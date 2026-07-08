@@ -5,8 +5,7 @@ Theme pairs a polished native WordPress baseline with a full **Elementor Theme
 Builder** template set (PRO Elements compatible), plus a built-in options panel
 and GitHub-hosted auto-updates.
 
-> **Design reference:** inspired by the look and feel of
-> [paragoncompetitions.co.uk](https://www.paragoncompetitions.co.uk/) —
+> **Design reference:** 
 > accent colours on dark/light surfaces, Montserrat typography, pill buttons,
 > soft shadows. Ships **5 switchable colour presets** (Diamond, Golf, Car,
 > Retro, Elite) configurable from **Appearance → Theme Options**.
