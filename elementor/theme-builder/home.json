@@ -1,0 +1,298 @@
+{
+  "version": "0.4",
+  "title": "Diamond Home",
+  "type": "page",
+  "page_settings": { "document_type": "wp-page" },
+  "content": [
+    {
+      "id": "dmdhome-hero",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "min_height": { "unit": "px", "size": 520 },
+        "flex_align_items": "center",
+        "padding": { "unit": "px", "top": "88", "right": "0", "bottom": "88", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#2C2C2C",
+        "background_overlay_background": "classic",
+        "background_overlay_color": "#2C2C2C",
+        "background_overlay_opacity": { "unit": "px", "size": 0.5 },
+        "css_classes": "diamond-hero"
+      },
+      "elements": [
+        {
+          "id": "dmdhome-hero-inner",
+          "elType": "container",
+          "settings": { "content_width": { "unit": "px", "size": 720 } },
+          "elements": [
+            {
+              "id": "dmdhome-hero-eb",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "LUXURY PRIZE COMPETITIONS", "header_size": "div", "title_color": "rgba(255,255,255,0.85)", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 13 }, "typography_font_weight": "700", "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 } },
+              "elements": []
+            },
+            {
+              "id": "dmdhome-hero-h",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Win incredible prizes <span style=\"color:#E4678A\">every week</span>", "header_size": "h1", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 60 }, "typography_font_weight": "800", "typography_line_height": { "unit": "em", "size": 1.1 } },
+              "elements": []
+            },
+            {
+              "id": "dmdhome-hero-lead",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "settings": { "editor": "<p style=\"color:rgba(255,255,255,0.9);font-size:18px\">Low fixed odds, instant payouts and 100% of ticket sales donated to charity. Enter your favourite competition today.</p>" },
+              "elements": []
+            },
+            {
+              "id": "dmdhome-hero-btns",
+              "elType": "container",
+              "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "top": "24", "right": "0", "bottom": "0", "left": "0", "isLinked": false } },
+              "elements": [
+                {
+                  "id": "dmdhome-hero-btn1",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "settings": {
+                    "text": "Enter Competitions",
+                    "link": { "url": "/shop", "is_external": "", "nofollow": "" },
+                    "selected_icon": { "value": "fas fa-arrow-right", "library": "fa-solid" },
+                    "icon_align": "right",
+                    "background_color": "#E4678A",
+                    "background_hover_color": "#D24E75",
+                    "text_color": "#FFFFFF",
+                    "typography_typography": "custom",
+                    "typography_font_family": "Montserrat",
+                    "typography_font_weight": "600",
+                    "typography_font_size": { "unit": "px", "size": 16 },
+                    "border_radius": { "unit": "px", "top": "999", "right": "999", "bottom": "999", "left": "999", "isLinked": true },
+                    "button_padding": { "unit": "px", "top": "14", "right": "32", "bottom": "14", "left": "32", "isLinked": false }
+                  },
+                  "elements": []
+                },
+                {
+                  "id": "dmdhome-hero-btn2",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "settings": {
+                    "text": "See Recent Winners",
+                    "link": { "url": "#winners", "is_external": "", "nofollow": "" },
+                    "background_color": "rgba(255,255,255,0)",
+                    "background_hover_color": "rgba(255,255,255,0.12)",
+                    "text_color": "#FFFFFF",
+                    "border_border": "solid",
+                    "border_width": { "unit": "px", "top": "1", "right": "1", "bottom": "1", "left": "1", "isLinked": true },
+                    "border_color": "#FFFFFF",
+                    "border_radius": { "unit": "px", "top": "999", "right": "999", "bottom": "999", "left": "999", "isLinked": true },
+                    "button_padding": { "unit": "px", "top": "14", "right": "32", "bottom": "14", "left": "32", "isLinked": false }
+                  },
+                  "elements": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dmdhome-winners",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#F6F6F6",
+        "css_classes": "diamond-winners"
+      },
+      "elements": [
+        {
+          "id": "dmdhome-winners-sh",
+          "elType": "widget",
+          "widgetType": "heading",
+          "settings": { "title": "Featured Winners", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "typography_font_weight": "700", "align": "center" },
+          "elements": []
+        },
+        {
+          "id": "dmdhome-winners-sub",
+          "elType": "widget",
+          "widgetType": "text-editor",
+          "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;margin-top:8px\">Real prizes, real people, paid out instantly.</p>" },
+          "elements": []
+        },
+        {
+          "id": "dmdhome-winners-shortcode",
+          "elType": "widget",
+          "widgetType": "shortcode",
+          "settings": { "shortcode": "[raffle_list status=\"ended\" columns=\"4\" per_page=\"8\"]" },
+          "elements": []
+        }
+      ]
+    },
+    {
+      "id": "dmdhome-active",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "css_classes": "diamond-active"
+      },
+      "elements": [
+        {
+          "id": "dmdhome-active-sh",
+          "elType": "widget",
+          "widgetType": "heading",
+          "settings": { "title": "Active Competitions", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "typography_font_weight": "700", "align": "center" },
+          "elements": []
+        },
+        {
+          "id": "dmdhome-active-sub",
+          "elType": "widget",
+          "widgetType": "text-editor",
+          "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;margin-top:8px\">Enter now — limited tickets, guaranteed draws.</p>" },
+          "elements": []
+        },
+        {
+          "id": "dmdhome-active-shortcode",
+          "elType": "widget",
+          "widgetType": "shortcode",
+          "settings": { "shortcode": "[raffle_list status=\"active\" columns=\"3\" per_page=\"9\"]" },
+          "elements": []
+        },
+        {
+          "id": "dmdhome-active-btn",
+          "elType": "widget",
+          "widgetType": "button",
+          "settings": {
+            "text": "View all competitions",
+            "link": { "url": "/shop", "is_external": "", "nofollow": "" },
+            "selected_icon": { "value": "fas fa-arrow-right", "library": "fa-solid" },
+            "icon_align": "right",
+            "background_color": "#E4678A",
+            "text_color": "#FFFFFF",
+            "align": "center",
+            "border_radius": { "unit": "px", "top": "999", "right": "999", "bottom": "999", "left": "999", "isLinked": true }
+          },
+          "elements": []
+        }
+      ]
+    },
+    {
+      "id": "dmdhome-charity",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#F6F6F6"
+      },
+      "elements": [
+        {
+          "id": "dmdhome-charity-card",
+          "elType": "container",
+          "settings": {
+            "content_width": { "unit": "px", "size": 720 },
+            "flex_align_items": "center",
+            "padding": { "unit": "px", "top": "48", "right": "48", "bottom": "48", "left": "48", "isLinked": true },
+            "background_background": "gradient",
+            "background_color": "#E4678A",
+            "background_color_b": "#D24E75",
+            "background_gradient_angle": { "unit": "deg", "size": 135 },
+            "border_radius": { "unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true },
+            "css_classes": "diamond-charity"
+          },
+          "elements": [
+            {
+              "id": "dmdhome-charity-eb",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "GIVING BACK", "header_size": "div", "title_color": "rgba(255,255,255,0.85)", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 }, "align": "center" },
+              "elements": []
+            },
+            {
+              "id": "dmdhome-charity-total",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "£2,800,000", "header_size": "h2", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 64 }, "typography_font_weight": "800", "align": "center" },
+              "elements": []
+            },
+            {
+              "id": "dmdhome-charity-label",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "RAISED FOR CHARITY", "header_size": "div", "title_color": "rgba(255,255,255,0.9)", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 1.5 }, "align": "center" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dmdhome-charity-list",
+          "elType": "widget",
+          "widgetType": "shortcode",
+          "settings": { "shortcode": "[raffle_charities columns=\"3\"]" },
+          "elements": []
+        }
+      ]
+    },
+    {
+      "id": "dmdhome-trust",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false }
+      },
+      "elements": [
+        {
+          "id": "dmdhome-trust-sh",
+          "elType": "widget",
+          "widgetType": "heading",
+          "settings": { "title": "Play With Confidence", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "typography_font_weight": "700", "align": "center" },
+          "elements": []
+        },
+        {
+          "id": "dmdhome-trust-grid",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 24 }, "padding": { "unit": "px", "top": "32", "right": "0", "bottom": "0", "left": "0", "isLinked": false } },
+          "elements": [
+            {
+              "id": "dmdhome-trust-1",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdhome-trust-1i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-lock", "library": "fa-solid" }, "icon_color": "#E4678A", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdhome-trust-1t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Secure Payments", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdhome-trust-1d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Bank-grade encryption on every transaction.</p>" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdhome-trust-2",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdhome-trust-2i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-gift", "library": "fa-solid" }, "icon_color": "#63DD92", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdhome-trust-2t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Free Entry Route", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdhome-trust-2d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Every competition has a no-purchase entry option.</p>" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdhome-trust-3",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdhome-trust-3i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-certificate", "library": "fa-solid" }, "icon_color": "#5CAEED", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdhome-trust-3t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Verified Draws", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdhome-trust-3d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">All draws are independently verified and recorded.</p>" }, "elements": [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

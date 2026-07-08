@@ -1,0 +1,166 @@
+{
+  "version": "0.4",
+  "title": "Diamond Header",
+  "type": "header",
+  "page_settings": {
+    "document_type": "header",
+    "location": "header",
+    "conditions": [
+      { "type": "include", "condition": "all" }
+    ]
+  },
+  "content": [
+    {
+      "id": "dmdtop1",
+      "elType": "container",
+      "settings": {
+        "flex_direction": "row",
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "flex_justify_content": "space-between",
+        "flex_align_items": "center",
+        "padding": { "unit": "px", "top": "8", "right": "0", "bottom": "8", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#2C2C2C",
+        "css_classes": "diamond-topbar"
+      },
+      "elements": [
+        {
+          "id": "dmdtop1a",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "flex_align_items": "center", "gap": { "unit": "px", "size": 8 }, "width": "auto" },
+          "elements": [
+            {
+              "id": "dmdtop1a1",
+              "elType": "widget",
+              "widgetType": "icon",
+              "settings": { "selected_icon": { "value": "fas fa-bolt", "library": "fa-solid" }, "icon_color": "#63DD92", "size": { "unit": "px", "size": 14 } },
+              "elements": []
+            },
+            {
+              "id": "dmdtop1a2",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": { "title": "Instant payouts — pay yourself out 24/7 direct to your bank", "header_size": "div", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_font_weight": "500" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dmdtop1b",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "flex_align_items": "center", "gap": { "unit": "px", "size": 16 }, "width": "auto" },
+          "elements": [
+            {
+              "id": "dmdtop1b1",
+              "elType": "widget",
+              "widgetType": "nav-menu",
+              "settings": { "source": "menu", "menu": "primary", "submenu_indicator": "classic", "color_menu_item": "#FFFFFF", "color_menu_item_hover": "#E4678A", "pointer_color_menu_item_hover": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_font_weight": "500", "padding_horizontal_menu_item": { "unit": "px", "size": 8 } },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dmdhdr1",
+      "elType": "container",
+      "settings": {
+        "flex_direction": "row",
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "flex_justify_content": "space-between",
+        "flex_align_items": "center",
+        "min_height": { "unit": "px", "size": 88 },
+        "padding": { "unit": "px", "top": "12", "right": "0", "bottom": "12", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "border_border": "solid",
+        "border_width": { "unit": "px", "top": "0", "right": "0", "bottom": "1", "left": "0", "isLinked": false },
+        "border_color": "#DEE2E6",
+        "css_classes": "diamond-header",
+        "position": "sticky",
+        "_position": "sticky",
+        "sticky": "top",
+        "sticky_on": [ "desktop", "tablet", "mobile" ],
+        "sticky_offset": 0
+      },
+      "elements": [
+        {
+          "id": "dmdhdr1a",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "flex_align_items": "center", "gap": { "unit": "px", "size": 12 }, "width": "auto" },
+          "elements": [
+            {
+              "id": "dmdhdr1a1",
+              "elType": "widget",
+              "widgetType": "theme-site-logo",
+              "settings": { "custom_logo": { "url": "" }, "size": { "unit": "px", "size": 56 }, "align": "left" },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dmdhdr1b",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "flex_justify_content": "center", "flex_align_items": "center" },
+          "elements": [
+            {
+              "id": "dmdhdr1b1",
+              "elType": "widget",
+              "widgetType": "nav-menu",
+              "settings": {
+                "source": "menu",
+                "menu": "primary",
+                "layout": "horizontal",
+                "submenu_indicator": "classic",
+                "color_menu_item": "#2C2C2C",
+                "color_menu_item_hover": "#E4678A",
+                "color_menu_item_active": "#E4678A",
+                "pointer_color_menu_item_hover": "#E4678A",
+                "typography_typography": "custom",
+                "typography_font_family": "Montserrat",
+                "typography_font_size": { "unit": "px", "size": 15 },
+                "typography_font_weight": "600",
+                "padding_horizontal_menu_item": { "unit": "px", "size": 16 },
+                "pointer": "underline",
+                "animation_floating": "fade"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "dmdhdr1c",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "flex_align_items": "center", "flex_justify_content": "flex-end", "gap": { "unit": "px", "size": 12 }, "width": "auto" },
+          "elements": [
+            {
+              "id": "dmdhdr1c1",
+              "elType": "widget",
+              "widgetType": "icon",
+              "settings": { "selected_icon": { "value": "fas fa-magnifying-glass", "library": "fa-solid" }, "icon_color": "#2C2C2C", "size": { "unit": "px", "size": 18 }, "css_classes": "diamond-icon-btn" },
+              "elements": []
+            },
+            {
+              "id": "dmdhdr1c2",
+              "elType": "widget",
+              "widgetType": "icon-list",
+              "settings": {
+                "view": "inline",
+                "icon_list": [
+                  { "_id": "a1", "text": "My Account", "selected_icon": { "value": "far fa-user", "library": "fa-regular" }, "link": { "url": "/my-account", "is_external": "", "nofollow": "" } },
+                  { "_id": "a2", "text": "Cart", "selected_icon": { "value": "fas fa-bag-shopping", "library": "fa-solid" }, "link": { "url": "/cart", "is_external": "", "nofollow": "" } }
+                ],
+                "icon_color": "#2C2C2C",
+                "text_color": "#2C2C2C",
+                "css_classes": "diamond-header__actions"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

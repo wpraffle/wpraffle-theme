@@ -1,0 +1,56 @@
+{
+  "version": "0.4",
+  "title": "Diamond — Instant Payouts / Trust",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-trust",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false }
+      },
+      "elements": [
+        { "id": "dmdsec-trust-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "Play With Confidence", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
+        {
+          "id": "dmdsec-trust-grid",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 24 }, "padding": { "unit": "px", "top": "32", "right": "0", "bottom": "0", "left": "0", "isLinked": false } },
+          "elements": [
+            {
+              "id": "dmdsec-trust-1",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdsec-trust-1i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-lock", "library": "fa-solid" }, "icon_color": "#E4678A", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdsec-trust-1t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Secure Payments", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdsec-trust-1d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Bank-grade encryption on every transaction.</p>" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdsec-trust-2",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdsec-trust-2i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-gift", "library": "fa-solid" }, "icon_color": "#63DD92", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdsec-trust-2t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Free Entry Route", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdsec-trust-2d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Every competition has a no-purchase entry option.</p>" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdsec-trust-3",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdsec-trust-3i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-certificate", "library": "fa-solid" }, "icon_color": "#5CAEED", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdsec-trust-3t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Verified Draws", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdsec-trust-3d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">All draws are independently verified and recorded.</p>" }, "elements": [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

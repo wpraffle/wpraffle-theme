@@ -1,0 +1,51 @@
+/**
+ * Diamond settings admin styles.
+ */
+
+.diamond-wrap h1 .dashicons { vertical-align: text-bottom; margin-right: 0.25rem; color: #e4678a; }
+.diamond-wrap .nav-tab-wrapper { margin-bottom: 1.5rem; }
+
+.diamond-panel {
+	background: #fff;
+	border: 1px solid #e2e4e7;
+	border-radius: 8px;
+	padding: 1.5rem 2rem;
+	margin-bottom: 1.5rem;
+}
+.diamond-panel-intro { color: #555; font-style: italic; max-width: 720px; }
+.diamond-panel h3 { margin-top: 1.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #f0f0f1; }
+.diamond-panel h3:first-of-type { margin-top: 0.5rem; }
+
+/* Presets */
+.diamond-presets { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0 1.5rem; }
+.diamond-preset {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.75rem 1rem;
+	border: 2px solid #e2e4e7;
+	border-radius: 8px;
+	text-decoration: none;
+	background: #fff;
+	transition: border-color 0.15s ease, transform 0.15s ease;
+	min-width: 110px;
+}
+.diamond-preset:hover { border-color: #e4678a; transform: translateY(-2px); }
+.diamond-preset.is-active { border-color: #e4678a; box-shadow: 0 0 0 3px rgba(228, 103, 138, 0.15); }
+.diamond-preset-swatches { display: flex; gap: 2px; width: 100%; border-radius: 4px; overflow: hidden; }
+.diamond-preset-swatches span { display: block; height: 28px; flex: 1 1 0; }
+.diamond-preset-name { font-weight: 600; font-size: 0.85rem; color: #2c2c2c; }
+
+/* Colour picker rows */
+.diamond-color-picker { max-width: 140px; }
+
+/* Media picker button */
+.diamond-media-button { margin-left: 0.5rem; vertical-align: baseline; }
+
+/* Hero title hint */
+.form-table .description { color: #666; font-size: 0.85rem; margin-top: 0.25rem; }
+
+/* Submit */
+.diamond-form .submit { padding-top: 0.5rem; }
+.button-hero { font-size: 14px !important; padding: 6px 28px !important; height: auto !important; }

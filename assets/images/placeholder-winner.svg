@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360" viewBox="0 0 360 360" role="img" aria-label="Winner placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5caeed"/>
+      <stop offset="100%" stop-color="#e4678a"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="360" fill="url(#g)"/>
+  <circle cx="180" cy="140" r="56" fill="rgba(255,255,255,0.85)"/>
+  <path d="M80 320c0-55 45-90 100-90s100 35 100 90z" fill="rgba(255,255,255,0.85)"/>
+  <text x="180" y="350" font-family="Montserrat, Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.9">Winner photo</text>
+</svg>

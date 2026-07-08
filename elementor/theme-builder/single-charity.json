@@ -1,0 +1,72 @@
+{
+  "version": "0.4",
+  "title": "Diamond Single Charity",
+  "type": "single",
+  "page_settings": {
+    "document_type": "single",
+    "location": "single",
+    "conditions": [ { "type": "include", "condition": "post", "sub_condition": "post_type", "post_type": "raffle_charity" } ]
+  },
+  "content": [
+    {
+      "id": "dmdch-wrap",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false }
+      },
+      "elements": [
+        {
+          "id": "dmdch-grid",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 40 } },
+          "elements": [
+            {
+              "id": "dmdch-img",
+              "elType": "container",
+              "settings": { "width": { "unit": "%", "size": 40 } },
+              "elements": [
+                {
+                  "id": "dmdch-featured",
+                  "elType": "widget",
+                  "widgetType": "theme-post-featured-image",
+                  "settings": { "image_size": "large", "border_radius": { "unit": "px", "size": 16 } },
+                  "elements": []
+                }
+              ]
+            },
+            {
+              "id": "dmdch-body",
+              "elType": "container",
+              "settings": { "width": { "unit": "%", "size": 60 }, "gap": { "unit": "px", "size": 16 } },
+              "elements": [
+                {
+                  "id": "dmdch-eb",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "settings": { "title": "CHARITY", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 } },
+                  "elements": []
+                },
+                {
+                  "id": "dmdch-title",
+                  "elType": "widget",
+                  "widgetType": "theme-post-title",
+                  "settings": { "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 40 }, "typography_font_weight": "800" },
+                  "elements": []
+                },
+                {
+                  "id": "dmdch-content",
+                  "elType": "widget",
+                  "widgetType": "theme-post-content",
+                  "settings": { "text_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "typography_line_height": { "unit": "em", "size": 1.7 } },
+                  "elements": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

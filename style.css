@@ -1,0 +1,23 @@
+/*
+Theme Name: WPRaffle Theme
+Theme URI: https://wpraffles.dev/
+Author: WPRaffles
+Author URI: https://wpraffles.dev/
+Description: WPRaffle Theme — a premium WordPress theme designed specifically for the WPRaffles plugin. Ships multiple colour presets (Diamond, Golf, Car, Retro, Elite) switchable from Appearance → Theme Options. Pairs a polished native WordPress baseline with a full Elementor Theme Builder template set (Pro Elements compatible). Built on Bootstrap 5.3, Swiper, Fancybox and Font Awesome.
+Version: 1.0.0
+Update URI: false
+Requires at least: 6.5
+Tested up to: 6.5
+Requires PHP: 8.1
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: wpraffle-theme
+Tags: ecommerce, entertainment, custom-colors, custom-menu, custom-logo, featured-images, full-width-template, threaded-comments, translation-ready, block-styles, wide-blocks
+WC requires at least: 8.0
+WC tested up to: 9.0
+*/
+
+/*
+ * The heavy lifting lives in /assets/css/*.css, loaded via wp_enqueue_scripts.
+ * This file only holds the theme header above for WordPress to discover.
+ */

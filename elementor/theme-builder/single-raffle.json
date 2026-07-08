@@ -1,0 +1,102 @@
+{
+  "version": "0.4",
+  "title": "Diamond Single Raffle",
+  "type": "single",
+  "page_settings": {
+    "document_type": "single",
+    "location": "single",
+    "conditions": [
+      { "type": "include", "condition": "product", "sub_condition": "in_product_cats" }
+    ]
+  },
+  "content": [
+    {
+      "id": "dmdsingle-wrap",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "48", "right": "0", "bottom": "48", "left": "0", "isLinked": false }
+      },
+      "elements": [
+        {
+          "id": "dmdsingle-grid",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 40 } },
+          "elements": [
+            {
+              "id": "dmdsingle-gallery",
+              "elType": "container",
+              "settings": { "width": { "unit": "%", "size": 55 } },
+              "elements": [
+                {
+                  "id": "dmdsingle-img",
+                  "elType": "widget",
+                  "widgetType": "theme-post-featured-image",
+                  "settings": { "image_size": "large", "border_radius": { "unit": "px", "size": 16 } },
+                  "elements": []
+                }
+              ]
+            },
+            {
+              "id": "dmdsingle-summary",
+              "elType": "container",
+              "settings": { "width": { "unit": "%", "size": 45 }, "gap": { "unit": "px", "size": 12 } },
+              "elements": [
+                {
+                  "id": "dmdsingle-title",
+                  "elType": "widget",
+                  "widgetType": "theme-post-title",
+                  "settings": { "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "typography_font_weight": "800" },
+                  "elements": []
+                },
+                {
+                  "id": "dmdsingle-price",
+                  "elType": "widget",
+                  "widgetType": "woocommerce-product-price",
+                  "settings": { "price_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 28 }, "typography_font_weight": "700" },
+                  "elements": []
+                },
+                {
+                  "id": "dmdsingle-shortcode",
+                  "elType": "widget",
+                  "widgetType": "shortcode",
+                  "settings": { "shortcode": "[raffle id=\"{{current_product_id}}\"]" },
+                  "elements": []
+                },
+                {
+                  "id": "dmdsingle-add",
+                  "elType": "widget",
+                  "widgetType": "woocommerce-product-add-to-cart",
+                  "settings": {
+                    "background_color": "#E4678A",
+                    "text_color": "#FFFFFF",
+                    "border_radius": { "unit": "px", "top": "999", "right": "999", "bottom": "999", "left": "999", "isLinked": true },
+                    "typography_typography": "custom",
+                    "typography_font_weight": "700",
+                    "button_padding": { "unit": "px", "top": "14", "right": "32", "bottom": "14", "left": "32", "isLinked": false }
+                  },
+                  "elements": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dmdsingle-tabs",
+          "elType": "container",
+          "settings": { "padding": { "unit": "px", "top": "40", "right": "0", "bottom": "0", "left": "0", "isLinked": false } },
+          "elements": [
+            {
+              "id": "dmdsingle-tabs-widget",
+              "elType": "widget",
+              "widgetType": "woocommerce-product-data-tabs",
+              "settings": {},
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

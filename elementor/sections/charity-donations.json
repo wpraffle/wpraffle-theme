@@ -1,0 +1,40 @@
+{
+  "version": "0.4",
+  "title": "Diamond — Charity Donations",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-charity",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#F6F6F6"
+      },
+      "elements": [
+        {
+          "id": "dmdsec-charity-card",
+          "elType": "container",
+          "settings": {
+            "content_width": { "unit": "px", "size": 720 },
+            "flex_align_items": "center",
+            "padding": { "unit": "px", "size": 48 },
+            "background_background": "gradient",
+            "background_color": "#E4678A",
+            "background_color_b": "#D24E75",
+            "background_gradient_angle": { "unit": "deg", "size": 135 },
+            "border_radius": { "unit": "px", "size": 16 }
+          },
+          "elements": [
+            { "id": "dmdsec-charity-eb", "elType": "widget", "widgetType": "heading", "settings": { "title": "GIVING BACK", "header_size": "div", "title_color": "rgba(255,255,255,0.85)", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 }, "align": "center" }, "elements": [] },
+            { "id": "dmdsec-charity-total", "elType": "widget", "widgetType": "heading", "settings": { "title": "£2,800,000", "header_size": "h2", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 64 }, "typography_font_weight": "800", "align": "center" }, "elements": [] },
+            { "id": "dmdsec-charity-label", "elType": "widget", "widgetType": "heading", "settings": { "title": "RAISED FOR CHARITY", "header_size": "div", "title_color": "rgba(255,255,255,0.9)", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 1.5 }, "align": "center" }, "elements": [] }
+          ]
+        },
+        { "id": "dmdsec-charity-sc", "elType": "widget", "widgetType": "shortcode", "settings": { "shortcode": "[raffle_charities columns=\"3\"]" }, "elements": [] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "version": "0.4",
+  "title": "Diamond My Account",
+  "type": "page",
+  "page_settings": {
+    "document_type": "wp-page",
+    "conditions": [ { "type": "include", "condition": "url", "url": "/my-account" } ]
+  },
+  "content": [
+    {
+      "id": "dmdac-wrap",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false }
+      },
+      "elements": [
+        {
+          "id": "dmdac-sh",
+          "elType": "widget",
+          "widgetType": "heading",
+          "settings": { "title": "My Account", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 } },
+          "elements": []
+        },
+        {
+          "id": "dmdac-h",
+          "elType": "widget",
+          "widgetType": "shortcode",
+          "settings": { "shortcode": "[woocommerce_my_account]" },
+          "elements": []
+        }
+      ]
+    }
+  ]
+}
