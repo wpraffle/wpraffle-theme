@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" font-family="Montserrat, 'Segoe UI', -apple-system, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2c2c2c"/><stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="heroOverlay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a" stop-opacity="0.25"/>
+      <stop offset="55%" stop-color="#1a1a1a" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="heroImg" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%" stop-color="#3a1f4a"/><stop offset="45%" stop-color="#2c2c2c"/><stop offset="100%" stop-color="#4a3a2a"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e4678a"/><stop offset="100%" stop-color="#5caeed"/>
+    </linearGradient>
+    <linearGradient id="progressGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e4678a"/><stop offset="100%" stop-color="#5caeed"/>
+    </linearGradient>
+    <filter id="frameShadow" x="-3%" y="-3%" width="106%" height="108%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dx="0" dy="6" result="off"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.45"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="cardImg1" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0%" stop-color="#e4678a"/><stop offset="100%" stop-color="#7a3a52"/></linearGradient>
+    <linearGradient id="cardImg2" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0%" stop-color="#5caeed"/><stop offset="100%" stop-color="#2a5a82"/></linearGradient>
+    <linearGradient id="cardImg3" x1="0" y1="0" x2="0.8" y2="1"><stop offset="0%" stop-color="#63dd92"/><stop offset="100%" stop-color="#2a6a3a"/></linearGradient>
+    <clipPath id="viewport"><rect x="51" y="129" width="1098" height="720"/></clipPath>
+
+    <!-- Reusable star icon (for rating + eyebrow) -->
+    <symbol id="star" viewBox="0 0 24 24"><path d="M12 2 L14.6 8.6 L21.6 9.2 L16.3 13.9 L18 20.8 L12 17 L6 20.8 L7.7 13.9 L2.4 9.2 L9.4 8.6 Z" fill="currentColor"/></symbol>
+  </defs>
+
+  <!-- BACKDROP -->
+  <rect width="1200" height="900" fill="url(#bgGrad)"/>
+  <g opacity="0.05" fill="#ffffff">
+    <circle cx="100" cy="120" r="1.2"/><circle cx="240" cy="80" r="1"/><circle cx="380" cy="150" r="1.2"/>
+    <circle cx="520" cy="60" r="1"/><circle cx="660" cy="110" r="1.2"/><circle cx="800" cy="70" r="1"/>
+    <circle cx="940" cy="140" r="1.2"/><circle cx="1080" cy="90" r="1"/>
+    <circle cx="60" cy="820" r="1.2"/><circle cx="200" cy="860" r="1"/><circle cx="1140" cy="780" r="1.2"/>
+  </g>
+
+  <!-- BRAND WORDMARK -->
+  <g transform="translate(50,52)">
+    <g transform="translate(0,-2)">
+      <path d="M9 0 L18 11 L9 28 L0 11 Z" fill="url(#accentGrad)"/>
+      <path d="M0 11 L18 11 L9 28 Z" fill="#ffffff" opacity="0.18"/>
+    </g>
+    <text x="30" y="20" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="0.3">WPRaffle <tspan fill="url(#accentGrad)">Theme</tspan></text>
+    <text x="30" y="38" font-size="10" font-weight="500" fill="#9ca3af" letter-spacing="1.5">PREMIUM COMPETITION THEME · v1.2.0</text>
+  </g>
+
+  <!-- TOP-RIGHT BADGES -->
+  <g font-size="10" font-weight="700" letter-spacing="0.8">
+    <g transform="translate(1058,38)"><rect width="92" height="22" rx="11" fill="#e4678a" opacity="0.18"/><text x="46" y="15" fill="#e4678a" text-anchor="middle">5 PRESETS</text></g>
+    <g transform="translate(958,38)"><rect width="92" height="22" rx="11" fill="#5caeed" opacity="0.18"/><text x="46" y="15" fill="#5caeed" text-anchor="middle">DARK MODE</text></g>
+    <g transform="translate(836,38)"><rect width="114" height="22" rx="11" fill="#63dd92" opacity="0.18"/><text x="57" y="15" fill="#63dd92" text-anchor="middle">ELEMENTOR READY</text></g>
+  </g>
+
+  <!-- BROWSER FRAME -->
+  <g filter="url(#frameShadow)">
+    <rect x="50" y="90" width="1100" height="760" rx="12" fill="#ffffff"/>
+    <rect x="50" y="90" width="1100" height="38" rx="12" fill="#1a1a1a"/>
+    <rect x="50" y="116" width="1100" height="12" fill="#1a1a1a"/>
+    <circle cx="74" cy="109" r="5.5" fill="#ff5f57"/>
+    <circle cx="94" cy="109" r="5.5" fill="#febc2e"/>
+    <circle cx="114" cy="109" r="5.5" fill="#28c840"/>
+    <rect x="380" y="100" width="440" height="18" rx="9" fill="#3a3a3a"/>
+    <text x="600" y="113" font-size="10" fill="#9ca3af" text-anchor="middle">raffles.local</text>
+  </g>
+
+  <!-- HOMEPAGE CONTENT -->
+  <g clip-path="url(#viewport)">
+    <!-- Top bar -->
+    <rect x="51" y="128" width="1098" height="22" fill="#2c2c2c"/>
+    <g transform="translate(80,143)" color="#ffc107"><use href="#star" width="9" height="9"/></g>
+    <text x="94" y="143" font-size="8" fill="#9ca3af">Use code WELCOME20 for 20% off your first entry</text>
+    <circle cx="1060" cy="139" r="3" fill="#e4678a"/><circle cx="1072" cy="139" r="3" fill="#5caeed"/><circle cx="1084" cy="139" r="3" fill="#63dd92"/>
+    <!-- Nav -->
+    <rect x="51" y="150" width="1098" height="44" fill="#ffffff"/>
+    <text x="110" y="178" font-size="13" font-weight="800" fill="#2c2c2c">WPRaffles<tspan fill="#e4678a">.</tspan></text>
+    <text x="600" y="177" font-size="10" font-weight="600" fill="#2c2c2c" text-anchor="middle">Competitions   Winners   How It Works   Charity</text>
+    <!-- Header action icons (vector) -->
+    <g transform="translate(996,167)" fill="none" stroke="#2c2c2c" stroke-width="1.4"><path d="M3 0 a3 3 0 0 0-3 3 v3 l-1.5 1.5 h9 l-1.5 -1.5 v-3 a3 3 0 0 0-3-3 z M2.4 9 a1.6 1.6 0 0 0 3.2 0"/></g>
+    <circle cx="997" cy="163" r="2.5" fill="#e4678a"/>
+    <g transform="translate(1022,160)" fill="none" stroke="#2c2c2c" stroke-width="1.4"><circle cx="6" cy="4" r="3"/><path d="M0.5 13 a5.5 5.5 0 0 1 11 0"/></g>
+    <g transform="translate(1048,162)"><path d="M2 0 h8 a2 2 0 0 1 2 2 v5 a2 2 0 0 1-2 2 H6 l-3 3 v-3 H2 a2 2 0 0 1-2-2 V2 a2 2 0 0 1 2-2 z" fill="#e4678a"/></g>
+
+    <!-- HERO -->
+    <rect x="51" y="194" width="1098" height="250" fill="url(#heroImg)"/>
+    <rect x="51" y="194" width="1098" height="250" fill="url(#heroOverlay)"/>
+    <!-- Stylised car silhouette (vector, no emoji) -->
+    <g opacity="0.4" transform="translate(620,238)">
+      <path d="M0 100 Q40 64 130 58 L200 26 Q260 12 330 24 L410 72 L490 84 Q525 100 525 118 L525 138 Q525 150 510 150 H22 Q0 150 0 132 Z" fill="#0a0a0a"/>
+      <path d="M205 32 L260 26 Q310 22 360 40 L400 72 L210 72 Z" fill="#1a1a1a" opacity="0.6"/>
+      <circle cx="120" cy="148" r="26" fill="#0a0a0a" stroke="#e4678a" stroke-width="3"/>
+      <circle cx="120" cy="148" r="11" fill="#2c2c2c"/>
+      <circle cx="420" cy="148" r="26" fill="#0a0a0a" stroke="#e4678a" stroke-width="3"/>
+      <circle cx="420" cy="148" r="11" fill="#2c2c2c"/>
+    </g>
+    <!-- Hero copy -->
+    <g transform="translate(106,238)" color="#e4678a"><use href="#star" width="11" height="11"/></g>
+    <text x="122" y="248" font-size="10" font-weight="700" fill="#e4678a" letter-spacing="2.5">LUXURY PRIZE COMPETITIONS</text>
+    <text x="106" y="286" font-size="30" font-weight="800" fill="#ffffff">Win incredible prizes</text>
+    <text x="106" y="318" font-size="30" font-weight="800" fill="url(#accentGrad)">every week</text>
+    <text x="106" y="344" font-size="11" fill="#ffffff" opacity="0.82">Low fixed odds · Instant payouts · 100% to charity</text>
+    <rect x="106" y="358" width="156" height="38" rx="19" fill="#e4678a"/>
+    <text x="184" y="382" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">Enter Competitions →</text>
+    <rect x="272" y="358" width="140" height="38" rx="19" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.7"/>
+    <text x="342" y="382" font-size="11" font-weight="700" fill="#ffffff" text-anchor="middle">See Winners</text>
+    <line x1="106" y1="414" x2="560" y2="414" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+    <g transform="translate(106,420)"><text font-size="18" font-weight="800" fill="#ffffff">12,400+</text><text y="14" font-size="8" fill="#9ca3af" letter-spacing="0.5">WINNERS</text></g>
+    <g transform="translate(246,420)"><text font-size="18" font-weight="800" fill="#ffffff">£2.8m</text><text y="14" font-size="8" fill="#9ca3af" letter-spacing="0.5">RAISED FOR CHARITY</text></g>
+    <g transform="translate(396,420)" color="#ffc107"><text font-size="18" font-weight="800" fill="#ffffff">4.9 </text><use href="#star" x="32" y="6" width="13" height="13"/><text y="14" font-size="8" fill="#9ca3af" letter-spacing="0.5">TRUSTPILOT</text></g>
+
+    <!-- ACTIVE COMPETITIONS -->
+    <rect x="51" y="444" width="1098" height="296" fill="#ffffff"/>
+    <text x="106" y="476" font-size="16" font-weight="800" fill="#2c2c2c">Active Competitions</text>
+    <text x="106" y="492" font-size="9" fill="#9ca3af">Enter now — limited tickets, guaranteed draws.</text>
+    <text x="1090" y="486" font-size="9" font-weight="700" fill="#e4678a" text-anchor="end">View all →</text>
+    <!-- Filter tabs -->
+    <g transform="translate(106,504)" font-size="8" font-weight="700">
+      <rect width="40" height="18" rx="9" fill="#e4678a"/><text x="20" y="12" fill="#fff" text-anchor="middle">All</text>
+      <g transform="translate(46,0)"><rect width="42" height="18" rx="9" fill="#f6f6f6"/><text x="21" y="12" fill="#2c2c2c" text-anchor="middle">Cars</text></g>
+      <g transform="translate(94,0)"><rect width="40" height="18" rx="9" fill="#f6f6f6"/><text x="20" y="12" fill="#2c2c2c" text-anchor="middle">Cash</text></g>
+      <g transform="translate(140,0)"><rect width="44" height="18" rx="9" fill="#f6f6f6"/><text x="22" y="12" fill="#2c2c2c" text-anchor="middle">Tech</text></g>
+      <g transform="translate(190,0)"><rect width="58" height="18" rx="9" fill="#f6f6f6"/><text x="29" y="12" fill="#2c2c2c" text-anchor="middle">InstaWins</text></g>
+    </g>
+
+    <!-- CARD 1 (Featured car) -->
+    <g transform="translate(106,534)">
+      <rect width="320" height="186" rx="10" fill="#ffffff" stroke="#eee"/>
+      <rect width="320" height="100" rx="10" fill="url(#cardImg1)"/>
+      <rect y="90" width="320" height="10" fill="url(#cardImg1)"/>
+      <!-- Vector car icon -->
+      <g transform="translate(118,30)" opacity="0.92">
+        <path d="M6 40 Q9 24 28 22 L52 6 Q66 0 82 6 L100 26 L118 32 Q126 38 126 46 L126 56 Q126 62 120 62 H10 Q4 62 4 56 Z" fill="#ffffff"/>
+        <path d="M54 8 L78 6 Q92 4 104 14 L114 26 L60 26 Z" fill="#000" opacity="0.12"/>
+        <circle cx="36" cy="60" r="11" fill="#2c2c2c"/><circle cx="36" cy="60" r="5" fill="#e4678a"/>
+        <circle cx="100" cy="60" r="11" fill="#2c2c2c"/><circle cx="100" cy="60" r="5" fill="#e4678a"/>
+      </g>
+      <g transform="translate(10,10)"><rect width="62" height="16" rx="8" fill="#000" opacity="0.55"/><text x="31" y="11" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">FEATURED</text></g>
+      <g transform="translate(258,10)"><rect width="52" height="16" rx="8" fill="#dc3545"/><text x="26" y="11" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">ENDING SOON</text></g>
+      <text x="14" y="124" font-size="12" font-weight="800" fill="#2c2c2c">Porsche 911 Carrera</text>
+      <text x="14" y="142" font-size="9" fill="#9ca3af">Win a 2024 Porsche 911 + £10,000 Cash</text>
+      <rect x="14" y="150" width="292" height="5" rx="2.5" fill="#f6f6f6"/>
+      <rect x="14" y="150" width="220" height="5" rx="2.5" fill="url(#progressGrad)"/>
+      <text x="14" y="170" font-size="7" fill="#9ca3af">7,450 sold</text>
+      <text x="306" y="170" font-size="7" font-weight="700" fill="#2c2c2c" text-anchor="end">1,550 left</text>
+      <text x="14" y="180" font-size="13" font-weight="800" fill="#e4678a">£12.99</text>
+      <rect x="232" y="170" width="74" height="16" rx="8" fill="#e4678a"/>
+      <text x="269" y="181" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">ENTER NOW</text>
+    </g>
+
+    <!-- CARD 2 (Cash) -->
+    <g transform="translate(441,534)">
+      <rect width="320" height="186" rx="10" fill="#ffffff" stroke="#eee"/>
+      <rect width="320" height="100" rx="10" fill="url(#cardImg2)"/>
+      <rect y="90" width="320" height="10" fill="url(#cardImg2)"/>
+      <!-- Vector money/notes icon -->
+      <g transform="translate(116,28)" opacity="0.95">
+        <rect x="0" y="10" width="88" height="40" rx="4" fill="#ffffff"/>
+        <rect x="6" y="16" width="76" height="28" rx="3" fill="none" stroke="#5caeed" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="44" cy="30" r="9" fill="#5caeed" opacity="0.25"/>
+        <text x="44" y="34" font-size="11" font-weight="800" fill="#2a5a82" text-anchor="middle">£</text>
+        <circle cx="14" cy="22" r="3" fill="#5caeed" opacity="0.4"/>
+        <circle cx="74" cy="38" r="3" fill="#5caeed" opacity="0.4"/>
+      </g>
+      <g transform="translate(10,10)"><rect width="48" height="16" rx="8" fill="#000" opacity="0.5"/><text x="24" y="11" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">CASH</text></g>
+      <text x="14" y="124" font-size="12" font-weight="800" fill="#2c2c2c">£50,000 Cash Bundle</text>
+      <text x="14" y="142" font-size="9" fill="#9ca3af">Tax-free cash — instant payout</text>
+      <rect x="14" y="150" width="292" height="5" rx="2.5" fill="#f6f6f6"/>
+      <rect x="14" y="150" width="150" height="5" rx="2.5" fill="url(#progressGrad)"/>
+      <text x="14" y="170" font-size="7" fill="#9ca3af">3,200 sold</text>
+      <text x="306" y="170" font-size="7" font-weight="700" fill="#2c2c2c" text-anchor="end">6,800 left</text>
+      <text x="14" y="180" font-size="13" font-weight="800" fill="#e4678a">£9.99</text>
+      <rect x="232" y="170" width="74" height="16" rx="8" fill="#e4678a"/>
+      <text x="269" y="181" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">ENTER NOW</text>
+    </g>
+
+    <!-- CARD 3 (Tech / phone) -->
+    <g transform="translate(776,534)">
+      <rect width="320" height="186" rx="10" fill="#ffffff" stroke="#eee"/>
+      <rect width="320" height="100" rx="10" fill="url(#cardImg3)"/>
+      <rect y="90" width="320" height="10" fill="url(#cardImg3)"/>
+      <!-- Vector phone icon -->
+      <g transform="translate(138,22)" opacity="0.95">
+        <rect x="0" y="0" width="44" height="68" rx="8" fill="#ffffff"/>
+        <rect x="3" y="8" width="38" height="48" rx="2" fill="#2a6a3a" opacity="0.3"/>
+        <rect x="16" y="3" width="12" height="3" rx="1.5" fill="#2a6a3a" opacity="0.4"/>
+        <circle cx="22" cy="62" r="2.5" fill="#2a6a3a" opacity="0.4"/>
+      </g>
+      <g transform="translate(10,10)"><rect width="54" height="16" rx="8" fill="#000" opacity="0.5"/><text x="27" y="11" font-size="7" font-weight="700" fill="#fff" text-anchor="middle">+12 IW</text></g>
+      <text x="14" y="124" font-size="12" font-weight="800" fill="#2c2c2c">iPhone 15 Pro Max</text>
+      <text x="14" y="142" font-size="9" fill="#9ca3af">Plus 12 instant-win prizes inside</text>
+      <rect x="14" y="150" width="292" height="5" rx="2.5" fill="#f6f6f6"/>
+      <rect x="14" y="150" width="90" height="5" rx="2.5" fill="url(#progressGrad)"/>
+      <text x="14" y="170" font-size="7" fill="#9ca3af">900 sold</text>
+      <text x="306" y="170" font-size="7" font-weight="700" fill="#2c2c2c" text-anchor="end">2,100 left</text>
+      <text x="14" y="180" font-size="13" font-weight="800" fill="#e4678a">£4.99</text>
+      <rect x="232" y="170" width="74" height="16" rx="8" fill="#e4678a"/>
+      <text x="269" y="181" font-size="8" font-weight="700" fill="#fff" text-anchor="middle">ENTER NOW</text>
+    </g>
+  </g>
+
+  <!-- FEATURE STRIP (below browser, inside the frame) -->
+  <g transform="translate(50,768)">
+    <rect width="1100" height="82" fill="#232323"/>
+    <g transform="translate(40,18)">
+      <g>
+        <circle cx="14" cy="14" r="14" fill="#e4678a" opacity="0.18"/>
+        <path d="M8 8 a6 6 0 1 0 0 12 a6 6 0 0 0 0-12 z M8 6 a2 2 0 0 1 2 2 M14 18 a2 2 0 0 1 2-2" fill="none" stroke="#e4678a" stroke-width="1.6" transform="translate(6,6) scale(0.9)"/>
+        <text x="38" y="11" font-size="10" font-weight="700" fill="#fff">5 Colour Presets</text>
+        <text x="38" y="24" font-size="8" fill="#9ca3af">Diamond · Golf · Car · Retro · Elite</text>
+      </g>
+      <g transform="translate(260,0)">
+        <circle cx="14" cy="14" r="14" fill="#5caeed" opacity="0.18"/>
+        <path d="M18 12 a7 7 0 1 1-9-8 a5.5 5.5 0 0 0 9 8 z" fill="#5caeed" transform="translate(6,6)"/>
+        <text x="38" y="11" font-size="10" font-weight="700" fill="#fff">Dark Mode</text>
+        <text x="38" y="24" font-size="8" fill="#9ca3af">Auto &amp; manual · custom palette</text>
+      </g>
+      <g transform="translate(480,0)">
+        <circle cx="14" cy="14" r="14" fill="#63dd92" opacity="0.18"/>
+        <path d="M11 4 L5 14 h5 l-1 8 l8-12 h-5 z" fill="#63dd92" transform="translate(6,6)"/>
+        <text x="38" y="11" font-size="10" font-weight="700" fill="#fff">22 v1.2 Enhancements</text>
+        <text x="38" y="24" font-size="8" fill="#9ca3af">Scroll reveal · counters · quick-view</text>
+      </g>
+      <g transform="translate(720,0)">
+        <circle cx="14" cy="14" r="14" fill="#ffc107" opacity="0.18"/>
+        <path d="M6 4 h6 l3 3 v9 a1 1 0 0 1-1 1 H6 a1 1 0 0 1-1-1 V5 a1 1 0 0 1 1-1 z M12 4 v3 h3" fill="none" stroke="#ffc107" stroke-width="1.5" transform="translate(6,6)"/>
+        <text x="38" y="11" font-size="10" font-weight="700" fill="#fff">Elementor + Blocks</text>
+        <text x="38" y="24" font-size="8" fill="#9ca3af">Theme Builder · Pro Elements</text>
+      </g>
+      <g transform="translate(930,0)">
+        <circle cx="14" cy="14" r="14" fill="#d4af37" opacity="0.18"/>
+        <rect x="6" y="8" width="12" height="9" rx="2" fill="none" stroke="#d4af37" stroke-width="1.5" transform="translate(6,6)"/>
+        <path d="M8.5 8 V6.5 a3.5 3.5 0 0 1 7 0 V8" fill="none" stroke="#d4af37" stroke-width="1.5" transform="translate(6,6)"/>
+        <text x="38" y="11" font-size="10" font-weight="700" fill="#fff">WCAG-Minded</text>
+        <text x="38" y="24" font-size="8" fill="#9ca3af">Reduced-motion · i18n · a11y</text>
+      </g>
+    </g>
+    <text x="550" y="74" font-size="8" fill="#6b7280" text-anchor="middle" letter-spacing="0.5">WPRaffle Theme v1.2.0 · Built for the WPRaffle plugin v1.3.1+ · Bootstrap 5.3 · Swiper · Font Awesome</text>
+  </g>
+</svg>

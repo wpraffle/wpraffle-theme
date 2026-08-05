@@ -8,7 +8,7 @@
  * Assign this template to a page under Page → Attributes → Template, or rely
  * on the auto-created "Charities" page (theme activation creates it).
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,7 +19,7 @@ get_header();
 ?>
 <main id="main" class="site-main">
 
-	<header class="diamond-shop-hero section--dark" style="padding:3.5rem 0;">
+	<header class="wpr-shop-hero section--dark" style="padding:3.5rem 0;">
 		<div class="container">
 			<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Giving Back', 'wpraffle-theme' ); ?></span>
 			<h1 class="mb-2" style="color:#fff;font-size:clamp(1.8rem,4vw,2.75rem);margin:0;">
@@ -35,10 +35,10 @@ get_header();
 		<div class="container">
 
 			<?php if ( wpraffle_theme_has_plugin() ) : ?>
-				<div class="diamond-charity mb-5">
+				<div class="wpr-charity mb-5">
 					<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Total Raised', 'wpraffle-theme' ); ?></span>
-					<div class="diamond-charity__total"><?php echo esc_html( WPRaffle_Theme_Integration::get_total_raised() ); ?></div>
-					<div class="diamond-charity__label"><?php esc_html_e( 'Raised for Charity', 'wpraffle-theme' ); ?></div>
+					<div class="wpr-charity__total"><?php echo esc_html( WPRaffle_Theme_Integration::get_total_raised() ); ?></div>
+					<div class="wpr-charity__label"><?php esc_html_e( 'Raised for Charity', 'wpraffle-theme' ); ?></div>
 				</div>
 
 				<?php echo do_shortcode( '[raffle_charities columns="3"]' ); ?>

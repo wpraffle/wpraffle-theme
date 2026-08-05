@@ -2,7 +2,7 @@
 /**
  * The main template file — blog/posts fallback.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,7 +17,7 @@ get_header();
 
 			<div class="col-lg-8">
 				<?php if ( have_posts() ) : ?>
-					<div class="diamond-posts">
+					<div class="wpr-posts">
 						<?php while ( have_posts() ) : ?>
 							<?php the_post(); ?>
 							<?php get_template_part( 'template-parts/content', get_post_type() ); ?>

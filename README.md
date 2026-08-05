@@ -5,10 +5,31 @@ Theme pairs a polished native WordPress baseline with a full **Elementor Theme
 Builder** template set (PRO Elements compatible), plus a built-in options panel
 and GitHub-hosted auto-updates.
 
-> **Design reference:** 
+> **Design reference:** inspired by the look and feel of
+> [paragoncompetitions.co.uk](https://www.paragoncompetitions.co.uk/) —
 > accent colours on dark/light surfaces, Montserrat typography, pill buttons,
 > soft shadows. Ships **5 switchable colour presets** (Diamond, Golf, Car,
 > Retro, Elite) configurable from **Appearance → Theme Options**.
+
+---
+
+## What's new in 1.3.0
+
+A cleanup + Elementor release that pairs with **WPRaffle Plugin v1.3.1**.
+
+- **Elementor dynamic tags** for plugin data (raffle id, ticket price, draw
+  date, charity total) — bind any native widget to live values.
+- **7 new homepage section blocks** + **4 new Theme Builder templates**
+  (Cart, Checkout, 404, Search) for the Elementor library.
+- **Legacy `diamond` prefix retired** across ~1,100 references → `wpr` /
+  `wpraffle-theme` (CSS vars, classes, theme-mod keys, admin slug, JS object).
+  The "Diamond" colour preset name is preserved.
+- **Update repo hard-coded** to `wpraffle/wpraffle-theme`.
+- Fixed: testimonial headings disappearing after the rename; the single-raffle
+  Elementor template rendering nothing.
+
+See [`RELEASE.md`](./RELEASE.md) for the full release notes and
+[`CHANGELOG.md`](./CHANGELOG.md) for the complete version history.
 
 ---
 
@@ -66,7 +87,7 @@ tabs:
 
 ### Style
 - **Colour presets:** Diamond, Golf, Car, Retro, Elite — one click re-themes
-  the whole site (both the theme's `--diamond-*` vars and the plugin's
+  the whole site (the theme's `--wpr-*` vars, which also drive the plugin's
   `--wpr-*` vars). Edit any colour to switch to a custom palette.
 - **8 colour pickers:** accent, accent-2, dark, light, success, danger,
   warning, body text. Derived shades (darker, lighter, borders) are generated
@@ -125,9 +146,9 @@ A one-click template set lives in `elementor/`. See
 The theme talks to the plugin exclusively through documented surfaces (no plugin
 file edits):
 
-- **Palette ownership** — the Theme Options Style tab drives both the theme's
-  `--diamond-*` vars and the plugin's `--wpr-*` vars from one source. The
-  plugin's own styling output is suppressed so there's no competition.
+- **Palette ownership** — the Theme Options Style tab drives the theme's
+  `--wpr-*` vars (which also feed the plugin's `--wpr-*` vars) from one source.
+  The plugin's own styling output is suppressed so there's no competition.
 - **Asset forcing** — the theme force-enqueues the plugin's `raffle-public`
   stylesheet on the homepage and template pages that render raffle shortcodes
   via `do_shortcode()`, so cards look identical on the homepage, the shop, and
@@ -189,7 +210,7 @@ on theme activation. It is **optional** — the native templates work without it
 
 ```
 wpraffle-theme/
-├── style.css                         # Theme header (Version: 1.0.0)
+├── style.css                         # Theme header (Version: 1.3.0)
 ├── theme.json                        # Block-editor palette/typography
 ├── functions.php                     # Bootstrap (loads inc/, defines constants)
 ├── header.php / footer.php           # Wrappers (fire wpraffle_theme_header/footer)

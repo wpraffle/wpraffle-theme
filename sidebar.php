@@ -2,7 +2,7 @@
 /**
  * The sidebar.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

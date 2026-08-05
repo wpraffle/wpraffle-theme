@@ -2,7 +2,7 @@
 /**
  * Comments template.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,9 +13,9 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="comments" class="diamond-comments">
+<div id="comments" class="wpr-comments">
 	<?php if ( have_comments() ) : ?>
-		<h2 class="diamond-comments-title">
+		<h2 class="wpr-comments-title">
 			<?php
 			$count = get_comments_number();
 			/* translators: %s: comment count. */
@@ -23,7 +23,7 @@ if ( post_password_required() ) {
 			?>
 		</h2>
 
-		<ol class="diamond-comments-list list-unstyled">
+		<ol class="wpr-comments-list list-unstyled">
 			<?php
 			wp_list_comments( array(
 				'style'      => 'ol',
@@ -38,7 +38,7 @@ if ( post_password_required() ) {
 
 	<?php
 	comment_form( array(
-		'class_form'    => 'diamond-comment-form',
+		'class_form'    => 'wpr-comment-form',
 		'class_submit'  => 'btn btn-accent',
 		'title_reply'   => __( 'Leave a Comment', 'wpraffle-theme' ),
 	) );

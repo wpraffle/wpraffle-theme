@@ -2,7 +2,7 @@
 /**
  * Single post template.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

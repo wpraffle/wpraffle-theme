@@ -3,7 +3,7 @@
  * The Template for displaying product archives, including the main shop page
  * which is the "Active Competitions" listing.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header( 'shop' );
 ?>
-<header class="diamond-shop-hero section--dark" style="padding:3.5rem 0;">
+<header class="wpr-shop-hero section--dark" style="padding:3.5rem 0;">
 	<div class="container">
 		<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Live Now', 'wpraffle-theme' ); ?></span>
 		<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
@@ -37,7 +37,7 @@ do_action( 'woocommerce_before_main_content' );
 
 	<?php do_action( 'woocommerce_before_shop_loop' ); ?>
 
-	<div class="diamond-active-grid">
+	<div class="wpr-active-grid">
 		<?php
 		woocommerce_product_loop_start();
 		if ( wc_get_loop_prop( 'total' ) ) {

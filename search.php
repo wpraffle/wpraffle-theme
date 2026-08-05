@@ -2,7 +2,7 @@
 /**
  * Search results template.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,18 +13,18 @@ get_header();
 ?>
 <main id="main" class="site-main section">
 	<div class="container">
-		<header class="diamond-archive-header mb-5">
-			<h1 class="diamond-archive-title">
+		<header class="wpr-archive-header mb-5">
+			<h1 class="wpr-archive-title">
 				<?php
 				/* translators: %s: search query. */
 				printf( esc_html__( 'Search results for: %s', 'wpraffle-theme' ), '<span>' . esc_html( get_search_query() ) . '</span>' );
 				?>
 			</h1>
-			<div class="diamond-rule"></div>
+			<div class="wpr-rule"></div>
 		</header>
 
 		<?php if ( have_posts() ) : ?>
-			<div class="diamond-posts">
+			<div class="wpr-posts">
 				<?php while ( have_posts() ) : ?>
 					<?php the_post(); ?>
 					<?php get_template_part( 'template-parts/content', 'search' ); ?>

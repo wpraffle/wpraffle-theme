@@ -3,7 +3,7 @@
  * The archive template (categories, tags, custom taxonomies, author, date).
  * Note: WooCommerce product archives are handled by woocommerce/archive-product.php.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -14,18 +14,18 @@ get_header();
 ?>
 <main id="main" class="site-main section">
 	<div class="container">
-		<header class="diamond-archive-header mb-5">
+		<header class="wpr-archive-header mb-5">
 			<?php
-			the_archive_title( '<h1 class="diamond-archive-title">', '</h1>' );
-			the_archive_description( '<div class="diamond-archive-description">', '</div>' );
+			the_archive_title( '<h1 class="wpr-archive-title">', '</h1>' );
+			the_archive_description( '<div class="wpr-archive-description">', '</div>' );
 			?>
-			<div class="diamond-rule"></div>
+			<div class="wpr-rule"></div>
 		</header>
 
 		<div class="row">
 			<div class="col-lg-8">
 				<?php if ( have_posts() ) : ?>
-					<div class="diamond-posts">
+					<div class="wpr-posts">
 						<?php while ( have_posts() ) : ?>
 							<?php the_post(); ?>
 							<?php get_template_part( 'template-parts/content', get_post_type() ); ?>

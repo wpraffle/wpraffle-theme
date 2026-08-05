@@ -7,7 +7,7 @@
  * optional testimonial. Falls back to a neutral placeholder grid when the
  * plugin is absent or no winners are featured yet.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,13 +20,13 @@ $winners = wpraffle_theme_has_plugin() ? WPRaffle_Theme_Integration::get_feature
 	<div class="container">
 		<?php
 		wpraffle_theme_section_heading(
-			get_theme_mod( 'diamond_winners_title', __( 'Featured Winners', 'wpraffle-theme' ) ),
-			get_theme_mod( 'diamond_winners_subtitle', __( 'Real prizes, real people, paid out instantly.', 'wpraffle-theme' ) ),
+			get_theme_mod( 'wpr_winners_title', __( 'Featured Winners', 'wpraffle-theme' ) ),
+			get_theme_mod( 'wpr_winners_subtitle', __( 'Real prizes, real people, paid out instantly.', 'wpraffle-theme' ) ),
 			wpraffle_theme_winners_url(),
 			__( 'View all winners', 'wpraffle-theme' )
 		);
 		?>
-		<div class="swiper diamond-swiper" data-diamond-carousel>
+		<div class="swiper wpr-swiper" data-wpr-carousel>
 			<div class="swiper-wrapper">
 				<?php if ( ! empty( $winners ) ) : ?>
 					<?php foreach ( $winners as $fw ) : ?>

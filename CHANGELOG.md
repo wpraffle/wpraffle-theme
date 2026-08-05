@@ -3,6 +3,108 @@
 All notable changes to WPRaffle Theme are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.0] — 2026-08-05
+
+### Added — Elementor improvements
+
+- **Dynamic tags** for plugin data (group `🎁 WPRaffle Theme`): Raffle ID,
+  Ticket Price, Draw Date (current product), and a global Charity Total Raised
+  tag — so any native Elementor widget can bind to live values instead of
+  hardcoding them. (`inc/class-wpraffle-theme-elementor-tags.php`)
+- **`[wpraffle_charity_total]` shortcode** outputs the always-current charity
+  total (sums active charities via the plugin). Used in the Elementor templates
+  in place of the previously hardcoded `£2,800,000`. (`inc/class-wpraffle-theme-integration.php`)
+- **7 homepage section blocks** for the Elementor library, covering every
+  section the PHP homepage renders: `how-it-works`, `featured-spotlight`,
+  `stats-counter`, `countdown`, `live-draw`, `testimonials`, `faq`.
+  (`elementor/sections/`)
+- **4 Theme Builder templates:** Cart, Checkout, 404, Search results — so they
+  are visually editable. (`elementor/theme-builder/`)
+- **Dedicated `assets/css/elementor.css`** enqueued only when Elementor is
+  active, centralising canvas max-width, responsive column-stacking, and
+  section padding for the `wpr-*` classes.
+
+### Fixed
+
+- **Testimonials headings disappeared** after the diamond→wpr rename: the
+  template still read `diamond_testimonials_title/subtitle`. Now uses the
+  `wpraffle_theme_mod()` fallback helper against the renamed keys.
+  (`template-parts/testimonials.php`)
+- **Single-raffle Elementor template rendered nothing:** the
+  `[raffle id="{{current_product_id}}"]` placeholder was invalid Elementor
+  syntax. Now uses `[raffle]`, which auto-resolves to the current product's
+  raffle (plugin-side fix). (`elementor/theme-builder/single-raffle.json`)
+
+### Changed
+
+- **Hardcoded charity total removed** from `charity-donations.json` and
+  `home.json` — both now use `[wpraffle_charity_total]`.
+- **`elementor/README.md` refreshed:** renamed "Diamond" → "WPRaffle Theme",
+  removed the dead `class-diamond-wpraffle.php` reference, documented the new
+  sections, templates, and dynamic tags.
+
+## [1.2.1] — 2026-08-05
+
+### Security / Hardening
+
+- **Update repository hard-coded.** The GitHub repo the theme updater polls is
+  now a constant (`WPRaffle_Theme_Updater::REPO` = `wpraffle/wpraffle-theme`)
+  and is no longer read from `wpraffle_theme_update_settings['github_repo']`.
+  The editable "GitHub repository" field on Appearance → Theme Options →
+  Advanced is replaced with a fixed label + link to
+  https://github.com/wpraffle/wpraffle-theme, and the settings save handler
+  ignores any posted `github_repo`. Theme update traffic can no longer be
+  redirected to an arbitrary third-party repo.
+  (`inc/class-wpraffle-theme-updater.php`,
+  `inc/class-wpraffle-theme-settings.php`, `admin/views/settings-advanced.php`)
+
+### Changed — "diamond" → "wpr" prefix rename (keep the Diamond colour preset)
+
+The theme was originally branded "Diamond" and still used `diamond` as the
+prefix for every technical identifier even after the rename to WPRaffle Theme.
+The legacy prefix has now been retired in favour of `wpr` / `wpraffle-theme`.
+**The user-facing "Diamond" colour preset (one of five: Diamond/Golf/Car/Retro/
+Elite) is intentionally preserved** — only the internal prefix changed.
+
+- **CSS custom properties:** every `--diamond-*` variable → `--wpr-*`
+  (~55 variable names, ~367 usages across all CSS files).
+- **CSS classes / selectors:** every `.diamond-*` class → `.wpr-*`
+  (~95 selectors, ~415 usages, including markup and Elementor JSON).
+- **Theme-mod / option field keys:** `diamond_*` → `wpr_*` (~20 keys).
+- **Admin page slug:** `diamond-settings` → `wpraffle-theme-settings`
+  (menu, redirects, admin-CSS body-class, updater).
+- **Nonces / form identifiers:** `diamond_nonce`, `diamond_save_settings`,
+  `diamond_preset`, `diamond_action`, `diamond_tab` → `wpr_*` equivalents.
+- **Form namespace:** `$_POST['diamond'][...]` → `$_POST['wpr_settings'][...]`.
+- **JS localised object:** `diamondData` → `wprThemeData` (3 JS files + inline).
+- **Image-size handles:** `diamond-card`, `diamond-card-wide`, `diamond-hero`,
+  `diamond-winner` → `wpr-*`.
+- **`@package Diamond` docblocks** → `@package WPRaffle_Theme` (37 files).
+- **TGM slug id** `'diamond'` → `'wpraffle-theme'`.
+- **DB migration:** `wpraffle_theme_migrate_settings()` now renames every
+  `diamond_*` theme_mod key → `wpr_*` inside the `theme_mods` row (one-time,
+  flag-gated by `wpraffle_theme_migrated_diamond_mods_v1`).
+- **Read fallback:** new `wpraffle_theme_mod()` helper falls back to the old
+  `diamond_*` key for one release, so a saved value can never be lost even if
+  the migration is skipped.
+
+> ⚠️ **Child themes / custom CSS:** any custom CSS or child-theme templates
+> referencing `.diamond-*` classes or `--diamond-*` variables will need updating
+> to `.wpr-*` / `--wpr-*`.
+
+### Changed — Redundancy cleanup
+
+- Removed empty deprecated `create_plugin_pages()` and the no-op
+  `enqueue_google_fonts()` method + its hook. (`inc/class-wpraffle-theme-setup.php`)
+- Removed dead first-pass font-URL computation in `load_dynamic_fonts()`.
+  (`inc/class-wpraffle-theme-settings.php`)
+- Removed the unused `DEFAULT_REPO` constant. (`inc/class-wpraffle-theme-updater.php`)
+- Deleted a byte-identical duplicate CSS block in `assets/css/wpraffle.css`
+  (the `.raffle-image-card` / `.raffle-title-main` / `.raffle-price-value` /
+  `.raffle-progress-bar-*` rules were defined twice).
+- Deleted the orphan `template-parts/share-buttons.php` (never loaded by any
+  `get_template_part()` call).
+
 ## [1.0.0] — 2026-07-08
 
 ### Added — Initial release

@@ -3,7 +3,7 @@
  * The header template. Fires wpraffle_theme_header() which either renders an
  * Elementor Theme Builder header (if active) or the native header partial.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +21,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="diamond-skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'wpraffle-theme' ); ?></a>
+<a class="wpr-skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'wpraffle-theme' ); ?></a>
 
 <div class="site">
+	<?php
+	// v1.1.0 conditional template parts.
+	$s = WPRaffle_Theme_Settings::instance()->get_settings();
+	if ( 'on' === $s['promo_bar'] ) {
+		get_template_part( 'template-parts/promo-bar' );
+	}
+	if ( 'on' === $s['age_gate'] ) {
+		get_template_part( 'template-parts/age-gate' );
+	}
+	?>
 	<?php wpraffle_theme_header(); ?>

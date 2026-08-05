@@ -2,7 +2,7 @@
 /**
  * Default page template.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,15 +17,15 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 			?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class( 'diamond-page' ); ?>>
-				<header class="diamond-page-header mb-4">
-					<h1 class="diamond-page-title"><?php the_title(); ?></h1>
-					<div class="diamond-rule"></div>
+			<article id="post-<?php the_ID(); ?>" <?php post_class( 'wpr-page' ); ?>>
+				<header class="wpr-page-header mb-4">
+					<h1 class="wpr-page-title"><?php the_title(); ?></h1>
+					<div class="wpr-rule"></div>
 				</header>
 				<?php if ( has_post_thumbnail() ) : ?>
-					<div class="diamond-page-featured mb-4"><?php the_post_thumbnail( 'diamond-card-wide' ); ?></div>
+					<div class="wpr-page-featured mb-4"><?php the_post_thumbnail( 'wpr-card-wide' ); ?></div>
 				<?php endif; ?>
-				<div class="diamond-page-content">
+				<div class="wpr-page-content">
 					<?php
 					the_content();
 					wp_link_pages();
