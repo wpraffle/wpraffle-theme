@@ -9,7 +9,7 @@
  * installed from the GitHub release URL otherwise. The TGMPA library itself is
  * loaded from /lib/tgmpa/tgm-plugin-activation.php.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -93,9 +93,9 @@ final class WPRaffle_Theme_TGM {
 		);
 
 		$config = array(
-			'id'           => 'diamond',
+			'id'           => 'wpraffle-theme',
 			'default_path' => '',
-			'menu'         => 'diamond-install-plugins',
+			'menu'         => 'wpraffle-theme-install-plugins',
 			'has_notices'  => true,
 			'dismissable'  => true,
 			'dismiss_msg'  => '',

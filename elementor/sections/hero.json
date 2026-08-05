@@ -1,6 +1,6 @@
 {
   "version": "0.4",
-  "title": "Diamond — Hero Section",
+  "title": "WPRaffle Theme — Hero Section",
   "type": "section",
   "content": [
     {
@@ -14,7 +14,7 @@
         "padding": { "unit": "px", "top": "88", "right": "0", "bottom": "88", "left": "0", "isLinked": false },
         "background_background": "classic",
         "background_color": "#2C2C2C",
-        "css_classes": "diamond-hero"
+        "css_classes": "wpr-hero"
       },
       "elements": [
         {

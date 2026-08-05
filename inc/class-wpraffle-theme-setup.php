@@ -2,7 +2,7 @@
 /**
  * Core theme setup: supports, menus, image sizes, enqueues.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -42,14 +42,14 @@ final class WPRaffle_Theme_Setup {
 		add_action( 'after_setup_theme', array( $this, 'setup' ), 11 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 5 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_google_fonts' ), 1 );
 		add_action( 'widgets_init', array( $this, 'register_sidebars' ) );
 		add_filter( 'body_class', array( $this, 'body_classes' ) );
 
-		// NOTE: page auto-creation was removed in favour of manual page
-		// assignment in Appearance → Theme Options (see class-diamond-settings).
-		// The page-winners.php / page-charities.php templates are retained for
-		// users who want to create the pages themselves.
+		// v1.1.0 optimization features.
+		add_action( 'init', array( $this, 'disable_emoji' ), 1 );
+		add_filter( 'script_loader_src', array( $this, 'remove_version_qs' ), 9999 );
+		add_filter( 'style_loader_src', array( $this, 'remove_version_qs' ), 9999 );
+		add_action( 'wp_head', array( $this, 'preload_hero' ), 1 );
 	}
 
 	/**
@@ -93,24 +93,12 @@ final class WPRaffle_Theme_Setup {
 		) );
 
 		// Image sizes sized to the competition-card pattern.
-		add_image_size( 'diamond-card', 600, 450, true );
-		add_image_size( 'diamond-card-wide', 800, 500, true );
-		add_image_size( 'diamond-hero', 1920, 800, true );
-		add_image_size( 'diamond-winner', 360, 360, true );
+		add_image_size( 'wpr-card', 600, 450, true );
+		add_image_size( 'wpr-card-wide', 800, 500, true );
+		add_image_size( 'wpr-hero', 1920, 800, true );
+		add_image_size( 'wpr-winner', 360, 360, true );
 
 		add_editor_style( 'assets/css/base.css' );
-	}
-
-	/**
-	 * Google Fonts (Montserrat). Loaded early so CSS can reference it.
-	 */
-	public function enqueue_google_fonts() {
-		wp_enqueue_style(
-			'wpraffle-theme-fonts',
-			'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap',
-			array(),
-			null
-		);
 	}
 
 	/**
@@ -121,17 +109,31 @@ final class WPRaffle_Theme_Setup {
 	 */
 	public function enqueue_styles() {
 		$ver = WPRAFFLE_THEME_VERSION;
+		$s   = WPRaffle_Theme_Settings::instance()->get_settings();
 
 		// Vendor: Bootstrap 5.3 grid/utilities, Swiper 11, Fancybox 6, Font Awesome 6.
+		// Each is conditional on the Optimization tab toggles (v1.1.0).
 		wp_enqueue_style( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css', array(), '5.3.3' );
-		wp_enqueue_style( 'swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.1.14' );
-		wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.css', array(), '6.0' );
-		wp_enqueue_style( 'font-awesome', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css', array(), '6.5.2' );
+		if ( 'on' === $s['load_swiper'] ) {
+			wp_enqueue_style( 'swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', array(), '11.1.14' );
+		}
+		if ( 'on' === $s['load_fancybox'] ) {
+			wp_enqueue_style( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.css', array(), '6.0' );
+		}
+		if ( 'on' === $s['load_font_awesome'] ) {
+			wp_enqueue_style( 'font-awesome', 'https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css', array(), '6.5.2' );
+		}
 
 		// Theme base styles.
 		wp_enqueue_style( 'wpraffle-theme-base', WPRAFFLE_THEME_URI . '/assets/css/base.css', array( 'bootstrap' ), $ver );
 		wp_enqueue_style( 'wpraffle-theme-components', WPRAFFLE_THEME_URI . '/assets/css/components.css', array( 'wpraffle-theme-base' ), $ver );
 		wp_enqueue_style( 'wpraffle-theme-woocommerce', WPRAFFLE_THEME_URI . '/assets/css/woocommerce.css', array( 'wpraffle-theme-components' ), $ver );
+		// v1.1.0 features (typography, header layouts, sections, blog).
+		wp_enqueue_style( 'wpraffle-theme-v110', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0.css', array( 'wpraffle-theme-components' ), $ver );
+		// v1.1.0 15 features (dark mode, promo, mobile CTA, social proof, age gate, footer, product cards, mega menu).
+		wp_enqueue_style( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0-features.css', array( 'wpraffle-theme-v110' ), $ver );
+		// v1.2.0 enhancements (scroll reveal, counters, back-to-top, new sections, etc.).
+		wp_enqueue_style( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/css/v1.2.0.css', array( 'wpraffle-theme-features' ), $ver );
 
 		// WPRaffle plugin overrides — declared as dependent on the plugin's
 		// 'raffle-public' stylesheet so this always loads AFTER it (equal
@@ -148,17 +150,40 @@ final class WPRaffle_Theme_Setup {
 	 */
 	public function enqueue_scripts() {
 		$ver = WPRAFFLE_THEME_VERSION;
+		$s   = WPRaffle_Theme_Settings::instance()->get_settings();
 
 		wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', array( 'jquery' ), '5.3.3', true );
-		wp_enqueue_script( 'swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.1.14', true );
-		wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.umd.js', array(), '6.0', true );
+		if ( 'on' === $s['load_swiper'] ) {
+			wp_enqueue_script( 'swiper', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), '11.1.14', true );
+		}
+		if ( 'on' === $s['load_fancybox'] ) {
+			wp_enqueue_script( 'fancybox', 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@6/dist/fancybox/fancybox.umd.js', array(), '6.0', true );
+		}
 
-		wp_enqueue_script( 'wpraffle-theme-script', WPRAFFLE_THEME_URI . '/assets/js/wpraffle-theme.js', array( 'jquery', 'swiper', 'bootstrap' ), $ver, true );
+		$deps = array( 'jquery', 'bootstrap' );
+		if ( 'on' === $s['load_swiper'] ) {
+			$deps[] = 'swiper';
+		}
+		wp_enqueue_script( 'wpraffle-theme-script', WPRAFFLE_THEME_URI . '/assets/js/wpraffle-theme.js', $deps, $ver, true );
+		wp_enqueue_script( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/js/v1.1.0-features.js', array( 'wpraffle-theme-script' ), $ver, true );
+		// v1.2.0 enhancements — depends on the features script so it can extend its helpers.
+		wp_enqueue_script( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/js/v1.2.0.js', array( 'wpraffle-theme-features' ), $ver, true );
 
-		wp_localize_script( 'wpraffle-theme-script', 'diamondData', array(
-			'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
-			'nonce'    => wp_create_nonce( 'diamond_nonce' ),
-			'isRaffle' => wpraffle_theme_has_plugin(),
+		wp_localize_script( 'wpraffle-theme-script', 'wprThemeData', array(
+			'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
+			'nonce'           => wp_create_nonce( 'wpr_nonce' ),
+			'isRaffle'        => wpraffle_theme_has_plugin(),
+			'headerScroll'    => $s['header_scroll'],
+			'headerLayout'    => $s['header_layout'],
+			'darkMode'        => $s['dark_mode'],
+			'socialProofFreq' => isset( $s['social_proof_freq'] ) ? intval( $s['social_proof_freq'] ) : 30,
+			'socialProofPos'  => isset( $s['social_proof_pos'] ) ? $s['social_proof_pos'] : 'bottom-left',
+			// v1.2.0 feature toggles.
+			'scrollReveal'    => isset( $s['scroll_reveal'] ) ? $s['scroll_reveal'] : 'on',
+			'backToTop'       => isset( $s['back_to_top'] ) ? $s['back_to_top'] : 'on',
+			'confettiWinners' => isset( $s['confetti_winners'] ) ? $s['confetti_winners'] : 'on',
+			'progressAnimate' => isset( $s['progress_animate'] ) ? $s['progress_animate'] : 'on',
+			'heroCounters'    => isset( $s['hero_counters'] ) ? $s['hero_counters'] : 'on',
 		) );
 
 		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -204,6 +229,38 @@ final class WPRaffle_Theme_Setup {
 			'before_title'  => '<h3 class="footer-widget-title">',
 			'after_title'   => '</h3>',
 		) );
+
+		// v1.1.0: Named hook widget areas for no-code page composition.
+		register_sidebar( array(
+			'name'          => __( 'Before Homepage Sections', 'wpraffle-theme' ),
+			'id'            => 'wprt-before-home',
+			'description'   => __( 'Appears above the first homepage section (great for promo banners).', 'wpraffle-theme' ),
+			'before_widget' => '<div id="%1$s" class="wprt-hook-widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3 class="wprt-hook-widget-title">',
+			'after_title'   => '</h3>',
+		) );
+		register_sidebar( array(
+			'name'          => __( 'After Hero', 'wpraffle-theme' ),
+			'id'            => 'wprt-after-hero',
+			'description'   => __( 'Appears directly after the homepage hero.', 'wpraffle-theme' ),
+			'before_widget' => '<div id="%1$s" class="wprt-hook-widget %2$s">',
+			'after_widget'  => '</div>',
+		) );
+		register_sidebar( array(
+			'name'          => __( 'Before Competitions', 'wpraffle-theme' ),
+			'id'            => 'wprt-before-competitions',
+			'description'   => __( 'Appears above the Active Competitions section.', 'wpraffle-theme' ),
+			'before_widget' => '<div id="%1$s" class="wprt-hook-widget %2$s">',
+			'after_widget'  => '</div>',
+		) );
+		register_sidebar( array(
+			'name'          => __( 'After Homepage Sections', 'wpraffle-theme' ),
+			'id'            => 'wprt-after-home',
+			'description'   => __( 'Appears after the last homepage section (above the footer).', 'wpraffle-theme' ),
+			'before_widget' => '<div id="%1$s" class="wprt-hook-widget %2$s">',
+			'after_widget'  => '</div>',
+		) );
 	}
 
 	/**
@@ -213,7 +270,8 @@ final class WPRaffle_Theme_Setup {
 	 * @return array
 	 */
 	public function body_classes( $classes ) {
-		$classes[] = 'diamond-theme';
+		$classes[] = 'wpr-theme';
+		$s = WPRaffle_Theme_Settings::instance()->get_settings();
 
 		if ( wpraffle_theme_has_plugin() ) {
 			$classes[] = 'has-wpraffle';
@@ -222,20 +280,84 @@ final class WPRaffle_Theme_Setup {
 			$classes[] = 'has-elementor-pro';
 		}
 		if ( is_front_page() ) {
-			$classes[] = 'diamond-front';
+			$classes[] = 'wpr-front';
+		}
+
+		// v1.1.0 layout classes.
+		$classes[] = 'header-layout-' . sanitize_html_class( $s['header_layout'] );
+		$classes[] = 'header-scroll-' . sanitize_html_class( $s['header_scroll'] );
+		if ( 'on' === $s['header_overlay'] && is_front_page() ) {
+			$classes[] = 'header-overlay';
+		}
+		if ( is_home() || is_archive() ) {
+			$classes[] = 'blog-layout-' . sanitize_html_class( $s['blog_layout'] );
+			$classes[] = 'blog-cols-' . absint( $s['blog_columns'] );
+		}
+		if ( 'on' === $s['btn_hover_lift'] ) {
+			$classes[] = 'btn-hover-lift';
+		}
+
+		// v1.1.0 product card classes.
+		$classes[] = 'card-ratio-' . sanitize_html_class( $s['card_ratio'] );
+		$classes[] = 'card-title-' . sanitize_html_class( $s['card_title_pos'] );
+		$classes[] = 'card-progress-' . sanitize_html_class( $s['card_progress'] );
+		$classes[] = 'card-hover-' . sanitize_html_class( $s['card_hover'] );
+
+		// v1.2.0 — Winners template body class (drives confetti targeting).
+		if ( is_page_template( 'page-winners.php' ) ) {
+			$classes[] = 'wprt-is-winners-page';
 		}
 
 		return $classes;
 	}
 
+	/* ---------------------------------------------------------------------
+	 * Optimization (v1.1.0)
+	 * ------------------------------------------------------------------- */
+
 	/**
-	 * Create the Winners and Charities pages on theme activation.
-	 *
-	 * DEPRECATED. Page auto-creation was removed in favour of manual page
-	 * assignment in Appearance → Theme Options. The method is retained as a
-	 * no-op so any external references don't fatal.
+	 * Disable the WordPress emoji script if the toggle is on.
 	 */
-	public static function create_plugin_pages() {
-		// Intentionally empty — see class-diamond-settings for page assignment.
+	public function disable_emoji() {
+		$s = WPRaffle_Theme_Settings::instance()->get_settings();
+		if ( 'on' !== $s['disable_emoji'] ) {
+			return;
+		}
+		remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+		remove_action( 'wp_print_styles', 'print_emoji_styles' );
+		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
+		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	}
+
+	/**
+	 * Remove the ?ver= query string from script/style URLs.
+	 *
+	 * @param string $src Asset URL.
+	 * @return string
+	 */
+	public function remove_version_qs( $src ) {
+		$s = WPRaffle_Theme_Settings::instance()->get_settings();
+		if ( 'on' !== $s['disable_version_qs'] ) {
+			return $src;
+		}
+		if ( false !== strpos( $src, 'ver=' ) ) {
+			$src = remove_query_arg( 'ver', $src );
+		}
+		return $src;
+	}
+
+	/**
+	 * Preload the hero background image on the homepage.
+	 */
+	public function preload_hero() {
+		$s = WPRaffle_Theme_Settings::instance()->get_settings();
+		if ( 'on' !== $s['preload_hero'] || ! is_front_page() ) {
+			return;
+		}
+		$bg = get_theme_mod( 'wpr_hero_bg' );
+		if ( $bg ) {
+			echo '<link rel="preload" as="image" href="' . esc_url( $bg ) . '">' . "\n";
+		}
 	}
 }

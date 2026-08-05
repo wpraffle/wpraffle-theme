@@ -1,12 +1,12 @@
 <?php
 /**
- * Template tags for the Diamond theme.
+ * Template tags for the WPRaffle theme.
  *
  * These wrap common markup so templates stay readable. Most are pluggable
  * (defined only if not already overridden) so child themes or plugins can
  * replace them.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -75,21 +75,113 @@ if ( ! function_exists( 'wpraffle_theme_competitions_url' ) ) {
 	/** URL for the "View all competitions" link. Defaults to the WC shop. */
 	function wpraffle_theme_competitions_url() {
 		$shop = class_exists( 'WooCommerce' ) ? get_permalink( wc_get_page_id( 'shop' ) ) : '';
-		return wpraffle_theme_get_page_url( 'diamond_page_competitions', 'raffles', 'raffle_list', $shop );
+		return wpraffle_theme_get_page_url( 'wpr_page_competitions', 'raffles', 'raffle_list', $shop );
 	}
 }
 
 if ( ! function_exists( 'wpraffle_theme_winners_url' ) ) {
 	/** URL for the "View all winners" link. */
 	function wpraffle_theme_winners_url() {
-		return wpraffle_theme_get_page_url( 'diamond_page_winners', 'ended', 'raffle_ended_list', wpraffle_theme_competitions_url() );
+		return wpraffle_theme_get_page_url( 'wpr_page_winners', 'ended', 'raffle_ended_list', wpraffle_theme_competitions_url() );
 	}
 }
 
 if ( ! function_exists( 'wpraffle_theme_charities_url' ) ) {
 	/** URL for the "View all charities" link. */
 	function wpraffle_theme_charities_url() {
-		return wpraffle_theme_get_page_url( 'diamond_page_charities', 'charities', 'raffle_charities', home_url( '/' ) );
+		return wpraffle_theme_get_page_url( 'wpr_page_charities', 'charities', 'raffle_charities', home_url( '/' ) );
+	}
+}
+
+/* ---------------------------------------------------------------------
+ * Homepage section manager.
+ *
+ * Reads the 'sections' config from Theme Options and returns the enabled
+ * sections in the user-defined order, ready for front-page.php to render.
+ * ------------------------------------------------------------------- */
+
+if ( ! function_exists( 'wpraffle_theme_get_homepage_sections' ) ) {
+	/**
+	 * Get the enabled homepage sections sorted by their configured order.
+	 *
+	 * @return array Array of section keys in display order.
+	 */
+	function wpraffle_theme_get_homepage_sections() {
+		$s        = WPRaffle_Theme_Settings::instance()->get_settings();
+		$sections = isset( $s['sections'] ) ? $s['sections'] : array();
+		$enabled  = array();
+
+		foreach ( $sections as $key => $cfg ) {
+			if ( ! empty( $cfg['enabled'] ) ) {
+				$enabled[ $key ] = isset( $cfg['order'] ) ? intval( $cfg['order'] ) : 99;
+			}
+		}
+
+		asort( $enabled );
+		return array_keys( $enabled );
+	}
+}
+
+/**
+ * Conditional display check for a homepage section.
+ *
+ * @param string $section Section key.
+ * @return bool Whether the section should render.
+ */
+function wpraffle_theme_section_should_show( $section ) {
+	switch ( $section ) {
+		case 'live_draw':
+			// Only show live draw if the shortcode exists AND a live draw is active.
+			if ( ! wpraffle_theme_has_plugin() ) {
+				return false;
+			}
+			return true;
+		case 'countdown':
+			// Show countdown only if a live raffle with a draw date exists.
+			if ( ! wpraffle_theme_has_plugin() ) {
+				return false;
+			}
+			return true;
+		case 'charity':
+			// Show charity only if the total raised > 0 OR shortcode exists.
+			if ( ! wpraffle_theme_has_plugin() ) {
+				return false;
+			}
+			return true;
+		case 'testimonials':
+			// Show only if at least one testimonial entry exists in Theme Options.
+			$s = WPRaffle_Theme_Settings::instance()->get_settings();
+			$items = isset( $s['testimonial_items'] ) && is_array( $s['testimonial_items'] ) ? $s['testimonial_items'] : array();
+			return ! empty( $items );
+		case 'faq':
+			// Show only if at least one FAQ entry exists in Theme Options.
+			$s = WPRaffle_Theme_Settings::instance()->get_settings();
+			$items = isset( $s['faqs'] ) && is_array( $s['faqs'] ) ? $s['faqs'] : array();
+			return ! empty( $items );
+		case 'featured':
+			// Show only if there is a featured raffle to display (picked ID
+			// or a featured-flagged raffle in plugin v1.3.1+).
+			if ( ! wpraffle_theme_has_plugin() ) {
+				return false;
+			}
+			$s = WPRaffle_Theme_Settings::instance()->get_settings();
+			if ( ! empty( $s['featured_raffle_id'] ) ) {
+				return true;
+			}
+			// No explicit ID — show if any featured-flagged raffle exists.
+			global $wpdb;
+			$has = $wpdb->get_var( "SHOW COLUMNS FROM {$wpdb->prefix}raffles LIKE 'is_featured'" );
+			if ( ! $has ) {
+				return false;
+			}
+			$count = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}raffles WHERE is_featured = 1 AND status = 'active'" );
+			return $count > 0;
+		case 'how_it_works':
+		case 'stats_counter':
+			// These sections are always renderable (defaults provided in-template).
+			return true;
+		default:
+			return true;
 	}
 }
 
@@ -148,7 +240,7 @@ if ( ! function_exists( 'wpraffle_theme_logo' ) ) {
 	 * @param bool $linked Wrap in a home link.
 	 */
 	function wpraffle_theme_logo( $linked = true ) {
-		$open  = $linked ? '<a class="diamond-logo" href="' . esc_url( home_url( '/' ) ) . '">' : '<span class="diamond-logo">';
+		$open  = $linked ? '<a class="wpr-logo" href="' . esc_url( home_url( '/' ) ) . '">' : '<span class="wpr-logo">';
 		$close = $linked ? '</a>' : '</span>';
 
 		if ( has_custom_logo() ) {
@@ -157,9 +249,9 @@ if ( ! function_exists( 'wpraffle_theme_logo' ) ) {
 		}
 
 		$tagline = get_bloginfo( 'description', 'display' );
-		echo wp_kses_post( $open . '<span class="diamond-logo__text">' . get_bloginfo( 'name' ) . '</span>' . $close );
+		echo wp_kses_post( $open . '<span class="wpr-logo__text">' . get_bloginfo( 'name' ) . '</span>' . $close );
 		if ( $tagline ) {
-			echo '<span class="diamond-logo__tagline d-none d-md-block">' . esc_html( $tagline ) . '</span>';
+			echo '<span class="wpr-logo__tagline d-none d-md-block">' . esc_html( $tagline ) . '</span>';
 		}
 	}
 }
@@ -178,9 +270,9 @@ if ( ! function_exists( 'wpraffle_theme_cart_link' ) ) {
 		}
 		$count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0;
 		?>
-		<a class="diamond-icon-btn diamond-cart" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View cart', 'wpraffle-theme' ); ?>">
+		<a class="wpr-icon-btn wpr-cart" href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View cart', 'wpraffle-theme' ); ?>">
 			<i class="fa-solid fa-bag-shopping"></i>
-			<span class="diamond-cart-count"><?php echo absint( $count ); ?></span>
+			<span class="wpr-cart-count"><?php echo absint( $count ); ?></span>
 		</a>
 		<?php
 	}
@@ -201,7 +293,7 @@ if ( ! function_exists( 'wpraffle_theme_account_link' ) ) {
 		$url   = is_user_logged_in() ? wc_get_page_permalink( 'myaccount' ) : wc_get_page_permalink( 'myaccount' );
 		$label = is_user_logged_in() ? __( 'My Account', 'wpraffle-theme' ) : __( 'Login', 'wpraffle-theme' );
 		?>
-		<a class="diamond-icon-btn diamond-account" href="<?php echo esc_url( $url ); ?>">
+		<a class="wpr-icon-btn wpr-account" href="<?php echo esc_url( $url ); ?>">
 			<i class="fa-regular fa-user"></i>
 			<span class="d-none d-lg-inline"><?php echo esc_html( $label ); ?></span>
 		</a>
@@ -219,14 +311,14 @@ if ( ! function_exists( 'wpraffle_theme_social_links' ) ) {
 	 */
 	function wpraffle_theme_social_links() {
 		$networks = array(
-			'facebook'  => get_theme_mod( 'diamond_social_facebook' ),
-			'instagram' => get_theme_mod( 'diamond_social_instagram' ),
-			'x'         => get_theme_mod( 'diamond_social_x' ),
-			'tiktok'    => get_theme_mod( 'diamond_social_tiktok' ),
-			'youtube'   => get_theme_mod( 'diamond_social_youtube' ),
+			'facebook'  => get_theme_mod( 'wpr_social_facebook' ),
+			'instagram' => get_theme_mod( 'wpr_social_instagram' ),
+			'x'         => get_theme_mod( 'wpr_social_x' ),
+			'tiktok'    => get_theme_mod( 'wpr_social_tiktok' ),
+			'youtube'   => get_theme_mod( 'wpr_social_youtube' ),
 		);
 
-		echo '<div class="diamond-social">';
+		echo '<div class="wpr-social">';
 		foreach ( $networks as $net => $url ) {
 			if ( ! $url ) {
 				continue;
@@ -264,17 +356,17 @@ if ( ! function_exists( 'wpraffle_theme_section_heading' ) ) {
 	 */
 	function wpraffle_theme_section_heading( $title, $subtitle = '', $link = '', $link_text = '' ) {
 		?>
-		<div class="diamond-section-heading d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
+		<div class="wpr-section-heading d-flex flex-wrap align-items-end justify-content-between gap-2 mb-4">
 			<div>
 				<?php if ( $title ) : ?>
-					<h2 class="diamond-section-heading__title"><?php echo esc_html( $title ); ?></h2>
+					<h2 class="wpr-section-heading__title"><?php echo esc_html( $title ); ?></h2>
 				<?php endif; ?>
 				<?php if ( $subtitle ) : ?>
-					<p class="diamond-section-heading__subtitle mb-0"><?php echo esc_html( $subtitle ); ?></p>
+					<p class="wpr-section-heading__subtitle mb-0"><?php echo esc_html( $subtitle ); ?></p>
 				<?php endif; ?>
 			</div>
 			<?php if ( $link && $link_text ) : ?>
-				<a class="diamond-section-heading__link" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $link_text ); ?> <i class="fa-solid fa-arrow-right ms-1"></i></a>
+				<a class="wpr-section-heading__link" href="<?php echo esc_url( $link ); ?>"><?php echo esc_html( $link_text ); ?> <i class="fa-solid fa-arrow-right ms-1"></i></a>
 			<?php endif; ?>
 		</div>
 		<?php
@@ -297,7 +389,7 @@ if ( ! function_exists( 'wpraffle_theme_winner_badge' ) ) {
 			'instant' => array( 'label' => __( 'Instant Winner', 'wpraffle-theme' ), 'class' => 'badge-instant' ),
 		);
 		$badge = isset( $map[ $type ] ) ? $map[ $type ] : $map['main'];
-		printf( '<span class="diamond-winner-badge %s">%s</span>', esc_attr( $badge['class'] ), esc_html( $badge['label'] ) );
+		printf( '<span class="wpr-winner-badge %s">%s</span>', esc_attr( $badge['class'] ), esc_html( $badge['label'] ) );
 	}
 }
 

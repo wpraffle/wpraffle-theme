@@ -1,0 +1,59 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle Theme — How It Works",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-hiw",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#F6F6F6",
+        "css_classes": "wpr-how-it-works"
+      },
+      "elements": [
+        { "id": "dmdsec-hiw-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "How It Works", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
+        {
+          "id": "dmdsec-hiw-grid",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 24 }, "padding": { "unit": "px", "top": "32", "right": "0", "bottom": "0", "left": "0", "isLinked": false } },
+          "elements": [
+            {
+              "id": "dmdsec-hiw-1",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdsec-hiw-1i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-mouse-pointer", "library": "fa-solid" }, "icon_color": "#E4678A", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdsec-hiw-1t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Choose", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdsec-hiw-1d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Browse live draws and pick the prize you love.</p>" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdsec-hiw-2",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdsec-hiw-2i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-ticket-simple", "library": "fa-solid" }, "icon_color": "#5CAEED", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdsec-hiw-2t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Enter", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdsec-hiw-2d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Answer the question and choose your tickets.</p>" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdsec-hiw-3",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 }, "flex_align_items": "center", "text_align": "center" },
+              "elements": [
+                { "id": "dmdsec-hiw-3i", "elType": "widget", "widgetType": "icon", "settings": { "selected_icon": { "value": "fas fa-trophy", "library": "fa-solid" }, "icon_color": "#63DD92", "size": { "unit": "px", "size": 32 } }, "elements": [] },
+                { "id": "dmdsec-hiw-3t", "elType": "widget", "widgetType": "heading", "settings": { "title": "Win", "header_size": "h3", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 18 }, "align": "center" }, "elements": [] },
+                { "id": "dmdsec-hiw-3d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;font-size:14px\">Watch the live draw and get paid out instantly.</p>" }, "elements": [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

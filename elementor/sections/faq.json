@@ -1,0 +1,45 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle Theme — FAQ",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-faq",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 800 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "css_classes": "wpr-faq"
+      },
+      "elements": [
+        { "id": "dmdsec-faq-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "Frequently Asked Questions", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsec-faq-sub", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D\">Everything you need to know about how we run our competitions.</p>" }, "elements": [] },
+        {
+          "id": "dmdsec-faq-acc",
+          "elType": "widget",
+          "widgetType": "accordion",
+          "settings": {
+            "tabs": [
+              { "tab_title": "How do I enter a competition?", "tab_content": "Pick a live competition, answer the skill question, and choose how many tickets you'd like. Every competition also has a free postal entry route." },
+              { "tab_title": "How are winners chosen?", "tab_content": "All draws are conducted live and independently verified. You can watch each draw in real time on the Live Draw section." },
+              { "tab_title": "When do I get paid if I win?", "tab_content": "Instantly. Winners are paid out the same day the draw closes — no waiting periods and no admin fees." },
+              { "tab_title": "Where does the money go?", "tab_content": "100% of ticket sales are donated to charity. You can see the running total and the causes we support on the Charities page." }
+            ],
+            "border_border": "solid",
+            "border_width": { "unit": "px", "size": 1 },
+            "border_color": "#DEE2E6",
+            "title_color": "#2C2C2C",
+            "tab_active_color": "#E4678A",
+            "title_typography_typography": "custom",
+            "title_typography_font_family": "Montserrat",
+            "title_typography_font_size": { "unit": "px", "size": 16 },
+            "content_typography_typography": "custom",
+            "content_typography_font_size": { "unit": "px", "size": 14 }
+          },
+          "elements": []
+        }
+      ]
+    }
+  ]
+}

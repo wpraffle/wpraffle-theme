@@ -1,4 +1,4 @@
-/* global Swiper, Fancybox, diamondData */
+/* global Swiper, Fancybox, wprThemeData */
 ( function () {
 	'use strict';
 
@@ -7,14 +7,17 @@
 		initCarousels();
 		initFancybox();
 		initStickyHeader();
+		initHeaderScrollEffect();
+		initFaqAccordion();
+		initCountdown();
 	} );
 
 	/**
 	 * Mobile nav: toggle the off-canvas menu.
 	 */
 	function initMobileNav() {
-		var toggle = document.querySelector( '.diamond-menu-toggle' );
-		var nav = document.querySelector( '.diamond-nav' );
+		var toggle = document.querySelector( '.wpr-menu-toggle' );
+		var nav = document.querySelector( '.wpr-nav' );
 		if ( ! toggle || ! nav ) {
 			return;
 		}
@@ -41,13 +44,13 @@
 	}
 
 	/**
-	 * Swiper carousels. Any element with [data-diamond-carousel] becomes a slider.
+	 * Swiper carousels. Any element with [data-wpr-carousel] becomes a slider.
 	 */
 	function initCarousels() {
 		if ( typeof Swiper === 'undefined' ) {
 			return;
 		}
-		document.querySelectorAll( '[data-diamond-carousel]' ).forEach( function ( el ) {
+		document.querySelectorAll( '[data-wpr-carousel]' ).forEach( function ( el ) {
 			var config = {
 				slidesPerView: 1.2,
 				spaceBetween: 16,
@@ -61,7 +64,7 @@
 				}
 			};
 			try {
-				var opts = el.getAttribute( 'data-diamond-carousel-options' );
+				var opts = el.getAttribute( 'data-wpr-carousel-options' );
 				if ( opts ) {
 					Object.assign( config, JSON.parse( opts ) );
 				}
@@ -88,7 +91,7 @@
 	 * Add a shadow to the sticky header once the page scrolls.
 	 */
 	function initStickyHeader() {
-		var header = document.querySelector( '.diamond-header' );
+		var header = document.querySelector( '.wpr-header' );
 		if ( ! header ) {
 			return;
 		}
@@ -101,5 +104,98 @@
 		};
 		window.addEventListener( 'scroll', onScroll, { passive: true } );
 		onScroll();
+	}
+
+	/**
+	 * v1.1.0: Header scroll effects (shrink / hide / shadow) driven by the
+	 * headerScroll setting passed via wprThemeData.
+	 */
+	function initHeaderScrollEffect() {
+		var mode = ( typeof wprThemeData !== 'undefined' && wprThemeData.headerScroll ) ? wprThemeData.headerScroll : 'shrink';
+		var header = document.querySelector( '.wpr-header' );
+		if ( ! header || 'none' === mode ) {
+			return;
+		}
+		var lastY = 0;
+
+		var onScroll = function () {
+			var y = window.scrollY;
+
+			if ( 'hide' === mode ) {
+				if ( y > lastY && y > 120 ) {
+					header.classList.add( 'hide-up' );
+				} else {
+					header.classList.remove( 'hide-up' );
+				}
+			}
+			// 'shrink' + 'shadow' handled by CSS via .is-scrolled (initStickyHeader).
+			lastY = y;
+		};
+		window.addEventListener( 'scroll', onScroll, { passive: true } );
+	}
+
+	/**
+	 * v1.1.0: FAQ accordion toggle.
+	 */
+	function initFaqAccordion() {
+		document.querySelectorAll( '.wprt-faq-question' ).forEach( function ( btn ) {
+			btn.addEventListener( 'click', function () {
+				var answer = btn.nextElementSibling;
+				var expanded = btn.getAttribute( 'aria-expanded' ) === 'true';
+				// Close all others (single-open accordion).
+				document.querySelectorAll( '.wprt-faq-question' ).forEach( function ( other ) {
+					other.setAttribute( 'aria-expanded', 'false' );
+					if ( other.nextElementSibling ) {
+						other.nextElementSibling.style.display = 'none';
+					}
+				} );
+				if ( ! expanded ) {
+					btn.setAttribute( 'aria-expanded', 'true' );
+					if ( answer ) {
+						answer.style.display = 'block';
+					}
+				}
+			} );
+		} );
+	}
+
+	/**
+	 * v1.1.0: Homepage countdown banner.
+	 */
+	function initCountdown() {
+		var el = document.querySelector( '.wprt-countdown-banner' );
+		if ( ! el ) {
+			return;
+		}
+		var target = el.getAttribute( 'data-draw-date' );
+		if ( ! target ) {
+			return;
+		}
+		var end = new Date( target ).getTime();
+
+		var tick = function () {
+			var now = Date.now();
+			var diff = end - now;
+			if ( diff < 0 ) {
+				diff = 0;
+			}
+			var days = Math.floor( diff / 86400000 );
+			var hours = Math.floor( ( diff % 86400000 ) / 3600000 );
+			var mins = Math.floor( ( diff % 3600000 ) / 60000 );
+			var secs = Math.floor( ( diff % 60000 ) / 1000 );
+
+			var set = function ( cls, val ) {
+				var node = el.querySelector( cls );
+				if ( node ) {
+					node.textContent = String( val ).padStart( 2, '0' );
+				}
+			};
+			set( '.wprt-cd-days', days );
+			set( '.wprt-cd-hours', hours );
+			set( '.wprt-cd-mins', mins );
+			set( '.wprt-cd-secs', secs );
+		};
+		tick();
+		setInterval( tick, 1000 );
 	}
 } )();

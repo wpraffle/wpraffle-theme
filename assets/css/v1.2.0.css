@@ -1,0 +1,1051 @@
+/**
+ * WPRaffle Theme — v1.2.0 enhancements.
+ *
+ * All styling for the fact-checked enhancement set (Tiers 1–7). Loaded after
+ * v1.1.0-features.css. Selectors use the design-system CSS variables
+ * (--wpr-*, --wpr-*) so colours follow the active preset + dark mode.
+ *
+ * Sections:
+ *   1. Tier 1 — scroll reveal, hero counters, smooth FAQ, progress fill,
+ *      back-to-top, confetti
+ *   2. Tier 2 — How It Works, stats counter strip, featured spotlight
+ *   3. Tier 3 — Trustpilot embed, testimonial Trustpilot styling, cookie consent
+ *   4. Tier 4 — ending-soon urgency (homepage port), category filter tabs
+ *   5. Tier 5 — video hero, skeleton loading
+ *   6. Tier 6 — Instagram feed, share buttons, chat button
+ *   7. Tier 7 — quick-view modal, sticky entry bar, notification bell
+ *
+ * All animations respect prefers-reduced-motion (final state shown, no motion).
+ */
+
+/* ===================================================================
+   Reduced motion — every animation in this file is gated by this query.
+   Users who prefer reduced motion see the final state immediately.
+   =================================================================== */
+@media ( prefers-reduced-motion: reduce ) {
+
+	.wprt-reveal,
+	.wprt-counter,
+	.rc-card__progress-fill,
+	.wprt-faq-answer,
+	.wprt-back-to-top,
+	.wprt-skeleton,
+	.wprt-confetti {
+		animation: none !important;
+		transition: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+	}
+	.wprt-reveal { opacity: 1 !important; transform: none !important; }
+	.rc-card__progress-fill { transition: none !important; }
+	.wprt-back-to-top { opacity: 1 !important; }
+}
+
+/* ===================================================================
+   1. TIER 1 — Quick wins
+   =================================================================== */
+
+/* --- A. Scroll-triggered section reveal --------------------------- */
+/* Targets homepage sections + repeatable blocks. JS adds .is-visible. */
+.wprt-reveal {
+	opacity: 0;
+	transform: translateY( 24px );
+	transition: opacity 0.6s ease, transform 0.6s ease;
+	will-change: opacity, transform;
+}
+.wprt-reveal.wprt-reveal--left  { transform: translateX( -24px ); }
+.wprt-reveal.wprt-reveal--right { transform: translateX(  24px ); }
+.wprt-reveal.wprt-reveal--zoom  { transform: scale( 0.96 ); }
+.wprt-reveal.is-visible {
+	opacity: 1;
+	transform: none;
+}
+/* Stagger children inside a revealed grid (cards, steps). */
+.wprt-reveal-stagger > * {
+	opacity: 0;
+	transform: translateY( 18px );
+	transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.wprt-reveal-stagger.is-visible > * {
+	opacity: 1;
+	transform: none;
+}
+.wprt-reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.wprt-reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+.wprt-reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.19s; }
+.wprt-reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+.wprt-reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.33s; }
+.wprt-reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+
+/* --- B. Hero stat counters --------------------------------------- */
+/* The .num already has its content; JS swaps to a data-target animation. */
+.wpr-hero__stat .num {
+	font-variant-numeric: tabular-nums;
+}
+
+/* --- C. Smooth FAQ accordion ------------------------------------- */
+/* Replaces the display:none/block toggle in v1.1.0.css. JS sets max-height
+   to scrollHeight on open. Graceful: if JS fails, answer is shown via
+   the .is-open fallback rule below. */
+.wprt-faq-answer {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.32s ease;
+}
+.wprt-faq-item.is-open .wprt-faq-answer {
+	/* JS sets the exact pixel height; this is a safe upper-bound fallback. */
+	max-height: 999px;
+}
+.wprt-faq-question {
+	cursor: pointer;
+}
+
+/* --- D. Scroll-triggered progress bar fill ------------------------ */
+/* Plugin already sets `transition: width .4s ease` on value change.
+   We add an initial zero-width state JS removes on scroll-in. */
+.rc-card__progress-fill.is-paused {
+	width: 0 !important;
+}
+
+/* --- E. Back-to-top button --------------------------------------- */
+.wprt-back-to-top {
+	position: fixed;
+	right: 1.25rem;
+	bottom: 1.25rem;
+	z-index: 1000;
+	width: 48px;
+	height: 48px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	border: none;
+	background: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	color: #fff;
+	font-size: 1.1rem;
+	line-height: 1;
+	cursor: pointer;
+	box-shadow: 0 6px 20px rgba( 0, 0, 0, 0.18 );
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY( 12px );
+	transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease;
+}
+.wprt-back-to-top.is-visible {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+}
+.wprt-back-to-top:hover,
+.wprt-back-to-top:focus-visible {
+	background: var( --wpr-accent-2, var( --wpr-accent-2, #5caeed ) );
+	color: #fff;
+}
+.wprt-back-to-top:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 2px;
+}
+
+/* Keep clear of the social-proof toast (bottom-left) and mobile CTA bar. */
+body.wprt-mobile-cta-visible .wprt-back-to-top { bottom: 5rem; }
+
+/* --- P. Confetti canvas (winners page) --------------------------- */
+.wprt-confetti {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 9998;
+}
+
+/* ===================================================================
+   2. TIER 2 — New homepage sections
+   =================================================================== */
+
+/* --- F. How It Works steps --------------------------------------- */
+.wprt-how-it-works {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: 2rem;
+	counter-reset: wprt-step;
+}
+.wprt-how-it-works__step {
+	position: relative;
+	text-align: center;
+	padding: 1.5rem 1rem;
+}
+.wprt-how-it-works__num {
+	counter-increment: wprt-step;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 56px;
+	height: 56px;
+	margin: 0 auto 1rem;
+	border-radius: 50%;
+	background: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	color: #fff;
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+.wprt-how-it-works__num::before { content: counter( wprt-step ); }
+.wprt-how-it-works__icon {
+	font-size: 1.5rem;
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	margin-bottom: 0.5rem;
+}
+.wprt-how-it-works__title {
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin: 0 0 0.5rem;
+}
+.wprt-how-it-works__text {
+	margin: 0;
+	color: var( --wpr-text-muted, #6b7280 );
+	font-size: 0.95rem;
+}
+/* Connector line between steps on wide screens. */
+@media ( min-width: 768px ) {
+	.wprt-how-it-works__step:not( :last-child )::after {
+		content: "";
+		position: absolute;
+		top: 48px;
+		left: calc( 50% + 36px );
+		right: calc( -50% + 36px );
+		height: 2px;
+		background: currentColor;
+		opacity: 0.12;
+	}
+}
+
+/* --- H. Stats counter strip -------------------------------------- */
+.wprt-stats-counter {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
+	gap: 1.5rem;
+	text-align: center;
+}
+.wprt-stats-counter__item .num {
+	display: block;
+	font-size: clamp( 1.75rem, 4vw, 2.5rem );
+	font-weight: 800;
+	line-height: 1.1;
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	font-variant-numeric: tabular-nums;
+}
+.wprt-stats-counter__item .label {
+	display: block;
+	margin-top: 0.25rem;
+	font-size: 0.9rem;
+	color: var( --wpr-text-muted, #9ca3af );
+}
+
+/* --- G. Featured competition spotlight --------------------------- */
+.wprt-featured-spotlight {
+	display: grid;
+	grid-template-columns: 1.1fr 1fr;
+	gap: 0;
+	border-radius: var( --wpr-radius, 12px );
+	overflow: hidden;
+	background: var( --wpr-surface, #fff );
+	box-shadow: 0 12px 40px rgba( 0, 0, 0, 0.1 );
+}
+.wprt-featured-spotlight__media {
+	position: relative;
+	min-height: 320px;
+	background-size: cover;
+	background-position: center;
+	background-color: var( --wpr-dark, #2c2c2c );
+}
+.wprt-featured-spotlight__badge {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	background: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	color: #fff;
+	padding: 0.35rem 0.85rem;
+	border-radius: 999px;
+	font-size: 0.8rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+.wprt-featured-spotlight__body {
+	padding: 2.25rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1rem;
+}
+.wprt-featured-spotlight__title {
+	font-size: clamp( 1.5rem, 3vw, 2.1rem );
+	font-weight: 800;
+	margin: 0;
+}
+.wprt-featured-spotlight__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.25rem;
+	align-items: center;
+}
+.wprt-featured-spotlight__price {
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+}
+.wprt-featured-spotlight__countdown {
+	font-variant-numeric: tabular-nums;
+	font-weight: 600;
+}
+@media ( max-width: 767.98px ) {
+	.wprt-featured-spotlight { grid-template-columns: 1fr; }
+	.wprt-featured-spotlight__media { min-height: 220px; }
+	.wprt-featured-spotlight__body { padding: 1.5rem; }
+}
+
+/* ===================================================================
+   3. TIER 3 — Trust & social proof
+   =================================================================== */
+
+/* --- I. Trustpilot TrustBox embed slot --------------------------- */
+.wprt-trustpilot-slot {
+	display: flex;
+	justify-content: center;
+	margin: 1rem 0;
+}
+.wprt-trustpilot-slot--hero { margin: 0.5rem 0 0; }
+.wprt-trustpilot-slot--footer { margin: 1.5rem 0 0; }
+/* TrustBox iframes inherit their own sizing; the slot just centres them. */
+
+/* --- J. Trustpilot-styled testimonial stars ---------------------- */
+/* Only applied when the Trustpilot integration is live (real reviews).
+   Uses Trustpilot's recognised green (#00b67a). Manual testimonials keep
+   their existing gold stars — no deceptive branding. */
+.wprt-testimonial-card.is-trustpilot .wprt-testimonial-stars,
+.wprt-testimonials.is-trustpilot .wprt-testimonial-stars {
+	color: #00b67a;
+}
+.wprt-testimonial-card.is-trustpilot .wprt-testimonial-stars i {
+	color: #00b67a;
+}
+
+/* --- K. Cookie consent / GDPR bar -------------------------------- */
+.wprt-cookie-consent {
+	position: fixed;
+	left: 1rem;
+	right: 1rem;
+	bottom: 1rem;
+	z-index: 1001;
+	max-width: 720px;
+	margin: 0 auto;
+	background: var( --wpr-surface, #fff );
+	color: var( --wpr-text, #2c2c2c );
+	border: 1px solid var( --wpr-border, #e5e7eb );
+	border-radius: var( --wpr-radius, 12px );
+	box-shadow: 0 12px 40px rgba( 0, 0, 0, 0.16 );
+	padding: 1.25rem 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	align-items: center;
+	transform: translateY( 140% );
+	transition: transform 0.4s cubic-bezier( 0.22, 1, 0.36, 1 );
+}
+.wprt-cookie-consent.is-visible { transform: none; }
+.wprt-cookie-consent__text {
+	flex: 1 1 320px;
+	margin: 0;
+	font-size: 0.92rem;
+	line-height: 1.5;
+}
+.wprt-cookie-consent__text a { color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+.wprt-cookie-consent__actions {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+.wprt-cookie-consent__btn {
+	border: 1px solid var( --wpr-border, #d1d5db );
+	background: transparent;
+	color: var( --wpr-text, #2c2c2c );
+	padding: 0.5rem 1.1rem;
+	border-radius: var( --wpr-radius, 8px );
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+.wprt-cookie-consent__btn:hover { background: var( --wpr-light, #f6f6f6 ); }
+.wprt-cookie-consent__btn--primary {
+	background: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	border-color: transparent;
+	color: #fff;
+}
+.wprt-cookie-consent__btn--primary:hover { background: var( --wpr-accent-2, var( --wpr-accent-2, #5caeed ) ); color: #fff; }
+@media ( max-width: 575.98px ) {
+	.wprt-cookie-consent { left: 0.5rem; right: 0.5rem; bottom: 0.5rem; padding: 1rem; }
+}
+
+/* ===================================================================
+   4. TIER 4 — Competition grid & card UX
+   =================================================================== */
+
+/* --- M. Ending-soon urgency (ported to homepage countdown) ------- */
+/* Reuses the plugin's --wpr-urgency-color convention (red #dc2626).
+   Applied to the theme homepage countdown when < 24h remain.
+   Colour-only — no infinite animation (continuous repaints freeze the page
+   when combined with social proof toasts + the entry form on raffle pages). */
+.wprt-countdown-banner.is-urgent .wprt-cd-num {
+	color: var( --wpr-urgency-color, #dc2626 );
+}
+/* A single one-shot pulse on entering urgent state (not continuous). */
+.wprt-countdown-banner.is-urgent .wprt-cd-num:first-child {
+	animation: wprt-urgent-pulse-once 0.6s ease-out;
+}
+@keyframes wprt-urgent-pulse-once {
+	from { opacity: 0.4; transform: scale( 1.08 ); }
+	to   { opacity: 1;   transform: scale( 1 ); }
+}
+/* Cards: a subtle glow on ending-soon cards (plugin already adds the class). */
+.rc-card--ending-soon {
+	box-shadow: 0 0 0 2px var( --wpr-urgency-color, #dc2626 ), 0 8px 24px rgba( 220, 38, 38, 0.18 );
+}
+
+/* --- L. Category filter tabs ------------------------------------- */
+.wprt-filter-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: center;
+	margin-bottom: 2rem;
+}
+.wprt-filter-tabs__btn {
+	border: 1px solid var( --wpr-border, #e5e7eb );
+	background: var( --wpr-surface, #fff );
+	color: var( --wpr-text, #2c2c2c );
+	padding: 0.5rem 1.15rem;
+	border-radius: 999px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.wprt-filter-tabs__btn:hover { border-color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+.wprt-filter-tabs__btn.is-active {
+	background: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	border-color: transparent;
+	color: #fff;
+}
+.wprt-filter-tabs__btn:focus-visible {
+	outline: 2px solid var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	outline-offset: 2px;
+}
+/* When filtering, non-matching cards fade out before the reload. */
+.wpr-active-grid.is-filtering { opacity: 0.4; transition: opacity 0.2s ease; }
+
+/* ===================================================================
+   5. TIER 5 — Hero & visual polish
+   =================================================================== */
+
+/* --- O. Video hero background ------------------------------------ */
+.wpr-hero__video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+/* Ensure hero content sits above the video. */
+.wpr-hero .container { position: relative; z-index: 2; }
+.wpr-hero__bg { z-index: 0; }
+/* WCAG: visible pause control for the autoplay video. */
+.wprt-hero-video-controls {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	z-index: 3;
+	display: inline-flex;
+	gap: 0.5rem;
+}
+.wprt-hero-video-controls button {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: none;
+	background: rgba( 0, 0, 0, 0.45 );
+	color: #fff;
+	font-size: 0.95rem;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.15s ease;
+}
+.wprt-hero-video-controls button:hover { background: rgba( 0, 0, 0, 0.7 ); }
+
+/* --- Q. Skeleton loading placeholders ---------------------------- */
+.wprt-skeleton-card {
+	border-radius: var( --wpr-radius, 12px );
+	overflow: hidden;
+	background: var( --wpr-surface, #fff );
+	box-shadow: 0 4px 16px rgba( 0, 0, 0, 0.06 );
+}
+.wprt-skeleton-card__media,
+.wprt-skeleton-card__line {
+	background: linear-gradient( 90deg,
+		var( --wpr-light, #eee ) 25%,
+		rgba( 255, 255, 255, 0.55 ) 37%,
+		var( --wpr-light, #eee ) 63% );
+	background-size: 400% 100%;
+	animation: wprt-shimmer 1.4s ease infinite;
+}
+.wprt-skeleton-card__media { aspect-ratio: 4 / 3; }
+.wprt-skeleton-card__body { padding: 1rem; display: grid; gap: 0.6rem; }
+.wprt-skeleton-card__line { height: 12px; border-radius: 6px; }
+.wprt-skeleton-card__line--w70 { width: 70%; }
+.wprt-skeleton-card__line--w50 { width: 50%; }
+.wprt-skeleton-card__line--w90 { width: 90%; }
+@keyframes wprt-shimmer {
+	0%   { background-position: 100% 0; }
+	100% { background-position: -100% 0; }
+}
+
+/* ===================================================================
+   6. TIER 6 — Footer & social
+   =================================================================== */
+
+/* --- R. Instagram feed grid -------------------------------------- */
+.wprt-instagram-feed {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 120px, 1fr ) );
+	gap: 0.5rem;
+	margin-top: 1rem;
+}
+.wprt-instagram-feed__item {
+	position: relative;
+	aspect-ratio: 1 / 1;
+	overflow: hidden;
+	border-radius: var( --wpr-radius, 8px );
+}
+.wprt-instagram-feed__item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.4s ease;
+}
+.wprt-instagram-feed__item:hover img { transform: scale( 1.06 ); }
+.wprt-instagram-feed__item::after {
+	content: "\f16d"; /* fa-instagram */
+	font-family: "Font Awesome 6 Brands";
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 1.4rem;
+	opacity: 0;
+	background: rgba( 0, 0, 0, 0.35 );
+	transition: opacity 0.25s ease;
+}
+.wprt-instagram-feed__item:hover::after { opacity: 1; }
+
+/* --- S. Share buttons -------------------------------------------- */
+.wprt-share-row {
+	display: inline-flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.wprt-share-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 38px;
+	height: 38px;
+	border-radius: 50%;
+	border: 1px solid var( --wpr-border, #e5e7eb );
+	background: var( --wpr-surface, #fff );
+	color: var( --wpr-text, #2c2c2c );
+	font-size: 0.95rem;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.wprt-share-btn:hover { border-color: transparent; color: #fff; }
+.wprt-share-btn--whatsapp:hover  { background: #25d366; }
+.wprt-share-btn--facebook:hover  { background: #1877f2; }
+.wprt-share-btn--x:hover         { background: #000; }
+.wprt-share-btn--copy:hover      { background: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+.wprt-share-btn.is-copied { background: var( --wpr-success, #63dd92 ); border-color: transparent; color: #fff; }
+
+/* --- T. Floating chat button ------------------------------------- */
+.wprt-chat-button {
+	position: fixed;
+	right: 1.25rem;
+	bottom: 5.5rem; /* sits above the back-to-top button */
+	z-index: 1000;
+	width: 56px;
+	height: 56px;
+	border-radius: 50%;
+	border: none;
+	background: #25d366; /* WhatsApp green by default */
+	color: #fff;
+	font-size: 1.5rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 6px 20px rgba( 0, 0, 0, 0.2 );
+	cursor: pointer;
+	transition: transform 0.2s ease, background 0.2s ease;
+}
+.wprt-chat-button:hover { transform: scale( 1.06 ); }
+.wprt-chat-button--tawk,
+.wprt-chat-button--crisp { background: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+.wprt-chat-button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* Avoid clashing with the mobile CTA bar. */
+body.wprt-mobile-cta-visible .wprt-chat-button { bottom: 7rem; }
+
+/* ===================================================================
+   7. TIER 7 — Advanced
+   =================================================================== */
+
+/* --- U. Quick-view modal ----------------------------------------- */
+/* Uses Fancybox when available; this styles the in-modal content shell. */
+.wprt-quickview {
+	max-width: 880px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+	background: var( --wpr-surface, #fff );
+	border-radius: var( --wpr-radius, 12px );
+	overflow: hidden;
+}
+.wprt-quickview__media { min-height: 280px; background-size: cover; background-position: center; background-color: var( --wpr-light, #f6f6f6 ); }
+.wprt-quickview__body { padding: 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
+@media ( max-width: 767.98px ) {
+	.wprt-quickview { grid-template-columns: 1fr; }
+}
+
+/* Native modal shell (used when Fancybox isn't loaded). */
+.wprt-quickview-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1002;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+}
+.wprt-quickview-modal[hidden] { display: none; }
+.wprt-quickview-modal__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba( 0, 0, 0, 0.6 );
+	backdrop-filter: blur( 2px );
+}
+.wprt-quickview-modal__panel {
+	position: relative;
+	max-width: 880px;
+	width: 100%;
+	max-height: 90vh;
+	overflow: auto;
+	background: var( --wpr-surface, #fff );
+	border-radius: var( --wpr-radius, 12px );
+	box-shadow: 0 24px 80px rgba( 0, 0, 0, 0.3 );
+}
+.wprt-quickview-modal__close {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	z-index: 2;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: none;
+	background: rgba( 0, 0, 0, 0.4 );
+	color: #fff;
+	font-size: 1rem;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+.wprt-quickview-modal__close:hover { background: rgba( 0, 0, 0, 0.7 ); }
+
+/* Quick-view trigger injected onto cards. */
+.rc-card { position: relative; }
+.wprt-quickview-trigger {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	z-index: 3;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.4rem 0.75rem;
+	border-radius: 999px;
+	border: none;
+	background: rgba( 0, 0, 0, 0.55 );
+	color: #fff;
+	font-size: 0.78rem;
+	font-weight: 600;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.2s ease, background 0.2s ease;
+}
+.rc-card:hover .wprt-quickview-trigger,
+.wprt-quickview-trigger:focus-visible { opacity: 1; }
+.wprt-quickview-trigger:hover { background: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+/* Always visible on touch devices (no hover). */
+@media ( hover: none ) {
+	.wprt-quickview-trigger { opacity: 1; }
+}
+
+/* --- V. Sticky "Add to basket" bar ------------------------------- */
+.wprt-sticky-entry-bar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999;
+	background: var( --wpr-surface, #fff );
+	border-top: 1px solid var( --wpr-border, #e5e7eb );
+	box-shadow: 0 -6px 20px rgba( 0, 0, 0, 0.1 );
+	transform: translateY( 100% );
+	transition: transform 0.3s cubic-bezier( 0.22, 1, 0.36, 1 );
+}
+.wprt-sticky-entry-bar.is-visible { transform: none; }
+.wprt-sticky-entry-bar__inner {
+	max-width: var( --wpr-container-width, 1280px );
+	margin: 0 auto;
+	padding: 0.75rem 1rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	justify-content: space-between;
+}
+.wprt-sticky-entry-bar__title {
+	font-weight: 700;
+	margin: 0;
+	font-size: 1rem;
+	flex: 1 1 auto;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.wprt-sticky-entry-bar__price {
+	font-size: 1.15rem;
+	font-weight: 800;
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	white-space: nowrap;
+}
+
+/* --- W. Header notification bell --------------------------------- */
+.wprt-notification-bell {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+.wprt-notification-bell__count {
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 9px;
+	background: var( --wpr-danger, #dc3545 );
+	color: #fff;
+	font-size: 0.7rem;
+	font-weight: 700;
+	line-height: 18px;
+	text-align: center;
+}
+.wprt-notification-bell__count:empty,
+.wprt-notification-bell__count[data-count="0"] { display: none; }
+.wprt-notification-dropdown {
+	position: absolute;
+	top: calc( 100% + 8px );
+	right: 0;
+	min-width: 280px;
+	max-width: 90vw;
+	background: var( --wpr-surface, #fff );
+	border: 1px solid var( --wpr-border, #e5e7eb );
+	border-radius: var( --wpr-radius, 12px );
+	box-shadow: 0 12px 40px rgba( 0, 0, 0, 0.16 );
+	padding: 0.5rem 0;
+	z-index: 1001;
+	display: none;
+}
+.wprt-notification-dropdown.is-open { display: block; }
+.wprt-notification-dropdown__item {
+	display: block;
+	padding: 0.65rem 1rem;
+	font-size: 0.9rem;
+	color: var( --wpr-text, #2c2c2c );
+	text-decoration: none;
+	border-bottom: 1px solid var( --wpr-border, #f3f4f6 );
+}
+.wprt-notification-dropdown__item:last-child { border-bottom: none; }
+.wprt-notification-dropdown__item:hover { background: var( --wpr-light, #f6f6f6 ); }
+.wprt-notification-dropdown__empty {
+	padding: 1.25rem 1rem;
+	text-align: center;
+	color: var( --wpr-text-muted, #9ca3af );
+	font-size: 0.9rem;
+}
+
+/* ===================================================================
+   Dark-mode adjustments for new components.
+   The theme toggles a .wprt-dark (or [data-theme="dark"]) body class.
+   =================================================================== */
+body.wprt-dark .wprt-cookie-consent,
+body[data-theme="dark"] .wprt-cookie-consent,
+body.wprt-dark .wprt-sticky-entry-bar,
+body[data-theme="dark"] .wprt-sticky-entry-bar {
+	background: var( --wpr-dark-surface, #2c2c2c );
+	color: var( --wpr-dark-text, #e0e0e0 );
+	border-color: var( --wpr-dark-border, #404040 );
+}
+body.wprt-dark .wprt-filter-tabs__btn,
+body[data-theme="dark"] .wprt-filter-tabs__btn,
+body.wprt-dark .wprt-share-btn,
+body[data-theme="dark"] .wprt-share-btn {
+	background: var( --wpr-dark-surface, #2c2c2c );
+	color: var( --wpr-dark-text, #e0e0e0 );
+	border-color: var( --wpr-dark-border, #404040 );
+}
+body.wprt-dark .wprt-skeleton-card__media,
+body[data-theme="dark"] .wprt-skeleton-card__line {
+	background: linear-gradient( 90deg,
+		var( --wpr-dark-surface, #2c2c2c ) 25%,
+		rgba( 255, 255, 255, 0.06 ) 37%,
+		var( --wpr-dark-surface, #2c2c2c ) 63% );
+	background-size: 400% 100%;
+	animation: wprt-shimmer 1.4s ease infinite;
+}
+
+/* ===================================================================
+   v1.2.0 Compliance & Conversion Pack
+   =================================================================== */
+
+/* --- #1. Responsible-play footer bar (DCMS Voluntary Code) --------- */
+.wprt-responsible-play {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem 0.6rem;
+	margin-top: 1rem;
+	padding: 0.65rem 1rem;
+	border-top: 1px solid var( --wpr-border-color, rgba( 255, 255, 255, 0.08 ) );
+	font-size: 0.72rem;
+	line-height: 1;
+	color: var( --wpr-text-muted, #9ca3af );
+}
+.wprt-responsible-play a {
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	text-decoration: none;
+	font-weight: 600;
+}
+.wprt-responsible-play a:hover { text-decoration: underline; }
+.wprt-responsible-play__age {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 26px;
+	height: 22px;
+	padding: 0 0.3rem;
+	border-radius: 4px;
+	background: var( --wpr-danger, #dc3545 );
+	color: #fff;
+	font-weight: 800;
+	font-size: 0.7rem;
+	letter-spacing: 0.02em;
+}
+.wprt-responsible-play__sep { opacity: 0.5; }
+
+/* --- #2. Free-entry route prominence (below the entry tabs) ------- */
+.wprt-free-entry-callout {
+	margin-top: 0.6rem;
+	font-size: 0.82rem;
+	color: var( --wpr-text-muted, #6b7280 );
+	text-align: center;
+}
+.wprt-free-entry-callout a {
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	font-weight: 700;
+	text-decoration: none;
+	cursor: pointer;
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+}
+.wprt-free-entry-callout a:hover { text-decoration: underline; }
+.wprt-free-entry-callout a:focus-visible { outline: 2px solid var( --wpr-accent, #e4678a ); outline-offset: 2px; border-radius: 2px; }
+
+/* --- #3. Draw details / odds disclosure block -------------------- */
+.wprt-draw-details {
+	margin: 1.25rem 0 0;
+	padding: 1rem 1.1rem;
+	border: 1px solid var( --wpr-border-color, #e5e7eb );
+	border-radius: var( --wpr-radius, 12px );
+	background: var( --wpr-light, #f9fafb );
+	font-size: 0.85rem;
+}
+.wprt-draw-details__heading {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-weight: 700;
+	margin: 0 0 0.6rem;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var( --wpr-text-primary, #2c2c2c );
+}
+.wprt-draw-details__grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 140px, 1fr ) );
+	gap: 0.65rem 1rem;
+}
+.wprt-draw-details__item {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+}
+.wprt-draw-details__label {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var( --wpr-text-muted, #9ca3af );
+	font-weight: 600;
+}
+.wprt-draw-details__value {
+	font-weight: 700;
+	color: var( --wpr-text-primary, #2c2c2c );
+}
+.wprt-draw-details__value--accent { color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+.wprt-draw-details__footer {
+	margin-top: 0.6rem;
+	padding-top: 0.6rem;
+	border-top: 1px dashed var( --wpr-border-color, #e5e7eb );
+	font-size: 0.74rem;
+	color: var( --wpr-text-muted, #9ca3af );
+}
+.wprt-draw-details__footer a { color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); font-weight: 600; }
+
+/* --- #4. Bundle visual upgrade ---------------------------------- */
+/* Highlight the best-value bundle and emphasise savings. */
+.raffle-qty-pill {
+	position: relative;
+	border: 2px solid var( --wpr-border-color, #e5e7eb ) !important;
+	border-radius: 0.75rem !important;
+	padding: 0.65rem 0.5rem !important;
+	transition: border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+.raffle-qty-pill:hover { border-color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ) !important; transform: translateY( -2px ); }
+.raffle-qty-pill.is-selected {
+	border-color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ) !important;
+	background: var( --wpr-accent-bg, rgba( 228, 103, 138, 0.06 ) ) !important;
+	box-shadow: 0 4px 14px rgba( 228, 103, 138, 0.15 );
+}
+/* "Best value" ribbon — auto-applied by JS to the highest-savings bundle. */
+.raffle-qty-pill.is-best-value {
+	border-color: var( --wpr-success, #63dd92 ) !important;
+}
+.raffle-qty-pill.is-best-value::before {
+	content: "BEST VALUE";
+	position: absolute;
+	top: -9px;
+	left: 50%;
+	transform: translateX( -50% );
+	background: var( --wpr-success, #63dd92 );
+	color: #fff;
+	font-size: 0.58rem;
+	font-weight: 800;
+	letter-spacing: 0.05em;
+	padding: 1px 7px;
+	border-radius: 999px;
+	white-space: nowrap;
+}
+.raffle-bundle-badge {
+	background: var( --wpr-success, #63dd92 ) !important;
+	color: #fff !important;
+	font-weight: 700 !important;
+	font-size: 0.65rem !important;
+	padding: 1px 6px !important;
+	border-radius: 999px !important;
+}
+.raffle-bundle-price { font-weight: 800 !important; color: var( --wpr-text-primary, #2c2c2c ) !important; }
+.raffle-qty-pill.is-selected .raffle-bundle-qty { color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ); }
+
+/* --- #5. Winner card video overlay + proof polish ---------------- */
+.wpr-winner-card__media { position: relative; }
+.wpr-winner-card__video-btn {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba( 0, 0, 0, 0.25 );
+	color: #fff;
+	font-size: 1.5rem;
+	text-decoration: none;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+.wpr-winner-card:hover .wpr-winner-card__video-btn,
+.wpr-winner-card:focus-within .wpr-winner-card__video-btn { opacity: 1; }
+.wpr-winner-card__video-btn-inner {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+}
+.wpr-winner-card__prize {
+	font-weight: 700;
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) ) !important;
+}
+.wpr-winner-card__watch-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	margin-top: 0.5rem;
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: var( --wpr-accent, var( --wpr-accent, #e4678a ) );
+	text-decoration: none;
+}
+.wpr-winner-card__watch-link:hover { text-decoration: underline; }
+/* Always show the video button on touch devices. */
+@media ( hover: none ) {
+	.wpr-winner-card__video-btn { opacity: 1; background: rgba( 0, 0, 0, 0.15 ); }
+}
+
+/* <details> summary styling (draw-details disclosure). */
+.wprt-draw-details > summary {
+	list-style: none;
+	cursor: pointer;
+}
+.wprt-draw-details > summary::-webkit-details-marker { display: none; }
+.wprt-draw-details > summary::after {
+	content: "\f078"; /* fa-chevron-down */
+	font-family: "Font Awesome 6 Free";
+	font-weight: 900;
+	margin-left: auto;
+	transition: transform 0.2s ease;
+}
+.wprt-draw-details[open] > summary::after { transform: rotate( 180deg ); }
+.wprt-draw-details > summary { display: flex; }
+
+

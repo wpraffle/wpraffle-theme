@@ -1,6 +1,6 @@
 {
   "version": "0.4",
-  "title": "Diamond Header",
+  "title": "WPRaffle Theme Header",
   "type": "header",
   "page_settings": {
     "document_type": "header",
@@ -22,7 +22,7 @@
         "padding": { "unit": "px", "top": "8", "right": "0", "bottom": "8", "left": "0", "isLinked": false },
         "background_background": "classic",
         "background_color": "#2C2C2C",
-        "css_classes": "diamond-topbar"
+        "css_classes": "wpr-topbar"
       },
       "elements": [
         {
@@ -78,7 +78,7 @@
         "border_border": "solid",
         "border_width": { "unit": "px", "top": "0", "right": "0", "bottom": "1", "left": "0", "isLinked": false },
         "border_color": "#DEE2E6",
-        "css_classes": "diamond-header",
+        "css_classes": "wpr-header",
         "position": "sticky",
         "_position": "sticky",
         "sticky": "top",
@@ -139,7 +139,7 @@
               "id": "dmdhdr1c1",
               "elType": "widget",
               "widgetType": "icon",
-              "settings": { "selected_icon": { "value": "fas fa-magnifying-glass", "library": "fa-solid" }, "icon_color": "#2C2C2C", "size": { "unit": "px", "size": 18 }, "css_classes": "diamond-icon-btn" },
+              "settings": { "selected_icon": { "value": "fas fa-magnifying-glass", "library": "fa-solid" }, "icon_color": "#2C2C2C", "size": { "unit": "px", "size": 18 }, "css_classes": "wpr-icon-btn" },
               "elements": []
             },
             {
@@ -154,7 +154,7 @@
                 ],
                 "icon_color": "#2C2C2C",
                 "text_color": "#2C2C2C",
-                "css_classes": "diamond-header__actions"
+                "css_classes": "wpr-header__actions"
               },
               "elements": []
             }

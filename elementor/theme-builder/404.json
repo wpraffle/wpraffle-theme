@@ -1,0 +1,31 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle 404",
+  "type": "single",
+  "page_settings": {
+    "document_type": "wp-page",
+    "conditions": [ { "type": "include", "condition": "404" } ]
+  },
+  "content": [
+    {
+      "id": "dmd404-wrap",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 720 },
+        "min_height": { "unit": "px", "size": 520 },
+        "flex_align_items": "center",
+        "flex_justify_content": "center",
+        "padding": { "unit": "px", "top": "120", "right": "0", "bottom": "120", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#2C2C2C"
+      },
+      "elements": [
+        { "id": "dmd404-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "404", "header_size": "h1", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 160 }, "typography_font_weight": "800", "align": "center" }, "elements": [] },
+        { "id": "dmd404-msg", "elType": "widget", "widgetType": "heading", "settings": { "title": "Page not found", "header_size": "h2", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 28 }, "align": "center" }, "elements": [] },
+        { "id": "dmd404-lead", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85);font-size:18px\">Sorry, that page has been drawn and is no longer available.</p>" }, "elements": [] },
+        { "id": "dmd404-btn", "elType": "widget", "widgetType": "button", "settings": { "text": "Back to Home", "link": { "url": "/" }, "selected_icon": { "value": "fas fa-arrow-left", "library": "fa-solid" }, "icon_align": "left", "background_color": "#E4678A", "text_color": "#FFFFFF", "align": "center", "border_radius": { "unit": "px", "size": 999 }, "button_padding": { "unit": "px", "top": "14", "right": "32", "bottom": "14", "left": "32", "isLinked": false } }, "elements": [] }
+      ]
+    }
+  ]
+}

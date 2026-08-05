@@ -1,0 +1,60 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle Theme — Testimonials",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-ts",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#F6F6F6",
+        "css_classes": "wpr-testimonials"
+      },
+      "elements": [
+        { "id": "dmdsec-ts-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "What Our Players Say", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsec-ts-sc", "elType": "widget", "widgetType": "shortcode", "settings": { "shortcode": "[raffle_testimonials]" }, "elements": [] },
+        {
+          "id": "dmdsec-ts-grid",
+          "elType": "container",
+          "settings": { "flex_direction": "row", "gap": { "unit": "px", "size": 24 }, "padding": { "unit": "px", "top": "24", "right": "0", "bottom": "0", "left": "0", "isLinked": false } },
+          "elements": [
+            {
+              "id": "dmdsec-ts-1",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 } },
+              "elements": [
+                { "id": "dmdsec-ts-1t", "elType": "widget", "widgetType": "heading", "settings": { "title": "★★★★★", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "align": "left" }, "elements": [] },
+                { "id": "dmdsec-ts-1d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:#6C757D;font-size:14px\">\"Won a Rolex on my third try — payout hit my account the same day. Brilliant.\"</p>" }, "elements": [] },
+                { "id": "dmdsec-ts-1n", "elType": "widget", "widgetType": "heading", "settings": { "title": "James, Manchester", "header_size": "h4", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 14 }, "typography_font_weight": "600" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdsec-ts-2",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 } },
+              "elements": [
+                { "id": "dmdsec-ts-2t", "elType": "widget", "widgetType": "heading", "settings": { "title": "★★★★★", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "align": "left" }, "elements": [] },
+                { "id": "dmdsec-ts-2d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:#6C757D;font-size:14px\">\"Low odds and 100% to charity — best competition site I've used by far.\"</p>" }, "elements": [] },
+                { "id": "dmdsec-ts-2n", "elType": "widget", "widgetType": "heading", "settings": { "title": "Sophie, London", "header_size": "h4", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 14 }, "typography_font_weight": "600" }, "elements": [] }
+              ]
+            },
+            {
+              "id": "dmdsec-ts-3",
+              "elType": "container",
+              "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 } },
+              "elements": [
+                { "id": "dmdsec-ts-3t", "elType": "widget", "widgetType": "heading", "settings": { "title": "★★★★★", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "align": "left" }, "elements": [] },
+                { "id": "dmdsec-ts-3d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:#6C757D;font-size:14px\">\"The live draw is so transparent. No wondering if it's legit — you watch it happen.\"</p>" }, "elements": [] },
+                { "id": "dmdsec-ts-3n", "elType": "widget", "widgetType": "heading", "settings": { "title": "Mark, Glasgow", "header_size": "h4", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 14 }, "typography_font_weight": "600" }, "elements": [] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

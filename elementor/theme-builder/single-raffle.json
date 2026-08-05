@@ -1,6 +1,6 @@
 {
   "version": "0.4",
-  "title": "Diamond Single Raffle",
+  "title": "WPRaffle Theme Single Raffle",
   "type": "single",
   "page_settings": {
     "document_type": "single",
@@ -61,7 +61,7 @@
                   "id": "dmdsingle-shortcode",
                   "elType": "widget",
                   "widgetType": "shortcode",
-                  "settings": { "shortcode": "[raffle id=\"{{current_product_id}}\"]" },
+                  "settings": { "shortcode": "[raffle]" },
                   "elements": []
                 },
                 {

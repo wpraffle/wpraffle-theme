@@ -1,0 +1,242 @@
+/**
+ * WPRaffle Theme v1.1.0 — 15 feature frontend CSS.
+ * Dark mode toggle, promo bar, mobile CTA, social proof toasts, age gate,
+ * footer layouts, product card options, mega menu.
+ */
+
+/* ================================================================== *
+ * DARK MODE TOGGLE
+ * ================================================================== */
+.wprt-dark-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	color: var(--wpr-dark, #2c2c2c);
+	font-size: 1rem;
+	transition: all 0.2s ease;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+}
+.wprt-dark-toggle:hover { background: var(--wpr-light, #f6f6f6); }
+.wprt-dark-toggle .fa-sun { display: none; }
+[data-theme="dark"] .wprt-dark-toggle .fa-sun { display: block; }
+[data-theme="dark"] .wprt-dark-toggle .fa-moon { display: none; }
+
+/* ================================================================== *
+ * PROMO BAR
+ * ================================================================== */
+.wprt-promo-bar {
+	width: 100%;
+	color: #fff;
+	font-size: 0.875rem;
+	font-weight: 500;
+	text-align: center;
+	z-index: 1030;
+}
+.wprt-promo-bar__inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	max-width: var(--wpr-container, 1280px);
+	margin: 0 auto;
+	padding: 0.55rem 2rem;
+}
+.wprt-promo-bar__link, .wprt-promo-bar__text { color: #fff; text-decoration: none; }
+.wprt-promo-bar__link:hover { text-decoration: underline; }
+.wprt-promo-bar__close {
+	background: transparent;
+	border: 0;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 1rem;
+	cursor: pointer;
+	padding: 0.25rem;
+	transition: color 0.2s ease;
+}
+.wprt-promo-bar__close:hover { color: #fff; }
+
+/* ================================================================== *
+ * STICKY MOBILE CTA BAR
+ * ================================================================== */
+.wprt-mobile-cta {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 1030;
+	background: var(--wpr-dark, #2c2c2c);
+	box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+	display: none;
+}
+.wprt-mobile-cta__inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+}
+.wprt-mobile-cta__text {
+	color: #fff;
+	font-weight: 600;
+	font-size: 0.9rem;
+}
+.wprt-mobile-cta__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	background: var(--wpr-accent, #e4678a);
+	color: #fff;
+	padding: 0.6rem 1.5rem;
+	border-radius: var(--wpr-btn-radius, 50rem);
+	font-weight: 700;
+	font-size: 0.9rem;
+	text-decoration: none;
+	white-space: nowrap;
+}
+@media (max-width: 767.98px) {
+	.wprt-mobile-cta { display: block; }
+	body.has-mobile-cta { padding-bottom: 64px; }
+}
+
+/* ================================================================== *
+ * SOCIAL PROOF TOASTS
+ * ================================================================== */
+.wprt-social-proof {
+	position: fixed;
+	bottom: 1.5rem;
+	z-index: 1000;
+	pointer-events: none;
+}
+.wprt-social-proof.pos-bottom-left { left: 1.5rem; }
+.wprt-social-proof.pos-bottom-right { right: 1.5rem; }
+.wprt-toast {
+	background: #fff;
+	border-radius: 0.625rem;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+	padding: 0.85rem 1.1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	max-width: 340px;
+	pointer-events: auto;
+	animation: wprt-toast-in 0.3s ease forwards;
+	margin-bottom: 0.5rem;
+}
+.wprt-toast.is-leaving { animation: wprt-toast-out 0.3s ease forwards; }
+.wprt-toast__icon {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: var(--wpr-accent-bg, #fdeef3);
+	color: var(--wpr-accent, #e4678a);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.9rem;
+	flex-shrink: 0;
+}
+.wprt-toast__body { font-size: 0.82rem; line-height: 1.4; color: var(--wpr-dark, #2c2c2c); }
+.wprt-toast__body strong { color: var(--wpr-accent, #e4678a); }
+.wprt-toast__time { display: block; font-size: 0.72rem; color: var(--wpr-muted, #6c757d); margin-top: 0.15rem; }
+@keyframes wprt-toast-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes wprt-toast-out { from { opacity: 1; } to { opacity: 0; transform: translateY(10px); } }
+@media (max-width: 575.98px) {
+	.wprt-social-proof { left: 0.75rem !important; right: 0.75rem !important; }
+	.wprt-toast { max-width: 100%; }
+}
+
+/* ================================================================== *
+ * AGE GATE
+ * ================================================================== */
+.wprt-age-gate { position: fixed; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; }
+.wprt-age-gate__overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); }
+.wprt-age-gate__modal {
+	position: relative;
+	background: #fff;
+	border-radius: 1rem;
+	padding: 2.5rem;
+	max-width: 440px;
+	text-align: center;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+.wprt-age-gate__icon { font-size: 2.5rem; color: var(--wpr-accent, #e4678a); margin-bottom: 1rem; }
+.wprt-age-gate__title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--wpr-dark, #2c2c2c); }
+.wprt-age-gate__text { color: var(--wpr-muted, #6c757d); margin-bottom: 1.5rem; font-size: 0.95rem; }
+.wprt-age-gate__actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+.wprt-age-gate.is-hidden { display: none; }
+
+/* ================================================================== *
+ * FOOTER LAYOUTS
+ * ================================================================== */
+.wpr-footer__cta {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	margin-bottom: 2.5rem;
+}
+.wpr-footer__cta h3 { color: #fff; font-size: 1.5rem; margin: 0 0 0.25rem; }
+.wpr-footer__cta p { margin: 0; color: rgba(255, 255, 255, 0.7); }
+.wpr-footer__top--2col { grid-template-columns: 1fr 1fr; }
+.wpr-footer__top--3col { grid-template-columns: 1.5fr 1fr 1fr; }
+.wpr-footer__top--4col { grid-template-columns: 1.4fr 1fr 1fr 1fr; }
+@media (max-width: 991.98px) { .wpr-footer__top--4col, .wpr-footer__top--3col { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 575.98px) { .wpr-footer__top--4col, .wpr-footer__top--3col, .wpr-footer__top--2col { grid-template-columns: 1fr; } }
+
+.wpr-footer__newsletter { text-align: center; padding: 2rem 0; border-top: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 2rem; }
+.wpr-footer__newsletter h3 { color: #fff; font-size: 1.1rem; margin-bottom: 1rem; }
+.wprt-newsletter-form { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; max-width: 420px; margin: 0 auto; }
+.wprt-newsletter-form input { flex: 1 1 200px; padding: 0.65rem 1rem; border-radius: var(--wpr-btn-radius, 50rem); border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.06); color: #fff; }
+.wprt-newsletter-form input::placeholder { color: rgba(255, 255, 255, 0.4); }
+
+/* ================================================================== *
+ * PRODUCT CARD OPTIONS (driven by body classes from setup)
+ * ================================================================== */
+/* Image aspect ratio. */
+body.card-ratio-16-9 .rc-card__image,
+body.card-ratio-16-9 .wpr-card__media { padding-top: 56.25%; }
+body.card-ratio-square .rc-card__image,
+body.card-ratio-square .wpr-card__media { padding-top: 100%; }
+
+/* Title overlay. */
+body.card-title-overlay .rc-card__title {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: linear-gradient(transparent, rgba(0,0,0,0.8));
+	color: #fff;
+	z-index: 2;
+}
+body.card-title-overlay .rc-card__title-alt,
+body.card-title-overlay .rc-card__title-iw { color: rgba(255, 255, 255, 0.85); }
+
+/* Progress bar styles. */
+body.card-progress-thin .rc-card__progress-bar { height: 4px; }
+body.card-progress-hidden .rc-card__progress { display: none; }
+
+/* Card hover effects. */
+body.card-hover-zoom .rc-card:hover .rc-card__image img,
+body.card-hover-zoom .wpr-card:hover .wpr-card__media img { transform: scale(1.08); }
+body.card-hover-border .rc-card:hover { border-color: var(--wpr-accent, #e4678a); }
+
+/* ================================================================== *
+ * MEGA MENU
+ * ================================================================== */
+.wpr-nav ul.wprt-mega-menu > li.menu-item-has-children > .sub-menu {
+	min-width: 480px;
+	padding: 1.5rem;
+	display: none;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+.wpr-nav ul.wprt-mega-menu > li.menu-item-has-children:hover > .sub-menu { display: grid; }
+.wpr-nav ul.wprt-mega-menu > li > .sub-menu > li { white-space: normal; }
+.wpr-nav ul.wprt-mega-menu > li > .sub-menu > li > a { font-weight: 700; text-transform: uppercase; font-size: 0.78rem; color: var(--wpr-muted); }

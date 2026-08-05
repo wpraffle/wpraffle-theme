@@ -1,0 +1,22 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle Theme — Featured Spotlight",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-feat",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "css_classes": "wpr-featured-spotlight"
+      },
+      "elements": [
+        { "id": "dmdsec-feat-eb", "elType": "widget", "widgetType": "heading", "settings": { "title": "DON'T MISS", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsec-feat-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "Featured Competition", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsec-feat-sc", "elType": "widget", "widgetType": "shortcode", "settings": { "shortcode": "[raffle_list featured=\"1\" columns=\"1\" limit=\"1\"]" }, "elements": [] }
+      ]
+    }
+  ]
+}

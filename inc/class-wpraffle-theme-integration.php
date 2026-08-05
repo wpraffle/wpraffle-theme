@@ -7,7 +7,7 @@
  *  - Shortcodes ([raffle_list], [raffle_charities]).
  *  - Static helper methods on Raffle_Public / Raffle_Charity.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -38,9 +38,15 @@ final class WPRaffle_Theme_Integration {
 	 * Hook into the plugin when it is present.
 	 */
 	private function __construct() {
-		// The Diamond settings panel now owns the full --wpr-* / --diamond-*
+		// The Theme Options Style tab now owns the full --wpr-* / --wpr-*
 		// palette. Suppress the plugin's own inline styling so it never competes.
 		add_filter( 'pre_option_wpraffle_styling_settings', array( $this, 'disable_plugin_styling' ), 10, 1 );
+
+		// Hide the plugin's redundant "Styling" settings tab (it's an internal
+		// tab with no filter, so we hide it via CSS on that admin screen only).
+		add_action( 'admin_enqueue_scripts', array( $this, 'hide_plugin_styling_tab' ) );
+		// Show a notice on the styling tab body if someone reaches it via URL.
+		add_action( 'admin_notices', array( $this, 'plugin_styling_tab_notice' ) );
 
 		// Force the plugin's front-end assets (public.css/public.js) on pages
 		// where the theme embeds raffle shortcodes via do_shortcode() — namely
@@ -50,6 +56,20 @@ final class WPRaffle_Theme_Integration {
 		// markup ships without its stylesheet. This makes cards render
 		// identically on the homepage, the shop, and the raffles page.
 		add_action( 'wp_enqueue_scripts', array( $this, 'force_plugin_assets' ), 20 );
+
+		// Expose the live charity total as a shortcode so it can be used in
+		// Elementor templates (and anywhere else) instead of a hardcoded value.
+		add_shortcode( 'wpraffle_charity_total', array( __CLASS__, 'render_total_shortcode' ) );
+	}
+
+	/**
+	 * Shortcode wrapper around get_total_raised() — outputs the formatted,
+	 * always-current charity total (e.g. "£2,800,000").
+	 *
+	 * @return string
+	 */
+	public static function render_total_shortcode() {
+		return self::get_total_raised();
 	}
 
 	/**
@@ -87,9 +107,44 @@ final class WPRaffle_Theme_Integration {
 	}
 
 	/**
+	 * Hide the plugin's "Styling" settings tab via CSS.
+	 *
+	 * The plugin's Settings page hardcodes its tab list with no filter, so we
+	 * inject CSS on that specific admin screen only to hide the "Styling" tab
+	 * link (its href contains tab=styling). The theme already forces the
+	 * plugin's styling output off, so the tab is redundant.
+	 *
+	 * @param string $hook Current admin page hook suffix.
+	 */
+	public function hide_plugin_styling_tab( $hook ) {
+		if ( 'raffle-system_page_wpraffle-settings' !== $hook ) {
+			return;
+		}
+		wp_add_inline_style( 'common', '.nav-tab[href*="tab=styling"]{display:none !important;}' );
+	}
+
+	/**
+	 * Show a notice on the plugin's Styling tab if someone reaches it via URL.
+	 */
+	public function plugin_styling_tab_notice() {
+		$screen = get_current_screen();
+		if ( ! $screen || 'raffle-system_page_wpraffle-settings' !== $screen->id ) {
+			return;
+		}
+		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( 'styling' !== $tab ) {
+			return;
+		}
+		echo '<div class="notice notice-info"><p>'
+			. esc_html__( 'Colour styling is managed by the WPRaffle Theme — see Appearance → Theme Options → Style.', 'wpraffle-theme' )
+			. ' <a href="' . esc_url( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=style' ) ) . '" class="button button-secondary">'
+			. esc_html__( 'Go to Theme Options', 'wpraffle-theme' ) . '</a></p></div>';
+	}
+
+	/**
 	 * Force the plugin's `disable_custom_styling` flag ON so its inline :root
 	 * block is never printed. The theme (via WPRaffle_Theme_Settings::output_css_variables())
-	 * is the single source of truth for the --wpr-* and --diamond-* variables.
+	 * is the single source of truth for the --wpr-* and --wpr-* variables.
 	 *
 	 * @param mixed $value The raw option value (false if unset).
 	 * @return mixed

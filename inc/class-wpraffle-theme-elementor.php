@@ -7,7 +7,7 @@
  * Elementor Pro and the GPL Pro Elements fork (github.com/proelements/proelements)
  * — both expose the same `elementor/theme/register_locations` hook.
  *
- * @package Diamond
+ * @package WPRaffle_Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -43,6 +43,7 @@ final class WPRaffle_Theme_Elementor {
 		}
 
 		add_action( 'elementor/theme/register_locations', array( $this, 'register_locations' ) );
+		add_action( 'elementor/dynamic_tags/register', array( $this, 'register_dynamic_tags' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_elementor_styles' ), 100 );
 	}
 
@@ -77,10 +78,49 @@ final class WPRaffle_Theme_Elementor {
 	}
 
 	/**
-	 * Elementor canvas styles. Smooths the seam between theme base styles and
-	 * Elementor's own stylesheet.
+	 * Enqueue the dedicated Elementor override stylesheet (centralises the
+	 * canvas max-width + responsive stacking + section padding for the wpr-*
+	 * classes used inside Elementor templates). Loaded after the theme's main
+	 * cascade so it wins without !important, on both the frontend and the
+	 * editor canvas.
 	 */
 	public function enqueue_elementor_styles() {
-		wp_add_inline_style( 'wpraffle-theme-base', '.elementor-section.elementor-section-boxed > .elementor-container{max-width:1280px;}' );
+		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.3.0';
+		wp_enqueue_style(
+			'wpraffle-theme-elementor',
+			WPRAFFLE_THEME_URI . '/assets/css/elementor.css',
+			array( 'wpraffle-theme-base' ),
+			$ver
+		);
+	}
+
+	/**
+	 * Register the theme's dynamic tags (raffle id / price / draw date / charity
+	 * total) under a `wpraffle-theme` tag group, so any native Elementor widget
+	 * can bind to live values instead of hardcoding them in JSON templates.
+	 *
+	 * @param \Elementor\Core\DynamicTags\Manager $dynamic_tags
+	 */
+	public function register_dynamic_tags( $dynamic_tags ) {
+		require_once WPRAFFLE_THEME_DIR . '/inc/class-wpraffle-theme-elementor-tags.php';
+
+		$groups = \Elementor\Plugin::$instance->dynamic_tags->get_config( 'groups' );
+		if ( ! is_array( $groups ) || ! isset( $groups['wpraffle-theme'] ) ) {
+			\Elementor\Plugin::$instance->dynamic_tags->register_group( 'wpraffle-theme', array(
+				'title' => '🎁 ' . __( 'WPRaffle Theme', 'wpraffle-theme' ),
+			) );
+		}
+
+		$tags = array(
+			'WPRaffle_Theme_Tag_Raffle_Id',
+			'WPRaffle_Theme_Tag_Ticket_Price',
+			'WPRaffle_Theme_Tag_Draw_Date',
+			'WPRaffle_Theme_Tag_Charity_Total',
+		);
+		foreach ( $tags as $class ) {
+			if ( class_exists( $class ) ) {
+				$dynamic_tags->register( new $class() );
+			}
+		}
 	}
 }

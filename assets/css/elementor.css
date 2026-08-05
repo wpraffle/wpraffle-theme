@@ -1,0 +1,100 @@
+/**
+ * WPRaffle Theme — Elementor overrides.
+ *
+ * Centralises editor + frontend overrides for the wpr-* classes used inside
+ * Elementor templates (Theme Builder docs + section blocks). Enqueued only
+ * when Elementor is active, after the theme's main stylesheet cascade, so
+ * these rules win against the base/component defaults without !important.
+ *
+ * Loaded by WPRaffle_Theme_Elementor::enqueue_elementor_styles().
+ */
+
+/* Constrain boxed sections to the theme container width on the canvas
+ * and the frontend alike (Elementor resets this on the editor frame). */
+.elementor-section.elementor-section-boxed > .elementor-container {
+	max-width: 1280px;
+}
+
+/* The raffle sections share a consistent section padding + max inner width. */
+.wpr-section,
+.wpr-hero,
+.wpr-winners,
+.wpr-active,
+.wpr-charity,
+.wpr-trust,
+.wpr-faq,
+.wpr-testimonials,
+.wpr-how-it-works,
+.wpr-featured-spotlight,
+.wpr-stats,
+.wpr-countdown,
+.wpr-live-draw {
+	padding: 4rem 0;
+}
+
+/* Section heading alignment (heading + subtitle pattern used by section blocks). */
+.wpr-section-heading__title,
+.wpr-section-heading__subtitle {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* ------------------------------------------------------------------
+ * Responsive: stack grids on tablet/mobile (Elementor columns default
+ * to desktop flex-direction: row; force a vertical stack on small screens
+ * for the multi-column sections that don't carry their own breakpoints).
+ * ------------------------------------------------------------------ */
+@media (max-width: 1024px) {
+	.elementor-section .elementor-container {
+		flex-wrap: wrap;
+	}
+}
+
+@media (max-width: 767px) {
+
+	/* Force single-column stacking on phones for raffle section columns. */
+	.wpr-how-it-works .elementor-row,
+	.wpr-stats .elementor-row,
+	.wpr-trust .elementor-row,
+	.wpr-testimonials .elementor-row,
+	.wpr-featured-spotlight .elementor-row {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	/* Single-raffle 55/45 grid collapses to a stacked column. */
+	.wpr-single-raffle .elementor-row,
+	.wpr-single-raffle .elementor-container {
+		display: flex;
+		flex-direction: column;
+	}
+
+	/* Tighter section padding on mobile. */
+	.wpr-section,
+	.wpr-hero,
+	.wpr-winners,
+	.wpr-active,
+	.wpr-charity,
+	.wpr-trust,
+	.wpr-faq,
+	.wpr-testimonials,
+	.wpr-how-it-works,
+	.wpr-featured-spotlight,
+	.wpr-stats,
+	.wpr-countdown,
+	.wpr-live-draw {
+		padding: 2.5rem 0;
+	}
+}
+
+/* ------------------------------------------------------------------
+ * Editor-only niceties: make the editor canvas background neutral so
+ * dark hero sections are visible while editing.
+ * ------------------------------------------------------------------ */
+body.elementor-editor-active .elementor-section.wpr-hero,
+body.elementor-editor-active .elementor-section.wpr-countdown,
+body.elementor-editor-active .elementor-section.wpr-live-draw {
+	outline: 1px dashed rgba(228, 103, 138, 0.4);
+}

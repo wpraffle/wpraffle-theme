@@ -1,46 +1,46 @@
 /**
- * Diamond — woocommerce.css
+ * WPRaffle Theme — woocommerce.css
  * WooCommerce layout overrides to match the Paragon-style aesthetic.
  * The WPRaffles plugin owns the raffle single-product template and shop-loop
  * cards; these styles frame the surrounding shop chrome (messages, notices,
  * pagination, account page).
  */
 
-.woocommerce .diamond-shop__inner { padding: 3rem 0; max-width: 1280px; }
+.woocommerce .wpr-shop__inner { padding: 3rem 0; max-width: 1280px; }
 
 /* Breadcrumbs. */
 .woocommerce .woocommerce-breadcrumb {
 	font-size: 0.85rem;
-	color: var(--diamond-muted);
+	color: var(--wpr-muted);
 	margin-bottom: 1.5rem;
 }
-.woocommerce .woocommerce-breadcrumb a { color: var(--diamond-dark); }
-.woocommerce .woocommerce-breadcrumb a:hover { color: var(--diamond-accent); }
+.woocommerce .woocommerce-breadcrumb a { color: var(--wpr-dark); }
+.woocommerce .woocommerce-breadcrumb a:hover { color: var(--wpr-accent); }
 
 /* Messages / notices. */
 .woocommerce .woocommerce-message,
 .woocommerce .woocommerce-info,
 .woocommerce .woocommerce-error {
-	border-top-color: var(--diamond-accent);
-	border-radius: var(--diamond-radius);
-	background: var(--diamond-light);
+	border-top-color: var(--wpr-accent);
+	border-radius: var(--wpr-radius);
+	background: var(--wpr-light);
 	padding: 1rem 1.25rem;
 }
 .woocommerce .woocommerce-message::before,
-.woocommerce .woocommerce-info::before { color: var(--diamond-accent); }
-.woocommerce .woocommerce-error { border-top-color: var(--diamond-danger); }
-.woocommerce .woocommerce-error::before { color: var(--diamond-danger); }
+.woocommerce .woocommerce-info::before { color: var(--wpr-accent); }
+.woocommerce .woocommerce-error { border-top-color: var(--wpr-danger); }
+.woocommerce .woocommerce-error::before { color: var(--wpr-danger); }
 
 /* Message buttons. */
 .woocommerce .woocommerce-message .button,
 .woocommerce .woocommerce-info .button {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
-	border-radius: var(--diamond-radius-pill);
+	border-radius: var(--wpr-radius-pill);
 	padding: 0.45rem 1.1rem;
 	font-weight: 600;
 }
-.woocommerce .woocommerce-message .button:hover { background: var(--diamond-accent-dark); color: #fff; }
+.woocommerce .woocommerce-message .button:hover { background: var(--wpr-accent-dark); color: #fff; }
 
 /* Shop grid — align with the theme 3-col grid. */
 .woocommerce ul.products {
@@ -77,15 +77,15 @@
 .woocommerce ul.products li.product:not(.raffle-product-card) {
 	text-align: left;
 	background: #fff;
-	border: 1px solid var(--diamond-border);
-	border-radius: var(--diamond-radius-lg);
+	border: 1px solid var(--wpr-border);
+	border-radius: var(--wpr-radius-lg);
 	overflow: hidden;
-	box-shadow: var(--diamond-shadow-sm);
-	transition: transform var(--diamond-transition), box-shadow var(--diamond-transition);
+	box-shadow: var(--wpr-shadow-sm);
+	transition: transform var(--wpr-transition), box-shadow var(--wpr-transition);
 }
 .woocommerce ul.products li.product:not(.raffle-product-card):hover {
 	transform: translateY(-4px);
-	box-shadow: var(--diamond-shadow);
+	box-shadow: var(--wpr-shadow);
 }
 /* Raffle li's: let the .rc-card own the box. Neutralise any stray li styling. */
 .woocommerce ul.products li.product.raffle-product-card,
@@ -97,16 +97,16 @@
 	transform: none;
 }
 .woocommerce ul.products li.product:not(.raffle-product-card) .woocommerce-loop-product__title { padding: 0.75rem 1rem 0; font-size: 1rem; }
-.woocommerce ul.products li.product:not(.raffle-product-card) .price { padding: 0 1rem; color: var(--diamond-accent); font-weight: 700; }
+.woocommerce ul.products li.product:not(.raffle-product-card) .price { padding: 0 1rem; color: var(--wpr-accent); font-weight: 700; }
 .woocommerce ul.products li.product:not(.raffle-product-card) .button {
 	margin: 0.75rem 1rem 1rem;
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
-	border-radius: var(--diamond-radius-pill);
+	border-radius: var(--wpr-radius-pill);
 	padding: 0.5rem 1.25rem;
 	font-weight: 600;
 }
-.woocommerce ul.products li.product:not(.raffle-product-card) .button:hover { background: var(--diamond-accent-dark); color: #fff; }
+.woocommerce ul.products li.product:not(.raffle-product-card) .button:hover { background: var(--wpr-accent-dark); color: #fff; }
 .woocommerce ul.products li.product:not(.raffle-product-card) img { margin-bottom: 0; }
 @media (max-width: 991.98px) {
 	.woocommerce ul.products { grid-template-columns: repeat(2, 1fr); }
@@ -116,7 +116,7 @@
 }
 
 /* Star ratings. */
-.woocommerce .star-rating { color: var(--diamond-warning); }
+.woocommerce .star-rating { color: var(--wpr-warning); }
 
 /* Pagination. */
 .woocommerce nav.woocommerce-pagination ul {
@@ -136,23 +136,23 @@
 	min-width: 44px;
 	height: 44px;
 	padding: 0 0.75rem;
-	border-radius: var(--diamond-radius);
-	border: 1px solid var(--diamond-border);
-	color: var(--diamond-dark);
+	border-radius: var(--wpr-radius);
+	border: 1px solid var(--wpr-border);
+	color: var(--wpr-dark);
 	font-weight: 600;
 }
 .woocommerce nav.woocommerce-pagination ul li a:focus,
 .woocommerce nav.woocommerce-pagination ul li a:hover,
 .woocommerce nav.woocommerce-pagination ul li span.current {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
-	border-color: var(--diamond-accent);
+	border-color: var(--wpr-accent);
 }
 
 /* Single product wrapping (plugin owns the inner layout). */
 .woocommerce div.product { margin-bottom: 0; }
 .woocommerce div.product .product_title { font-size: clamp(1.6rem, 3vw, 2.25rem); }
-.woocommerce div.product p.price { color: var(--diamond-accent); }
+.woocommerce div.product p.price { color: var(--wpr-accent); }
 
 /* Related / upsells. */
 .woocommerce .related > h2,
@@ -162,31 +162,31 @@
  * Cart / Checkout
  * ------------------------------------------------------------------ */
 .woocommerce table.shop_table {
-	border-radius: var(--diamond-radius-lg);
-	border: 1px solid var(--diamond-border);
+	border-radius: var(--wpr-radius-lg);
+	border: 1px solid var(--wpr-border);
 	border-collapse: separate;
 	border-spacing: 0;
 }
-.woocommerce table.shop_table th { background: var(--diamond-light); }
+.woocommerce table.shop_table th { background: var(--wpr-light); }
 .woocommerce-cart table.cart td.actions .coupon .input-text,
 .woocommerce form .form-row input.input-text,
 .woocommerce form .form-row textarea,
 .woocommerce form .form-row select {
-	border-radius: var(--diamond-radius);
-	border: 1px solid var(--diamond-border);
+	border-radius: var(--wpr-radius);
+	border: 1px solid var(--wpr-border);
 	padding: 0.6rem 0.85rem;
 }
-.woocommerce-cart table.cart img { border-radius: var(--diamond-radius-sm); }
+.woocommerce-cart table.cart img { border-radius: var(--wpr-radius-sm); }
 .woocommerce a.remove {
 	border-radius: 50%;
-	color: var(--diamond-danger) !important;
+	color: var(--wpr-danger) !important;
 }
-.woocommerce a.remove:hover { background: var(--diamond-danger); color: #fff !important; }
+.woocommerce a.remove:hover { background: var(--wpr-danger); color: #fff !important; }
 
 /* Cart totals / checkout review — rounded. */
 .woocommerce .cart_totals h2,
 .woocommerce-checkout h3 { font-size: 1.25rem; }
-.woocommerce .cart_totals .shop_table { background: var(--diamond-light); }
+.woocommerce .cart_totals .shop_table { background: var(--wpr-light); }
 
 /* Cross-sells. */
 .woocommerce .cross-sells > h2 { font-size: 1.25rem; }
@@ -198,12 +198,12 @@
 	list-style: none;
 	padding: 0;
 	margin: 0 0 2rem;
-	border: 1px solid var(--diamond-border);
-	border-radius: var(--diamond-radius-lg);
+	border: 1px solid var(--wpr-border);
+	border-radius: var(--wpr-radius-lg);
 	overflow: hidden;
 }
 .woocommerce-account .woocommerce-MyAccount-navigation ul li {
-	border-bottom: 1px solid var(--diamond-border);
+	border-bottom: 1px solid var(--wpr-border);
 	margin: 0;
 }
 .woocommerce-account .woocommerce-MyAccount-navigation ul li:last-child { border-bottom: 0; }
@@ -211,14 +211,14 @@
 	display: block;
 	padding: 0.85rem 1.25rem;
 	font-weight: 600;
-	color: var(--diamond-dark);
+	color: var(--wpr-dark);
 }
 .woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
 }
-.woocommerce-account .woocommerce-MyAccount-navigation ul li a:hover { background: var(--diamond-light); }
-.woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a:hover { background: var(--diamond-accent-dark); }
+.woocommerce-account .woocommerce-MyAccount-navigation ul li a:hover { background: var(--wpr-light); }
+.woocommerce-account .woocommerce-MyAccount-navigation ul li.is-active a:hover { background: var(--wpr-accent-dark); }
 
 @media (min-width: 768px) {
 	.woocommerce-account .woocommerce-MyAccount-navigation { width: 25%; }
@@ -237,9 +237,9 @@
 .woocommerce a.button,
 .woocommerce button.button,
 .woocommerce input.button {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
-	border-radius: var(--diamond-radius-pill);
+	border-radius: var(--wpr-radius-pill);
 	padding: 0.625rem 1.5rem;
 	font-weight: 600;
 }
@@ -251,16 +251,16 @@
 .woocommerce a.button:hover,
 .woocommerce button.button:hover,
 .woocommerce input.button:hover {
-	background: var(--diamond-accent-dark);
+	background: var(--wpr-accent-dark);
 	color: #fff;
 }
 
 /* The "Add to cart" on raffle products (plugin relabels to "Enter Raffle"). */
 .woocommerce div.product form.cart .button {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
-	border-radius: var(--diamond-radius-pill);
+	border-radius: var(--wpr-radius-pill);
 	padding: 0.75rem 2rem;
 	font-weight: 700;
 }
-.woocommerce div.product form.cart .button:hover { background: var(--diamond-accent-dark); color: #fff; }
+.woocommerce div.product form.cart .button:hover { background: var(--wpr-accent-dark); color: #fff; }

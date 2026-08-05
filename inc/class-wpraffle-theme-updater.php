@@ -20,11 +20,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class WPRaffle_Theme_Updater {
 
 	/**
-	 * Default GitHub repo in owner/name form.
+	 * Hard-coded GitHub repo. Per project rules the update source is fixed and
+	 * no longer user-editable from the settings screen, so theme updates can
+	 * never be redirected to an arbitrary third-party repo.
 	 *
 	 * @var string
 	 */
-	const DEFAULT_REPO = 'wpraffle/wpraffle-theme';
+	const REPO = 'wpraffle/wpraffle-theme';
+
+	/**
+	 * Public GitHub URL for the repository.
+	 *
+	 * @var string
+	 */
+	const REPO_URL = 'https://github.com/wpraffle/wpraffle-theme';
 
 	/**
 	 * Hook everything in.
@@ -43,19 +52,14 @@ final class WPRaffle_Theme_Updater {
 	}
 
 	/**
-	 * Get the configured repo (owner/name), validated.
+	 * Get the hard-coded repo (owner/name). The value is a constant and is
+	 * intentionally NOT read from options, so the update source cannot be
+	 * changed from the admin UI or via a crafted option value.
 	 *
 	 * @return string
 	 */
 	private function get_repo() {
-		$settings = get_option( 'wpraffle_theme_update_settings', array() );
-		$settings = is_array( $settings ) ? $settings : array();
-		$repo     = isset( $settings['github_repo'] ) ? $settings['github_repo'] : self::DEFAULT_REPO;
-
-		if ( ! preg_match( '#^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$#', $repo ) ) {
-			return self::DEFAULT_REPO;
-		}
-		return $repo;
+		return self::REPO;
 	}
 
 	/**
@@ -145,7 +149,7 @@ final class WPRaffle_Theme_Updater {
 		$this->refresh_version_cache();
 		delete_site_transient( 'update_themes' );
 
-		wp_safe_redirect( admin_url( 'themes.php?page=diamond-settings&tab=advanced&updated=1' ) );
+		wp_safe_redirect( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&updated=1' ) );
 		exit;
 	}
 
@@ -304,7 +308,7 @@ final class WPRaffle_Theme_Updater {
 	 */
 	public static function check_url() {
 		return wp_nonce_url(
-			admin_url( 'themes.php?page=diamond-settings&tab=advanced&check_theme_updates=1' ),
+			admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&check_theme_updates=1' ),
 			'wpraffle_theme_check_updates'
 		);
 	}

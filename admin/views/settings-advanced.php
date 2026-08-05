@@ -11,22 +11,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $s = WPRaffle_Theme_Settings::instance()->get_settings();
 ?>
-<div class="diamond-panel">
-	<p class="diamond-panel-intro"><?php esc_html_e( 'Control the layout and structural options for the theme.', 'wpraffle-theme' ); ?></p>
+<div class="wpr-panel">
+	<p class="wpr-panel-intro"><?php esc_html_e( 'Control the layout and structural options for the theme.', 'wpraffle-theme' ); ?></p>
 
 	<h3><?php esc_html_e( 'Layout', 'wpraffle-theme' ); ?></h3>
 	<table class="form-table" role="presentation"><tbody>
 		<tr>
 			<th scope="row"><label for="wpraffle_container_width"><?php esc_html_e( 'Container width', 'wpraffle-theme' ); ?></label></th>
 			<td>
-				<input type="number" min="800" max="1920" step="10" id="wpraffle_container_width" name="diamond[container_width]" value="<?php echo esc_attr( $s['container_width'] ); ?>"> px
+				<input type="number" min="800" max="1920" step="10" id="wpraffle_container_width" name="wpr_settings[container_width]" value="<?php echo esc_attr( $s['container_width'] ); ?>"> px
 				<p class="description"><?php esc_html_e( 'Maximum content width for the site (800–1920px).', 'wpraffle-theme' ); ?></p>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="wpraffle_radius"><?php esc_html_e( 'Card corner radius', 'wpraffle-theme' ); ?></label></th>
 			<td>
-				<input type="number" min="0" max="30" step="1" id="wpraffle_radius" name="diamond[radius]" value="<?php echo esc_attr( $s['radius'] ); ?>"> px
+				<input type="number" min="0" max="30" step="1" id="wpraffle_radius" name="wpr_settings[radius]" value="<?php echo esc_attr( $s['radius'] ); ?>"> px
 				<p class="description"><?php esc_html_e( 'Base border-radius for cards and inputs (0–30px). Larger and smaller variants are derived automatically.', 'wpraffle-theme' ); ?></p>
 			</td>
 		</tr>
@@ -37,19 +37,19 @@ $s = WPRaffle_Theme_Settings::instance()->get_settings();
 		<tr>
 			<th scope="row"><?php esc_html_e( 'Sticky header', 'wpraffle-theme' ); ?></th>
 			<td>
-				<label><input type="checkbox" name="diamond[sticky_header]" value="on" <?php checked( $s['sticky_header'], 'on' ); ?>> <?php esc_html_e( 'Keep the header fixed at the top while scrolling', 'wpraffle-theme' ); ?></label>
+				<label><input type="checkbox" name="wpr_settings[sticky_header]" value="on" <?php checked( $s['sticky_header'], 'on' ); ?>> <?php esc_html_e( 'Keep the header fixed at the top while scrolling', 'wpraffle-theme' ); ?></label>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><?php esc_html_e( 'Full-width header', 'wpraffle-theme' ); ?></th>
 			<td>
-				<label><input type="checkbox" name="diamond[fullwidth_header]" value="on" <?php checked( $s['fullwidth_header'], 'on' ); ?>> <?php esc_html_e( 'Let the header span the full viewport width', 'wpraffle-theme' ); ?></label>
+				<label><input type="checkbox" name="wpr_settings[fullwidth_header]" value="on" <?php checked( $s['fullwidth_header'], 'on' ); ?>> <?php esc_html_e( 'Let the header span the full viewport width', 'wpraffle-theme' ); ?></label>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><?php esc_html_e( 'Show top bar', 'wpraffle-theme' ); ?></th>
 			<td>
-				<label><input type="checkbox" name="diamond[show_topbar]" value="on" <?php checked( $s['show_topbar'], 'on' ); ?>> <?php esc_html_e( 'Display the dark top bar above the header', 'wpraffle-theme' ); ?></label>
+				<label><input type="checkbox" name="wpr_settings[show_topbar]" value="on" <?php checked( $s['show_topbar'], 'on' ); ?>> <?php esc_html_e( 'Display the dark top bar above the header', 'wpraffle-theme' ); ?></label>
 			</td>
 		</tr>
 	</tbody></table>
@@ -97,16 +97,70 @@ $s = WPRaffle_Theme_Settings::instance()->get_settings();
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="wpraffle_github_repo"><?php esc_html_e( 'GitHub repository', 'wpraffle-theme' ); ?></label></th>
+			<th scope="row"><?php esc_html_e( 'GitHub repository', 'wpraffle-theme' ); ?></th>
 			<td>
-				<input type="text" id="wpraffle_github_repo" name="wpraffle_theme_update[github_repo]" value="<?php echo esc_attr( get_option( 'wpraffle_theme_update_settings', array( 'github_repo' => 'wpraffle/wpraffle-theme' ) )['github_repo'] ?? 'wpraffle/wpraffle-theme' ); ?>" class="regular-text" placeholder="owner/repo">
-				<p class="description"><?php esc_html_e( 'The owner/repo to check for releases (default: wpraffle/wpraffle-theme).', 'wpraffle-theme' ); ?></p>
+				<code style="font-size:13px;padding:3px 8px;background:#f0f0f1;border-radius:4px;">wpraffle/wpraffle-theme</code>
+				<a href="https://github.com/wpraffle/wpraffle-theme" target="_blank" rel="noopener noreferrer" style="margin-left:8px;"><?php esc_html_e( 'View on GitHub ↗', 'wpraffle-theme' ); ?></a>
+				<p class="description"><?php esc_html_e( 'The update source is hard-coded and cannot be changed. Theme releases are pulled from this repository.', 'wpraffle-theme' ); ?></p>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><?php esc_html_e( 'Auto-update', 'wpraffle-theme' ); ?></th>
 			<td>
 				<label><input type="checkbox" name="wpraffle_theme_update[auto_update]" value="1" <?php checked( get_option( 'wpraffle_theme_update_settings', array() )['auto_update'] ?? 0, '1' ); ?>> <?php esc_html_e( 'Install updates automatically when available', 'wpraffle-theme' ); ?></label>
+			</td>
+		</tr>
+	</tbody></table>
+
+	<hr>
+
+	<h3><?php esc_html_e( 'Import / Export', 'wpraffle-theme' ); ?></h3>
+	<p class="description" style="margin-bottom:1rem;"><?php esc_html_e( 'Back up or transfer your theme settings between sites.', 'wpraffle-theme' ); ?></p>
+	<table class="form-table" role="presentation"><tbody>
+		<tr>
+			<th scope="row"><?php esc_html_e( 'Export settings', 'wpraffle-theme' ); ?></th>
+			<td>
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( '?wprt_export=1' ), 'wprt_export' ) ); ?>" class="button button-secondary">
+					<span class="dashicons dashicons-download" style="vertical-align:text-top;"></span>
+					<?php esc_html_e( 'Download settings (JSON)', 'wpraffle-theme' ); ?>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><?php esc_html_e( 'Import settings', 'wpraffle-theme' ); ?></th>
+			<td>
+				<form method="post" enctype="multipart/form-data" style="display:inline;">
+					<?php wp_nonce_field( 'wprt_import' ); ?>
+					<input type="file" name="wprt_import_file" accept=".json" style="vertical-align:baseline;">
+					<button type="submit" name="wprt_import_submit" value="1" class="button button-secondary">
+						<span class="dashicons dashicons-upload" style="vertical-align:text-top;"></span>
+						<?php esc_html_e( 'Upload & Apply', 'wpraffle-theme' ); ?>
+					</button>
+				</form>
+				<?php if ( isset( $_GET['import'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+					<?php if ( 'success' === $_GET['import'] ) : ?>
+						<p style="color:#00a32a;font-weight:600;"><?php esc_html_e( '✓ Settings imported successfully.', 'wpraffle-theme' ); ?></p>
+					<?php elseif ( 'error' === $_GET['import'] ) : ?>
+						<p style="color:#d63638;font-weight:600;"><?php esc_html_e( '✗ Import failed. Please check the file is a valid settings JSON.', 'wpraffle-theme' ); ?></p>
+					<?php endif; ?>
+				<?php endif; ?>
+			</td>
+		</tr>
+	</tbody></table>
+
+	<hr>
+
+	<h3 style="color:#d63638;"><?php esc_html_e( 'Reset', 'wpraffle-theme' ); ?></h3>
+	<table class="form-table" role="presentation"><tbody>
+		<tr>
+			<th scope="row"><?php esc_html_e( 'Reset all settings', 'wpraffle-theme' ); ?></th>
+			<td>
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&wprt_reset=1' ), 'wprt_reset' ) ); ?>"
+					class="button button-link-delete"
+					onclick="return confirm('<?php esc_attr_e( 'This will reset ALL theme settings to their defaults. This cannot be undone. Continue?', 'wpraffle-theme' ); ?>');">
+					<span class="dashicons dashicons-warning" style="vertical-align:text-top;"></span>
+					<?php esc_html_e( 'Reset everything to defaults', 'wpraffle-theme' ); ?>
+				</a>
 			</td>
 		</tr>
 	</tbody></table>

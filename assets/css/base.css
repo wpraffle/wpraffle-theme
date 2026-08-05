@@ -1,5 +1,5 @@
 /**
- * Diamond — base.css
+ * WPRaffle Theme — base.css
  * Design tokens, typography, layout foundations.
  * Mirrors the paragoncompetitions.co.uk palette (pink #e4678a / blue #5caeed
  * accents on dark #2c2c2c + light #f6f6f6 surfaces), Montserrat typography,
@@ -11,51 +11,51 @@
  * ------------------------------------------------------------------ */
 :root {
 	/* Brand */
-	--diamond-accent: #e4678a;          /* pink */
-	--diamond-accent-rgb: 228, 103, 138;
-	--diamond-accent-dark: #d24e75;
-	--diamond-accent-2: #5caeed;        /* blue */
-	--diamond-accent-2-rgb: 92, 174, 237;
-	--diamond-accent-2-dark: #3f97de;
-	--diamond-success: #63dd92;
-	--diamond-success-dark: #43c97a;
-	--diamond-danger: #dc3545;
-	--diamond-warning: #ffc107;
+	--wpr-accent: #e4678a;          /* pink */
+	--wpr-accent-rgb: 228, 103, 138;
+	--wpr-accent-dark: #d24e75;
+	--wpr-accent-2: #5caeed;        /* blue */
+	--wpr-accent-2-rgb: 92, 174, 237;
+	--wpr-accent-2-dark: #3f97de;
+	--wpr-success: #63dd92;
+	--wpr-success-dark: #43c97a;
+	--wpr-danger: #dc3545;
+	--wpr-warning: #ffc107;
 
 	/* Neutrals */
-	--diamond-dark: #2c2c2c;
-	--diamond-dark-rgb: 44, 44, 44;
-	--diamond-body: #2c2c2c;
-	--diamond-muted: #6c757d;
-	--diamond-light: #f6f6f6;
-	--diamond-lighter: #ffffff;
-	--diamond-border: #dee2e6;
-	--diamond-border-strong: #ced4da;
+	--wpr-dark: #2c2c2c;
+	--wpr-dark-rgb: 44, 44, 44;
+	--wpr-body: #2c2c2c;
+	--wpr-muted: #6c757d;
+	--wpr-light: #f6f6f6;
+	--wpr-lighter: #ffffff;
+	--wpr-border: #dee2e6;
+	--wpr-border-strong: #ced4da;
 
 	/* Typography */
-	--diamond-font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	--diamond-font-head: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	--diamond-font-size-base: 1rem;
-	--diamond-line-height: 1.6;
-	--diamond-head-line-height: 1.2;
+	--wpr-font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--wpr-font-head: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--wpr-font-size-base: 1rem;
+	--wpr-line-height: 1.6;
+	--wpr-head-line-height: 1.2;
 
 	/* Shape */
-	--diamond-radius: 0.5rem;
-	--diamond-radius-sm: 0.375rem;
-	--diamond-radius-lg: 0.75rem;
-	--diamond-radius-pill: 50rem;
+	--wpr-radius: 0.5rem;
+	--wpr-radius-sm: 0.375rem;
+	--wpr-radius-lg: 0.75rem;
+	--wpr-radius-pill: 50rem;
 
 	/* Shadows */
-	--diamond-shadow-sm: 0 0.125rem 0.25rem rgba(var(--diamond-dark-rgb), 0.075);
-	--diamond-shadow: 0 0.5rem 1rem rgba(var(--diamond-dark-rgb), 0.10);
-	--diamond-shadow-lg: 0 1rem 3rem rgba(var(--diamond-dark-rgb), 0.15);
+	--wpr-shadow-sm: 0 0.125rem 0.25rem rgba(var(--wpr-dark-rgb), 0.075);
+	--wpr-shadow: 0 0.5rem 1rem rgba(var(--wpr-dark-rgb), 0.10);
+	--wpr-shadow-lg: 0 1rem 3rem rgba(var(--wpr-dark-rgb), 0.15);
 
 	/* Layout */
-	--diamond-container: 1280px;
-	--diamond-header-h: 88px;
-	--diamond-topbar-h: 44px;
-	--diamond-section-gap: 4rem;
-	--diamond-transition: 0.2s ease;
+	--wpr-container: 1280px;
+	--wpr-header-h: 88px;
+	--wpr-topbar-h: 44px;
+	--wpr-section-gap: 4rem;
+	--wpr-transition: 0.2s ease;
 }
 
 /* ------------------------------------------------------------------ *
@@ -66,53 +66,53 @@
 html { scroll-behavior: smooth; }
 
 body {
-	font-family: var(--diamond-font-sans);
-	font-size: var(--diamond-font-size-base);
-	line-height: var(--diamond-line-height);
-	color: var(--diamond-body);
-	background: var(--diamond-lighter);
+	font-family: var(--wpr-font-sans);
+	font-size: var(--wpr-font-size-base);
+	line-height: var(--wpr-line-height);
+	color: var(--wpr-body);
+	background: var(--wpr-lighter);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	overflow-x: hidden;
 }
 
 /* The theme wrapper owns horizontal spacing so Elementor / blocks inherit it. */
-.diamond-theme { background: var(--diamond-lighter); }
+.wpr-theme { background: var(--wpr-lighter); }
 
 /* ------------------------------------------------------------------ *
  * Typography
  * ------------------------------------------------------------------ */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-	font-family: var(--diamond-font-head);
+	font-family: var(--wpr-font-head);
 	font-weight: 700;
-	line-height: var(--diamond-head-line-height);
-	color: var(--diamond-dark);
+	line-height: var(--wpr-head-line-height);
+	color: var(--wpr-dark);
 }
 
 h1, .h1 { font-weight: 800; }
 
 a {
-	color: var(--diamond-accent);
+	color: var(--wpr-accent);
 	text-decoration: none;
-	transition: color var(--diamond-transition);
+	transition: color var(--wpr-transition);
 }
-a:hover { color: var(--diamond-accent-dark); }
+a:hover { color: var(--wpr-accent-dark); }
 
 p { margin-bottom: 1rem; }
 
 img { max-width: 100%; height: auto; }
 
 ::selection {
-	background: rgba(var(--diamond-accent-rgb), 0.25);
-	color: var(--diamond-dark);
+	background: rgba(var(--wpr-accent-rgb), 0.25);
+	color: var(--wpr-dark);
 }
 
 /* ------------------------------------------------------------------ *
  * Layout helpers
  * ------------------------------------------------------------------ */
-.diamond-container,
-.site-main.container { max-width: var(--diamond-container); }
+.wpr-container,
+.site-main.container { max-width: var(--wpr-container); }
 
 .site {
 	display: flex;
@@ -122,28 +122,28 @@ img { max-width: 100%; height: auto; }
 .site-main { flex: 1 0 auto; }
 
 .section {
-	padding-top: var(--diamond-section-gap);
-	padding-bottom: var(--diamond-section-gap);
+	padding-top: var(--wpr-section-gap);
+	padding-bottom: var(--wpr-section-gap);
 }
 .section--tight { padding-top: 2.5rem; padding-bottom: 2.5rem; }
-.section--tint  { background: var(--diamond-light); }
+.section--tint  { background: var(--wpr-light); }
 .section--dark  {
-	background: var(--diamond-dark);
+	background: var(--wpr-dark);
 	color: rgba(255, 255, 255, 0.85);
 }
 .section--dark h1, .section--dark h2, .section--dark h3 { color: #fff; }
 
 /* Skip link (a11y). */
-.diamond-skip-link {
+.wpr-skip-link {
 	position: absolute;
 	left: -9999px;
 	top: 0;
 	z-index: 1000;
 	padding: 0.5rem 1rem;
-	background: var(--diamond-dark);
+	background: var(--wpr-dark);
 	color: #fff;
 }
-.diamond-skip-link:focus {
+.wpr-skip-link:focus {
 	left: 1rem;
 	top: 1rem;
 	color: #fff;
@@ -172,43 +172,43 @@ img { max-width: 100%; height: auto; }
 .woocommerce a.added_to_cart,
 .woocommerce #respond input#submit,
 .woocommerce input.button {
-	font-family: var(--diamond-font-sans);
+	font-family: var(--wpr-font-sans);
 	font-weight: 600;
 	letter-spacing: 0.02em;
-	border-radius: var(--diamond-radius-pill);
+	border-radius: var(--wpr-radius-pill);
 	padding: 0.625rem 1.5rem;
-	transition: all var(--diamond-transition);
+	transition: all var(--wpr-transition);
 	border: 1px solid transparent;
 }
 
 .btn-accent,
 .woocommerce a.button.btn-accent {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
-	border-color: var(--diamond-accent);
+	border-color: var(--wpr-accent);
 }
 .btn-accent:hover,
 .woocommerce a.button.btn-accent:hover {
-	background: var(--diamond-accent-dark);
-	border-color: var(--diamond-accent-dark);
+	background: var(--wpr-accent-dark);
+	border-color: var(--wpr-accent-dark);
 	color: #fff;
 	transform: translateY(-1px);
 }
 
 .btn-outline-accent {
 	background: transparent;
-	color: var(--diamond-accent);
-	border-color: var(--diamond-accent);
+	color: var(--wpr-accent);
+	border-color: var(--wpr-accent);
 }
 .btn-outline-accent:hover {
-	background: var(--diamond-accent);
+	background: var(--wpr-accent);
 	color: #fff;
 }
 
 .btn-dark {
-	background: var(--diamond-dark);
+	background: var(--wpr-dark);
 	color: #fff;
-	border-color: var(--diamond-dark);
+	border-color: var(--wpr-dark);
 }
 .btn-dark:hover { background: #1a1a1a; color: #fff; }
 
@@ -218,16 +218,16 @@ img { max-width: 100%; height: auto; }
 /* ------------------------------------------------------------------ *
  * Utility
  * ------------------------------------------------------------------ */
-.text-accent  { color: var(--diamond-accent) !important; }
-.text-accent2 { color: var(--diamond-accent-2) !important; }
-.bg-accent    { background-color: var(--diamond-accent) !important; color: #fff; }
-.bg-accent2   { background-color: var(--diamond-accent-2) !important; color: #fff; }
-.bg-dark-dim  { background-color: var(--diamond-dark) !important; color: #fff; }
+.text-accent  { color: var(--wpr-accent) !important; }
+.text-accent2 { color: var(--wpr-accent-2) !important; }
+.bg-accent    { background-color: var(--wpr-accent) !important; color: #fff; }
+.bg-accent2   { background-color: var(--wpr-accent-2) !important; color: #fff; }
+.bg-dark-dim  { background-color: var(--wpr-dark) !important; color: #fff; }
 
-.shadow-soft { box-shadow: var(--diamond-shadow); }
-.shadow-lg-soft { box-shadow: var(--diamond-shadow-lg); }
+.shadow-soft { box-shadow: var(--wpr-shadow); }
+.shadow-lg-soft { box-shadow: var(--wpr-shadow-lg); }
 
-.rounded-pill { border-radius: var(--diamond-radius-pill) !important; }
+.rounded-pill { border-radius: var(--wpr-radius-pill) !important; }
 
 .eyebrow {
 	display: inline-block;
@@ -235,15 +235,15 @@ img { max-width: 100%; height: auto; }
 	font-weight: 700;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: var(--diamond-accent);
+	color: var(--wpr-accent);
 	margin-bottom: 0.5rem;
 }
 
 /* Dividing gradient rule used under headings. */
-.diamond-rule {
+.wpr-rule {
 	height: 4px;
 	width: 64px;
 	border-radius: 4px;
-	background: linear-gradient(90deg, var(--diamond-accent), var(--diamond-accent-2));
+	background: linear-gradient(90deg, var(--wpr-accent), var(--wpr-accent-2));
 	margin-bottom: 1.25rem;
 }

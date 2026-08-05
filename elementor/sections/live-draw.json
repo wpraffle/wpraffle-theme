@@ -1,0 +1,25 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle Theme — Live Draw",
+  "type": "section",
+  "content": [
+    {
+      "id": "dmdsec-ld",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 1280 },
+        "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
+        "background_background": "classic",
+        "background_color": "#2C2C2C",
+        "flex_align_items": "center",
+        "css_classes": "wpr-live-draw"
+      },
+      "elements": [
+        { "id": "dmdsec-ld-eb", "elType": "widget", "widgetType": "heading", "settings": { "title": "WATCH LIVE", "header_size": "div", "title_color": "rgba(255,255,255,0.85)", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsec-ld-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "Live Draw", "header_size": "h2", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsec-ld-sc", "elType": "widget", "widgetType": "shortcode", "settings": { "shortcode": "[raffle_live_draw]" }, "elements": [] }
+      ]
+    }
+  ]
+}

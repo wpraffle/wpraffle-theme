@@ -1,0 +1,211 @@
+/**
+ * WPRaffle Theme — v1.1.0 features.
+ * Typography, buttons, header layouts, scroll behaviour, new sections
+ * (countdown, live draw, FAQ, testimonials), blog layouts, widget areas.
+ */
+
+/* ================================================================== *
+ * TYPOGRAPHY (driven by --wpr-font-* / --wpr-h*-size vars)
+ * ================================================================== */
+body {
+	font-family: var(--wpr-font-sans, var(--wpr-font-sans, "Montserrat", sans-serif));
+	font-size: var(--wpr-font-size-base, 1rem);
+	line-height: var(--wpr-line-height, 1.6);
+}
+h1, .h1 { font-family: var(--wpr-font-head, "Montserrat", sans-serif); font-size: var(--wpr-h1-size, 2.5rem); }
+h2, .h2 { font-family: var(--wpr-font-head, "Montserrat", sans-serif); font-size: var(--wpr-h2-size, 2rem); }
+h3, .h3 { font-family: var(--wpr-font-head, "Montserrat", sans-serif); font-size: var(--wpr-h3-size, 1.5rem); }
+h4, .h4 { font-family: var(--wpr-font-head, "Montserrat", sans-serif); font-size: var(--wpr-h4-size, 1.25rem); }
+h5, .h5 { font-family: var(--wpr-font-head, "Montserrat", sans-serif); font-size: var(--wpr-h5-size, 1rem); }
+h6, .h6 { font-family: var(--wpr-font-head, "Montserrat", sans-serif); font-size: var(--wpr-h6-size, 0.875rem); }
+
+/* ================================================================== *
+ * BUTTONS (driven by --wpr-btn-* vars)
+ * ================================================================== */
+.btn,
+.woocommerce a.button,
+.woocommerce button.button,
+.btn-accent {
+	border-radius: var(--wpr-btn-radius, 50rem);
+	padding: var(--wpr-btn-py, 0.625rem) var(--wpr-btn-px, 1.5rem);
+	font-weight: var(--wpr-btn-weight, 600);
+	text-transform: var(--wpr-btn-transform, none);
+	transition: all 0.2s ease;
+}
+body.btn-hover-lift .btn:hover,
+body.btn-hover-lift .btn-accent:hover,
+body.btn-hover-lift .woocommerce a.button:hover {
+	transform: translateY(-2px);
+}
+
+/* ================================================================== *
+ * HEADER LAYOUTS
+ * ================================================================== */
+/* Centered logo: logo on top centre, nav below. */
+body.header-layout-centered .wpr-header__inner {
+	flex-direction: column;
+	gap: 0.5rem;
+}
+body.header-layout-centered .wpr-header__left { order: 1; }
+body.header-layout-centered .wpr-nav { order: 2; }
+body.header-layout-centered .wpr-header__actions { order: 3; position: absolute; right: 0; top: 50%; transform: translateY(-50%); }
+
+/* Minimal: compact, logo left, hamburger right. */
+body.header-layout-minimal .wpr-nav { display: none; }
+body.header-layout-minimal .wpr-header__inner { min-height: 64px; }
+
+/* Split: nav left + right, logo centre. */
+body.header-layout-split .wpr-header__inner {
+	grid-template-columns: 1fr auto 1fr;
+	display: grid;
+}
+body.header-layout-split .wpr-header__left { grid-column: 2; }
+body.header-layout-split .wpr-header__actions { grid-column: 3; justify-content: flex-end; }
+
+/* Overlay: transparent until scrolled. */
+body.header-overlay .wpr-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: transparent;
+	border-bottom: 0;
+	z-index: 1030;
+}
+body.header-overlay .wpr-header.is-scrolled {
+	position: fixed;
+	background: #fff;
+	border-bottom: 1px solid var(--wpr-border, #dee2e6);
+	box-shadow: var(--wpr-shadow-sm, 0 0.125rem 0.25rem rgba(0,0,0,.075));
+}
+body.header-overlay .wpr-header.is-scrolled .wpr-logo__text,
+body.header-overlay .wpr-header.is-scrolled .wpr-nav a { color: var(--wpr-dark, #2c2c2c); }
+body.header-overlay:not(.is-scrolled) .wpr-header .wpr-logo__text,
+body.header-overlay:not(.is-scrolled) .wpr-header .wpr-nav a { color: #fff; }
+
+/* ================================================================== *
+ * SCROLL BEHAVIOUR
+ * ================================================================== */
+/* Shrink. */
+body.header-scroll-shrink .wpr-header.is-scrolled .wpr-header__inner { min-height: 60px; }
+body.header-scroll-shrink .wpr-header.is-scrolled .wpr-logo .custom-logo { max-height: 40px; }
+
+/* Hide on scroll down. */
+body.header-scroll-hide .wpr-header.hide-up { transform: translateY(-100%); }
+body.header-scroll-hide .wpr-header { transition: transform 0.3s ease; }
+
+/* Shadow when scrolled. */
+body.header-scroll-shadow .wpr-header.is-scrolled { box-shadow: var(--wpr-shadow, 0 0.5rem 1rem rgba(0,0,0,.1)); }
+
+/* ================================================================== *
+ * COUNTDOWN BANNER
+ * ================================================================== */
+.wprt-countdown-banner {
+	display: inline-flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.wprt-cd-unit {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: rgba(255,255,255,0.1);
+	border-radius: var(--wpr-radius, 8px);
+	padding: 1rem 1.5rem;
+	min-width: 80px;
+}
+.wprt-cd-num {
+	font-size: 2rem;
+	font-weight: 800;
+	color: #fff;
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+.wprt-cd-label {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: rgba(255,255,255,0.7);
+	margin-top: 0.35rem;
+}
+
+/* ================================================================== *
+ * FAQ ACCORDION
+ * ================================================================== */
+.wprt-faq-accordion { margin-top: 1rem; }
+.wprt-faq-item {
+	border: 1px solid var(--wpr-border, #dee2e6);
+	border-radius: var(--wpr-radius, 8px);
+	margin-bottom: 0.75rem;
+	overflow: hidden;
+}
+.wprt-faq-question {
+	width: 100%;
+	text-align: left;
+	background: #fff;
+	border: 0;
+	padding: 1rem 1.25rem;
+	font-weight: 600;
+	font-size: 1rem;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--wpr-dark, #2c2c2c);
+	font-family: var(--wpr-font-head, "Montserrat", sans-serif);
+}
+.wprt-faq-question:hover { color: var(--wpr-accent, #e4678a); }
+.wprt-faq-icon { transition: transform 0.2s ease; font-size: 0.85rem; }
+.wprt-faq-question[aria-expanded="true"] .wprt-faq-icon { transform: rotate(180deg); }
+.wprt-faq-answer {
+	display: none;
+	padding: 0 1.25rem 1.25rem;
+	color: var(--wpr-muted, #6c757d);
+	line-height: 1.7;
+}
+
+/* ================================================================== *
+ * TESTIMONIALS
+ * ================================================================== */
+.wprt-testimonial-card {
+	background: #fff;
+	border: 1px solid var(--wpr-border, #dee2e6);
+	border-radius: var(--wpr-radius-lg, 12px);
+	padding: 1.75rem;
+	text-align: center;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.75rem;
+	box-shadow: var(--wpr-shadow-sm, 0 0.125rem 0.25rem rgba(0,0,0,.075));
+}
+.wprt-testimonial-photo img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.wprt-testimonial-stars { color: var(--wpr-warning, #ffc107); }
+.wprt-testimonial-content { color: var(--wpr-body, #2c2c2c); font-style: italic; font-size: 0.95rem; line-height: 1.6; }
+.wprt-testimonial-name { font-weight: 700; color: var(--wpr-dark, #2c2c2c); }
+
+/* ================================================================== *
+ * BLOG LAYOUTS
+ * ================================================================== */
+body.blog-layout-grid .wpr-posts {
+	display: grid;
+	grid-template-columns: repeat(var(--blog-cols, 2), 1fr);
+	gap: 1.5rem;
+}
+body.blog-layout-grid .wpr-post { width: auto; }
+body.blog-layout-list .wpr-post { margin-bottom: 2rem; }
+body.blog-layout-masonry .wpr-posts {
+	display: grid;
+	grid-template-columns: repeat(var(--blog-cols, 2), 1fr);
+	gap: 1.5rem;
+	align-items: start;
+}
+body.blog-layout-masonry .wpr-post { break-inside: avoid; }
+
+/* ================================================================== *
+ * HOMEPAGE SECTION MANAGER TABLE (admin only, but styled here for consistency)
+ * ================================================================== */
+.wprt-sections-table th { font-weight: 600; color: #2c2c2c; padding-bottom: 0.5rem; }
+.wprt-section-row td { padding: 0.75rem; border-bottom: 1px solid #f0f0f1; vertical-align: middle; }

@@ -1,6 +1,6 @@
 {
   "version": "0.4",
-  "title": "Diamond Home",
+  "title": "WPRaffle Theme Home",
   "type": "page",
   "page_settings": { "document_type": "wp-page" },
   "content": [
@@ -18,7 +18,7 @@
         "background_overlay_background": "classic",
         "background_overlay_color": "#2C2C2C",
         "background_overlay_opacity": { "unit": "px", "size": 0.5 },
-        "css_classes": "diamond-hero"
+        "css_classes": "wpr-hero"
       },
       "elements": [
         {
@@ -106,7 +106,7 @@
         "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
         "background_background": "classic",
         "background_color": "#F6F6F6",
-        "css_classes": "diamond-winners"
+        "css_classes": "wpr-winners"
       },
       "elements": [
         {
@@ -139,7 +139,7 @@
         "content_width": "boxed",
         "boxed_width": { "unit": "px", "size": 1280 },
         "padding": { "unit": "px", "top": "64", "right": "0", "bottom": "64", "left": "0", "isLinked": false },
-        "css_classes": "diamond-active"
+        "css_classes": "wpr-active"
       },
       "elements": [
         {
@@ -204,7 +204,7 @@
             "background_color_b": "#D24E75",
             "background_gradient_angle": { "unit": "deg", "size": 135 },
             "border_radius": { "unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true },
-            "css_classes": "diamond-charity"
+            "css_classes": "wpr-charity"
           },
           "elements": [
             {
@@ -217,8 +217,8 @@
             {
               "id": "dmdhome-charity-total",
               "elType": "widget",
-              "widgetType": "heading",
-              "settings": { "title": "£2,800,000", "header_size": "h2", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 64 }, "typography_font_weight": "800", "align": "center" },
+              "widgetType": "shortcode",
+              "settings": { "shortcode": "[wpraffle_charity_total]" },
               "elements": []
             },
             {

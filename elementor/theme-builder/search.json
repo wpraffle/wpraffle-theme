@@ -1,0 +1,26 @@
+{
+  "version": "0.4",
+  "title": "WPRaffle Search Results",
+  "type": "archive",
+  "page_settings": {
+    "document_type": "wp-page",
+    "conditions": [ { "type": "include", "condition": "search" } ]
+  },
+  "content": [
+    {
+      "id": "dmdsrch-wrap",
+      "elType": "container",
+      "settings": {
+        "content_width": "boxed",
+        "boxed_width": { "unit": "px", "size": 800 },
+        "padding": { "unit": "px", "top": "56", "right": "0", "bottom": "56", "left": "0", "isLinked": false },
+        "flex_align_items": "center"
+      },
+      "elements": [
+        { "id": "dmdsrch-eb", "elType": "widget", "widgetType": "heading", "settings": { "title": "SEARCH", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 }, "align": "center" }, "elements": [] },
+        { "id": "dmdsrch-title", "elType": "widget", "widgetType": "theme-archive-title", "settings": { "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 44 }, "typography_font_weight": "800", "align": "center" }, "elements": [] },
+        { "id": "dmdsrch-sc", "elType": "widget", "widgetType": "shortcode", "settings": { "shortcode": "[woocommerce_product_search]" }, "elements": [] }
+      ]
+    }
+  ]
+}
