@@ -134,6 +134,8 @@ final class WPRaffle_Theme_Setup {
 		wp_enqueue_style( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0-features.css', array( 'wpraffle-theme-v110' ), $ver );
 		// v1.2.0 enhancements (scroll reveal, counters, back-to-top, new sections, etc.).
 		wp_enqueue_style( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/css/v1.2.0.css', array( 'wpraffle-theme-features' ), $ver );
+		// v1.3.1 main-site visual language, scoped to the new Default preset.
+		wp_enqueue_style( 'wpraffle-theme-v131', WPRAFFLE_THEME_URI . '/assets/css/v1.3.1-default.css', array( 'wpraffle-theme-v120' ), $ver );
 
 		// WPRaffle plugin overrides — declared as dependent on the plugin's
 		// 'raffle-public' stylesheet so this always loads AFTER it (equal
@@ -272,6 +274,7 @@ final class WPRaffle_Theme_Setup {
 	public function body_classes( $classes ) {
 		$classes[] = 'wpr-theme';
 		$s = WPRaffle_Theme_Settings::instance()->get_settings();
+		$classes[] = 'wpr-preset-' . sanitize_html_class( $s['preset'] );
 
 		if ( wpraffle_theme_has_plugin() ) {
 			$classes[] = 'has-wpraffle';

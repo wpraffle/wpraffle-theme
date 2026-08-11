@@ -1,0 +1,155 @@
+/**
+ * WPRaffle Theme v1.3.1 — Default preset.
+ * Scoped so the five legacy presets retain their established presentation.
+ */
+
+body.wpr-preset-default {
+	--wpr-header-h: 78px;
+	--wpr-section-gap: clamp(5rem, 9vw, 8.125rem);
+	--wpr-head-line-height: 0.96;
+	--wpr-shadow-sm: 0 1px 0 rgba(255,255,255,.08);
+	--wpr-shadow: 0 18px 45px rgba(0,0,0,.12);
+	--wpr-shadow-lg: 0 40px 90px rgba(0,0,0,.22);
+	background: #f3f1ea;
+	letter-spacing: -.01em;
+}
+
+body.wpr-preset-default h1,
+body.wpr-preset-default h2,
+body.wpr-preset-default h3,
+body.wpr-preset-default h4,
+body.wpr-preset-default h5,
+body.wpr-preset-default h6 {
+	font-weight: 800;
+	letter-spacing: -.045em;
+}
+
+body.wpr-preset-default h1,
+body.wpr-preset-default .wpr-hero__title { font-weight: 900; letter-spacing: -.06em; }
+
+body.wpr-preset-default .section { padding-block: var(--wpr-section-gap); }
+
+body.wpr-preset-default .btn,
+body.wpr-preset-default button,
+body.wpr-preset-default input[type="submit"],
+body.wpr-preset-default .woocommerce a.button,
+body.wpr-preset-default .woocommerce button.button,
+body.wpr-preset-default .woocommerce input.button,
+body.wpr-preset-default .rc-card__cta {
+	min-height: 52px;
+	font-weight: 800;
+	letter-spacing: 0;
+	border-radius: 999px;
+	transition: transform .22s ease, background-color .22s ease, border-color .22s ease;
+}
+
+body.wpr-preset-default .btn:hover,
+body.wpr-preset-default button:hover,
+body.wpr-preset-default input[type="submit"]:hover,
+body.wpr-preset-default .woocommerce a.button:hover,
+body.wpr-preset-default .woocommerce button.button:hover,
+body.wpr-preset-default .rc-card__cta:hover { transform: translateY(-2px); }
+
+body.wpr-preset-default .btn-accent,
+body.wpr-preset-default .woocommerce a.button,
+body.wpr-preset-default .woocommerce button.button,
+body.wpr-preset-default .woocommerce input.button,
+body.wpr-preset-default .rc-card__cta {
+	background: #ffdc25;
+	border-color: #ffdc25;
+	color: #111113;
+}
+
+body.wpr-preset-default .btn-accent:hover,
+body.wpr-preset-default .woocommerce a.button:hover,
+body.wpr-preset-default .woocommerce button.button:hover,
+body.wpr-preset-default .woocommerce input.button:hover,
+body.wpr-preset-default .rc-card__cta:hover { background: #ffe552; border-color: #ffe552; color: #111113; }
+
+body.wpr-preset-default .wpr-topbar { background: #080809; border-bottom: 1px solid rgba(255,255,255,.1); }
+body.wpr-preset-default .wpr-header {
+	background: rgba(11,11,13,.92);
+	border-color: rgba(255,255,255,.1);
+	box-shadow: none;
+	backdrop-filter: blur(18px);
+}
+body.wpr-preset-default .wpr-logo__text,
+body.wpr-preset-default .wpr-nav a,
+body.wpr-preset-default .wpr-icon-btn,
+body.wpr-preset-default .wpr-account.wpr-icon-btn,
+body.wpr-preset-default .wpr-menu-toggle { color: #f5f4ef; }
+body.wpr-preset-default .wpr-logo__tagline { color: #99999f; }
+body.wpr-preset-default .wpr-icon-btn:hover { background: rgba(255,255,255,.06); color: #ffdc25; }
+body.wpr-preset-default .wpr-nav .sub-menu { background: #18181c; border-color: rgba(255,255,255,.1); }
+
+body.wpr-preset-default .wpr-hero {
+	background: #0b0b0d;
+	min-height: min(720px, 82vh);
+	display: flex;
+	align-items: center;
+}
+body.wpr-preset-default .wpr-hero::after {
+	background: radial-gradient(circle at 82% 45%, rgba(255,220,37,.14), transparent 28%), linear-gradient(90deg, rgba(11,11,13,.96), rgba(11,11,13,.58));
+}
+body.wpr-preset-default .wpr-hero__bg { opacity: .32; }
+body.wpr-preset-default .wpr-hero__inner { padding-block: clamp(6rem, 12vw, 10rem); max-width: 780px; }
+body.wpr-preset-default .wpr-hero__title { font-size: clamp(3.6rem, 7vw, 6rem); }
+body.wpr-preset-default .wpr-hero__lead { color: #b6b6bb; line-height: 1.72; max-width: 640px; }
+
+body.wpr-preset-default .wpr-card,
+body.wpr-preset-default .wpr-panel,
+body.wpr-preset-default .rc-card,
+body.wpr-preset-default .woocommerce ul.products li.product:not(.raffle-product-card),
+body.wpr-preset-default .woocommerce form.checkout,
+body.wpr-preset-default .woocommerce .cart_totals,
+body.wpr-preset-default .woocommerce-checkout-review-order {
+	border: 1px solid rgba(17,17,19,.1);
+	border-radius: 22px;
+	box-shadow: 0 8px 30px rgba(0,0,0,.07);
+	overflow: hidden;
+}
+body.wpr-preset-default .wpr-card:hover,
+body.wpr-preset-default .rc-card:hover,
+body.wpr-preset-default .woocommerce ul.products li.product:not(.raffle-product-card):hover {
+	transform: translateY(-4px);
+	box-shadow: 0 18px 45px rgba(0,0,0,.12);
+}
+body.wpr-preset-default .rc-card__title { font-weight: 800; letter-spacing: -.025em; }
+body.wpr-preset-default .rc-card__draw-bar { background: #111113; color: #f5f4ef; }
+body.wpr-preset-default .rc-card__progress-fill { background: #ffdc25; }
+body.wpr-preset-default .rc-card__status,
+body.wpr-preset-default .rc-card__iw-badge { border-radius: 999px; }
+
+body.wpr-preset-default input[type="text"],
+body.wpr-preset-default input[type="email"],
+body.wpr-preset-default input[type="tel"],
+body.wpr-preset-default input[type="number"],
+body.wpr-preset-default input[type="password"],
+body.wpr-preset-default select,
+body.wpr-preset-default textarea {
+	min-height: 50px;
+	border: 1px solid rgba(17,17,19,.14);
+	border-radius: 12px;
+	background: #fff;
+}
+body.wpr-preset-default input:focus,
+body.wpr-preset-default select:focus,
+body.wpr-preset-default textarea:focus { border-color: #ffdc25; box-shadow: 0 0 0 3px rgba(255,220,37,.22); outline: 0; }
+
+body.wpr-preset-default .wpr-footer { background: #080809; color: #99999f; border-top: 1px solid rgba(255,255,255,.1); }
+body.wpr-preset-default .wpr-footer h2,
+body.wpr-preset-default .wpr-footer h3,
+body.wpr-preset-default .wpr-footer h4,
+body.wpr-preset-default .wpr-footer a { color: #f5f4ef; }
+body.wpr-preset-default .wpr-footer a:hover { color: #ffdc25; }
+
+@media (max-width: 991.98px) {
+	body.wpr-preset-default .wpr-nav.is-open { background: #0b0b0d; }
+	body.wpr-preset-default .wpr-nav.is-open a { border-color: rgba(255,255,255,.1); }
+}
+
+@media (max-width: 767.98px) {
+	body.wpr-preset-default { --wpr-header-h: 68px; --wpr-section-gap: 5.25rem; }
+	body.wpr-preset-default .wpr-hero { min-height: auto; }
+	body.wpr-preset-default .wpr-hero__title { font-size: clamp(3rem, 15vw, 4.25rem); }
+}

@@ -60,26 +60,26 @@ final class WPRaffle_Theme_Settings {
 	 * ------------------------------------------------------------------- */
 
 	/**
-	 * Default settings (the Paragon-inspired default palette).
+	 * Default settings (the WPRaffle main-site palette).
 	 *
 	 * @return array
 	 */
 	public static function get_defaults() {
 		return array(
 			// Style.
-			'preset'      => 'diamond',
-			'accent'      => '#e4678a',
-			'accent_2'    => '#5caeed',
-			'dark'        => '#2c2c2c',
-			'light'       => '#f6f6f6',
+			'preset'      => 'default',
+			'accent'      => '#ffdc25',
+			'accent_2'    => '#f2c800',
+			'dark'        => '#111113',
+			'light'       => '#f3f1ea',
 			'success'     => '#63dd92',
 			'danger'      => '#dc3545',
 			'warning'     => '#ffc107',
-			'body'        => '#2c2c2c',
+			'body'        => '#111113',
 			// Typography.
-			'heading_font'       => 'Montserrat',
-			'body_font'          => 'Montserrat',
-			'heading_weight'     => '700',
+			'heading_font'       => 'Inter',
+			'body_font'          => 'Inter',
+			'heading_weight'     => '800',
 			'body_weight'        => '400',
 			'body_size'          => 16,
 			'h1_size'            => 40,
@@ -89,12 +89,12 @@ final class WPRaffle_Theme_Settings {
 			'h5_size'            => 16,
 			'h6_size'            => 14,
 			'letter_spacing'     => 0,
-			'line_height'        => 1.6,
+			'line_height'        => 1.55,
 			// Buttons.
 			'btn_radius'         => 50,
 			'btn_padding_x'      => 24,
 			'btn_padding_y'      => 12,
-			'btn_weight'         => '600',
+			'btn_weight'         => '800',
 			'btn_transform'      => 'none',
 			'btn_hover_lift'     => 'on',
 			// Header.
@@ -142,11 +142,11 @@ final class WPRaffle_Theme_Settings {
 			'admin_custom_css'   => '',
 			// Dark mode.
 			'dark_mode'          => 'auto', // auto | manual | off.
-			'dark_bg'            => '#1a1a1a',
-			'dark_surface'       => '#2c2c2c',
-			'dark_text'          => '#e0e0e0',
-			'dark_muted'         => '#9ca3af',
-			'dark_border'        => '#404040',
+			'dark_bg'            => '#0b0b0d',
+			'dark_surface'       => '#121215',
+			'dark_text'          => '#f5f4ef',
+			'dark_muted'         => '#99999f',
+			'dark_border'        => '#2a2a2e',
 			// Mobile CTA bar.
 			'mobile_cta'         => 'off',
 			'mobile_cta_text'    => '',
@@ -212,8 +212,8 @@ final class WPRaffle_Theme_Settings {
 			'error_show_comps'   => 'on',
 			'error_bg'           => '',
 			// Advanced.
-			'container_width'    => 1280,
-			'radius'             => 8,
+			'container_width'    => 1220,
+			'radius'             => 22,
 			'sticky_header'      => 'on',
 			'show_topbar'        => 'on',
 			'fullwidth_header'   => 'off',
@@ -264,6 +264,33 @@ final class WPRaffle_Theme_Settings {
 	}
 
 	/**
+	 * Pre-1.3.1 fallback values for explicitly selected legacy presets.
+	 *
+	 * Older installations may have saved only a preset and its colours. Using
+	 * these fallbacks prevents the new Default typography/shape defaults from
+	 * silently changing Diamond, Golf, Retro, Car or Elite after an update.
+	 *
+	 * @return array
+	 */
+	private static function get_legacy_defaults() {
+		return array_merge( self::get_defaults(), array(
+			'heading_font'   => 'Montserrat',
+			'body_font'      => 'Montserrat',
+			'heading_weight' => '700',
+			'body_weight'    => '400',
+			'line_height'    => 1.6,
+			'btn_weight'     => '600',
+			'dark_bg'        => '#1a1a1a',
+			'dark_surface'   => '#2c2c2c',
+			'dark_text'      => '#e0e0e0',
+			'dark_muted'     => '#9ca3af',
+			'dark_border'    => '#404040',
+			'container_width'=> 1280,
+			'radius'         => 8,
+		) );
+	}
+
+	/**
 	 * Colour presets. Mirrors the WPRaffles plugin's own preset names so the
 	 * switcher feels consistent. Each preset sets the 8 base colours.
 	 *
@@ -271,6 +298,19 @@ final class WPRaffle_Theme_Settings {
 	 */
 	public static function get_presets() {
 		return array(
+			'default' => array(
+				'name'    => __( 'Default', 'wpraffle-theme' ),
+				'colours' => array(
+					'accent'   => '#ffdc25',
+					'accent_2' => '#f2c800',
+					'dark'     => '#111113',
+					'light'    => '#f3f1ea',
+					'success'  => '#63dd92',
+					'danger'   => '#dc3545',
+					'warning'  => '#ffc107',
+					'body'     => '#111113',
+				),
+			),
 			'diamond' => array(
 				'name'    => __( 'Diamond', 'wpraffle-theme' ),
 				'colours' => array(
@@ -350,7 +390,11 @@ final class WPRaffle_Theme_Settings {
 		}
 		$saved   = get_option( self::OPTION, array() );
 		$saved   = is_array( $saved ) ? $saved : array();
-		$merged  = wp_parse_args( $saved, self::get_defaults() );
+		$legacy_presets = array( 'diamond', 'golf', 'retro', 'car', 'elite' );
+		$defaults = isset( $saved['preset'] ) && in_array( $saved['preset'], $legacy_presets, true )
+			? self::get_legacy_defaults()
+			: self::get_defaults();
+		$merged  = wp_parse_args( $saved, $defaults );
 		$this->settings = $merged;
 		return $merged;
 	}

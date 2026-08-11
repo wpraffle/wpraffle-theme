@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $settings = WPRaffle_Theme_Settings::instance()->get_settings();
 $presets  = WPRaffle_Theme_Settings::get_presets();
-$current_preset = isset( $settings['preset'] ) ? $settings['preset'] : 'diamond';
+$current_preset = isset( $settings['preset'] ) ? $settings['preset'] : 'default';
 
 $fields = array(
 	'accent'   => __( 'Accent (Primary)', 'wpraffle-theme' ),

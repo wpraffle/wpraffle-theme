@@ -85,7 +85,7 @@ final class WPRaffle_Theme_Elementor {
 	 * editor canvas.
 	 */
 	public function enqueue_elementor_styles() {
-		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.3.0';
+		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.3.1';
 		wp_enqueue_style(
 			'wpraffle-theme-elementor',
 			WPRAFFLE_THEME_URI . '/assets/css/elementor.css',
