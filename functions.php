@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Theme version (bumped on each release).
  */
-define( 'WPRAFFLE_THEME_VERSION', '1.3.0' );
+define( 'WPRAFFLE_THEME_VERSION', '1.3.1' );
 define( 'WPRAFFLE_THEME_DIR', get_template_directory() );
 define( 'WPRAFFLE_THEME_URI', get_template_directory_uri() );
 

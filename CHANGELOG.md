@@ -3,6 +3,22 @@
 All notable changes to WPRaffle Theme are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.1] — 2026-08-11
+
+### Added
+
+- New **Default** style matching the WPRaffle main site: Inter typography,
+  yellow/ink palette, generous spacing, pill buttons, rounded cards, dark
+  header/footer and aligned raffle/WooCommerce presentation.
+- A preset body class (`wpr-preset-{slug}`) and scoped Default stylesheet so
+  Diamond, Golf, Car, Retro and Elite retain their existing presentation.
+
+### Changed
+
+- Fresh installs and installations with no saved preset now use Default.
+  Explicitly saved legacy presets continue to resolve unchanged.
+- Theme and asset version bumped to 1.3.1.
+
 ## [1.3.0] — 2026-08-05
 
 ### Added — Elementor improvements
