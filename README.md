@@ -48,21 +48,6 @@ See [`RELEASE.md`](./RELEASE.md) for the full release notes and
 
 ## Installation
 
-### Option A — Sync from the workspace (local dev)
-
-The theme lives at `wpraffle-themes/wpraffle-theme/`. To deploy to the local
-**raffles** test site:
-
-```bash
-rsync -av --delete --exclude '.DS_Store' \
-  "/Users/liamkenyon/Documents/WPRAFFLES MAIN/wpraffle-themes/wpraffle-theme/" \
-  "/Users/liamkenyon/Local Sites/raffles/app/public/wp-content/themes/wpraffle-theme/"
-```
-
-Then activate under **Appearance → Themes**.
-
-### Option B — Zip upload
-
 1. Zip the `wpraffle-theme/` folder.
 2. **Appearance → Themes → Add New → Upload Theme** → choose the zip.
 3. Activate.
