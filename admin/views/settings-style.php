@@ -30,7 +30,7 @@ $fields = array(
 	<h3><?php esc_html_e( 'Presets', 'wpraffle-theme' ); ?></h3>
 	<div class="wpr-presets">
 		<?php foreach ( $presets as $slug => $preset ) : ?>
-			<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=style&preset=' . $slug ), 'diamond_preset', 'diamond_preset_nonce' ) ); ?>"
+			<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=style&preset=' . $slug ), 'wprt_apply_preset', 'wprt_preset_nonce' ) ); ?>"
 				class="wpr-preset <?php echo $current_preset === $slug ? 'is-active' : ''; ?>"
 				data-preset="<?php echo esc_attr( $slug ); ?>">
 				<span class="wpr-preset-swatches">

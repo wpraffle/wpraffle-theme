@@ -76,7 +76,7 @@ final class WPRaffle_Theme_TGM {
 				'slug'         => 'wpraffle',
 				'source'       => 'bundled', // Shipped with the site or installed manually.
 				'required'     => false,
-				'external_url' => 'https://wpraffles.dev/',
+				'external_url' => 'https://wpraffle.dev/',
 			),
 			array(
 				'name'         => 'Elementor',

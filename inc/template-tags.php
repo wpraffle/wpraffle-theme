@@ -149,10 +149,18 @@ function wpraffle_theme_section_should_show( $section ) {
 			}
 			return true;
 		case 'testimonials':
-			// Show only if at least one testimonial entry exists in Theme Options.
+			// Manual testimonials or a fully configured Trustpilot carousel.
 			$s = WPRaffle_Theme_Settings::instance()->get_settings();
 			$items = isset( $s['testimonial_items'] ) && is_array( $s['testimonial_items'] ) ? $s['testimonial_items'] : array();
-			return ! empty( $items );
+			$trustpilot = ! empty( $s['trustpilot_business_id'] ) && ! empty( $s['testimonials_trustpilot'] ) && 'on' === $s['testimonials_trustpilot'];
+			return ! empty( $items ) || $trustpilot;
+		case 'winners':
+			// Never publish fictional placeholder winners. The section becomes
+			// visible automatically when at least one winner is featured.
+			if ( ! wpraffle_theme_has_plugin() ) {
+				return false;
+			}
+			return ! empty( WPRaffle_Theme_Integration::get_featured_winners( 1 ) );
 		case 'faq':
 			// Show only if at least one FAQ entry exists in Theme Options.
 			$s = WPRaffle_Theme_Settings::instance()->get_settings();
@@ -293,9 +301,8 @@ if ( ! function_exists( 'wpraffle_theme_account_link' ) ) {
 		$url   = is_user_logged_in() ? wc_get_page_permalink( 'myaccount' ) : wc_get_page_permalink( 'myaccount' );
 		$label = is_user_logged_in() ? __( 'My Account', 'wpraffle-theme' ) : __( 'Login', 'wpraffle-theme' );
 		?>
-		<a class="wpr-icon-btn wpr-account" href="<?php echo esc_url( $url ); ?>">
-			<i class="fa-regular fa-user"></i>
-			<span class="d-none d-lg-inline"><?php echo esc_html( $label ); ?></span>
+		<a class="wpr-icon-btn wpr-account" href="<?php echo esc_url( $url ); ?>" aria-label="<?php echo esc_attr( $label ); ?>" title="<?php echo esc_attr( $label ); ?>">
+			<i class="fa-solid fa-user"></i>
 		</a>
 		<?php
 	}

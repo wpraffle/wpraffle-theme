@@ -1,0 +1,923 @@
+/**
+ * WPRaffle Theme v1.3.4 — Retro preset refresh
+ *
+ * Modern gaming + retro-arcade competition styling inspired by the structure,
+ * density and energy of gaming raffle websites. Original WPRaffle treatment:
+ * no third-party artwork, logos or copied layouts.
+ *
+ * Fully scoped to .wpr-preset-retro.
+ */
+
+.wpr-preset-retro {
+	--wpr-retro-black: #0b0812;
+	--wpr-retro-ink: #12101a;
+	--wpr-retro-panel: #191525;
+	--wpr-retro-panel-2: #211a31;
+	--wpr-retro-purple: #7c3cff;
+	--wpr-retro-violet: #9b5cff;
+	--wpr-retro-pink: #ff3ea5;
+	--wpr-retro-cyan: #20d9ff;
+	--wpr-retro-green: #68ff9b;
+	--wpr-retro-yellow: #ffd84a;
+	--wpr-retro-white: #f8f7fb;
+	--wpr-retro-muted: #aaa5b7;
+	--wpr-retro-line: #342b48;
+	--wpr-retro-glow: 0 0 26px rgba(124,60,255,.28);
+	--wpr-retro-card-shadow: 0 16px 42px rgba(5,3,10,.32);
+
+	/* Presentation-level palette remap for theme + plugin UI. */
+	--wpr-accent: var(--wpr-retro-purple);
+	--wpr-accent-2: var(--wpr-retro-pink);
+	--wpr-dark: var(--wpr-retro-black);
+	--wpr-light: #f3f0f8;
+	--wpr-body: #15111d;
+	--wpr-text-primary: #15111d;
+
+	background: #f4f1f8;
+	color: #15111d;
+}
+
+.wpr-preset-retro h1,
+.wpr-preset-retro h2,
+.wpr-preset-retro h3,
+.wpr-preset-retro h4,
+.wpr-preset-retro h5,
+.wpr-preset-retro h6 {
+	font-weight: 850;
+	letter-spacing: -.03em;
+}
+
+/* ================================================================
+ * HEADER — GAMING NAV / RGB EDGE
+ * ================================================================ */
+.wpr-preset-retro .wpr-header {
+	position: relative;
+	background: rgba(11,8,18,.985);
+	border-bottom: 1px solid #2b223c;
+	box-shadow: 0 12px 36px rgba(6,3,12,.32);
+	color: #fff;
+	backdrop-filter: blur(16px);
+}
+
+.wpr-preset-retro .wpr-header::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -1px;
+	height: 2px;
+	background: linear-gradient(
+		90deg,
+		var(--wpr-retro-purple),
+		var(--wpr-retro-pink),
+		var(--wpr-retro-cyan),
+		var(--wpr-retro-purple)
+	);
+	background-size: 240% 100%;
+	animation: wpr-retro-rgb 8s linear infinite;
+}
+
+@keyframes wpr-retro-rgb {
+	to { background-position: 240% 0; }
+}
+
+.wpr-preset-retro .wpr-header__inner { min-height: 76px; }
+
+.wpr-preset-retro .wpr-header .site-title,
+.wpr-preset-retro .wpr-header .site-title a,
+.wpr-preset-retro .wpr-nav a,
+.wpr-preset-retro .wpr-header__actions a,
+.wpr-preset-retro .wpr-header__actions button,
+.wpr-preset-retro .wpr-menu-toggle {
+	color: #fff;
+}
+
+.wpr-preset-retro .wpr-primary-menu > li > a {
+	position: relative;
+	font-size: .78rem;
+	font-weight: 850;
+	letter-spacing: .075em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .wpr-primary-menu > li > a::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -9px;
+	width: 5px;
+	height: 5px;
+	border-radius: 1px;
+	background: var(--wpr-retro-cyan);
+	opacity: 0;
+	transform: translateX(-50%) rotate(45deg);
+	box-shadow: 0 0 12px var(--wpr-retro-cyan);
+	transition: opacity .18s ease;
+}
+
+.wpr-preset-retro .wpr-primary-menu > li:hover > a,
+.wpr-preset-retro .wpr-primary-menu > .current-menu-item > a,
+.wpr-preset-retro .wpr-primary-menu > .current-menu-ancestor > a {
+	color: #fff;
+	text-shadow: 0 0 18px rgba(32,217,255,.32);
+}
+
+.wpr-preset-retro .wpr-primary-menu > li:hover > a::before,
+.wpr-preset-retro .wpr-primary-menu > .current-menu-item > a::before,
+.wpr-preset-retro .wpr-primary-menu > .current-menu-ancestor > a::before {
+	opacity: 1;
+}
+
+.wpr-preset-retro .wpr-primary-menu .sub-menu {
+	background: #171220;
+	border: 1px solid #3a2b51;
+	border-radius: 8px;
+	box-shadow: 0 20px 50px rgba(5,3,10,.5), 0 0 24px rgba(124,60,255,.12);
+	overflow: hidden;
+}
+
+.wpr-preset-retro .wpr-primary-menu .sub-menu a { color: #f8f7fb; }
+
+.wpr-preset-retro .wpr-primary-menu .sub-menu a:hover {
+	background: linear-gradient(90deg, rgba(124,60,255,.34), rgba(255,62,165,.18));
+	color: #fff;
+}
+
+/* ================================================================
+ * BUTTONS / CONTROLS — ARCADE PANEL
+ * ================================================================ */
+.wpr-preset-retro .button,
+.wpr-preset-retro button:not(.wpr-menu-toggle),
+.wpr-preset-retro input[type="submit"],
+.wpr-preset-retro .wp-element-button,
+.wpr-preset-retro .wpr-btn,
+.wpr-preset-retro .rc-card__cta,
+.wpr-preset-retro .woocommerce a.button,
+.wpr-preset-retro .woocommerce button.button,
+.wpr-preset-retro .woocommerce input.button {
+	border-radius: 7px;
+	font-weight: 900;
+	letter-spacing: .055em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .wpr-btn-primary,
+.wpr-preset-retro .rc-card__cta,
+.wpr-preset-retro .woocommerce a.button.alt,
+.wpr-preset-retro .woocommerce button.button.alt,
+.wpr-preset-retro .woocommerce #respond input#submit.alt {
+	background: linear-gradient(135deg, var(--wpr-retro-purple), #6530d8) !important;
+	border: 1px solid #9b72ff !important;
+	color: #fff !important;
+	box-shadow:
+		inset 0 -3px 0 rgba(0,0,0,.22),
+		0 7px 20px rgba(124,60,255,.22);
+}
+
+.wpr-preset-retro .wpr-btn-primary:hover,
+.wpr-preset-retro .rc-card__cta:hover,
+.wpr-preset-retro .rc-card__cta:focus,
+.wpr-preset-retro .woocommerce a.button.alt:hover,
+.wpr-preset-retro .woocommerce button.button.alt:hover {
+	background: linear-gradient(135deg, #8c52ff, var(--wpr-retro-pink)) !important;
+	border-color: #c29cff !important;
+	color: #fff !important;
+	transform: translateY(-2px);
+	box-shadow:
+		inset 0 -2px 0 rgba(0,0,0,.18),
+		0 10px 28px rgba(255,62,165,.22);
+}
+
+.wpr-preset-retro input:not([type="checkbox"]):not([type="radio"]),
+.wpr-preset-retro select,
+.wpr-preset-retro textarea,
+.wpr-preset-retro .select2-container--default .select2-selection--single {
+	border: 1px solid #d8d2df;
+	border-radius: 7px;
+	background: #fff;
+}
+
+.wpr-preset-retro input:focus,
+.wpr-preset-retro select:focus,
+.wpr-preset-retro textarea:focus {
+	border-color: var(--wpr-retro-purple);
+	box-shadow: 0 0 0 3px rgba(124,60,255,.12);
+}
+
+/* ================================================================
+ * HERO — RGB GAMING STAGE
+ * ================================================================ */
+.wpr-preset-retro .wpr-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	background:
+		radial-gradient(circle at 82% 12%, rgba(255,62,165,.20), transparent 30%),
+		radial-gradient(circle at 68% 75%, rgba(32,217,255,.15), transparent 34%),
+		linear-gradient(118deg, #0b0812 0%, #17101f 48%, #100a19 100%);
+	color: #fff;
+}
+
+.wpr-preset-retro .wpr-hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	opacity: .34;
+	background:
+		linear-gradient(rgba(124,60,255,.10) 1px, transparent 1px) 0 0/38px 38px,
+		linear-gradient(90deg, rgba(124,60,255,.10) 1px, transparent 1px) 0 0/38px 38px;
+	-webkit-mask-image: linear-gradient(to bottom, #000, transparent 92%);
+	mask-image: linear-gradient(to bottom, #000, transparent 92%);
+}
+
+.wpr-preset-retro .wpr-hero::after {
+	content: "";
+	position: absolute;
+	left: -10%;
+	right: -10%;
+	bottom: -115px;
+	height: 190px;
+	z-index: -1;
+	background:
+		repeating-linear-gradient(90deg, rgba(32,217,255,.13) 0 1px, transparent 1px 60px),
+		repeating-linear-gradient(0deg, rgba(255,62,165,.12) 0 1px, transparent 1px 34px);
+	transform: perspective(280px) rotateX(63deg);
+	transform-origin: bottom;
+}
+
+.wpr-preset-retro .wpr-hero h1,
+.wpr-preset-retro .wpr-hero h2,
+.wpr-preset-retro .wpr-hero h3 {
+	color: #fff;
+}
+
+.wpr-preset-retro .wpr-hero h1 {
+	font-weight: 950;
+	text-transform: uppercase;
+	text-shadow:
+		3px 3px 0 rgba(124,60,255,.28),
+		-2px -2px 0 rgba(32,217,255,.12);
+}
+
+.wpr-preset-retro .wpr-section-title,
+.wpr-preset-retro .section-title {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .wpr-section-title::before,
+.wpr-preset-retro .section-title::before {
+	content: "";
+	width: 9px;
+	height: 9px;
+	border-radius: 2px;
+	background: var(--wpr-retro-purple);
+	box-shadow:
+		12px 0 0 var(--wpr-retro-pink),
+		24px 0 0 var(--wpr-retro-cyan);
+	margin-right: 22px;
+}
+
+/* ================================================================
+ * LIVE / TRUST / STATS — STREAM STATUS
+ * ================================================================ */
+.wpr-preset-retro .wpr-stat-card,
+.wpr-preset-retro .wpr-trust-item {
+	border-top: 3px solid transparent;
+	border-image: linear-gradient(90deg, var(--wpr-retro-purple), var(--wpr-retro-cyan)) 1;
+}
+
+.wpr-preset-retro .wpr-stat-card strong,
+.wpr-preset-retro .wpr-stat-card .wpr-stat-number {
+	color: var(--wpr-retro-purple);
+	font-variant-numeric: tabular-nums;
+}
+
+.wpr-preset-retro .wpr-live-draw,
+.wpr-preset-retro .wpr-countdown-section {
+	background:
+		linear-gradient(135deg, rgba(124,60,255,.10), rgba(32,217,255,.05)),
+		#100d17;
+	color: #fff;
+}
+
+.wpr-preset-retro .wpr-live-draw h2,
+.wpr-preset-retro .wpr-countdown-section h2 {
+	color: #fff;
+}
+
+/* ================================================================
+ * COMPETITION GRID
+ * ================================================================ */
+@media (min-width: 1280px) {
+	.wpr-preset-retro .raffle-list-grid,
+	.wpr-preset-retro .woocommerce ul.products {
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+	}
+}
+
+.wpr-preset-retro .raffle-list-grid { gap: 18px !important; }
+
+.wpr-preset-retro .rc-card {
+	position: relative;
+	background: #fff;
+	border: 1px solid #dcd7e4;
+	border-radius: 11px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(30,18,48,.09);
+}
+
+.wpr-preset-retro .rc-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1px;
+	background: linear-gradient(
+		145deg,
+		transparent 0 62%,
+		rgba(124,60,255,.34),
+		rgba(255,62,165,.28)
+	);
+	-webkit-mask:
+		linear-gradient(#fff 0 0) content-box,
+		linear-gradient(#fff 0 0);
+	-webkit-mask-composite: xor;
+	mask-composite: exclude;
+	pointer-events: none;
+	z-index: 6;
+}
+
+.wpr-preset-retro .rc-card:hover,
+.wpr-preset-retro .rc-card:focus-within {
+	transform: translateY(-6px);
+	border-color: #b7a6ce;
+	box-shadow:
+		0 20px 45px rgba(31,18,52,.18),
+		0 0 0 1px rgba(124,60,255,.16);
+}
+
+.wpr-preset-retro .rc-card__image {
+	padding-top: 70%;
+	background:
+		linear-gradient(135deg, #17121f, #241b31);
+	overflow: hidden;
+}
+
+.wpr-preset-retro .rc-card__image::after {
+	content: "";
+	position: absolute;
+	inset: auto 0 0 0;
+	height: 38%;
+	background:
+		linear-gradient(transparent, rgba(11,8,18,.72));
+	pointer-events: none;
+	z-index: 1;
+}
+
+.wpr-preset-retro .rc-card__image img {
+	transition: transform .35s ease, filter .35s ease;
+}
+
+.wpr-preset-retro .rc-card:hover .rc-card__image img {
+	transform: scale(1.045);
+	filter: saturate(1.08);
+}
+
+.wpr-preset-retro .rc-card__status {
+	border-radius: 5px;
+	font-size: .61rem;
+	font-weight: 950;
+	letter-spacing: .075em;
+	border: 1px solid rgba(255,255,255,.28);
+	box-shadow: 0 5px 18px rgba(0,0,0,.26);
+}
+
+.wpr-preset-retro .rc-card__status--soon {
+	background: var(--wpr-retro-pink);
+	color: #fff;
+}
+
+.wpr-preset-retro .rc-card__status--soldout {
+	background: #392b46;
+	color: #eee8f5;
+}
+
+.wpr-preset-retro .rc-card__iw-badge {
+	border-radius: 5px !important;
+	background: #0d0a13 !important;
+	color: var(--wpr-retro-green) !important;
+	border: 1px solid rgba(104,255,155,.38);
+	box-shadow: 0 0 18px rgba(104,255,155,.14);
+	font-weight: 950;
+	letter-spacing: .075em;
+}
+
+.wpr-preset-retro .rc-card__title {
+	min-height: 3.45rem;
+	padding: .95rem 1rem .38rem;
+	font-size: .98rem;
+	font-weight: 900;
+	line-height: 1.18;
+	letter-spacing: -.017em;
+	text-transform: uppercase;
+	color: #15111d;
+}
+
+.wpr-preset-retro .rc-card__title-alt {
+	color: var(--wpr-retro-purple);
+	font-weight: 850;
+	font-size: .72rem;
+}
+
+.wpr-preset-retro .rc-card__title-iw {
+	color: var(--wpr-retro-pink);
+	font-weight: 900;
+}
+
+/* Game-status draw strip */
+.wpr-preset-retro .rc-card__draw-bar {
+	position: relative;
+	background: #121019;
+	color: #fff;
+	padding: .54rem .9rem .54rem 1.55rem;
+	font-size: .66rem;
+	font-weight: 850;
+	letter-spacing: .065em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .rc-card__draw-bar::before {
+	content: "";
+	position: absolute;
+	left: .75rem;
+	top: 50%;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--wpr-retro-green);
+	transform: translateY(-50%);
+	box-shadow: 0 0 10px var(--wpr-retro-green);
+}
+
+.wpr-preset-retro .rc-card__countdown {
+	background: #f4f1f7;
+	border-bottom: 1px solid #e2dce9;
+	padding: .65rem .85rem;
+}
+
+.wpr-preset-retro .rc-card__cd-unit {
+	position: relative;
+}
+
+.wpr-preset-retro .rc-card__cd-unit:not(:last-child)::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 18%;
+	bottom: 18%;
+	width: 1px;
+	background: #ddd5e7;
+}
+
+.wpr-preset-retro .rc-card__cd-num {
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	color: #171220;
+	font-size: 1rem;
+	font-weight: 900;
+}
+
+.wpr-preset-retro .rc-card__cd-label {
+	color: #777080;
+	font-size: .56rem;
+	font-weight: 850;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .rc-card__cash-bar {
+	background: linear-gradient(90deg, #f7efff, #eefaff);
+	border-bottom: 1px solid #ded4ec;
+	color: #292031;
+	font-weight: 800;
+}
+
+.wpr-preset-retro .rc-card__price {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	padding: .8rem 1rem .35rem;
+}
+
+.wpr-preset-retro .rc-card__price-amount {
+	color: var(--wpr-retro-purple);
+	font-size: 1.55rem;
+	font-weight: 950;
+	letter-spacing: -.04em;
+	text-shadow: 0 0 16px rgba(124,60,255,.10);
+}
+
+.wpr-preset-retro .rc-card__price-label {
+	color: #777080;
+	font-size: .61rem;
+	font-weight: 850;
+	text-transform: uppercase;
+}
+
+/* HUD / segmented ticket progress */
+.wpr-preset-retro .rc-card__progress {
+	margin: .25rem 1rem .8rem;
+	padding: .65rem .72rem .75rem;
+	background: #f4f1f7;
+	border: 1px solid #e0dae8;
+	border-radius: 7px;
+}
+
+.wpr-preset-retro .rc-card__progress-stats {
+	color: #30283a;
+	font-size: .68rem;
+	font-weight: 850;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .rc-card__progress-bar,
+.wpr-preset-retro .raffle-progress-bar-wrap {
+	position: relative;
+	height: 10px;
+	border-radius: 3px;
+	background:
+		repeating-linear-gradient(
+			90deg,
+			#ded8e6 0 9%,
+			#f4f1f7 9% 11%
+		);
+	overflow: hidden;
+}
+
+.wpr-preset-retro .rc-card__progress-fill,
+.wpr-preset-retro .raffle-progress-bar-inner {
+	border-radius: 3px;
+	background:
+		linear-gradient(
+			90deg,
+			var(--wpr-retro-purple),
+			var(--wpr-retro-pink),
+			var(--wpr-retro-cyan)
+		) !important;
+	box-shadow: 0 0 12px rgba(124,60,255,.2);
+}
+
+.wpr-preset-retro .rc-card__charity {
+	color: #777080;
+	font-weight: 700;
+}
+
+.wpr-preset-retro .rc-card__cta {
+	position: relative;
+	margin: 0 1rem 1rem;
+	padding: .78rem 1rem;
+	overflow: hidden;
+}
+
+.wpr-preset-retro .rc-card__cta::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -45%;
+	width: 30%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+	transform: skewX(-24deg);
+	transition: left .38s ease;
+}
+
+.wpr-preset-retro .rc-card__cta:hover::before { left: 120%; }
+
+/* ================================================================
+ * WOO LOOP
+ * ================================================================ */
+.wpr-preset-retro .woocommerce ul.products li.product {
+	background: #fff;
+	border: 1px solid #dcd7e4;
+	border-radius: 11px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(30,18,48,.09);
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.wpr-preset-retro .woocommerce ul.products li.product:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 20px 45px rgba(31,18,52,.17);
+}
+
+.wpr-preset-retro .woocommerce ul.products li.product .woocommerce-loop-product__title {
+	color: #171220;
+	font-weight: 900;
+	text-transform: uppercase;
+	line-height: 1.18;
+}
+
+.wpr-preset-retro .woocommerce ul.products li.product .price {
+	color: var(--wpr-retro-purple);
+	font-weight: 950;
+}
+
+/* ================================================================
+ * SINGLE COMPETITION — GAMING HUD
+ * ================================================================ */
+.wpr-preset-retro .raffle-single-page-wrapper {
+	padding: 3rem 0 !important;
+	background:
+		linear-gradient(rgba(124,60,255,.025) 1px, transparent 1px) 0 0/32px 32px,
+		linear-gradient(90deg, rgba(124,60,255,.025) 1px, transparent 1px) 0 0/32px 32px,
+		#f3f0f7 !important;
+}
+
+.wpr-preset-retro .raffle-main-grid { gap: 2.5rem !important; }
+
+.wpr-preset-retro .raffle-image-card {
+	position: relative;
+	background: #0f0c15;
+	border: 1px solid #312640;
+	border-radius: 11px;
+	box-shadow:
+		0 18px 44px rgba(18,10,30,.2),
+		0 0 0 1px rgba(124,60,255,.08);
+	overflow: hidden;
+}
+
+.wpr-preset-retro .raffle-image-card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 4px;
+	background: linear-gradient(
+		90deg,
+		var(--wpr-retro-purple),
+		var(--wpr-retro-pink),
+		var(--wpr-retro-cyan)
+	);
+}
+
+.wpr-preset-retro .raffle-title-main {
+	color: #171220;
+	font-size: clamp(1.8rem, 3vw, 3.05rem);
+	font-weight: 950;
+	line-height: 1.03;
+	letter-spacing: -.047em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .raffle-price-value {
+	color: var(--wpr-retro-purple);
+	font-weight: 950;
+	letter-spacing: -.04em;
+}
+
+.wpr-preset-retro .raffle-stats-header {
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0,1fr));
+	gap: 9px !important;
+}
+
+/* HUD info tiles */
+.wpr-preset-retro .raffle-stat-box {
+	position: relative;
+	background: #fff;
+	border: 1px solid #dad4e3;
+	border-radius: 7px;
+	padding: .8rem .9rem;
+	overflow: hidden;
+	box-shadow: inset 0 -2px 0 #f0ecf4;
+}
+
+.wpr-preset-retro .raffle-stat-box::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 4px;
+	height: 100%;
+	background: linear-gradient(
+		to bottom,
+		var(--wpr-retro-purple),
+		var(--wpr-retro-pink)
+	);
+}
+
+.wpr-preset-retro .raffle-entry-tabs {
+	gap: 5px;
+	padding: 5px;
+	background: #15101e;
+	border: 1px solid #30223f;
+	border-radius: 8px;
+}
+
+.wpr-preset-retro .raffle-tab-btn {
+	border: 0 !important;
+	border-radius: 5px !important;
+	background: transparent;
+	color: #c5bdcd !important;
+	font-weight: 850;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-retro .raffle-tab-btn:hover {
+	background: rgba(124,60,255,.14);
+	color: #fff !important;
+}
+
+.wpr-preset-retro .raffle-tab-btn.active {
+	background: linear-gradient(135deg, var(--wpr-retro-purple), #6530d8) !important;
+	border-color: transparent !important;
+	color: #fff !important;
+	box-shadow: 0 0 18px rgba(124,60,255,.2);
+}
+
+.wpr-preset-retro .raffle-entry-section,
+.wpr-preset-retro .raffle-entry-panel,
+.wpr-preset-retro .raffle-purchase-box,
+.wpr-preset-retro .raffle-ticket-selector,
+.wpr-preset-retro .raffle-instant-wins,
+.wpr-preset-retro .raffle-prize-description,
+.wpr-preset-retro .raffle-rules,
+.wpr-preset-retro .raffle-faq {
+	background: #fff;
+	border: 1px solid #d9d3e1;
+	border-radius: 9px;
+}
+
+.wpr-preset-retro .raffle-ticket-selector button,
+.wpr-preset-retro .raffle-quantity button,
+.wpr-preset-retro .quantity .plus,
+.wpr-preset-retro .quantity .minus {
+	background: #171220;
+	color: #fff;
+	border: 1px solid #342640;
+	border-radius: 5px;
+}
+
+.wpr-preset-retro .raffle-ticket-selector button:hover,
+.wpr-preset-retro .raffle-quantity button:hover,
+.wpr-preset-retro .quantity .plus:hover,
+.wpr-preset-retro .quantity .minus:hover {
+	background: var(--wpr-retro-purple);
+	border-color: var(--wpr-retro-violet);
+}
+
+/* Instant wins table/panel where plugin markup allows it. */
+.wpr-preset-retro .raffle-instant-wins {
+	position: relative;
+	overflow: hidden;
+}
+
+.wpr-preset-retro .raffle-instant-wins::before {
+	content: "INSTANT WIN // ACTIVE";
+	display: block;
+	background: #15101e;
+	color: var(--wpr-retro-green);
+	padding: .6rem .85rem;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+	font-size: .68rem;
+	font-weight: 800;
+	letter-spacing: .07em;
+	border-bottom: 1px solid #30223f;
+}
+
+/* ================================================================
+ * FEATURED / WINNERS / HOW IT WORKS
+ * ================================================================ */
+.wpr-preset-retro .wpr-winner-card,
+.wpr-preset-retro .wpr-testimonial,
+.wpr-preset-retro .wpr-hiw-step,
+.wpr-preset-retro .wpr-stat-card,
+.wpr-preset-retro .wpr-featured-card,
+.wpr-preset-retro .wpr-trust-item {
+	position: relative;
+	background: #fff;
+	border: 1px solid #ddd7e5;
+	border-radius: 10px;
+	box-shadow: 0 8px 24px rgba(30,18,48,.07);
+	overflow: hidden;
+}
+
+.wpr-preset-retro .wpr-featured-card {
+	border-color: #c8b6e3;
+	box-shadow:
+		0 14px 34px rgba(58,32,96,.13),
+		0 0 0 1px rgba(124,60,255,.07);
+}
+
+.wpr-preset-retro .wpr-featured-card::after,
+.wpr-preset-retro .wpr-winner-card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 3px;
+	background: linear-gradient(
+		90deg,
+		var(--wpr-retro-purple),
+		var(--wpr-retro-pink),
+		var(--wpr-retro-cyan)
+	);
+}
+
+.wpr-preset-retro .wpr-hiw-step::before {
+	content: "";
+	position: absolute;
+	right: 12px;
+	top: 12px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--wpr-retro-green);
+	box-shadow:
+		0 0 9px rgba(104,255,155,.8),
+		-15px 0 0 var(--wpr-retro-yellow),
+		-30px 0 0 var(--wpr-retro-pink);
+}
+
+/* ================================================================
+ * CART / CHECKOUT / ACCOUNT
+ * ================================================================ */
+.wpr-preset-retro.woocommerce-cart,
+.wpr-preset-retro.woocommerce-checkout,
+.wpr-preset-retro.woocommerce-account {
+	background: #f3f0f7;
+}
+
+.wpr-preset-retro .woocommerce-cart-form,
+.wpr-preset-retro .cart_totals,
+.wpr-preset-retro .woocommerce-checkout-review-order,
+.wpr-preset-retro .woocommerce-billing-fields,
+.wpr-preset-retro .woocommerce-shipping-fields,
+.wpr-preset-retro .woocommerce-MyAccount-navigation,
+.wpr-preset-retro .woocommerce-MyAccount-content {
+	background: #fff;
+	border: 1px solid #dad4e2;
+	border-radius: 9px;
+}
+
+.wpr-preset-retro .woocommerce-info,
+.wpr-preset-retro .woocommerce-message {
+	border-top-color: var(--wpr-retro-purple);
+	background: #f5efff;
+	color: #21182b;
+}
+
+/* ================================================================
+ * MOBILE
+ * ================================================================ */
+@media (max-width: 767.98px) {
+	.wpr-preset-retro .wpr-header__inner { min-height: 64px; }
+	.wpr-preset-retro .raffle-list-grid { gap: 13px !important; }
+	.wpr-preset-retro .rc-card { border-radius: 9px; }
+	.wpr-preset-retro .rc-card__title {
+		min-height: 0;
+		font-size: .92rem;
+	}
+	.wpr-preset-retro .raffle-main-grid { gap: 1.4rem !important; }
+	.wpr-preset-retro .raffle-stats-header {
+		grid-template-columns: 1fr 1fr;
+	}
+	.wpr-preset-retro .wpr-hero::after { opacity: .45; }
+}
+
+@media (max-width: 420px) {
+	.wpr-preset-retro .raffle-stats-header { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
+ * ACCESSIBILITY / REDUCED MOTION
+ * ================================================================ */
+.wpr-preset-retro a:focus-visible,
+.wpr-preset-retro button:focus-visible,
+.wpr-preset-retro input:focus-visible,
+.wpr-preset-retro select:focus-visible,
+.wpr-preset-retro textarea:focus-visible {
+	outline: 3px solid var(--wpr-retro-cyan);
+	outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wpr-preset-retro .wpr-header::after {
+		animation: none !important;
+	}
+	.wpr-preset-retro .rc-card,
+	.wpr-preset-retro .rc-card__image img,
+	.wpr-preset-retro .wpr-btn,
+	.wpr-preset-retro .button,
+	.wpr-preset-retro .rc-card__cta::before {
+		transition: none !important;
+		transform: none !important;
+	}
+}

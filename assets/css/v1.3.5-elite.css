@@ -1,0 +1,730 @@
+/**
+ * WPRaffle Theme v1.3.5 — Elite preset refresh
+ *
+ * High-end luxury competition styling inspired by modern premium prize
+ * platforms: dream homes, supercars, watches and life-changing cash.
+ * Original WPRaffle implementation, fully scoped to .wpr-preset-elite.
+ */
+
+.wpr-preset-elite {
+	--wpr-elite-black: #090a0b;
+	--wpr-elite-obsidian: #121416;
+	--wpr-elite-panel: #1b1e21;
+	--wpr-elite-platinum: #c7c9c8;
+	--wpr-elite-silver: #e6e7e5;
+	--wpr-elite-champagne: #cbb878;
+	--wpr-elite-champagne-hot: #dec98b;
+	--wpr-elite-ivory: #f7f6f2;
+	--wpr-elite-white: #ffffff;
+	--wpr-elite-line: #d9dad7;
+	--wpr-elite-muted: #73777a;
+	--wpr-elite-success: #49a878;
+	--wpr-elite-shadow: 0 18px 50px rgba(8,10,11,.14);
+	--wpr-elite-shadow-hover: 0 30px 70px rgba(8,10,11,.22);
+
+	--wpr-accent: var(--wpr-elite-champagne);
+	--wpr-accent-2: var(--wpr-elite-champagne-hot);
+	--wpr-dark: var(--wpr-elite-black);
+	--wpr-light: var(--wpr-elite-ivory);
+	--wpr-body: #141617;
+	--wpr-text-primary: #141617;
+
+	background: var(--wpr-elite-ivory);
+	color: #141617;
+}
+
+.wpr-preset-elite h1,
+.wpr-preset-elite h2,
+.wpr-preset-elite h3,
+.wpr-preset-elite h4,
+.wpr-preset-elite h5,
+.wpr-preset-elite h6 {
+	color: #111314;
+	font-weight: 800;
+	letter-spacing: -.045em;
+}
+
+/* ================================================================
+ * HEADER — OBSIDIAN / PLATINUM
+ * ================================================================ */
+.wpr-preset-elite .wpr-header {
+	position: relative;
+	background: rgba(9,10,11,.975);
+	border-bottom: 1px solid rgba(203,184,120,.20);
+	box-shadow: 0 12px 38px rgba(0,0,0,.24);
+	color: #fff;
+	backdrop-filter: blur(18px);
+}
+
+.wpr-preset-elite .wpr-header__inner { min-height: 80px; }
+
+.wpr-preset-elite .wpr-header .site-title,
+.wpr-preset-elite .wpr-header .site-title a,
+.wpr-preset-elite .wpr-nav a,
+.wpr-preset-elite .wpr-header__actions a,
+.wpr-preset-elite .wpr-header__actions button,
+.wpr-preset-elite .wpr-menu-toggle { color: #f5f5f3; }
+
+.wpr-preset-elite .wpr-primary-menu > li > a {
+	position: relative;
+	font-size: .78rem;
+	font-weight: 750;
+	letter-spacing: .105em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .wpr-primary-menu > li > a::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 100%;
+	bottom: -10px;
+	height: 1px;
+	background: var(--wpr-elite-champagne);
+	transition: right .22s ease;
+}
+
+.wpr-preset-elite .wpr-primary-menu > li:hover > a::after,
+.wpr-preset-elite .wpr-primary-menu > .current-menu-item > a::after,
+.wpr-preset-elite .wpr-primary-menu > .current-menu-ancestor > a::after {
+	right: 0;
+}
+
+.wpr-preset-elite .wpr-primary-menu .sub-menu {
+	background: #101214;
+	border: 1px solid rgba(255,255,255,.10);
+	border-radius: 6px;
+	box-shadow: 0 24px 60px rgba(0,0,0,.42);
+	overflow: hidden;
+}
+
+.wpr-preset-elite .wpr-primary-menu .sub-menu a { color: #ececea; }
+
+.wpr-preset-elite .wpr-primary-menu .sub-menu a:hover {
+	background: rgba(203,184,120,.10);
+	color: var(--wpr-elite-champagne-hot);
+}
+
+/* ================================================================
+ * BUTTONS / FORM CONTROLS
+ * ================================================================ */
+.wpr-preset-elite .button,
+.wpr-preset-elite button:not(.wpr-menu-toggle):not(.wpr-icon-btn),
+.wpr-preset-elite input[type="submit"],
+.wpr-preset-elite .wp-element-button,
+.wpr-preset-elite .wpr-btn,
+.wpr-preset-elite .rc-card__cta,
+.wpr-preset-elite .woocommerce a.button,
+.wpr-preset-elite .woocommerce button.button,
+.wpr-preset-elite .woocommerce input.button {
+	border-radius: 4px;
+	font-weight: 800;
+	letter-spacing: .075em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .wpr-btn-primary,
+.wpr-preset-elite .rc-card__cta,
+.wpr-preset-elite .woocommerce a.button.alt,
+.wpr-preset-elite .woocommerce button.button.alt,
+.wpr-preset-elite .woocommerce #respond input#submit.alt {
+	background: var(--wpr-elite-champagne) !important;
+	border: 1px solid var(--wpr-elite-champagne) !important;
+	color: #0e0f10 !important;
+	box-shadow: none;
+}
+
+.wpr-preset-elite .wpr-btn-primary:hover,
+.wpr-preset-elite .rc-card__cta:hover,
+.wpr-preset-elite .rc-card__cta:focus,
+.wpr-preset-elite .woocommerce a.button.alt:hover,
+.wpr-preset-elite .woocommerce button.button.alt:hover {
+	background: var(--wpr-elite-champagne-hot) !important;
+	border-color: var(--wpr-elite-champagne-hot) !important;
+	color: #090a0b !important;
+	transform: translateY(-2px);
+}
+
+.wpr-preset-elite input:not([type="checkbox"]):not([type="radio"]),
+.wpr-preset-elite select,
+.wpr-preset-elite textarea,
+.wpr-preset-elite .select2-container--default .select2-selection--single {
+	background: #fff;
+	border: 1px solid #d4d5d2;
+	border-radius: 4px;
+}
+
+/* ================================================================
+ * HERO — EDITORIAL LUXURY
+ * ================================================================ */
+.wpr-preset-elite .wpr-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	background:
+		radial-gradient(circle at 75% 42%, rgba(203,184,120,.11), transparent 28%),
+		linear-gradient(112deg, #070809 0%, #151718 58%, #0b0c0d 100%);
+	color: #fff;
+	min-height: min(760px, 84vh);
+	display: flex;
+	align-items: center;
+}
+
+.wpr-preset-elite .wpr-hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background:
+		linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) 0 0/120px 100%,
+		linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px) 0 0/100% 120px;
+	opacity: .34;
+}
+
+.wpr-preset-elite .wpr-hero::after {
+	content: "";
+	position: absolute;
+	right: 5%;
+	top: 15%;
+	width: 1px;
+	height: 70%;
+	background: linear-gradient(transparent, rgba(203,184,120,.38), transparent);
+	z-index: -1;
+}
+
+.wpr-preset-elite .wpr-hero h1,
+.wpr-preset-elite .wpr-hero h2,
+.wpr-preset-elite .wpr-hero h3 { color: #fff; }
+
+.wpr-preset-elite .wpr-hero h1 {
+	font-size: clamp(3.2rem, 6.4vw, 6rem);
+	line-height: .93;
+	font-weight: 800;
+	letter-spacing: -.065em;
+	text-transform: uppercase;
+	max-width: 850px;
+}
+
+.wpr-preset-elite .wpr-hero__lead {
+	color: #bbbdbb;
+	max-width: 620px;
+	line-height: 1.75;
+}
+
+.wpr-preset-elite .wpr-section-title,
+.wpr-preset-elite .section-title {
+	position: relative;
+	display: inline-block;
+	padding-bottom: 12px;
+	text-transform: uppercase;
+	letter-spacing: -.03em;
+}
+
+.wpr-preset-elite .wpr-section-title::after,
+.wpr-preset-elite .section-title::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 44px;
+	height: 1px;
+	background: var(--wpr-elite-champagne);
+}
+
+/* ================================================================
+ * JACKPOT / DRAWN TODAY / PREMIUM FEATURED SECTIONS
+ * ================================================================ */
+.wpr-preset-elite .wpr-featured-card,
+.wpr-preset-elite .wpr-stat-card,
+.wpr-preset-elite .wpr-trust-item,
+.wpr-preset-elite .wpr-winner-card,
+.wpr-preset-elite .wpr-testimonial,
+.wpr-preset-elite .wpr-hiw-step {
+	background: rgba(255,255,255,.96);
+	border: 1px solid var(--wpr-elite-line);
+	border-radius: 6px;
+	box-shadow: 0 10px 28px rgba(10,12,13,.07);
+}
+
+.wpr-preset-elite .wpr-featured-card {
+	position: relative;
+	border-color: #cfc7aa;
+	box-shadow: 0 20px 50px rgba(45,39,22,.10);
+	overflow: hidden;
+}
+
+.wpr-preset-elite .wpr-featured-card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2px;
+	background: var(--wpr-elite-champagne);
+}
+
+.wpr-preset-elite .wpr-stat-card strong,
+.wpr-preset-elite .wpr-stat-card .wpr-stat-number,
+.wpr-preset-elite .wpr-winner-card__number {
+	color: #9f8a48;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ================================================================
+ * COMPETITION GRID — HIGH-TICKET EDITORIAL CARDS
+ * ================================================================ */
+@media (min-width: 1280px) {
+	.wpr-preset-elite .raffle-list-grid,
+	.wpr-preset-elite .woocommerce ul.products {
+		grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+	}
+}
+
+.wpr-preset-elite .raffle-list-grid { gap: 20px !important; }
+
+.wpr-preset-elite .rc-card {
+	position: relative;
+	background: #fff;
+	border: 1px solid #d8d9d6;
+	border-radius: 7px;
+	overflow: hidden;
+	box-shadow: 0 9px 28px rgba(12,14,15,.09);
+}
+
+.wpr-preset-elite .rc-card::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--wpr-elite-champagne), transparent);
+	z-index: 5;
+}
+
+.wpr-preset-elite .rc-card:hover,
+.wpr-preset-elite .rc-card:focus-within {
+	transform: translateY(-6px);
+	border-color: #c5c4be;
+	box-shadow: var(--wpr-elite-shadow-hover);
+}
+
+.wpr-preset-elite .rc-card__image {
+	padding-top: 73%;
+	background: #eaeae7;
+	overflow: hidden;
+}
+
+.wpr-preset-elite .rc-card__image img {
+	transition: transform .42s cubic-bezier(.2,.65,.2,1), filter .42s ease;
+}
+
+.wpr-preset-elite .rc-card:hover .rc-card__image img {
+	transform: scale(1.035);
+	filter: contrast(1.02) saturate(1.03);
+}
+
+.wpr-preset-elite .rc-card__status {
+	border-radius: 3px;
+	font-size: .60rem;
+	font-weight: 850;
+	letter-spacing: .08em;
+	background: rgba(10,11,12,.92);
+	border: 1px solid rgba(255,255,255,.22);
+	box-shadow: 0 6px 18px rgba(0,0,0,.24);
+}
+
+.wpr-preset-elite .rc-card__status--soon {
+	background: var(--wpr-elite-champagne-hot);
+	color: #101112;
+	border-color: var(--wpr-elite-champagne-hot);
+}
+
+.wpr-preset-elite .rc-card__iw-badge {
+	border-radius: 3px !important;
+	background: #0d0e0f !important;
+	color: var(--wpr-elite-champagne-hot) !important;
+	border: 1px solid rgba(203,184,120,.42);
+	font-weight: 850;
+	letter-spacing: .08em;
+}
+
+.wpr-preset-elite .rc-card__title {
+	min-height: 3.55rem;
+	padding: 1rem 1rem .42rem;
+	font-size: 1rem;
+	font-weight: 850;
+	line-height: 1.17;
+	letter-spacing: -.025em;
+	text-transform: uppercase;
+	color: #121415;
+}
+
+.wpr-preset-elite .rc-card__title-alt {
+	color: #9c8745;
+	font-size: .7rem;
+	font-weight: 800;
+	letter-spacing: .035em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .rc-card__title-iw {
+	color: #9c8745;
+	font-weight: 850;
+}
+
+/* "Drawn today" / draw-time line */
+.wpr-preset-elite .rc-card__draw-bar {
+	position: relative;
+	background: #101214;
+	color: #f4f4f2;
+	padding: .58rem .9rem .58rem 1.55rem;
+	font-size: .65rem;
+	font-weight: 800;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .rc-card__draw-bar::before {
+	content: "";
+	position: absolute;
+	left: .72rem;
+	top: 50%;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--wpr-elite-success);
+	transform: translateY(-50%);
+	box-shadow: 0 0 0 3px rgba(73,168,120,.12);
+}
+
+.wpr-preset-elite .rc-card__countdown {
+	background: #f2f2ef;
+	border-bottom: 1px solid #dedfdb;
+	padding: .68rem .85rem;
+}
+
+.wpr-preset-elite .rc-card__cd-unit:not(:last-child) {
+	border-right: 1px solid #d9dad6;
+}
+
+.wpr-preset-elite .rc-card__cd-num {
+	color: #101214;
+	font-size: 1.02rem;
+	font-weight: 850;
+}
+
+.wpr-preset-elite .rc-card__cd-label {
+	color: #777a7a;
+	font-size: .55rem;
+	font-weight: 750;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .rc-card__cash-bar {
+	background: #f6f3e9;
+	border-bottom: 1px solid #e3dcc4;
+	color: #25241f;
+	font-weight: 750;
+}
+
+.wpr-preset-elite .rc-card__price {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	padding: .85rem 1rem .4rem;
+}
+
+.wpr-preset-elite .rc-card__price-amount {
+	color: #8f7b3c;
+	font-size: 1.6rem;
+	font-weight: 900;
+	letter-spacing: -.05em;
+}
+
+.wpr-preset-elite .rc-card__price-label {
+	color: #747777;
+	font-size: .60rem;
+	font-weight: 750;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+}
+
+/* Minimal premium sold-progress */
+.wpr-preset-elite .rc-card__progress {
+	margin: .25rem 1rem .85rem;
+	padding: .66rem .72rem .76rem;
+	background: #f5f5f2;
+	border: 1px solid #dedfdb;
+	border-radius: 4px;
+}
+
+.wpr-preset-elite .rc-card__progress-stats {
+	color: #313335;
+	font-size: .67rem;
+	font-weight: 800;
+	letter-spacing: .03em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .rc-card__progress-bar,
+.wpr-preset-elite .raffle-progress-bar-wrap {
+	height: 7px;
+	border-radius: 1px;
+	background: #dcdeda;
+	overflow: hidden;
+}
+
+.wpr-preset-elite .rc-card__progress-fill,
+.wpr-preset-elite .raffle-progress-bar-inner {
+	border-radius: 1px;
+	background: linear-gradient(
+		90deg,
+		#8c793e,
+		var(--wpr-elite-champagne),
+		#e1cd8e
+	) !important;
+}
+
+.wpr-preset-elite .rc-card__charity {
+	color: #747777;
+	font-weight: 650;
+}
+
+.wpr-preset-elite .rc-card__cta {
+	margin: 0 1rem 1rem;
+	padding: .8rem 1rem;
+	border-radius: 3px;
+}
+
+/* ================================================================
+ * WOO LOOP
+ * ================================================================ */
+.wpr-preset-elite .woocommerce ul.products li.product {
+	background: #fff;
+	border: 1px solid #d8d9d6;
+	border-radius: 7px;
+	overflow: hidden;
+	box-shadow: 0 9px 28px rgba(12,14,15,.09);
+	transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.wpr-preset-elite .woocommerce ul.products li.product:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--wpr-elite-shadow-hover);
+}
+
+.wpr-preset-elite .woocommerce ul.products li.product .woocommerce-loop-product__title {
+	color: #121415;
+	font-weight: 850;
+	text-transform: uppercase;
+	line-height: 1.16;
+}
+
+.wpr-preset-elite .woocommerce ul.products li.product .price {
+	color: #8f7b3c;
+	font-weight: 900;
+}
+
+/* ================================================================
+ * SINGLE COMPETITION — LUXURY SHOWCASE
+ * ================================================================ */
+.wpr-preset-elite .raffle-single-page-wrapper {
+	padding: 3.25rem 0 !important;
+	background:
+		linear-gradient(90deg, rgba(10,12,13,.015) 1px, transparent 1px) 0 0/64px 64px,
+		linear-gradient(rgba(10,12,13,.015) 1px, transparent 1px) 0 0/64px 64px,
+		var(--wpr-elite-ivory) !important;
+}
+
+.wpr-preset-elite .raffle-main-grid { gap: 2.75rem !important; }
+
+.wpr-preset-elite .raffle-image-card {
+	position: relative;
+	background: #fff;
+	border: 1px solid #d5d6d2;
+	border-radius: 7px;
+	box-shadow: var(--wpr-elite-shadow);
+	overflow: hidden;
+}
+
+.wpr-preset-elite .raffle-image-card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--wpr-elite-champagne), transparent);
+}
+
+.wpr-preset-elite .raffle-title-main {
+	color: #111314;
+	font-size: clamp(1.95rem, 3.2vw, 3.35rem);
+	font-weight: 850;
+	line-height: 1;
+	letter-spacing: -.06em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .raffle-price-value {
+	color: #8b783c;
+	font-weight: 900;
+	letter-spacing: -.05em;
+}
+
+.wpr-preset-elite .raffle-stats-header {
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0,1fr));
+	gap: 10px !important;
+}
+
+/* Luxury fact cards */
+.wpr-preset-elite .raffle-stat-box {
+	position: relative;
+	background: #fff;
+	border: 1px solid #d7d8d4;
+	border-radius: 4px;
+	padding: .85rem .95rem;
+	overflow: hidden;
+}
+
+.wpr-preset-elite .raffle-stat-box::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 2px;
+	background: var(--wpr-elite-champagne);
+}
+
+.wpr-preset-elite .raffle-entry-tabs {
+	gap: 4px;
+	padding: 4px;
+	background: #101214;
+	border: 1px solid #25282a;
+	border-radius: 5px;
+}
+
+.wpr-preset-elite .raffle-tab-btn {
+	border: 0 !important;
+	border-radius: 2px !important;
+	background: transparent;
+	color: #bfc1bf !important;
+	font-weight: 750;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-elite .raffle-tab-btn:hover {
+	background: rgba(203,184,120,.08);
+	color: #fff !important;
+}
+
+.wpr-preset-elite .raffle-tab-btn.active {
+	background: var(--wpr-elite-champagne) !important;
+	border-color: transparent !important;
+	color: #101112 !important;
+	box-shadow: none;
+}
+
+.wpr-preset-elite .raffle-entry-section,
+.wpr-preset-elite .raffle-entry-panel,
+.wpr-preset-elite .raffle-purchase-box,
+.wpr-preset-elite .raffle-ticket-selector,
+.wpr-preset-elite .raffle-instant-wins,
+.wpr-preset-elite .raffle-prize-description,
+.wpr-preset-elite .raffle-rules,
+.wpr-preset-elite .raffle-faq {
+	background: #fff;
+	border: 1px solid #d7d8d4;
+	border-radius: 6px;
+}
+
+.wpr-preset-elite .raffle-ticket-selector button,
+.wpr-preset-elite .raffle-quantity button,
+.wpr-preset-elite .quantity .plus,
+.wpr-preset-elite .quantity .minus {
+	background: #111315;
+	color: #fff;
+	border-radius: 3px;
+}
+
+.wpr-preset-elite .raffle-ticket-selector button:hover,
+.wpr-preset-elite .raffle-quantity button:hover,
+.wpr-preset-elite .quantity .plus:hover,
+.wpr-preset-elite .quantity .minus:hover {
+	background: #8f7b3c;
+}
+
+/* ================================================================
+ * CART / CHECKOUT / ACCOUNT
+ * ================================================================ */
+.wpr-preset-elite.woocommerce-cart,
+.wpr-preset-elite.woocommerce-checkout,
+.wpr-preset-elite.woocommerce-account {
+	background: var(--wpr-elite-ivory);
+}
+
+.wpr-preset-elite .woocommerce-cart-form,
+.wpr-preset-elite .cart_totals,
+.wpr-preset-elite .woocommerce-checkout-review-order,
+.wpr-preset-elite .woocommerce-billing-fields,
+.wpr-preset-elite .woocommerce-shipping-fields,
+.wpr-preset-elite .woocommerce-MyAccount-navigation,
+.wpr-preset-elite .woocommerce-MyAccount-content {
+	background: #fff;
+	border: 1px solid #d7d8d4;
+	border-radius: 6px;
+}
+
+.wpr-preset-elite .woocommerce-info,
+.wpr-preset-elite .woocommerce-message {
+	border-top-color: var(--wpr-elite-champagne);
+	background: #f6f3e9;
+	color: #222421;
+}
+
+/* ================================================================
+ * MOBILE
+ * ================================================================ */
+@media (max-width: 767.98px) {
+	.wpr-preset-elite .wpr-header__inner { min-height: 64px; }
+	.wpr-preset-elite .wpr-hero { min-height: auto; }
+	.wpr-preset-elite .raffle-list-grid { gap: 14px !important; }
+	.wpr-preset-elite .rc-card { border-radius: 6px; }
+	.wpr-preset-elite .rc-card__title {
+		min-height: 0;
+		font-size: .93rem;
+	}
+	.wpr-preset-elite .raffle-main-grid { gap: 1.5rem !important; }
+	.wpr-preset-elite .raffle-stats-header { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 420px) {
+	.wpr-preset-elite .raffle-stats-header { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
+ * ACCESSIBILITY
+ * ================================================================ */
+.wpr-preset-elite a:focus-visible,
+.wpr-preset-elite button:focus-visible,
+.wpr-preset-elite input:focus-visible,
+.wpr-preset-elite select:focus-visible,
+.wpr-preset-elite textarea:focus-visible {
+	outline: 3px solid var(--wpr-elite-champagne-hot);
+	outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wpr-preset-elite .rc-card,
+	.wpr-preset-elite .rc-card__image img,
+	.wpr-preset-elite .wpr-btn,
+	.wpr-preset-elite .button {
+		transition: none !important;
+		transform: none !important;
+	}
+}

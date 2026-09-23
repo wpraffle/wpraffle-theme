@@ -231,7 +231,7 @@ final class WPRaffle_Theme_Updater {
 		$info->name       = 'WPRaffle Theme';
 		$info->slug       = $stylesheet;
 		$info->version    = $release_info['version'];
-		$info->author     = '<a href="https://wpraffles.dev">WPRaffles</a>';
+		$info->author     = '<a href="https://wpraffle.dev">WPRaffle</a>';
 		$info->homepage   = $release_info['url'];
 		$info->requires   = '6.5';
 		$info->tested     = '6.5';

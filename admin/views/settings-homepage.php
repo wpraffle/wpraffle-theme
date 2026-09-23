@@ -133,3 +133,121 @@ asort( $ordered_keys );
 		<?php esc_html_e( 'Some sections only appear when the WPRaffles plugin is active and there is content to show (e.g. winners, countdown, live draw). Disabled or empty sections are hidden automatically.', 'wpraffle-theme' ); ?>
 	</p>
 </div>
+
+
+<div class="wpr-panel wprt-hero-cta-settings">
+	<h2><?php esc_html_e( 'Hero Calls to Action', 'wpraffle-theme' ); ?></h2>
+	<p class="wpr-panel-intro"><?php esc_html_e( 'Configure the buttons shown in the homepage hero banner.', 'wpraffle-theme' ); ?></p>
+
+	<div class="wprt-hero-cta-grid">
+		<section class="wprt-hero-cta-card">
+			<h3><?php esc_html_e( 'Primary Button', 'wpraffle-theme' ); ?></h3>
+
+			<p>
+				<label>
+					<input type="hidden" name="wpr_settings[hero_primary_enabled]" value="">
+					<input type="checkbox" name="wpr_settings[hero_primary_enabled]" value="on" <?php checked( isset( $s['hero_primary_enabled'] ) ? $s['hero_primary_enabled'] : 'on', 'on' ); ?>>
+					<?php esc_html_e( 'Show primary button', 'wpraffle-theme' ); ?>
+				</label>
+			</p>
+
+			<p>
+				<label for="wprt-hero-primary-text"><strong><?php esc_html_e( 'Button text', 'wpraffle-theme' ); ?></strong></label>
+				<input id="wprt-hero-primary-text" class="regular-text" type="text" name="wpr_settings[hero_primary_text]" value="<?php echo esc_attr( isset( $s['hero_primary_text'] ) ? $s['hero_primary_text'] : __( 'Enter Competitions', 'wpraffle-theme' ) ); ?>">
+			</p>
+
+			<p>
+				<label for="wprt-hero-primary-link-type"><strong><?php esc_html_e( 'Destination', 'wpraffle-theme' ); ?></strong></label>
+				<select id="wprt-hero-primary-link-type" name="wpr_settings[hero_primary_link_type]" class="wprt-hero-link-type">
+					<?php $primary_type = isset( $s['hero_primary_link_type'] ) ? $s['hero_primary_link_type'] : 'shop'; ?>
+					<option value="shop" <?php selected( $primary_type, 'shop' ); ?>><?php esc_html_e( 'Competitions / WooCommerce Shop', 'wpraffle-theme' ); ?></option>
+					<option value="page" <?php selected( $primary_type, 'page' ); ?>><?php esc_html_e( 'WordPress Page', 'wpraffle-theme' ); ?></option>
+					<option value="custom" <?php selected( $primary_type, 'custom' ); ?>><?php esc_html_e( 'Custom URL', 'wpraffle-theme' ); ?></option>
+				</select>
+			</p>
+
+			<p class="wprt-hero-link-page">
+				<label><strong><?php esc_html_e( 'Page', 'wpraffle-theme' ); ?></strong></label>
+				<?php
+				wp_dropdown_pages(
+					array(
+						'name'              => 'wpr_settings[hero_primary_page_id]',
+						'selected'          => isset( $s['hero_primary_page_id'] ) ? absint( $s['hero_primary_page_id'] ) : 0,
+						'show_option_none'  => __( '— Select a page —', 'wpraffle-theme' ),
+						'option_none_value' => 0,
+					)
+				);
+				?>
+			</p>
+
+			<p class="wprt-hero-link-custom">
+				<label for="wprt-hero-primary-url"><strong><?php esc_html_e( 'Custom URL', 'wpraffle-theme' ); ?></strong></label>
+				<input id="wprt-hero-primary-url" class="regular-text" type="url" name="wpr_settings[hero_primary_url]" value="<?php echo esc_attr( isset( $s['hero_primary_url'] ) ? $s['hero_primary_url'] : '' ); ?>" placeholder="https://">
+			</p>
+
+			<p>
+				<label>
+					<input type="hidden" name="wpr_settings[hero_primary_new_tab]" value="">
+					<input type="checkbox" name="wpr_settings[hero_primary_new_tab]" value="on" <?php checked( isset( $s['hero_primary_new_tab'] ) ? $s['hero_primary_new_tab'] : '', 'on' ); ?>>
+					<?php esc_html_e( 'Open in a new tab', 'wpraffle-theme' ); ?>
+				</label>
+			</p>
+		</section>
+
+		<section class="wprt-hero-cta-card">
+			<h3><?php esc_html_e( 'Secondary Button', 'wpraffle-theme' ); ?></h3>
+
+			<p>
+				<label>
+					<input type="hidden" name="wpr_settings[hero_secondary_enabled]" value="">
+					<input type="checkbox" name="wpr_settings[hero_secondary_enabled]" value="on" <?php checked( isset( $s['hero_secondary_enabled'] ) ? $s['hero_secondary_enabled'] : 'on', 'on' ); ?>>
+					<?php esc_html_e( 'Show secondary button', 'wpraffle-theme' ); ?>
+				</label>
+			</p>
+
+			<p>
+				<label for="wprt-hero-secondary-text"><strong><?php esc_html_e( 'Button text', 'wpraffle-theme' ); ?></strong></label>
+				<input id="wprt-hero-secondary-text" class="regular-text" type="text" name="wpr_settings[hero_secondary_text]" value="<?php echo esc_attr( isset( $s['hero_secondary_text'] ) ? $s['hero_secondary_text'] : __( 'See Recent Winners', 'wpraffle-theme' ) ); ?>">
+			</p>
+
+			<p>
+				<label for="wprt-hero-secondary-link-type"><strong><?php esc_html_e( 'Destination', 'wpraffle-theme' ); ?></strong></label>
+				<select id="wprt-hero-secondary-link-type" name="wpr_settings[hero_secondary_link_type]" class="wprt-hero-link-type">
+					<?php $secondary_type = isset( $s['hero_secondary_link_type'] ) ? $s['hero_secondary_link_type'] : 'winners-section'; ?>
+					<option value="winners-section" <?php selected( $secondary_type, 'winners-section' ); ?>><?php esc_html_e( 'Winners section on homepage', 'wpraffle-theme' ); ?></option>
+					<option value="winners-page" <?php selected( $secondary_type, 'winners-page' ); ?>><?php esc_html_e( 'Winners page', 'wpraffle-theme' ); ?></option>
+					<option value="page" <?php selected( $secondary_type, 'page' ); ?>><?php esc_html_e( 'WordPress Page', 'wpraffle-theme' ); ?></option>
+					<option value="custom" <?php selected( $secondary_type, 'custom' ); ?>><?php esc_html_e( 'Custom URL', 'wpraffle-theme' ); ?></option>
+				</select>
+			</p>
+
+			<p class="wprt-hero-link-page">
+				<label><strong><?php esc_html_e( 'Page', 'wpraffle-theme' ); ?></strong></label>
+				<?php
+				wp_dropdown_pages(
+					array(
+						'name'              => 'wpr_settings[hero_secondary_page_id]',
+						'selected'          => isset( $s['hero_secondary_page_id'] ) ? absint( $s['hero_secondary_page_id'] ) : 0,
+						'show_option_none'  => __( '— Select a page —', 'wpraffle-theme' ),
+						'option_none_value' => 0,
+					)
+				);
+				?>
+			</p>
+
+			<p class="wprt-hero-link-custom">
+				<label for="wprt-hero-secondary-url"><strong><?php esc_html_e( 'Custom URL', 'wpraffle-theme' ); ?></strong></label>
+				<input id="wprt-hero-secondary-url" class="regular-text" type="url" name="wpr_settings[hero_secondary_url]" value="<?php echo esc_attr( isset( $s['hero_secondary_url'] ) ? $s['hero_secondary_url'] : '' ); ?>" placeholder="https://">
+			</p>
+
+			<p>
+				<label>
+					<input type="hidden" name="wpr_settings[hero_secondary_new_tab]" value="">
+					<input type="checkbox" name="wpr_settings[hero_secondary_new_tab]" value="on" <?php checked( isset( $s['hero_secondary_new_tab'] ) ? $s['hero_secondary_new_tab'] : '', 'on' ); ?>>
+					<?php esc_html_e( 'Open in a new tab', 'wpraffle-theme' ); ?>
+				</label>
+			</p>
+		</section>
+	</div>
+</div>
+

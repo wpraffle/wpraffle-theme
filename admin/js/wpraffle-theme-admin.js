@@ -3,6 +3,26 @@
 	'use strict';
 
 	$( function () {
+
+
+		// v1.4.0 responsive Control Centre navigation.
+		$( '.wprt-admin__mobile-toggle' ).on( 'click', function () {
+			var open = ! $( 'body' ).hasClass( 'wprt-nav-open' );
+			$( 'body' ).toggleClass( 'wprt-nav-open', open );
+			$( this ).attr( 'aria-expanded', open ? 'true' : 'false' );
+		} );
+
+		$( '.wprt-admin__nav-item' ).on( 'click', function () {
+			$( 'body' ).removeClass( 'wprt-nav-open' );
+			$( '.wprt-admin__mobile-toggle' ).attr( 'aria-expanded', 'false' );
+		} );
+
+		$( window ).on( 'resize.wprtControlNav', function () {
+			if ( window.innerWidth >= 992 ) {
+				$( 'body' ).removeClass( 'wprt-nav-open' );
+				$( '.wprt-admin__mobile-toggle' ).attr( 'aria-expanded', 'false' );
+			}
+		} );
 		// WP colour pickers.
 		$( '.wpr-color-picker' ).wpColorPicker();
 
@@ -27,6 +47,29 @@
 		$( '.wpr-color-picker' ).on( 'change input', function () {
 			$( '.wpr-preset' ).removeClass( 'is-active' );
 			$( 'input[name="wpr_settings[preset]"]' ).val( 'custom' );
+		} );
+
+		// v1.4.0: Theme Options navigation search.
+		$( '#wprt-settings-search' ).on( 'input', function () {
+			var query = $.trim( $( this ).val().toLowerCase() );
+			var aliases = {};
+			if ( window.WPRaffleThemeAdmin && Array.isArray( WPRaffleThemeAdmin.searchIndex ) ) {
+				WPRaffleThemeAdmin.searchIndex.forEach( function ( item ) { aliases[ item.tab ] = ( item.label || '' ).toLowerCase(); } );
+			}
+			$( '.wprt-admin__group' ).each( function () {
+				var $group = $( this );
+				var visible = 0;
+				$group.find( '.wprt-admin__nav-item' ).each( function () {
+					var href = $( this ).attr( 'href' ) || '';
+					var tabMatch = href.match( /[?&]tab=([^&]+)/ );
+					var tab = tabMatch ? tabMatch[1] : '';
+					var haystack = ( $( this ).text() + ' ' + ( aliases[ tab ] || '' ) ).toLowerCase();
+					var match = ! query || haystack.indexOf( query ) !== -1;
+					$( this ).toggle( match );
+					if ( match ) { visible++; }
+				} );
+				$group.toggle( visible > 0 );
+			} );
 		} );
 
 		// v1.1.0: Repeatable field rows (FAQs / Testimonials).

@@ -1,0 +1,368 @@
+/**
+ * WPRaffle Theme v1.4.0 — Native Page Preset Integration
+ * Loaded after preset styles to ensure native templates visibly match the
+ * selected Default/Golf/Car/Retro/Diamond/Elite design.
+ */
+
+.wprt-page-template,
+.wprt-native-page {
+	background: var(--wprt-native-bg, var(--wpr-light, #f6f6f6)) !important;
+	color: var(--wprt-native-text, var(--wpr-body, #222)) !important;
+}
+
+.wprt-page-template .wprt-page-hero,
+.wprt-native-page .wprt-native-hero {
+	background: var(--wprt-native-hero, var(--wpr-dark, #111)) !important;
+	border-bottom: var(--wprt-native-hero-border, 0);
+}
+
+.wprt-page-template .wprt-page-kicker,
+.wprt-native-page .wprt-native-kicker {
+	color: var(--wprt-native-accent, var(--wpr-accent, #ffdc25)) !important;
+}
+
+.wprt-page-template .wprt-page-content,
+.wprt-native-page .wprt-native-content {
+	background: transparent !important;
+	color: var(--wprt-native-text, var(--wpr-body, #222));
+}
+
+/* A single vertical rhythm for every page template. */
+.wprt-page-template .wprt-page-intro {
+	margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+.wprt-page-template > .wpr-page-featured,
+.wprt-page-template > .container.wpr-page-featured {
+	margin-top: clamp(2rem, 5vw, 4rem);
+}
+.wprt-page-template > .container.wpr-page-featured img,
+.wprt-page-template > .wpr-page-featured img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.wprt-page-template .wpr-charity {
+	background: var(--wprt-native-hero, var(--wpr-dark, #111));
+	color: #fff;
+	border-radius: var(--wprt-native-radius, var(--wpr-radius-lg, 12px));
+	box-shadow: var(--wprt-native-shadow, var(--wpr-shadow-sm));
+}
+
+.wprt-page-template :is(.wprt-faq-item,.wprt-how-it-works__step,.wprt-empty-state),
+.wprt-native-page :is(.wprt-faq-item,.wprt-how-it-works__step,.wprt-empty-state) {
+	background: var(--wprt-native-surface, #fff) !important;
+	border: 1px solid var(--wprt-native-border, var(--wpr-border,#ddd)) !important;
+	color: var(--wprt-native-text, #222) !important;
+	border-radius: var(--wprt-native-radius, var(--wpr-radius-lg,12px)) !important;
+	box-shadow: var(--wprt-native-shadow, var(--wpr-shadow-sm,0 3px 12px rgba(0,0,0,.08))) !important;
+}
+
+.wprt-page-template .wprt-faq-question {
+	background: var(--wprt-native-surface, #fff) !important;
+	color: var(--wprt-native-text, #222) !important;
+}
+.wprt-page-template .wprt-faq-question:hover,
+.wprt-page-template .wprt-faq-question[aria-expanded="true"] {
+	color: var(--wprt-native-accent, var(--wpr-accent,#ffdc25)) !important;
+}
+.wprt-page-template .wprt-faq-answer,
+.wprt-page-template .wprt-how-it-works__text,
+.wprt-native-page .wprt-native-content {
+	color: var(--wprt-native-muted, var(--wpr-muted,#6c757d)) !important;
+}
+.wprt-page-template .wprt-how-it-works__num {
+	background: var(--wprt-native-accent, var(--wpr-accent,#ffdc25)) !important;
+	color: var(--wprt-native-accent-text, #111) !important;
+}
+.wprt-page-template .wprt-how-it-works__icon {
+	color: var(--wprt-native-accent, var(--wpr-accent,#ffdc25)) !important;
+}
+.wprt-page-competitions > .section,
+.wprt-page-competitions #active {
+	background: var(--wprt-native-bg, transparent) !important;
+}
+.wprt-page-competitions .wprt-filter-tabs__btn {
+	background: var(--wprt-native-surface,#fff) !important;
+	border-color: var(--wprt-native-border,#ddd) !important;
+	color: var(--wprt-native-text,#222) !important;
+}
+.wprt-page-competitions .wprt-filter-tabs__btn.is-active {
+	background: var(--wprt-native-accent,var(--wpr-accent,#ffdc25)) !important;
+	border-color: var(--wprt-native-accent,var(--wpr-accent,#ffdc25)) !important;
+	color: var(--wprt-native-accent-text,#111) !important;
+}
+
+/* Default */
+body.wpr-preset-default {
+	--wprt-native-bg:#f5f4ef;
+	--wprt-native-surface:#fff;
+	--wprt-native-text:#151515;
+	--wprt-native-muted:#6d6b64;
+	--wprt-native-border:#dedcd3;
+	--wprt-native-hero:#0b0b0d;
+	--wprt-native-accent:#ffdc25;
+	--wprt-native-accent-text:#111;
+	--wprt-native-radius:12px;
+}
+
+/* Golf */
+body.wpr-preset-golf {
+	--wprt-native-bg:var(--wpr-golf-cream,#f5f4eb);
+	--wprt-native-surface:var(--wpr-golf-paper,#fffef9);
+	--wprt-native-text:var(--wpr-golf-ink,#10271c);
+	--wprt-native-muted:var(--wpr-golf-muted,#6b786f);
+	--wprt-native-border:var(--wpr-golf-line,#d9dfd4);
+	--wprt-native-hero:var(--wpr-golf-deep,#153b2b);
+	--wprt-native-accent:var(--wpr-golf-lime,#d8f35a);
+	--wprt-native-accent-text:var(--wpr-golf-ink,#10271c);
+	--wprt-native-radius:14px;
+	--wprt-native-shadow:0 12px 32px rgba(16,39,28,.10);
+}
+
+/* Car */
+body.wpr-preset-car {
+	--wprt-native-bg:var(--wpr-car-offwhite,#f5f5f3);
+	--wprt-native-surface:#fff;
+	--wprt-native-text:var(--wpr-car-ink,#111214);
+	--wprt-native-muted:var(--wpr-car-muted,#70757b);
+	--wprt-native-border:var(--wpr-car-line,#dadcdf);
+	--wprt-native-hero:linear-gradient(115deg,#111214,#24272a);
+	--wprt-native-accent:var(--wpr-car-orange,#f05a24);
+	--wprt-native-accent-text:#fff;
+	--wprt-native-radius:7px;
+	--wprt-native-shadow:0 14px 36px rgba(17,18,20,.12);
+}
+body.wpr-preset-car .wprt-page-hero:before {
+	content:"";position:absolute;inset:0;pointer-events:none;
+	background:repeating-linear-gradient(135deg,rgba(255,255,255,.018) 0 12px,transparent 12px 24px);
+}
+
+/* Retro */
+body.wpr-preset-retro {
+	--wprt-native-bg:var(--wpr-retro-black,#0b0812);
+	--wprt-native-surface:var(--wpr-retro-panel,#191525);
+	--wprt-native-text:var(--wpr-retro-white,#f8f7fb);
+	--wprt-native-muted:var(--wpr-retro-muted,#aaa5b7);
+	--wprt-native-border:var(--wpr-retro-line,#342b48);
+	--wprt-native-hero:radial-gradient(circle at 82% 12%,rgba(255,62,165,.20),transparent 30%),radial-gradient(circle at 68% 75%,rgba(32,217,255,.15),transparent 34%),linear-gradient(118deg,#0b0812,#17101f 48%,#100a19);
+	--wprt-native-accent:var(--wpr-retro-cyan,#20d9ff);
+	--wprt-native-accent-text:#081016;
+	--wprt-native-radius:10px;
+	--wprt-native-shadow:0 18px 44px rgba(5,3,10,.42),0 0 0 1px rgba(124,60,255,.10);
+}
+body.wpr-preset-retro .wprt-page-template h1,
+body.wpr-preset-retro .wprt-page-template h2,
+body.wpr-preset-retro .wprt-page-template h3,
+body.wpr-preset-retro .wprt-native-page h1,
+body.wpr-preset-retro .wprt-native-page h2,
+body.wpr-preset-retro .wprt-native-page h3 {
+	color:var(--wpr-retro-white,#f8f7fb) !important;
+}
+body.wpr-preset-retro .wprt-page-hero:before,
+body.wpr-preset-retro .wprt-native-hero:before {
+	content:"";position:absolute;inset:0;pointer-events:none;
+	background:linear-gradient(rgba(124,60,255,.10) 1px,transparent 1px) 0 0/38px 38px,
+	linear-gradient(90deg,rgba(124,60,255,.10) 1px,transparent 1px) 0 0/38px 38px;
+	opacity:.3;
+}
+
+/* Diamond */
+body.wpr-preset-diamond {
+	--wprt-native-bg:var(--wpr-dia-pearl,#f7f6f2);
+	--wprt-native-surface:#fff;
+	--wprt-native-text:var(--wpr-dia-ink,#171719);
+	--wprt-native-muted:var(--wpr-dia-muted,#76736c);
+	--wprt-native-border:var(--wpr-dia-line,#dedbd0);
+	--wprt-native-hero:linear-gradient(118deg,#121214,#252527 54%,#171719);
+	--wprt-native-accent:var(--wpr-dia-gold,#d8b84a);
+	--wprt-native-accent-text:#171719;
+	--wprt-native-radius:8px;
+	--wprt-native-shadow:0 15px 38px rgba(23,23,25,.11);
+}
+
+/* Elite */
+body.wpr-preset-elite {
+	--wprt-native-bg:var(--wpr-elite-ivory,#f7f6f2);
+	--wprt-native-surface:#fff;
+	--wprt-native-text:#141617;
+	--wprt-native-muted:var(--wpr-elite-muted,#73777a);
+	--wprt-native-border:var(--wpr-elite-line,#d9dad7);
+	--wprt-native-hero:linear-gradient(112deg,#070809,#151718 58%,#0b0c0d);
+	--wprt-native-accent:var(--wpr-elite-champagne,#cbb878);
+	--wprt-native-accent-text:#101112;
+	--wprt-native-radius:6px;
+	--wprt-native-shadow:0 18px 50px rgba(8,10,11,.12);
+}
+
+/* Night mode overrides native page variables without losing preset accent. */
+[data-theme="dark"] body {
+	--wprt-native-bg:var(--wprt-night-bg,#0b0c0e);
+	--wprt-native-surface:var(--wprt-night-surface,#141619);
+	--wprt-native-text:var(--wprt-night-text,#f2f3f3);
+	--wprt-native-muted:var(--wprt-night-muted,#a6aaae);
+	--wprt-native-border:var(--wprt-night-border,#2b2f34);
+	--wprt-native-accent:var(--wprt-night-accent,var(--wpr-accent,#ffdc25));
+	--wprt-native-shadow:var(--wprt-night-shadow,0 18px 48px rgba(0,0,0,.28));
+}
+
+
+/* ==========================================================================
+ * v1.4.0 RC — Native template header + competition-loop consistency
+ * ========================================================================== */
+
+/* Native WPRaffle templates must never fall back to components.css's original
+ * white header / dark logo presentation. These rules deliberately load after
+ * every 1.3.x preset stylesheet. */
+body.wprt-native-template-active .wpr-header {
+	background: var(--wprt-native-header-bg, var(--wprt-native-hero, #111)) !important;
+	border-bottom-color: var(--wprt-native-header-border, var(--wprt-native-border, rgba(255,255,255,.12))) !important;
+	color: var(--wprt-native-header-text, #fff) !important;
+}
+
+body.wprt-native-template-active .wpr-header :is(
+	.wpr-logo__text,
+	.site-title,
+	.site-title a,
+	.wpr-nav a,
+	.wpr-menu-toggle,
+	.wpr-header__actions a,
+	.wpr-header__actions button,
+	.wpr-icon-btn
+) {
+	color: var(--wprt-native-header-text, #fff) !important;
+}
+
+body.wprt-native-template-active .wpr-logo__tagline {
+	color: color-mix(in srgb, var(--wprt-native-header-text, #fff) 68%, transparent) !important;
+}
+
+body.wprt-native-template-active .wpr-header.is-scrolled {
+	background: var(--wprt-native-header-bg, var(--wprt-native-hero, #111)) !important;
+	border-bottom-color: var(--wprt-native-header-border, var(--wprt-native-border, rgba(255,255,255,.12))) !important;
+}
+
+body.wprt-native-template-active .wpr-header.is-scrolled :is(
+	.wpr-logo__text,
+	.site-title,
+	.site-title a,
+	.wpr-nav a,
+	.wpr-menu-toggle,
+	.wpr-header__actions a,
+	.wpr-header__actions button,
+	.wpr-icon-btn
+) {
+	color: var(--wprt-native-header-text, #fff) !important;
+}
+
+/* Per-preset header identities. */
+body.wpr-preset-default.wprt-native-template-active {
+	--wprt-native-header-bg:#0b0b0d;
+	--wprt-native-header-text:#fff;
+	--wprt-native-header-border:#292a2c;
+}
+body.wpr-preset-golf.wprt-native-template-active {
+	--wprt-native-header-bg:var(--wpr-golf-deep,#153b2b);
+	--wprt-native-header-text:#fff;
+	--wprt-native-header-border:rgba(216,243,90,.20);
+}
+body.wpr-preset-car.wprt-native-template-active {
+	--wprt-native-header-bg:var(--wpr-car-ink,#111214);
+	--wprt-native-header-text:#fff;
+	--wprt-native-header-border:rgba(240,90,36,.24);
+}
+body.wpr-preset-retro.wprt-native-template-active {
+	--wprt-native-header-bg:var(--wpr-retro-black,#0b0812);
+	--wprt-native-header-text:var(--wpr-retro-white,#f8f7fb);
+	--wprt-native-header-border:var(--wpr-retro-line,#342b48);
+}
+body.wpr-preset-diamond.wprt-native-template-active {
+	--wprt-native-header-bg:var(--wpr-dia-ink,#171719);
+	--wprt-native-header-text:#fff;
+	--wprt-native-header-border:rgba(216,184,74,.26);
+}
+body.wpr-preset-elite.wprt-native-template-active {
+	--wprt-native-header-bg:var(--wpr-elite-black,#090a0b);
+	--wprt-native-header-text:#f5f5f3;
+	--wprt-native-header-border:rgba(203,184,120,.20);
+}
+
+/* Mobile drawer inherits the active preset rather than components.css defaults. */
+@media (max-width: 991.98px) {
+	body.wprt-native-template-active .wpr-header .wpr-nav.is-open {
+		background: var(--wprt-native-header-bg, #111) !important;
+		color: var(--wprt-native-header-text, #fff) !important;
+	}
+	body.wprt-native-template-active .wpr-header .wpr-nav.is-open a {
+		color: var(--wprt-native-header-text, #fff) !important;
+		border-bottom-color: color-mix(in srgb, var(--wprt-native-header-text,#fff) 12%, transparent) !important;
+	}
+	body.wprt-native-template-active .wpr-header .wpr-nav.is-open .sub-menu {
+		background: transparent !important;
+		border: 0 !important;
+		box-shadow: none !important;
+	}
+}
+
+/* Competitions page: [raffle_list] is the same .rc-card component used by the
+ * plugin/WooCommerce loops. Remove native wrapper influence and use the same
+ * responsive grid geometry everywhere. */
+.wprt-page-competitions .wpr-active-grid,
+.wprt-page-competitions .wprt-active-list {
+	width: 100%;
+	max-width: 100%;
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.wprt-page-competitions .raffle-list-grid {
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	gap: 24px !important;
+	width: 100% !important;
+	padding: 20px 0 !important;
+	margin: 0 !important;
+	align-items: stretch;
+}
+
+.wprt-page-competitions .raffle-list-grid > .rc-card {
+	width: 100% !important;
+	min-width: 0 !important;
+	height: 100%;
+	margin: 0 !important;
+}
+
+/* Preserve the exact preset card identity even inside the native wrapper. */
+body.wpr-preset-retro .wprt-page-competitions .rc-card {
+	background: #fff;
+	border-color: #dcd7e4;
+}
+body.wpr-preset-golf .wprt-page-competitions .rc-card,
+body.wpr-preset-car .wprt-page-competitions .rc-card,
+body.wpr-preset-diamond .wprt-page-competitions .rc-card,
+body.wpr-preset-elite .wprt-page-competitions .rc-card,
+body.wpr-preset-default .wprt-page-competitions .rc-card {
+	/* The preset files own the visual properties; this rule only ensures the
+	   native page does not impose a competing surface. */
+	isolation: isolate;
+}
+
+@media (min-width: 1280px) {
+	.wprt-page-competitions .raffle-list-grid {
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+	}
+}
+@media (max-width: 991.98px) {
+	.wprt-page-competitions .raffle-list-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+		gap: 16px !important;
+	}
+}
+@media (max-width: 575.98px) {
+	.wprt-page-competitions .raffle-list-grid {
+		grid-template-columns: 1fr !important;
+		gap: 14px !important;
+	}
+}

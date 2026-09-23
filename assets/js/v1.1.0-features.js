@@ -14,39 +14,85 @@
 	 * Dark mode toggle
 	 * ----------------------------------------------------------------- */
 	function initDarkMode() {
-		var mode = ( typeof wprThemeData !== 'undefined' && wprThemeData.darkMode ) ? wprThemeData.darkMode : 'off';
-		if ( 'off' === mode ) {
+		var configured = ( typeof wprThemeData !== 'undefined' && wprThemeData.darkMode ) ? wprThemeData.darkMode : 'off';
+		if ( 'off' === configured ) {
+			document.documentElement.removeAttribute( 'data-theme' );
+			document.documentElement.style.colorScheme = '';
 			return;
 		}
 
-		// Auto: detect OS preference if no stored choice.
+		var media = window.matchMedia ? window.matchMedia( '(prefers-color-scheme: dark)' ) : null;
 		var stored = localStorage.getItem( 'wprt-theme' );
-		if ( ! stored && 'auto' === mode ) {
-			stored = window.matchMedia( '(prefers-color-scheme: dark)' ).matches ? 'dark' : 'light';
-		}
-		if ( 'dark' === stored ) {
-			document.documentElement.setAttribute( 'data-theme', 'dark' );
+		var current = document.documentElement.getAttribute( 'data-theme' );
+
+		if ( 'dark' !== current && 'light' !== current ) {
+			if ( 'dark' === stored || 'light' === stored ) {
+				current = stored;
+			} else if ( 'auto' === configured && media ) {
+				current = media.matches ? 'dark' : 'light';
+			} else {
+				current = 'light';
+			}
+			applyMode( current, false );
 		}
 
-		// Inject the toggle into the header actions.
 		var actions = document.querySelector( '.wpr-header__actions' );
-		if ( actions ) {
-			var toggle = document.createElement( 'button' );
-			toggle.className = 'wprt-dark-toggle wpr-icon-btn';
-			toggle.setAttribute( 'aria-label', 'Toggle dark mode' );
-			toggle.type = 'button';
-			toggle.innerHTML = '<i class="fa-solid fa-moon"></i><i class="fa-solid fa-sun"></i>';
-			toggle.addEventListener( 'click', function () {
-				var isDark = 'dark' === document.documentElement.getAttribute( 'data-theme' );
-				if ( isDark ) {
-					document.documentElement.removeAttribute( 'data-theme' );
-					localStorage.setItem( 'wprt-theme', 'light' );
-				} else {
-					document.documentElement.setAttribute( 'data-theme', 'dark' );
-					localStorage.setItem( 'wprt-theme', 'dark' );
+		if ( ! actions || actions.querySelector( '.wprt-dark-toggle' ) ) {
+			return;
+		}
+
+		var toggle = document.createElement( 'button' );
+		toggle.className = 'wprt-dark-toggle wprt-mode-toggle';
+		toggle.type = 'button';
+		toggle.innerHTML =
+			'<span class="wprt-mode-toggle__track" aria-hidden="true">' +
+				'<span class="wprt-mode-toggle__icon wprt-mode-toggle__icon--sun"><i class="fa-solid fa-sun"></i></span>' +
+				'<span class="wprt-mode-toggle__icon wprt-mode-toggle__icon--moon"><i class="fa-solid fa-moon"></i></span>' +
+				'<span class="wprt-mode-toggle__thumb"></span>' +
+			'</span>';
+
+		syncToggle();
+		toggle.addEventListener( 'click', function () {
+			var isDark = 'dark' === document.documentElement.getAttribute( 'data-theme' );
+			applyMode( isDark ? 'light' : 'dark', true );
+			syncToggle();
+		} );
+		actions.insertBefore( toggle, actions.firstChild );
+
+		// In Auto mode, follow OS changes until the visitor makes an explicit
+		// selection. Once a choice is stored, it wins on future visits.
+		if ( 'auto' === configured && media ) {
+			var systemChange = function ( event ) {
+				if ( localStorage.getItem( 'wprt-theme' ) ) {
+					return;
 				}
-			} );
-			actions.insertBefore( toggle, actions.firstChild );
+				applyMode( event.matches ? 'dark' : 'light', false );
+				syncToggle();
+			};
+			if ( media.addEventListener ) {
+				media.addEventListener( 'change', systemChange );
+			} else if ( media.addListener ) {
+				media.addListener( systemChange );
+			}
+		}
+
+		function applyMode( mode, remember ) {
+			document.documentElement.setAttribute( 'data-theme', mode );
+			document.documentElement.style.colorScheme = mode;
+			if ( remember ) {
+				localStorage.setItem( 'wprt-theme', mode );
+			}
+			document.dispatchEvent( new CustomEvent( 'wprt:modechange', { detail: { mode: mode } } ) );
+		}
+
+		function syncToggle() {
+			if ( ! toggle ) {
+				return;
+			}
+			var isDark = 'dark' === document.documentElement.getAttribute( 'data-theme' );
+			toggle.setAttribute( 'aria-pressed', isDark ? 'true' : 'false' );
+			toggle.setAttribute( 'aria-label', isDark ? 'Switch to day mode' : 'Switch to night mode' );
+			toggle.setAttribute( 'title', isDark ? 'Day mode' : 'Night mode' );
 		}
 	}
 

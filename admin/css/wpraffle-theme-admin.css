@@ -404,3 +404,793 @@
 .wprt-builder-toggle input:checked + .wprt-builder-toggle__track { background: #e4678a; }
 .wprt-builder-toggle input:checked + .wprt-builder-toggle__track .wprt-builder-toggle__thumb { transform: translateX(16px); }
 .wprt-builder-toggle input:focus-visible + .wprt-builder-toggle__track { outline: 2px solid #e4678a; outline-offset: 2px; }
+
+/* ===================================================================
+   v1.4.0 — Premium Control Centre
+   =================================================================== */
+.wprt-control-view{max-width:1500px}.wprt-admin__brand{background:linear-gradient(145deg,#121417,#1d2327)}.wprt-admin__brand .dashicons{color:#ffdc25}.wprt-admin__nav-item.is-active{border-left-color:#ffdc25}.wprt-admin__nav-item.is-active .dashicons{color:#ffdc25}.wprt-admin__content-header{display:flex;align-items:center;justify-content:space-between;min-height:40px}.wprt-admin__content-header:after{content:"WPRaffle Theme  •  Premium tools, free forever";font-size:.72rem;color:#8c8f94;letter-spacing:.04em}.wprt-eyebrow{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#ffdc25;margin-bottom:.75rem}.wprt-hero-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2rem;padding:clamp(1.8rem,4vw,3.25rem);border-radius:18px;background:radial-gradient(circle at 85% 20%,rgba(255,220,37,.15),transparent 28%),linear-gradient(120deg,#111316,#1d2126);color:#fff;margin-bottom:1.5rem;box-shadow:0 18px 40px rgba(0,0,0,.12)}.wprt-hero-card h2{color:#fff;font-size:clamp(1.8rem,3vw,2.8rem);line-height:1.05;margin:0 0 .8rem;max-width:780px}.wprt-hero-card p{color:#b8bec5;max-width:720px;font-size:.98rem;line-height:1.65}.wprt-button-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.3rem}.wprt-hero-card .button-hero{min-height:42px;display:inline-flex;align-items:center;padding:0 1.1rem;border-radius:7px}.wprt-hero-card .button-primary{background:#ffdc25;border-color:#ffdc25;color:#111316}.wprt-hero-card .button-secondary{background:transparent;border-color:#50565d;color:#fff}.wprt-readiness-ring{--progress:50%;width:132px;height:132px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle closest-side,#171a1d 78%,transparent 80% 100%),conic-gradient(#ffdc25 var(--progress),#343a40 0);box-shadow:0 0 0 1px rgba(255,255,255,.08)}.wprt-readiness-ring strong{font-size:1.7rem;color:#fff}.wprt-readiness-ring span{font-size:.7rem;text-transform:uppercase;letter-spacing:.09em;color:#89919a}.wprt-dashboard-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.wprt-dashboard-card{margin:0}.wprt-card-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.15rem}.wprt-card-heading>div{display:flex;align-items:center;gap:.65rem}.wprt-card-heading h2{font-size:1rem;margin:0;color:#1d2327}.wprt-card-heading .dashicons{color:#8a7310}.wprt-card-heading>a:not(.button){font-size:.78rem;text-decoration:none}.wprt-check-list{display:grid;gap:.65rem}.wprt-check{display:grid;grid-template-columns:24px 1fr;gap:.7rem;align-items:start;padding:.75rem;border-radius:8px;background:#f6f7f7}.wprt-check .dashicons{font-size:18px;width:18px;height:18px;margin-top:2px}.wprt-check.is-ok .dashicons{color:#16833c}.wprt-check.is-warning .dashicons{color:#b26200}.wprt-check strong{display:block;font-size:.84rem}.wprt-check small{display:block;color:#777;margin-top:.15rem;line-height:1.4}.wprt-quick-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem}.wprt-quick-actions>a{display:grid;grid-template-columns:34px 1fr;column-gap:.75rem;row-gap:.12rem;padding:1rem;border:1px solid #e2e4e7;border-radius:9px;background:#fafafa;text-decoration:none;color:#1d2327;transition:.15s ease}.wprt-quick-actions>a:hover{border-color:#c7a900;background:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}.wprt-quick-actions .dashicons{grid-row:1/3;font-size:24px;width:24px;height:24px;color:#8a7310}.wprt-quick-actions strong{font-size:.85rem}.wprt-quick-actions small{color:#777;line-height:1.35}.wprt-mini-style,.wprt-starter-preview{border-radius:10px;overflow:hidden;background:#f3f1ea;border:1px solid rgba(0,0,0,.1)}.wprt-mini-browser{height:26px;background:#111316;display:flex;align-items:center;gap:4px;padding:0 9px}.wprt-mini-browser i{width:5px;height:5px;border-radius:50%;background:#656a70}.wprt-mini-browser span{height:5px;width:38%;margin-left:auto;background:rgba(255,255,255,.13);border-radius:3px}.wprt-mini-hero{height:100px;background:#111316;padding:20px;display:flex;flex-direction:column;justify-content:center}.wprt-mini-hero b{font-size:18px;color:#fff;letter-spacing:-.04em}.wprt-mini-hero em{width:44px;height:8px;background:#ffdc25;margin-top:9px;border-radius:2px}.wprt-mini-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:10px}.wprt-mini-cards i{display:block;height:54px;background:#fff;border-radius:5px;box-shadow:0 2px 8px rgba(0,0,0,.08)}.is-golf .wprt-mini-browser,.is-golf .wprt-mini-hero{background:#10271c}.is-golf .wprt-mini-hero em{background:#d8f35a}.is-car .wprt-mini-browser,.is-car .wprt-mini-hero{background:#111214}.is-car .wprt-mini-hero em{background:#f05a24}.is-retro .wprt-mini-browser,.is-retro .wprt-mini-hero{background:#0b0812}.is-retro .wprt-mini-hero em{background:linear-gradient(90deg,#7c3cff,#ff3ea5,#20d9ff)}.is-diamond .wprt-mini-browser,.is-diamond .wprt-mini-hero{background:#171719}.is-diamond .wprt-mini-hero em{background:#d8b84a}.is-elite .wprt-mini-browser,.is-elite .wprt-mini-hero{background:#090a0b}.is-elite .wprt-mini-hero em{background:#cbb878}.wprt-setup-steps{display:grid;gap:1rem}.wprt-setup-step{display:grid;grid-template-columns:38px 1fr;gap:1rem;padding:1.1rem;border:1px solid #e2e4e7;border-radius:10px}.wprt-setup-step>span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#111316;color:#ffdc25;font-weight:800}.wprt-setup-step h3{margin:0 0 .35rem!important;border:0!important;padding:0!important}.wprt-setup-step p{color:#646970;margin:.25rem 0 .8rem}.wprt-page-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}.wprt-page-row{display:grid;grid-template-columns:22px 1fr auto;align-items:center;gap:.6rem;padding:.75rem .9rem;background:#f6f7f7;border-radius:7px}.wprt-page-row .dashicons{color:#9a9a9a}.wprt-page-row.is-ready .dashicons{color:#16833c}.wprt-page-row strong,.wprt-page-row small{display:block}.wprt-page-row small{color:#8c8f94;margin-top:2px}.wprt-starter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.wprt-starter-card{border:1px solid #e0e2e5;border-radius:12px;overflow:hidden;background:#fff;transition:.16s ease}.wprt-starter-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}.wprt-starter-card.is-active{border-color:#c3a400;box-shadow:0 0 0 2px rgba(255,220,37,.25)}.wprt-starter-preview{border:0;border-radius:0}.wprt-starter-body{padding:1rem}.wprt-starter-title{display:flex;justify-content:space-between;gap:.75rem}.wprt-starter-title h3{margin:0!important;border:0!important;padding:0!important}.wprt-starter-title small{display:block;color:#777;margin-top:.2rem}.wprt-starter-body p{color:#646970;min-height:52px;line-height:1.45}.wprt-current-pill,.wprt-ready-pill{display:inline-flex;align-items:center;align-self:flex-start;padding:.2rem .48rem;border-radius:999px;background:#eef8f1;color:#18723a;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.wprt-template-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem}.wprt-template-card{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:.65rem;padding:.8rem;border:1px solid #e2e4e7;border-radius:8px}.wprt-template-card>.dashicons{color:#8a7310}.wprt-template-card strong,.wprt-template-card small{display:block}.wprt-template-card small{font-size:.68rem;color:#8c8f94;margin-top:.15rem;word-break:break-all}.wprt-chip-list{display:flex;flex-wrap:wrap;gap:.45rem}.wprt-chip-list span{padding:.38rem .62rem;border-radius:999px;background:#f0f0f1;border:1px solid #e0e0e0;font-size:.72rem}.wprt-status-table{display:grid}.wprt-status-row{display:grid;grid-template-columns:24px 180px 1fr;align-items:center;gap:.7rem;padding:.75rem 0;border-bottom:1px solid #f0f0f1}.wprt-status-row:last-child{border-bottom:0}.wprt-status-row .dashicons-yes-alt{color:#16833c}.wprt-status-row .dashicons-warning{color:#b26200}.wprt-status-row code{justify-self:start;background:#f6f7f7}.wprt-control-view input[type=file]{max-width:100%}
+@media(max-width:1100px){.wprt-starter-grid,.wprt-template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wprt-quick-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:782px){.wprt-admin__content-header:after{display:none}.wprt-hero-card,.wprt-dashboard-grid{grid-template-columns:1fr}.wprt-readiness-ring{width:100px;height:100px}.wprt-starter-grid,.wprt-template-grid,.wprt-page-grid,.wprt-quick-actions{grid-template-columns:1fr}.wprt-status-row{grid-template-columns:22px 1fr}.wprt-status-row code{grid-column:2}}
+.wprt-admin__search{position:relative;padding:.75rem 1rem .25rem;background:#171b1f}.wprt-admin__search .dashicons{position:absolute;left:1.65rem;top:1.28rem;color:#727980;font-size:16px}.wprt-admin__search input[type=search]{width:100%;min-height:36px;padding-left:2rem;border:1px solid #343a40;border-radius:7px;background:#111417;color:#e8e9ea;box-shadow:none}.wprt-admin__search input[type=search]::placeholder{color:#737b82}.wprt-admin__search input[type=search]:focus{border-color:#ffdc25;box-shadow:0 0 0 1px #ffdc25}@media(max-width:782px){.wprt-admin__search{display:none}}
+
+
+/* ==========================================================================
+   v1.4.0 Responsive Admin UX
+   Desktop / Tablet / Mobile optimisation for Theme Options Control Centre.
+   ========================================================================== */
+
+.wprt-admin-wrap,
+.wprt-admin-shell,
+.wprt-admin-content,
+.wprt-settings-panel,
+.wprt-dashboard-grid,
+.wprt-card-grid {
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+.wprt-admin-content img,
+.wprt-settings-panel img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Wide desktop */
+@media (min-width: 1280px) {
+	.wprt-admin-shell {
+		display: grid;
+		grid-template-columns: 260px minmax(0, 1fr);
+		gap: 28px;
+		align-items: start;
+	}
+
+	.wprt-dashboard-grid,
+	.wprt-card-grid,
+	.wprt-starter-grid,
+	.wprt-template-grid,
+	.wprt-status-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 20px;
+	}
+
+	.wprt-dashboard-grid--2,
+	.wprt-card-grid--2 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* Standard desktop / laptop */
+@media (min-width: 992px) and (max-width: 1279.98px) {
+	.wprt-admin-shell {
+		display: grid;
+		grid-template-columns: 230px minmax(0, 1fr);
+		gap: 22px;
+		align-items: start;
+	}
+
+	.wprt-dashboard-grid,
+	.wprt-card-grid,
+	.wprt-starter-grid,
+	.wprt-template-grid,
+	.wprt-status-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+	}
+}
+
+/* Tablet */
+@media (min-width: 783px) and (max-width: 991.98px) {
+	.wprt-admin-shell {
+		display: block;
+	}
+
+	.wprt-admin-sidebar,
+	.wprt-settings-sidebar {
+		position: static !important;
+		width: 100% !important;
+		max-width: none !important;
+		margin: 0 0 18px !important;
+	}
+
+	.wprt-admin-sidebar nav,
+	.wprt-settings-sidebar nav,
+	.wprt-admin-nav {
+		display: flex;
+		gap: 8px;
+		overflow-x: auto;
+		overflow-y: hidden;
+		padding: 6px 2px 10px;
+		scroll-snap-type: x proximity;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.wprt-admin-sidebar nav a,
+	.wprt-settings-sidebar nav a,
+	.wprt-admin-nav a {
+		flex: 0 0 auto;
+		min-height: 44px;
+		display: inline-flex;
+		align-items: center;
+		white-space: nowrap;
+		scroll-snap-align: start;
+	}
+
+	.wprt-dashboard-grid,
+	.wprt-card-grid,
+	.wprt-starter-grid,
+	.wprt-template-grid,
+	.wprt-status-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 16px;
+	}
+
+	.wprt-form-row,
+	.wprt-setting-row,
+	.wprt-control-row {
+		grid-template-columns: minmax(180px, .8fr) minmax(0, 1.2fr) !important;
+		gap: 18px !important;
+	}
+
+	.wprt-admin-actions,
+	.wprt-toolbar,
+	.wprt-page-actions {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+}
+
+/* Phones + WordPress collapsed admin */
+@media (max-width: 782px) {
+	.wprt-admin-wrap {
+		margin-left: 0 !important;
+		margin-right: 10px !important;
+		padding: 0 !important;
+	}
+
+	.wprt-admin-shell,
+	.wprt-admin-layout,
+	.wprt-settings-layout {
+		display: block !important;
+		width: 100% !important;
+	}
+
+	.wprt-admin-sidebar,
+	.wprt-settings-sidebar {
+		position: static !important;
+		width: 100% !important;
+		max-width: none !important;
+		min-width: 0 !important;
+		margin: 0 0 14px !important;
+		padding: 10px !important;
+		border-radius: 10px !important;
+	}
+
+	.wprt-admin-sidebar nav,
+	.wprt-settings-sidebar nav,
+	.wprt-admin-nav {
+		display: flex !important;
+		gap: 7px;
+		width: 100%;
+		overflow-x: auto !important;
+		overflow-y: hidden !important;
+		padding: 2px 0 8px;
+		scroll-snap-type: x proximity;
+		overscroll-behavior-inline: contain;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.wprt-admin-sidebar nav a,
+	.wprt-settings-sidebar nav a,
+	.wprt-admin-nav a {
+		flex: 0 0 auto !important;
+		min-height: 44px !important;
+		padding: 10px 12px !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		white-space: nowrap !important;
+		scroll-snap-align: start;
+	}
+
+	.wprt-admin-content,
+	.wprt-settings-content,
+	.wprt-panel,
+	.wprt-settings-panel {
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 0 !important;
+		margin: 0 !important;
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
+
+	.wprt-dashboard-grid,
+	.wprt-card-grid,
+	.wprt-starter-grid,
+	.wprt-template-grid,
+	.wprt-status-grid {
+		display: grid !important;
+		grid-template-columns: minmax(0, 1fr) !important;
+		gap: 12px !important;
+	}
+
+	.wprt-card,
+	.wprt-dashboard-card,
+	.wprt-starter-card,
+	.wprt-template-card,
+	.wprt-status-card {
+		min-width: 0 !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+		padding: 16px !important;
+	}
+
+	.wprt-form-row,
+	.wprt-setting-row,
+	.wprt-control-row,
+	.wprt-field-row {
+		display: block !important;
+		grid-template-columns: none !important;
+		width: 100% !important;
+	}
+
+	.wprt-form-row > *,
+	.wprt-setting-row > *,
+	.wprt-control-row > *,
+	.wprt-field-row > * {
+		width: 100% !important;
+		max-width: 100% !important;
+		min-width: 0 !important;
+		margin-left: 0 !important;
+	}
+
+	.wprt-admin-wrap input[type="text"],
+	.wprt-admin-wrap input[type="url"],
+	.wprt-admin-wrap input[type="email"],
+	.wprt-admin-wrap input[type="number"],
+	.wprt-admin-wrap input[type="password"],
+	.wprt-admin-wrap input[type="search"],
+	.wprt-admin-wrap select,
+	.wprt-admin-wrap textarea,
+	.wprt-settings-wrap input[type="text"],
+	.wprt-settings-wrap input[type="url"],
+	.wprt-settings-wrap input[type="email"],
+	.wprt-settings-wrap input[type="number"],
+	.wprt-settings-wrap input[type="password"],
+	.wprt-settings-wrap input[type="search"],
+	.wprt-settings-wrap select,
+	.wprt-settings-wrap textarea {
+		width: 100% !important;
+		max-width: 100% !important;
+		min-height: 44px !important;
+		font-size: 16px !important;
+		box-sizing: border-box !important;
+	}
+
+	.wprt-admin-wrap textarea,
+	.wprt-settings-wrap textarea {
+		min-height: 120px !important;
+	}
+
+	.wprt-admin-wrap .button,
+	.wprt-settings-wrap .button,
+	.wprt-admin-actions .button,
+	.wprt-page-actions .button,
+	.wprt-toolbar .button {
+		min-height: 44px !important;
+		padding: 8px 14px !important;
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: center !important;
+	}
+
+	.wprt-admin-actions,
+	.wprt-page-actions,
+	.wprt-toolbar,
+	.wprt-card-actions,
+	.wprt-template-actions {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		gap: 8px !important;
+		width: 100% !important;
+	}
+
+	.wprt-admin-actions .button,
+	.wprt-page-actions .button {
+		flex: 1 1 160px;
+	}
+
+	.wprt-admin-header,
+	.wprt-page-header,
+	.wprt-settings-header {
+		display: block !important;
+		padding: 16px !important;
+	}
+
+	.wprt-admin-header h1,
+	.wprt-page-header h1,
+	.wprt-settings-header h1 {
+		font-size: 22px !important;
+		line-height: 1.2 !important;
+	}
+
+	/* Keep dense status/settings tables usable without clipping. */
+	.wprt-admin-wrap table,
+	.wprt-settings-wrap table,
+	.wprt-status-table {
+		display: block !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		overflow-x: auto !important;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.wprt-admin-wrap .form-table,
+	.wprt-settings-wrap .form-table {
+		display: block !important;
+	}
+
+	.wprt-admin-wrap .form-table tbody,
+	.wprt-admin-wrap .form-table tr,
+	.wprt-admin-wrap .form-table th,
+	.wprt-admin-wrap .form-table td,
+	.wprt-settings-wrap .form-table tbody,
+	.wprt-settings-wrap .form-table tr,
+	.wprt-settings-wrap .form-table th,
+	.wprt-settings-wrap .form-table td {
+		display: block !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	.wprt-admin-wrap .form-table th,
+	.wprt-settings-wrap .form-table th {
+		padding: 14px 0 6px !important;
+	}
+
+	.wprt-admin-wrap .form-table td,
+	.wprt-settings-wrap .form-table td {
+		padding: 0 0 14px !important;
+	}
+
+	.wprt-preview-frame,
+	.wprt-template-preview,
+	.wprt-starter-preview {
+		width: 100% !important;
+		max-width: 100% !important;
+		aspect-ratio: 16 / 10;
+		height: auto !important;
+	}
+
+	.wprt-notice,
+	.wprt-callout,
+	.wprt-readiness-item {
+		padding: 12px !important;
+	}
+
+	.wprt-setting-description,
+	.wprt-help-text,
+	.description {
+		overflow-wrap: anywhere;
+	}
+
+	/* Prevent fixed/sticky admin elements from consuming mobile viewport. */
+	.wprt-admin-sidebar,
+	.wprt-save-bar,
+	.wprt-sticky-actions {
+		top: auto !important;
+	}
+
+	.wprt-save-bar,
+	.wprt-sticky-actions {
+		position: static !important;
+		width: 100% !important;
+		margin-top: 14px !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.wprt-admin-wrap {
+		margin-right: 8px !important;
+	}
+
+	.wprt-card,
+	.wprt-dashboard-card,
+	.wprt-starter-card,
+	.wprt-template-card,
+	.wprt-status-card {
+		padding: 13px !important;
+	}
+
+	.wprt-admin-actions .button,
+	.wprt-page-actions .button,
+	.wprt-toolbar .button {
+		width: 100% !important;
+		flex-basis: 100% !important;
+	}
+
+	.wprt-admin-header h1,
+	.wprt-page-header h1,
+	.wprt-settings-header h1 {
+		font-size: 20px !important;
+	}
+}
+
+
+/* ==========================================================================\n   v1.4.0 Branded responsive navigation\n   Desktop keeps the Control Centre sidebar. Tablet/mobile use a hamburger\n   selector showing the current section name instead of horizontal tabs.\n   ========================================================================== */
+.wprt-admin__mobile-toggle { display:none; }
+@media (max-width: 991.98px) {
+    .appearance_page_wpraffle-theme-settings #wpcontent { padding-left:0 !important; }
+    .wprt-admin__mobile-toggle {
+        --wprt-mobile-accent: var(--wprt-accent, #ffdc25);
+        display:flex;width:100%;min-height:62px;align-items:center;gap:12px;
+        padding:10px 14px;border:0;border-radius:0;background:#1d2327;color:#fff;
+        text-align:left;cursor:pointer;position:sticky;top:32px;z-index:80;box-shadow:none;
+    }
+    .wprt-admin__mobile-toggle-icon { width:24px;display:flex;flex-direction:column;gap:4px;flex:0 0 24px; }
+    .wprt-admin__mobile-toggle-icon span { display:block;width:22px;height:2px;border-radius:2px;background:var(--wprt-mobile-accent); }
+    .wprt-admin__mobile-toggle-text { flex:1;min-width:0; }
+    .wprt-admin__mobile-toggle-text small { display:block;color:#8c8f94;font-size:10px;text-transform:uppercase;letter-spacing:.1em; }
+    .wprt-admin__mobile-toggle-text strong { display:block;color:#fff;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px; }
+    .wprt-admin__mobile-toggle > .dashicons { color:#c3c4c7;transition:transform .18s ease; }
+    body.wprt-nav-open .wprt-admin__mobile-toggle > .dashicons { transform:rotate(180deg); }
+
+    .wprt-admin { display:block !important;min-height:0 !important; }
+    .wprt-admin__sidebar {
+        display:none !important;position:relative !important;top:auto !important;width:100% !important;
+        height:auto !important;max-height:70vh !important;overflow:auto !important;border:0 !important;
+        box-shadow:0 14px 30px rgba(0,0,0,.20);z-index:70;
+    }
+    body.wprt-nav-open .wprt-admin__sidebar { display:flex !important; }
+    .wprt-admin__brand { display:none !important; }
+    .wprt-admin__sidebar-footer { display:none !important; }
+    .wprt-admin__search { padding:12px 14px 6px; }
+    .wprt-admin__nav { padding:5px 0 10px;overflow:auto; }
+    .wprt-admin__group { margin-bottom:3px; }
+    .wprt-admin__group-label { padding:11px 16px 5px; }
+    .wprt-admin__nav-item { min-height:46px;box-sizing:border-box;padding:10px 16px; }
+    .wprt-admin__content { width:100% !important;min-width:0;overflow:visible; }
+    .wprt-admin__content-header { padding:18px 16px; }
+    .wprt-admin .wpr-form { padding:18px 16px 36px !important; }
+}
+@media (max-width:782px) {
+    .wprt-admin__mobile-toggle { top:46px; }
+}
+
+
+/* ==========================================================================
+   v1.4.0 RC navigation correction
+   The legacy mobile rule converted the real sidebar navigation into a
+   horizontal tab strip. The compact hamburger now opens a true vertical
+   dropdown menu on tablet/mobile.
+   ========================================================================== */
+@media (max-width: 991.98px) {
+	.wprt-admin__sidebar .wprt-admin__nav {
+		display: block !important;
+		width: 100% !important;
+		overflow-x: hidden !important;
+		overflow-y: auto !important;
+		padding: 6px 0 12px !important;
+	}
+
+	.wprt-admin__sidebar .wprt-admin__group {
+		display: block !important;
+		width: 100% !important;
+		margin: 0 0 4px !important;
+	}
+
+	.wprt-admin__sidebar .wprt-admin__group-label {
+		display: block !important;
+		padding: 12px 16px 5px !important;
+		white-space: normal !important;
+	}
+
+	.wprt-admin__sidebar .wprt-admin__nav-item {
+		display: flex !important;
+		width: 100% !important;
+		min-height: 46px !important;
+		padding: 10px 16px !important;
+		border-left: 3px solid transparent !important;
+		border-bottom: 0 !important;
+		white-space: normal !important;
+		box-sizing: border-box !important;
+	}
+
+	.wprt-admin__sidebar .wprt-admin__nav-item.is-active {
+		border-left-color: var(--wprt-accent, #ffdc25) !important;
+		border-bottom-color: transparent !important;
+	}
+
+	/* Sidebar exists only as the hamburger dropdown below desktop. */
+	body:not(.wprt-nav-open) .wprt-admin__sidebar {
+		display: none !important;
+	}
+
+	body.wprt-nav-open .wprt-admin__sidebar {
+		display: flex !important;
+		flex-direction: column !important;
+	}
+
+	.wprt-admin__search {
+		flex: 0 0 auto !important;
+	}
+}
+
+
+/* v1.4.0 — Homepage Hero CTA controls */
+.wprt-hero-cta-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 18px;
+	margin-top: 18px;
+}
+.wprt-hero-cta-card {
+	background: #fff;
+	border: 1px solid #e1e3e6;
+	border-radius: 10px;
+	padding: 18px;
+	box-shadow: 0 1px 2px rgba(0,0,0,.025);
+}
+.wprt-hero-cta-card h3 {
+	margin: 0 0 16px;
+	font-size: 15px;
+}
+.wprt-hero-cta-card p {
+	margin: 0 0 14px;
+}
+.wprt-hero-cta-card label {
+	display: block;
+	margin-bottom: 6px;
+}
+.wprt-hero-cta-card input[type="text"],
+.wprt-hero-cta-card input[type="url"],
+.wprt-hero-cta-card select {
+	width: 100%;
+	max-width: 100%;
+}
+@media (max-width: 991.98px) {
+	.wprt-hero-cta-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+
+/* v1.4.0 — persistent onboarding completion */
+.wprt-inline-form {
+	display: inline-flex;
+	margin: 0;
+}
+.wprt-hero-card--complete {
+	border-color: #d8e6d9;
+	background:
+		radial-gradient(circle at 88% 20%, rgba(70,160,90,.10), transparent 28%),
+		linear-gradient(135deg, #fff, #f8fbf8);
+}
+.wprt-hero-card--complete h2 .dashicons {
+	color: #2f9e54;
+	vertical-align: -3px;
+}
+.wprt-setup-complete-mark {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #eef8f0;
+	border: 8px solid #dcefe1;
+	color: #247f42;
+	text-align: center;
+	box-shadow: inset 0 0 0 1px rgba(36,127,66,.08);
+}
+.wprt-setup-complete-mark .dashicons {
+	width: 36px;
+	height: 36px;
+	font-size: 36px;
+	margin-bottom: 4px;
+}
+.wprt-setup-complete-mark strong {
+	font-size: 18px;
+}
+.wprt-setup-complete-mark small {
+	margin-top: 3px;
+	color: #5d7564;
+}
+.wprt-setup-status-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+	margin: 0 0 18px;
+	padding: 16px 18px;
+	background: #fff8dc;
+	border: 1px solid #ead78e;
+	border-radius: 10px;
+}
+.wprt-setup-status-banner > div {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+.wprt-setup-status-banner.is-complete {
+	justify-content: flex-start;
+	background: #eef8f0;
+	border-color: #c9e5cf;
+	color: #236b39;
+}
+.wprt-setup-status-banner.is-complete > .dashicons {
+	width: 28px;
+	height: 28px;
+	font-size: 28px;
+	flex: 0 0 28px;
+}
+@media (max-width: 782px) {
+	.wprt-hero-card--complete {
+		display: block !important;
+	}
+	.wprt-setup-complete-mark {
+		width: 110px;
+		height: 110px;
+		margin-top: 18px;
+	}
+	.wprt-setup-status-banner {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+	.wprt-setup-status-banner form,
+	.wprt-setup-status-banner .button {
+		width: 100%;
+	}
+	.wprt-inline-form {
+		width: auto;
+	}
+}
+
+
+/* v1.4.0 — completed dashboard state contrast correction */
+.wprt-hero-card.wprt-hero-card--complete,
+.wprt-hero-card.wprt-hero-card--complete * {
+	text-shadow: none;
+}
+.wprt-hero-card.wprt-hero-card--complete h2 {
+	color: #183c24 !important;
+}
+.wprt-hero-card.wprt-hero-card--complete p {
+	color: #5c6960 !important;
+}
+.wprt-hero-card.wprt-hero-card--complete .wprt-eyebrow {
+	color: #b18d00 !important;
+}
+.wprt-hero-card.wprt-hero-card--complete .button-secondary {
+	background: #ffffff !important;
+	border-color: #3f4742 !important;
+	color: #1f2923 !important;
+}
+.wprt-hero-card.wprt-hero-card--complete .button-secondary:hover,
+.wprt-hero-card.wprt-hero-card--complete .button-secondary:focus {
+	background: #f1f5f2 !important;
+	border-color: #1f2923 !important;
+	color: #111813 !important;
+}
+.wprt-hero-card.wprt-hero-card--complete .button-primary {
+	color: #111 !important;
+}
+
+/* Permanent Recommended Plugins screen */
+.wprt-plugin-grid {
+	display: grid;
+	grid-template-columns: repeat(2,minmax(0,1fr));
+	gap: 16px;
+	margin-top: 20px;
+}
+.wprt-plugin-card {
+	display: flex;
+	gap: 16px;
+	padding: 18px;
+	background: #fff;
+	border: 1px solid #e0e2e4;
+	border-radius: 10px;
+	box-shadow: 0 2px 8px rgba(0,0,0,.035);
+}
+.wprt-plugin-card.is-active {
+	border-color: #cbe5d1;
+}
+.wprt-plugin-card__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	flex: 0 0 44px;
+	border-radius: 9px;
+	background: #f2f3f3;
+	color: #23282d;
+}
+.wprt-plugin-card.is-active .wprt-plugin-card__icon {
+	background: #edf8ef;
+	color: #258743;
+}
+.wprt-plugin-card__body {
+	flex: 1;
+	min-width: 0;
+}
+.wprt-plugin-card__title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.wprt-plugin-card__title h3 {
+	margin: 0;
+	font-size: 15px;
+}
+.wprt-required-pill {
+	padding: 3px 7px;
+	border-radius: 999px;
+	background: #fff1ae;
+	color: #5c4a00;
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+}
+.wprt-plugin-status {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 10px 0 14px;
+	color: #646970;
+}
+.wprt-plugin-card.is-active .wprt-plugin-status {
+	color: #257942;
+}
+.wprt-plugin-card__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.wprt-plugin-manager-footer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 18px;
+	padding-top: 16px;
+	border-top: 1px solid #e5e5e5;
+}
+@media (max-width: 782px) {
+	.wprt-plugin-grid {
+		grid-template-columns: 1fr;
+	}
+	.wprt-plugin-card {
+		padding: 15px;
+	}
+	.wprt-hero-card.wprt-hero-card--complete h2 {
+		color: #183c24 !important;
+	}
+	.wprt-hero-card.wprt-hero-card--complete p {
+		color: #5c6960 !important;
+	}
+}
+
+
+.wprt-bundled-pill {
+	padding: 3px 7px;
+	border-radius: 999px;
+	background: #e9f4ff;
+	color: #145a8d;
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .05em;
+	text-transform: uppercase;
+}
+.wprt-plugin-card__actions .wprt-inline-form {
+	display: inline-flex;
+	margin: 0;
+}
+@media (max-width: 782px) {
+	.wprt-plugin-card__actions .wprt-inline-form,
+	.wprt-plugin-card__actions .wprt-inline-form .button {
+		width: 100%;
+	}
+}

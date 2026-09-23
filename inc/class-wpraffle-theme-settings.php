@@ -223,6 +223,18 @@ final class WPRaffle_Theme_Settings {
 			'confetti_winners'   => 'on',
 			'progress_animate'   => 'on',
 			'hero_counters'      => 'on',
+			'hero_primary_enabled'    => 'on',
+			'hero_primary_text'       => __( 'Enter Competitions', 'wpraffle-theme' ),
+			'hero_primary_link_type'  => 'shop',
+			'hero_primary_page_id'    => 0,
+			'hero_primary_url'        => '',
+			'hero_primary_new_tab'    => '',
+			'hero_secondary_enabled'  => 'on',
+			'hero_secondary_text'     => __( 'See Recent Winners', 'wpraffle-theme' ),
+			'hero_secondary_link_type'=> 'winners-section',
+			'hero_secondary_page_id'  => 0,
+			'hero_secondary_url'      => '',
+			'hero_secondary_new_tab'  => '',
 			// v1.2.0 Trustpilot integration.
 			'trustpilot_business_id' => '',
 			'trustpilot_position'    => 'off', // hero | footer | both | off.
@@ -444,6 +456,22 @@ final class WPRaffle_Theme_Settings {
 		wp_enqueue_media();
 		wp_enqueue_style( 'wpraffle-theme-admin', WPRAFFLE_THEME_URI . '/admin/css/wpraffle-theme-admin.css', array( 'wp-color-picker' ), WPRAFFLE_THEME_VERSION );
 		wp_enqueue_script( 'wpraffle-theme-admin', WPRAFFLE_THEME_URI . '/admin/js/wpraffle-theme-admin.js', array( 'jquery', 'wp-color-picker' ), WPRAFFLE_THEME_VERSION, true );
+		wp_localize_script( 'wpraffle-theme-admin', 'WPRaffleThemeAdmin', array(
+			'searchIndex' => array(
+				array( 'tab' => 'style', 'label' => __( 'Style, colours, presets, branding, theme variation', 'wpraffle-theme' ) ),
+				array( 'tab' => 'typography', 'label' => __( 'Typography, fonts, headings, body text, font size', 'wpraffle-theme' ) ),
+				array( 'tab' => 'header', 'label' => __( 'Header, navigation, mobile menu, sticky header, dark mode', 'wpraffle-theme' ) ),
+				array( 'tab' => 'footer', 'label' => __( 'Footer, newsletter, Instagram, footer CTA', 'wpraffle-theme' ) ),
+				array( 'tab' => 'product-cards', 'label' => __( 'Competition cards, product cards, grid, progress, image ratio', 'wpraffle-theme' ) ),
+				array( 'tab' => 'homepage', 'label' => __( 'Homepage, hero, winners, sections, live draw, featured competition', 'wpraffle-theme' ) ),
+				array( 'tab' => 'templates', 'label' => __( 'Elementor templates, template library, header template, footer template', 'wpraffle-theme' ) ),
+				array( 'tab' => 'plugins', 'label' => __( 'Recommended plugins, WooCommerce, WPRaffle, Elementor, Pro Elements, plugin manager', 'wpraffle-theme' ) ),
+				array( 'tab' => 'setup', 'label' => __( 'Setup, pages, menus, onboarding, recommended pages', 'wpraffle-theme' ) ),
+				array( 'tab' => 'tools', 'label' => __( 'Tools, export, import, backup, child theme, developer', 'wpraffle-theme' ) ),
+				array( 'tab' => 'status', 'label' => __( 'System status, diagnostics, report, WooCommerce, WPRaffle, PHP', 'wpraffle-theme' ) ),
+			),
+			'baseUrl' => admin_url( 'themes.php?page=wpraffle-theme-settings&tab=' ),
+		) );
 		// v1.2.0 — drag-and-drop homepage builder uses WP's bundled jQuery UI Sortable.
 		wp_enqueue_script( 'jquery-ui-sortable' );
 	}
@@ -452,10 +480,15 @@ final class WPRaffle_Theme_Settings {
 	 * Render the settings page (Enfold-style left-sidebar panel).
 	 */
 	public function render_page() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'style'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : 'dashboard'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		// Tab labels.
 		$tab_labels = array(
+			'dashboard'     => __( 'Dashboard', 'wpraffle-theme' ),
+			'setup'         => __( 'Setup', 'wpraffle-theme' ),
+			'starter-sites' => __( 'Starter Sites', 'wpraffle-theme' ),
+			'templates'     => __( 'Template Library', 'wpraffle-theme' ),
+			'plugins'       => __( 'Recommended Plugins', 'wpraffle-theme' ),
 			'style'         => __( 'Style', 'wpraffle-theme' ),
 			'typography'    => __( 'Typography', 'wpraffle-theme' ),
 			'buttons'       => __( 'Buttons', 'wpraffle-theme' ),
@@ -476,11 +509,18 @@ final class WPRaffle_Theme_Settings {
 			'custom-code'   => __( 'Custom Code', 'wpraffle-theme' ),
 			'optimization'  => __( 'Optimization', 'wpraffle-theme' ),
 			'advanced'      => __( 'Advanced', 'wpraffle-theme' ),
-			'enhancements'  => __( 'Enhancements (v1.2)', 'wpraffle-theme' ),
+			'enhancements'  => __( 'Features', 'wpraffle-theme' ),
+			'tools'         => __( 'Tools', 'wpraffle-theme' ),
+			'status'        => __( 'System Status', 'wpraffle-theme' ),
 		);
 
 		// Dashicon per tab.
 		$tab_icons = array(
+			'dashboard'     => 'dashboard',
+			'setup'         => 'admin-settings',
+			'starter-sites' => 'layout',
+			'templates'     => 'screenoptions',
+			'plugins'       => 'admin-plugins',
 			'style'         => 'admin-appearance',
 			'typography'    => 'editor-textcolor',
 			'buttons'       => 'button',
@@ -502,29 +542,44 @@ final class WPRaffle_Theme_Settings {
 			'optimization'  => 'dashboard',
 			'advanced'      => 'admin-generic',
 			'enhancements'  => 'star-filled',
+			'tools'         => 'admin-tools',
+			'status'        => 'yes-alt',
 		);
 
 		// Grouped navigation.
 		$tab_groups = array(
-			__( 'Appearance', 'wpraffle-theme' ) => array( 'style', 'typography', 'buttons', 'header', 'footer', 'product-cards' ),
-			__( 'Layout', 'wpraffle-theme' )     => array( 'homepage', 'blog' ),
-			__( 'Content', 'wpraffle-theme' )     => array( 'content', 'faqs', 'testimonials' ),
-			__( 'Marketing', 'wpraffle-theme' )   => array( 'promo', 'social-proof', 'age-gate' ),
-			__( 'System', 'wpraffle-theme' )       => array( 'maintenance', 'login', 'error404' ),
-			__( 'Advanced', 'wpraffle-theme' )    => array( 'custom-code', 'optimization', 'advanced', 'enhancements' ),
+			__( 'Control Centre', 'wpraffle-theme' ) => array( 'dashboard', 'setup', 'starter-sites', 'templates', 'plugins' ),
+			__( 'Design', 'wpraffle-theme' )         => array( 'style', 'typography', 'buttons', 'header', 'footer', 'product-cards' ),
+			__( 'Pages', 'wpraffle-theme' )          => array( 'homepage', 'blog', 'login', 'error404', 'maintenance' ),
+			__( 'Content', 'wpraffle-theme' )        => array( 'content', 'faqs', 'testimonials' ),
+			__( 'Marketing', 'wpraffle-theme' )      => array( 'promo', 'social-proof', 'age-gate' ),
+			__( 'Developer', 'wpraffle-theme' )      => array( 'enhancements', 'optimization', 'custom-code', 'tools', 'status', 'advanced' ),
 		);
 		?>
+		<button type="button" class="wprt-admin__mobile-toggle" aria-expanded="false" aria-controls="wprt-theme-options-nav">
+			<span class="wprt-admin__mobile-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+			<span class="wprt-admin__mobile-toggle-text">
+				<small><?php esc_html_e( 'WPRaffle Theme', 'wpraffle-theme' ); ?></small>
+				<strong><?php echo esc_html( isset( $tab_labels[ $current_tab ] ) ? $tab_labels[ $current_tab ] : __( 'Settings', 'wpraffle-theme' ) ); ?></strong>
+			</span>
+			<span class="dashicons dashicons-arrow-down-alt2" aria-hidden="true"></span>
+		</button>
 		<div class="wprt-admin">
 			<aside class="wprt-admin__sidebar">
 				<div class="wprt-admin__brand">
 					<span class="dashicons dashicons-admin-appearance"></span>
 					<div>
 						<strong><?php esc_html_e( 'WPRaffle Theme', 'wpraffle-theme' ); ?></strong>
-						<small><?php esc_html_e( 'Options', 'wpraffle-theme' ); ?></small>
+						<small><?php esc_html_e( 'Control Centre', 'wpraffle-theme' ); ?></small>
 					</div>
 				</div>
 
-				<nav class="wprt-admin__nav">
+				<div class="wprt-admin__search">
+					<span class="dashicons dashicons-search"></span>
+					<input type="search" id="wprt-settings-search" placeholder="<?php esc_attr_e( 'Find a setting…', 'wpraffle-theme' ); ?>" autocomplete="off">
+				</div>
+
+				<nav class="wprt-admin__nav" id="wprt-theme-options-nav">
 					<?php foreach ( $tab_groups as $group_label => $group_tabs ) : ?>
 						<div class="wprt-admin__group">
 							<span class="wprt-admin__group-label"><?php echo esc_html( $group_label ); ?></span>
@@ -555,10 +610,18 @@ final class WPRaffle_Theme_Settings {
 					</h1>
 				</div>
 
+				<?php
+				$action_tabs = array( 'dashboard', 'setup', 'starter-sites', 'templates', 'tools', 'status' );
+				$is_action_tab = in_array( $current_tab, $action_tabs, true );
+				?>
+				<?php if ( ! $is_action_tab ) : ?>
 				<form method="post" action="" class="wpr-form">
-					<?php wp_nonce_field( 'diamond_save_settings', 'diamond_nonce' ); ?>
-					<input type="hidden" name="diamond_action" value="save_settings">
-					<input type="hidden" name="diamond_tab" value="<?php echo esc_attr( $current_tab ); ?>">
+					<?php wp_nonce_field( 'wprt_save_settings', 'wprt_settings_nonce' ); ?>
+					<input type="hidden" name="wprt_settings_action" value="save_settings">
+					<input type="hidden" name="wprt_settings_tab" value="<?php echo esc_attr( $current_tab ); ?>">
+				<?php else : ?>
+				<div class="wpr-form wprt-control-view">
+				<?php endif; ?>
 
 					<?php
 					$view = WPRAFFLE_THEME_DIR . '/admin/views/settings-' . $current_tab . '.php';
@@ -567,6 +630,7 @@ final class WPRaffle_Theme_Settings {
 					}
 					?>
 
+					<?php if ( ! $is_action_tab ) : ?>
 					<div class="wprt-admin__savebar">
 						<button type="submit" class="button button-primary button-large">
 							<span class="dashicons dashicons-saved" style="vertical-align:text-top;"></span>
@@ -574,6 +638,9 @@ final class WPRaffle_Theme_Settings {
 						</button>
 					</div>
 				</form>
+					<?php else : ?>
+				</div>
+					<?php endif; ?>
 			</main>
 		</div>
 		<?php
@@ -612,8 +679,8 @@ final class WPRaffle_Theme_Settings {
 		}
 
 		// Preset switching via GET (the preset buttons).
-		if ( isset( $_GET['preset'] ) && isset( $_GET['diamond_preset_nonce'] ) ) {
-			if ( current_user_can( 'manage_options' ) && wp_verify_nonce( sanitize_key( wp_unslash( $_GET['diamond_preset_nonce'] ) ), 'diamond_preset' ) ) {
+		if ( isset( $_GET['preset'] ) && isset( $_GET['wprt_preset_nonce'] ) ) {
+			if ( current_user_can( 'manage_options' ) && wp_verify_nonce( sanitize_key( wp_unslash( $_GET['wprt_preset_nonce'] ) ), 'wprt_apply_preset' ) ) {
 				$preset  = sanitize_key( wp_unslash( $_GET['preset'] ) );
 				$presets = self::get_presets();
 				if ( isset( $presets[ $preset ] ) ) {
@@ -628,15 +695,15 @@ final class WPRaffle_Theme_Settings {
 			}
 		}
 
-		if ( ! isset( $_POST['diamond_action'] ) || 'save_settings' !== $_POST['diamond_action'] ) {
+		if ( ! isset( $_POST['wprt_settings_action'] ) || 'save_settings' !== sanitize_key( wp_unslash( $_POST['wprt_settings_action'] ) ) ) {
 			return;
 		}
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		check_admin_referer( 'diamond_save_settings', 'diamond_nonce' );
+		check_admin_referer( 'wprt_save_settings', 'wprt_settings_nonce' );
 
-		$tab    = isset( $_POST['diamond_tab'] ) ? sanitize_key( wp_unslash( $_POST['diamond_tab'] ) ) : 'style';
+		$tab    = isset( $_POST['wprt_settings_tab'] ) ? sanitize_key( wp_unslash( $_POST['wprt_settings_tab'] ) ) : 'style';
 		$saved  = get_option( self::OPTION, array() );
 		$saved  = is_array( $saved ) ? $saved : array();
 
@@ -868,6 +935,122 @@ final class WPRaffle_Theme_Settings {
 	 * @param array $keys  Keys to save.
 	 * @return array
 	 */
+	/**
+	 * Sanitize an imported settings array against the theme defaults.
+	 *
+	 * Import files are untrusted input. Only known keys are accepted and each
+	 * value is normalized to the same type expected by the settings screens.
+	 *
+	 * @param array $input Imported settings.
+	 * @return array
+	 */
+	public static function sanitize_imported_settings( $input ) {
+		$defaults = self::get_defaults();
+		if ( ! is_array( $input ) ) {
+			return $defaults;
+		}
+
+		$clean = $defaults;
+
+		$checkboxes = array(
+			'btn_hover_lift','show_author','show_date','show_category',
+			'load_google_fonts','load_font_awesome','load_fancybox','load_swiper',
+			'disable_emoji','disable_version_qs','preload_hero','scroll_reveal',
+			'back_to_top','confetti_winners','progress_animate','hero_counters',
+			'testimonials_trustpilot','cookie_consent','responsible_play','draw_details',
+			'header_overlay','mobile_cta','mega_menu','footer_cta','footer_newsletter',
+			'footer_instagram','promo_bar','social_proof','age_gate','maintenance',
+			'maintenance_email','error_show_search','error_show_comps',
+			'hero_primary_enabled','hero_primary_new_tab','hero_secondary_enabled',
+			'hero_secondary_new_tab'
+		);
+		$integers = array(
+			'body_size','h1_size','h2_size','h3_size','h4_size','h5_size','h6_size',
+			'letter_spacing','btn_radius','btn_padding_x','btn_padding_y','blog_columns',
+			'excerpt_length','footer_columns','social_proof_freq','age_duration',
+			'container_width','radius','hero_primary_page_id','hero_secondary_page_id'
+		);
+		$floats = array( 'line_height' );
+		$urls = array(
+			'footer_cta_url','promo_url','age_no_url','mobile_cta_url','terms_url',
+			'rg_gamcare_url','rg_begambleaware_url','instagram_feed_url',
+			'hero_video','hero_primary_url','hero_secondary_url','testimonial_photo'
+		);
+		$kses = array( 'cookie_consent_text' );
+
+		foreach ( $defaults as $key => $default ) {
+			if ( ! array_key_exists( $key, $input ) ) {
+				continue;
+			}
+			$value = $input[ $key ];
+
+			if ( 'sections' === $key ) {
+				$sections = is_array( $value ) ? $value : array();
+				foreach ( $defaults['sections'] as $section_key => $section_default ) {
+					$clean['sections'][ $section_key ] = array(
+						'enabled' => ! empty( $sections[ $section_key ]['enabled'] ),
+						'order'   => isset( $sections[ $section_key ]['order'] ) ? absint( $sections[ $section_key ]['order'] ) : $section_default['order'],
+					);
+				}
+				continue;
+			}
+
+			if ( in_array( $key, array( 'faqs', 'testimonial_items' ), true ) ) {
+				$items = is_array( $value ) ? $value : array();
+				$clean_items = array();
+				foreach ( $items as $item ) {
+					if ( ! is_array( $item ) ) { continue; }
+					if ( 'faqs' === $key ) {
+						$clean_items[] = array(
+							'question' => isset( $item['question'] ) ? wp_kses_post( $item['question'] ) : '',
+							'answer'   => isset( $item['answer'] ) ? wp_kses_post( $item['answer'] ) : '',
+						);
+					} else {
+						$clean_items[] = array(
+							'name'    => isset( $item['name'] ) ? sanitize_text_field( $item['name'] ) : '',
+							'content' => isset( $item['content'] ) ? wp_kses_post( $item['content'] ) : '',
+							'photo'   => isset( $item['photo'] ) ? esc_url_raw( $item['photo'] ) : '',
+						);
+					}
+				}
+				$clean[ $key ] = $clean_items;
+				continue;
+			}
+
+			if ( in_array( $key, $checkboxes, true ) ) {
+				$clean[ $key ] = in_array( $value, array( 'on', '1', 1, true ), true ) ? 'on' : 'off';
+			} elseif ( in_array( $key, $integers, true ) ) {
+				$clean[ $key ] = absint( $value );
+			} elseif ( in_array( $key, $floats, true ) ) {
+				$clean[ $key ] = (float) $value;
+			} elseif ( in_array( $key, $urls, true ) ) {
+				$clean[ $key ] = esc_url_raw( $value );
+			} elseif ( in_array( $key, $kses, true ) ) {
+				$clean[ $key ] = wp_kses_post( $value );
+			} elseif ( is_array( $default ) ) {
+				// Unknown nested arrays are never accepted from imports.
+				continue;
+			} else {
+				$clean[ $key ] = sanitize_text_field( $value );
+			}
+		}
+
+		// Enforce enumerated fields after generic sanitisation.
+		$enums = array(
+			'preset' => array( 'default','diamond','golf','retro','car','elite' ),
+			'dark_mode' => array( 'off','auto','manual' ),
+			'hero_primary_link_type' => array( 'shop','page','custom' ),
+			'hero_secondary_link_type' => array( 'winners-section','winners-page','page','custom' ),
+		);
+		foreach ( $enums as $key => $allowed ) {
+			if ( isset( $clean[ $key ] ) && ! in_array( $clean[ $key ], $allowed, true ) ) {
+				$clean[ $key ] = $defaults[ $key ];
+			}
+		}
+
+		return $clean;
+	}
+
 	private function save_simple_keys( $saved, $keys ) {
 		$posted = isset( $_POST['wpr_settings'] ) ? wp_unslash( $_POST['wpr_settings'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		$posted = is_array( $posted ) ? $posted : array();
@@ -900,10 +1083,11 @@ final class WPRaffle_Theme_Settings {
 		$posted = isset( $_POST['wpr_settings'] ) ? wp_unslash( $_POST['wpr_settings'] ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 		$posted = is_array( $posted ) ? $posted : array();
 
-		$sections    = isset( $posted['sections'] ) && is_array( $posted['sections'] ) ? $posted['sections'] : array();
-		$defaults    = self::get_defaults();
-		$clean       = array();
-		$all_keys    = array_keys( $defaults['sections'] );
+		// Homepage section builder.
+		$sections = isset( $posted['sections'] ) && is_array( $posted['sections'] ) ? $posted['sections'] : array();
+		$defaults = self::get_defaults();
+		$clean    = array();
+		$all_keys = array_keys( $defaults['sections'] );
 
 		foreach ( $all_keys as $key ) {
 			$clean[ $key ] = array(
@@ -912,6 +1096,33 @@ final class WPRaffle_Theme_Settings {
 			);
 		}
 		$saved['sections'] = $clean;
+
+		// Hero CTA controls — save explicitly so page IDs and URLs retain their
+		// correct data types and never fall through to generic text sanitising.
+		$saved['hero_primary_enabled']     = isset( $posted['hero_primary_enabled'] ) && 'on' === $posted['hero_primary_enabled'] ? 'on' : 'off';
+		$saved['hero_primary_text']        = isset( $posted['hero_primary_text'] ) ? sanitize_text_field( $posted['hero_primary_text'] ) : $defaults['hero_primary_text'];
+		$saved['hero_primary_link_type']   = isset( $posted['hero_primary_link_type'] ) ? sanitize_key( $posted['hero_primary_link_type'] ) : 'shop';
+		$saved['hero_primary_page_id']     = isset( $posted['hero_primary_page_id'] ) ? absint( $posted['hero_primary_page_id'] ) : 0;
+		$saved['hero_primary_url']         = isset( $posted['hero_primary_url'] ) ? esc_url_raw( $posted['hero_primary_url'] ) : '';
+		$saved['hero_primary_new_tab']     = isset( $posted['hero_primary_new_tab'] ) && 'on' === $posted['hero_primary_new_tab'] ? 'on' : 'off';
+
+		$saved['hero_secondary_enabled']   = isset( $posted['hero_secondary_enabled'] ) && 'on' === $posted['hero_secondary_enabled'] ? 'on' : 'off';
+		$saved['hero_secondary_text']      = isset( $posted['hero_secondary_text'] ) ? sanitize_text_field( $posted['hero_secondary_text'] ) : $defaults['hero_secondary_text'];
+		$saved['hero_secondary_link_type'] = isset( $posted['hero_secondary_link_type'] ) ? sanitize_key( $posted['hero_secondary_link_type'] ) : 'winners-section';
+		$saved['hero_secondary_page_id']   = isset( $posted['hero_secondary_page_id'] ) ? absint( $posted['hero_secondary_page_id'] ) : 0;
+		$saved['hero_secondary_url']       = isset( $posted['hero_secondary_url'] ) ? esc_url_raw( $posted['hero_secondary_url'] ) : '';
+		$saved['hero_secondary_new_tab']   = isset( $posted['hero_secondary_new_tab'] ) && 'on' === $posted['hero_secondary_new_tab'] ? 'on' : 'off';
+
+		$primary_types   = array( 'shop', 'page', 'custom' );
+		$secondary_types = array( 'winners-section', 'winners-page', 'page', 'custom' );
+
+		if ( ! in_array( $saved['hero_primary_link_type'], $primary_types, true ) ) {
+			$saved['hero_primary_link_type'] = 'shop';
+		}
+		if ( ! in_array( $saved['hero_secondary_link_type'], $secondary_types, true ) ) {
+			$saved['hero_secondary_link_type'] = 'winners-section';
+		}
+
 		return $saved;
 	}
 

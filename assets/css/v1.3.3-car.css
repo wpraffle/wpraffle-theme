@@ -1,0 +1,764 @@
+/**
+ * WPRaffle Theme v1.3.3 — Car preset refresh
+ *
+ * Original performance-car competition styling inspired by modern automotive
+ * giveaway sites. Everything is scoped to .wpr-preset-car so Default, Diamond,
+ * Golf, Retro and Elite remain unchanged.
+ */
+
+.wpr-preset-car {
+	--wpr-car-ink: #111214;
+	--wpr-car-graphite: #1b1d20;
+	--wpr-car-panel: #25282c;
+	--wpr-car-steel: #4b5056;
+	--wpr-car-orange: #f05a24;
+	--wpr-car-orange-hot: #ff6b2c;
+	--wpr-car-amber: #ffb000;
+	--wpr-car-paper: #ffffff;
+	--wpr-car-offwhite: #f5f5f3;
+	--wpr-car-line: #dadcdf;
+	--wpr-car-muted: #70757b;
+	--wpr-car-shadow: 0 16px 38px rgba(17,18,20,.14);
+	--wpr-car-shadow-hover: 0 24px 56px rgba(17,18,20,.22);
+
+	/* Override the preset palette at presentation level so plugin and theme
+	   components inherit the new automotive treatment without changing saved
+	   settings or any other preset. */
+	--wpr-accent: var(--wpr-car-orange);
+	--wpr-accent-2: var(--wpr-car-amber);
+	--wpr-dark: var(--wpr-car-ink);
+	--wpr-light: var(--wpr-car-offwhite);
+	--wpr-body: var(--wpr-car-ink);
+	--wpr-text-primary: var(--wpr-car-ink);
+
+	background: var(--wpr-car-offwhite);
+	color: var(--wpr-car-ink);
+}
+
+.wpr-preset-car h1,
+.wpr-preset-car h2,
+.wpr-preset-car h3,
+.wpr-preset-car h4,
+.wpr-preset-car h5,
+.wpr-preset-car h6 {
+	color: var(--wpr-car-ink);
+	letter-spacing: -.035em;
+	font-weight: 850;
+}
+
+/* ================================================================
+ * HEADER / NAVIGATION
+ * ================================================================ */
+.wpr-preset-car .wpr-header {
+	background: rgba(17,18,20,.98);
+	color: #fff;
+	border-bottom: 1px solid rgba(255,255,255,.08);
+	box-shadow: 0 10px 30px rgba(0,0,0,.18);
+	backdrop-filter: blur(14px);
+}
+
+.wpr-preset-car .wpr-header__inner { min-height: 76px; }
+
+.wpr-preset-car .wpr-header .site-title,
+.wpr-preset-car .wpr-header .site-title a,
+.wpr-preset-car .wpr-header .wpr-nav a,
+.wpr-preset-car .wpr-header__actions a,
+.wpr-preset-car .wpr-header__actions button,
+.wpr-preset-car .wpr-menu-toggle { color: #fff; }
+
+.wpr-preset-car .wpr-primary-menu > li > a {
+	position: relative;
+	font-size: .79rem;
+	font-weight: 850;
+	letter-spacing: .075em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .wpr-primary-menu > li > a::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 100%;
+	bottom: -10px;
+	height: 3px;
+	background: var(--wpr-car-orange);
+	transform: skewX(-28deg);
+	transition: right .2s ease;
+}
+
+.wpr-preset-car .wpr-primary-menu > li:hover > a::before,
+.wpr-preset-car .wpr-primary-menu > .current-menu-item > a::before,
+.wpr-preset-car .wpr-primary-menu > .current-menu-ancestor > a::before {
+	right: 0;
+}
+
+.wpr-preset-car .wpr-primary-menu .sub-menu {
+	background: var(--wpr-car-graphite);
+	border: 1px solid rgba(255,255,255,.1);
+	border-radius: 8px;
+	box-shadow: 0 18px 45px rgba(0,0,0,.3);
+	overflow: hidden;
+}
+
+.wpr-preset-car .wpr-primary-menu .sub-menu a {
+	color: #fff;
+	text-transform: none;
+}
+
+.wpr-preset-car .wpr-primary-menu .sub-menu a:hover {
+	background: var(--wpr-car-orange);
+	color: #fff;
+}
+
+/* ================================================================
+ * GLOBAL BUTTON / FORM LANGUAGE
+ * ================================================================ */
+.wpr-preset-car .button,
+.wpr-preset-car button:not(.wpr-menu-toggle),
+.wpr-preset-car input[type="submit"],
+.wpr-preset-car .wp-element-button,
+.wpr-preset-car .wpr-btn,
+.wpr-preset-car .rc-card__cta,
+.wpr-preset-car .woocommerce a.button,
+.wpr-preset-car .woocommerce button.button,
+.wpr-preset-car .woocommerce input.button {
+	border-radius: 5px;
+	font-weight: 850;
+	letter-spacing: .055em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .wpr-btn-primary,
+.wpr-preset-car .rc-card__cta,
+.wpr-preset-car .woocommerce a.button.alt,
+.wpr-preset-car .woocommerce button.button.alt,
+.wpr-preset-car .woocommerce #respond input#submit.alt {
+	background: var(--wpr-car-orange) !important;
+	border-color: var(--wpr-car-orange) !important;
+	color: #fff !important;
+	box-shadow: inset 0 -3px 0 rgba(0,0,0,.18);
+}
+
+.wpr-preset-car .wpr-btn-primary:hover,
+.wpr-preset-car .rc-card__cta:hover,
+.wpr-preset-car .rc-card__cta:focus,
+.wpr-preset-car .woocommerce a.button.alt:hover,
+.wpr-preset-car .woocommerce button.button.alt:hover {
+	background: var(--wpr-car-orange-hot) !important;
+	border-color: var(--wpr-car-orange-hot) !important;
+	color: #fff !important;
+	transform: translateY(-2px);
+}
+
+.wpr-preset-car input:not([type="checkbox"]):not([type="radio"]),
+.wpr-preset-car select,
+.wpr-preset-car textarea,
+.wpr-preset-car .select2-container--default .select2-selection--single {
+	background: #fff;
+	border: 1px solid var(--wpr-car-line);
+	border-radius: 5px;
+}
+
+/* ================================================================
+ * HERO — SHOWROOM / STARTING-GRID FEEL
+ * ================================================================ */
+.wpr-preset-car .wpr-hero {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	background:
+		linear-gradient(115deg, rgba(17,18,20,.99), rgba(30,32,35,.95)),
+		var(--wpr-car-ink);
+	color: #fff;
+}
+
+.wpr-preset-car .wpr-hero::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(90deg, transparent 0 47%, rgba(255,255,255,.025) 47% 53%, transparent 53%),
+		repeating-linear-gradient(135deg, rgba(255,255,255,.022) 0 12px, transparent 12px 24px);
+	pointer-events: none;
+	z-index: -1;
+}
+
+.wpr-preset-car .wpr-hero::after {
+	content: "";
+	position: absolute;
+	right: -12%;
+	bottom: -70%;
+	width: 62%;
+	aspect-ratio: 1;
+	border: 2px solid rgba(240,90,36,.22);
+	border-radius: 50%;
+	box-shadow:
+		0 0 0 38px rgba(240,90,36,.055),
+		0 0 0 76px rgba(240,90,36,.03);
+	z-index: -1;
+}
+
+.wpr-preset-car .wpr-hero h1,
+.wpr-preset-car .wpr-hero h2,
+.wpr-preset-car .wpr-hero h3 { color: #fff; }
+
+.wpr-preset-car .wpr-hero h1 {
+	text-transform: uppercase;
+	font-style: italic;
+	letter-spacing: -.05em;
+}
+
+.wpr-preset-car .wpr-section-title,
+.wpr-preset-car .section-title {
+	position: relative;
+	display: inline-block;
+	padding-bottom: 10px;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .wpr-section-title::after,
+.wpr-preset-car .section-title::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 62px;
+	height: 4px;
+	background: var(--wpr-car-orange);
+	transform: skewX(-30deg);
+}
+
+/* ================================================================
+ * COMPETITION GRID / CARDS
+ * ================================================================ */
+@media (min-width: 1280px) {
+	.wpr-preset-car .raffle-list-grid,
+	.wpr-preset-car .woocommerce ul.products {
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+	}
+}
+
+.wpr-preset-car .raffle-list-grid { gap: 18px !important; }
+
+.wpr-preset-car .rc-card {
+	position: relative;
+	background: var(--wpr-car-paper);
+	border: 1px solid #d7d9dc;
+	border-radius: 9px;
+	overflow: hidden;
+	box-shadow: 0 7px 22px rgba(17,18,20,.09);
+}
+
+.wpr-preset-car .rc-card::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 70px;
+	height: 5px;
+	background: var(--wpr-car-orange);
+	transform: skewX(-28deg) translateX(-8px);
+	transform-origin: left;
+	z-index: 5;
+}
+
+.wpr-preset-car .rc-card:hover,
+.wpr-preset-car .rc-card:focus-within {
+	transform: translateY(-6px);
+	box-shadow: var(--wpr-car-shadow-hover);
+	border-color: #b9bcc0;
+}
+
+.wpr-preset-car .rc-card__image {
+	padding-top: 68%;
+	background:
+		linear-gradient(180deg, #f7f7f7, #e8e9ea);
+	overflow: hidden;
+}
+
+.wpr-preset-car .rc-card__image::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 28%;
+	background: linear-gradient(transparent, rgba(0,0,0,.2));
+	pointer-events: none;
+	z-index: 1;
+}
+
+.wpr-preset-car .rc-card__image img {
+	transition: transform .35s cubic-bezier(.2,.7,.2,1);
+}
+
+.wpr-preset-car .rc-card:hover .rc-card__image img {
+	transform: scale(1.045);
+}
+
+.wpr-preset-car .rc-card__status {
+	top: .65rem;
+	left: .65rem;
+	border-radius: 4px;
+	font-size: .62rem;
+	font-weight: 900;
+	letter-spacing: .07em;
+	box-shadow: 0 5px 16px rgba(0,0,0,.2);
+}
+
+.wpr-preset-car .rc-card__status--soon {
+	background: var(--wpr-car-amber);
+	color: var(--wpr-car-ink);
+}
+
+.wpr-preset-car .rc-card__iw-badge {
+	border-radius: 4px !important;
+	background: var(--wpr-car-ink) !important;
+	color: #fff !important;
+	border-left: 4px solid var(--wpr-car-orange);
+	font-weight: 900;
+	letter-spacing: .08em;
+}
+
+.wpr-preset-car .rc-card__title {
+	min-height: 3.35rem;
+	padding: .95rem 1rem .35rem;
+	font-size: .98rem;
+	font-weight: 900;
+	line-height: 1.2;
+	letter-spacing: -.015em;
+	text-transform: uppercase;
+	color: var(--wpr-car-ink);
+}
+
+.wpr-preset-car .rc-card__title-alt {
+	color: var(--wpr-car-orange);
+	font-size: .72rem;
+	font-weight: 850;
+	letter-spacing: .03em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .rc-card__title-iw {
+	color: var(--wpr-car-orange);
+	font-weight: 900;
+}
+
+.wpr-preset-car .rc-card__draw-bar {
+	position: relative;
+	background: var(--wpr-car-ink);
+	color: #fff;
+	padding: .55rem .85rem;
+	font-size: .67rem;
+	font-weight: 850;
+	letter-spacing: .065em;
+	text-transform: uppercase;
+	overflow: hidden;
+}
+
+.wpr-preset-car .rc-card__draw-bar::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 34px;
+	height: 100%;
+	background:
+		linear-gradient(45deg, rgba(255,255,255,.12) 25%, transparent 25% 75%, rgba(255,255,255,.12) 75%) 0 0/10px 10px,
+		linear-gradient(-45deg, rgba(255,255,255,.12) 25%, transparent 25% 75%, rgba(255,255,255,.12) 75%) 5px 5px/10px 10px;
+}
+
+.wpr-preset-car .rc-card__countdown {
+	background: #f0f1f2;
+	border-bottom-color: #d7d9dc;
+	padding: .65rem .85rem;
+}
+
+.wpr-preset-car .rc-card__cd-unit {
+	border-right: 1px solid #d8dade;
+}
+
+.wpr-preset-car .rc-card__cd-unit:last-child { border-right: 0; }
+
+.wpr-preset-car .rc-card__cd-num {
+	color: var(--wpr-car-ink);
+	font-size: 1rem;
+	font-weight: 900;
+}
+
+.wpr-preset-car .rc-card__cd-label {
+	color: var(--wpr-car-muted);
+	font-size: .56rem;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .rc-card__cash-bar {
+	background: #fff4ee;
+	border-bottom-color: #f2d4c6;
+	color: var(--wpr-car-ink);
+	font-weight: 800;
+}
+
+.wpr-preset-car .rc-card__price {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: end;
+	gap: .4rem;
+	padding: .8rem 1rem .35rem;
+}
+
+.wpr-preset-car .rc-card__price-amount {
+	color: var(--wpr-car-orange);
+	font-size: 1.55rem;
+	font-weight: 950;
+	letter-spacing: -.04em;
+}
+
+.wpr-preset-car .rc-card__price-label {
+	color: var(--wpr-car-muted);
+	font-size: .61rem;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+/* Telemetry-style sales gauge */
+.wpr-preset-car .rc-card__progress {
+	margin: .25rem 1rem .8rem;
+	padding: .65rem .72rem .75rem;
+	background: #f2f3f4;
+	border: 1px solid #dcdee0;
+	border-radius: 5px;
+}
+
+.wpr-preset-car .rc-card__progress-stats {
+	color: var(--wpr-car-ink);
+	font-size: .68rem;
+	font-weight: 850;
+	letter-spacing: .025em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .rc-card__progress-bar,
+.wpr-preset-car .raffle-progress-bar-wrap {
+	height: 9px;
+	border-radius: 2px;
+	background:
+		repeating-linear-gradient(90deg, #d9dbdd 0 10%, #f1f2f3 10% 12%);
+	overflow: hidden;
+}
+
+.wpr-preset-car .rc-card__progress-fill,
+.wpr-preset-car .raffle-progress-bar-inner {
+	position: relative;
+	border-radius: 2px;
+	background: linear-gradient(90deg, var(--wpr-car-orange), var(--wpr-car-amber)) !important;
+	box-shadow: 0 0 12px rgba(240,90,36,.22);
+}
+
+.wpr-preset-car .rc-card__charity {
+	color: var(--wpr-car-muted);
+	font-size: .7rem;
+	font-weight: 700;
+}
+
+.wpr-preset-car .rc-card__cta {
+	position: relative;
+	margin: 0 1rem 1rem;
+	padding: .78rem 1rem;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.wpr-preset-car .rc-card__cta::after {
+	content: "›";
+	position: absolute;
+	right: 14px;
+	top: 50%;
+	transform: translateY(-54%);
+	font-size: 1.35em;
+	line-height: 1;
+	transition: right .2s ease;
+}
+
+.wpr-preset-car .rc-card__cta:hover::after { right: 10px; }
+
+/* ================================================================
+ * WOO PRODUCT LOOP
+ * ================================================================ */
+.wpr-preset-car .woocommerce ul.products li.product {
+	background: #fff;
+	border: 1px solid #d7d9dc;
+	border-radius: 9px;
+	overflow: hidden;
+	box-shadow: 0 7px 22px rgba(17,18,20,.09);
+	transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.wpr-preset-car .woocommerce ul.products li.product:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--wpr-car-shadow-hover);
+	border-color: #b7babf;
+}
+
+.wpr-preset-car .woocommerce ul.products li.product .woocommerce-loop-product__title {
+	color: var(--wpr-car-ink);
+	font-weight: 900;
+	text-transform: uppercase;
+	line-height: 1.18;
+}
+
+.wpr-preset-car .woocommerce ul.products li.product .price {
+	color: var(--wpr-car-orange);
+	font-weight: 950;
+}
+
+/* ================================================================
+ * SINGLE COMPETITION — DIGITAL DASH / SHOWROOM
+ * ================================================================ */
+.wpr-preset-car .raffle-single-page-wrapper {
+	padding: 3rem 0 !important;
+	background:
+		linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px) 0 0/34px 34px,
+		linear-gradient(rgba(17,18,20,.018) 1px, transparent 1px) 0 0/34px 34px,
+		var(--wpr-car-offwhite) !important;
+}
+
+.wpr-preset-car .raffle-main-grid { gap: 2.5rem !important; }
+
+.wpr-preset-car .raffle-image-card {
+	position: relative;
+	background: #fff;
+	border: 1px solid #d5d7da;
+	border-radius: 10px;
+	box-shadow: var(--wpr-car-shadow);
+	overflow: hidden;
+}
+
+.wpr-preset-car .raffle-image-card::after {
+	content: "";
+	position: absolute;
+	inset: auto 0 0 0;
+	height: 5px;
+	background:
+		repeating-linear-gradient(
+			90deg,
+			var(--wpr-car-ink) 0 18px,
+			#fff 18px 36px
+		);
+	opacity: .88;
+}
+
+.wpr-preset-car .raffle-title-main {
+	color: var(--wpr-car-ink);
+	font-size: clamp(1.85rem, 3vw, 3.15rem);
+	font-weight: 950;
+	line-height: 1.02;
+	letter-spacing: -.05em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .raffle-price-value {
+	color: var(--wpr-car-orange);
+	font-weight: 950;
+	letter-spacing: -.04em;
+}
+
+.wpr-preset-car .raffle-stats-header {
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0,1fr));
+	gap: 9px !important;
+}
+
+/* Registration-plate / dashboard information blocks */
+.wpr-preset-car .raffle-stat-box {
+	position: relative;
+	background: #fff;
+	border: 1px solid #cfd2d5;
+	border-radius: 5px;
+	padding: .78rem .9rem;
+	overflow: hidden;
+	box-shadow: inset 0 -2px 0 #eceeef;
+}
+
+.wpr-preset-car .raffle-stat-box::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	background: var(--wpr-car-orange);
+}
+
+.wpr-preset-car .raffle-entry-tabs {
+	gap: 5px;
+	padding: 5px;
+	background: var(--wpr-car-graphite);
+	border: 0;
+	border-radius: 6px;
+}
+
+.wpr-preset-car .raffle-tab-btn {
+	border: 0 !important;
+	border-radius: 3px !important;
+	background: transparent;
+	color: #e8e9ea !important;
+	font-weight: 850;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-car .raffle-tab-btn:hover {
+	background: rgba(255,255,255,.08);
+	color: #fff !important;
+}
+
+.wpr-preset-car .raffle-tab-btn.active {
+	background: var(--wpr-car-orange) !important;
+	border-color: var(--wpr-car-orange) !important;
+	color: #fff !important;
+	box-shadow: none;
+}
+
+.wpr-preset-car .raffle-entry-section,
+.wpr-preset-car .raffle-entry-panel,
+.wpr-preset-car .raffle-purchase-box,
+.wpr-preset-car .raffle-ticket-selector,
+.wpr-preset-car .raffle-instant-wins,
+.wpr-preset-car .raffle-prize-description,
+.wpr-preset-car .raffle-rules,
+.wpr-preset-car .raffle-faq {
+	background: #fff;
+	border: 1px solid #d4d6d9;
+	border-radius: 8px;
+}
+
+.wpr-preset-car .raffle-ticket-selector button,
+.wpr-preset-car .raffle-quantity button,
+.wpr-preset-car .quantity .plus,
+.wpr-preset-car .quantity .minus {
+	background: var(--wpr-car-ink);
+	color: #fff;
+	border-radius: 3px;
+}
+
+.wpr-preset-car .raffle-ticket-selector button:hover,
+.wpr-preset-car .raffle-quantity button:hover,
+.wpr-preset-car .quantity .plus:hover,
+.wpr-preset-car .quantity .minus:hover {
+	background: var(--wpr-car-orange);
+}
+
+/* ================================================================
+ * WINNERS / HOW IT WORKS / TRUST
+ * ================================================================ */
+.wpr-preset-car .wpr-winner-card,
+.wpr-preset-car .wpr-testimonial,
+.wpr-preset-car .wpr-hiw-step,
+.wpr-preset-car .wpr-stat-card,
+.wpr-preset-car .wpr-featured-card,
+.wpr-preset-car .wpr-trust-item {
+	position: relative;
+	background: #fff;
+	border: 1px solid #d8dade;
+	border-radius: 8px;
+	box-shadow: 0 8px 22px rgba(17,18,20,.07);
+	overflow: hidden;
+}
+
+.wpr-preset-car .wpr-winner-card::after,
+.wpr-preset-car .wpr-featured-card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 4px;
+	background: var(--wpr-car-orange);
+}
+
+.wpr-preset-car .wpr-hiw-step::before {
+	content: "";
+	position: absolute;
+	right: -28px;
+	top: -28px;
+	width: 96px;
+	height: 96px;
+	border-radius: 50%;
+	border: 8px solid rgba(17,18,20,.04);
+	box-shadow:
+		0 0 0 8px rgba(17,18,20,.025),
+		0 0 0 16px rgba(17,18,20,.015);
+}
+
+/* ================================================================
+ * CART / CHECKOUT / ACCOUNT
+ * ================================================================ */
+.wpr-preset-car.woocommerce-cart,
+.wpr-preset-car.woocommerce-checkout,
+.wpr-preset-car.woocommerce-account {
+	background: var(--wpr-car-offwhite);
+}
+
+.wpr-preset-car .woocommerce-cart-form,
+.wpr-preset-car .cart_totals,
+.wpr-preset-car .woocommerce-checkout-review-order,
+.wpr-preset-car .woocommerce-billing-fields,
+.wpr-preset-car .woocommerce-shipping-fields,
+.wpr-preset-car .woocommerce-MyAccount-navigation,
+.wpr-preset-car .woocommerce-MyAccount-content {
+	background: #fff;
+	border: 1px solid #d7d9dc;
+	border-radius: 8px;
+}
+
+.wpr-preset-car .woocommerce-info,
+.wpr-preset-car .woocommerce-message {
+	border-top-color: var(--wpr-car-orange);
+	background: #fff3ed;
+	color: var(--wpr-car-ink);
+}
+
+/* ================================================================
+ * MOBILE
+ * ================================================================ */
+@media (max-width: 767.98px) {
+	.wpr-preset-car .wpr-header__inner { min-height: 64px; }
+	.wpr-preset-car .raffle-list-grid { gap: 13px !important; }
+	.wpr-preset-car .rc-card { border-radius: 7px; }
+	.wpr-preset-car .rc-card__title {
+		min-height: 0;
+		font-size: .92rem;
+	}
+	.wpr-preset-car .raffle-main-grid { gap: 1.4rem !important; }
+	.wpr-preset-car .raffle-stats-header {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 420px) {
+	.wpr-preset-car .raffle-stats-header { grid-template-columns: 1fr; }
+}
+
+/* ================================================================
+ * ACCESSIBILITY
+ * ================================================================ */
+.wpr-preset-car a:focus-visible,
+.wpr-preset-car button:focus-visible,
+.wpr-preset-car input:focus-visible,
+.wpr-preset-car select:focus-visible,
+.wpr-preset-car textarea:focus-visible {
+	outline: 3px solid var(--wpr-car-amber);
+	outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wpr-preset-car .rc-card,
+	.wpr-preset-car .rc-card__image img,
+	.wpr-preset-car .wpr-btn,
+	.wpr-preset-car .button,
+	.wpr-preset-car .wpr-primary-menu > li > a::before {
+		transition: none !important;
+		transform: none !important;
+	}
+}

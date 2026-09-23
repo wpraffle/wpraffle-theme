@@ -8,7 +8,6 @@
 		initFancybox();
 		initStickyHeader();
 		initHeaderScrollEffect();
-		initFaqAccordion();
 		initCountdown();
 	} );
 
@@ -132,31 +131,6 @@
 			lastY = y;
 		};
 		window.addEventListener( 'scroll', onScroll, { passive: true } );
-	}
-
-	/**
-	 * v1.1.0: FAQ accordion toggle.
-	 */
-	function initFaqAccordion() {
-		document.querySelectorAll( '.wprt-faq-question' ).forEach( function ( btn ) {
-			btn.addEventListener( 'click', function () {
-				var answer = btn.nextElementSibling;
-				var expanded = btn.getAttribute( 'aria-expanded' ) === 'true';
-				// Close all others (single-open accordion).
-				document.querySelectorAll( '.wprt-faq-question' ).forEach( function ( other ) {
-					other.setAttribute( 'aria-expanded', 'false' );
-					if ( other.nextElementSibling ) {
-						other.nextElementSibling.style.display = 'none';
-					}
-				} );
-				if ( ! expanded ) {
-					btn.setAttribute( 'aria-expanded', 'true' );
-					if ( answer ) {
-						answer.style.display = 'block';
-					}
-				}
-			} );
-		} );
 	}
 
 	/**

@@ -1,0 +1,425 @@
+/**
+ * WPRaffle Theme v1.4.0 — Day / Night design system
+ * Preset-aware colour modes for Default, Golf, Car, Retro, Diamond and Elite.
+ */
+
+/* --------------------------------------------------------------------------
+ * Switch design
+ * -------------------------------------------------------------------------- */
+.wprt-mode-toggle {
+	--wprt-mode-track: rgba(255,255,255,.10);
+	--wprt-mode-border: rgba(255,255,255,.18);
+	--wprt-mode-thumb: #fff;
+	--wprt-mode-active: var(--wpr-accent, #ffdc25);
+	--wprt-mode-icon: rgba(255,255,255,.58);
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 66px;
+	height: 38px;
+	padding: 0 !important;
+	margin: 0;
+	border: 0 !important;
+	border-radius: 999px !important;
+	background: transparent !important;
+	box-shadow: none !important;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.wprt-mode-toggle__track {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	width: 62px;
+	height: 32px;
+	padding: 2px;
+	border: 1px solid var(--wprt-mode-border);
+	border-radius: 999px;
+	background: var(--wprt-mode-track);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,.16);
+	transition: background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.wprt-mode-toggle__icon {
+	position: relative;
+	z-index: 2;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 27px;
+	height: 27px;
+	font-size: 11px;
+	color: var(--wprt-mode-icon);
+	transition: color .25s ease, transform .25s ease;
+}
+
+.wprt-mode-toggle__thumb {
+	position: absolute;
+	z-index: 1;
+	left: 3px;
+	top: 3px;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	background: var(--wprt-mode-thumb);
+	box-shadow: 0 3px 10px rgba(0,0,0,.28);
+	transition: transform .28s cubic-bezier(.2,.75,.2,1), background .25s ease;
+}
+
+[data-theme="light"] .wprt-mode-toggle__icon--sun,
+[data-theme="dark"] .wprt-mode-toggle__icon--moon {
+	color: #111;
+}
+
+[data-theme="dark"] .wprt-mode-toggle__thumb {
+	transform: translateX(29px);
+	background: var(--wprt-mode-active);
+}
+
+[data-theme="dark"] .wprt-mode-toggle__track {
+	border-color: color-mix(in srgb, var(--wprt-mode-active) 48%, transparent);
+	background: color-mix(in srgb, var(--wprt-mode-active) 16%, rgba(255,255,255,.08));
+}
+
+.wprt-mode-toggle:hover .wprt-mode-toggle__track {
+	border-color: color-mix(in srgb, var(--wprt-mode-active) 70%, transparent);
+}
+
+.wprt-mode-toggle:focus-visible {
+	outline: 3px solid var(--wprt-mode-active) !important;
+	outline-offset: 3px;
+}
+
+/* Preset switch personalities. */
+.wpr-preset-default .wprt-mode-toggle { --wprt-mode-active:#ffdc25; }
+.wpr-preset-golf .wprt-mode-toggle { --wprt-mode-active:var(--wpr-golf-lime,#d8f35a); }
+.wpr-preset-car .wprt-mode-toggle { --wprt-mode-active:var(--wpr-car-orange,#f05a24); }
+.wpr-preset-retro .wprt-mode-toggle {
+	--wprt-mode-active:var(--wpr-retro-cyan,#20d9ff);
+	--wprt-mode-track:rgba(124,60,255,.16);
+	--wprt-mode-border:rgba(32,217,255,.30);
+}
+.wpr-preset-retro .wprt-mode-toggle__track {
+	box-shadow: inset 0 0 12px rgba(124,60,255,.12), 0 0 10px rgba(32,217,255,.06);
+}
+.wpr-preset-diamond .wprt-mode-toggle { --wprt-mode-active:var(--wpr-dia-gold,#d8b84a); }
+.wpr-preset-elite .wprt-mode-toggle {
+	--wprt-mode-active:var(--wpr-elite-champagne,#cbb878);
+	--wprt-mode-track:rgba(255,255,255,.07);
+}
+
+/* --------------------------------------------------------------------------
+ * Global night-mode tokens
+ * -------------------------------------------------------------------------- */
+[data-theme="dark"] body {
+	--wprt-night-bg: #0b0c0e;
+	--wprt-night-surface: #141619;
+	--wprt-night-surface-2: #1b1e22;
+	--wprt-night-text: #f2f3f3;
+	--wprt-night-muted: #a6aaae;
+	--wprt-night-border: #2b2f34;
+	--wprt-night-accent: var(--wpr-accent,#ffdc25);
+	--wprt-night-shadow: 0 18px 48px rgba(0,0,0,.28);
+	color-scheme: dark;
+	background: var(--wprt-night-bg) !important;
+	color: var(--wprt-night-text) !important;
+}
+
+/* Preset-specific night palettes. */
+[data-theme="dark"] body.wpr-preset-default {
+	--wprt-night-bg:#08090a;
+	--wprt-night-surface:#111315;
+	--wprt-night-surface-2:#181b1e;
+	--wprt-night-text:#f6f5f0;
+	--wprt-night-muted:#aaa9a4;
+	--wprt-night-border:#2d3032;
+	--wprt-night-accent:#ffdc25;
+}
+[data-theme="dark"] body.wpr-preset-golf {
+	--wprt-night-bg:#08140e;
+	--wprt-night-surface:#10251a;
+	--wprt-night-surface-2:#173323;
+	--wprt-night-text:#f1f6ee;
+	--wprt-night-muted:#a9b7aa;
+	--wprt-night-border:#294d37;
+	--wprt-night-accent:var(--wpr-golf-lime,#d8f35a);
+}
+[data-theme="dark"] body.wpr-preset-car {
+	--wprt-night-bg:#090a0b;
+	--wprt-night-surface:#151719;
+	--wprt-night-surface-2:#202327;
+	--wprt-night-text:#f4f4f2;
+	--wprt-night-muted:#a8acb0;
+	--wprt-night-border:#34383d;
+	--wprt-night-accent:var(--wpr-car-orange,#f05a24);
+}
+[data-theme="dark"] body.wpr-preset-retro {
+	--wprt-night-bg:#07050c;
+	--wprt-night-surface:#110d19;
+	--wprt-night-surface-2:#191124;
+	--wprt-night-text:#faf8ff;
+	--wprt-night-muted:#b5aec2;
+	--wprt-night-border:#35264d;
+	--wprt-night-accent:var(--wpr-retro-cyan,#20d9ff);
+	--wprt-night-shadow:0 18px 50px rgba(3,1,8,.46),0 0 0 1px rgba(124,60,255,.06);
+}
+[data-theme="dark"] body.wpr-preset-diamond {
+	--wprt-night-bg:#0d0d0e;
+	--wprt-night-surface:#181819;
+	--wprt-night-surface-2:#202022;
+	--wprt-night-text:#f7f5ee;
+	--wprt-night-muted:#b0aca0;
+	--wprt-night-border:#39362d;
+	--wprt-night-accent:var(--wpr-dia-gold,#d8b84a);
+}
+[data-theme="dark"] body.wpr-preset-elite {
+	--wprt-night-bg:#070809;
+	--wprt-night-surface:#111315;
+	--wprt-night-surface-2:#181b1d;
+	--wprt-night-text:#f4f4f1;
+	--wprt-night-muted:#a9abaa;
+	--wprt-night-border:#303335;
+	--wprt-night-accent:var(--wpr-elite-champagne,#cbb878);
+}
+
+/* --------------------------------------------------------------------------
+ * Full-site surfaces
+ * -------------------------------------------------------------------------- */
+[data-theme="dark"] body .site,
+[data-theme="dark"] body .site-main,
+[data-theme="dark"] body .section,
+[data-theme="dark"] body .section--tint,
+[data-theme="dark"] body .wprt-page-template,
+[data-theme="dark"] body .wprt-native-page,
+[data-theme="dark"] body.woocommerce-cart,
+[data-theme="dark"] body.woocommerce-checkout,
+[data-theme="dark"] body.woocommerce-account {
+	background: var(--wprt-night-bg) !important;
+	color: var(--wprt-night-text) !important;
+}
+
+[data-theme="dark"] body h1,
+[data-theme="dark"] body h2,
+[data-theme="dark"] body h3,
+[data-theme="dark"] body h4,
+[data-theme="dark"] body h5,
+[data-theme="dark"] body h6,
+[data-theme="dark"] body .wpr-section-heading__title,
+[data-theme="dark"] body .raffle-title-main {
+	color: var(--wprt-night-text) !important;
+}
+
+[data-theme="dark"] body p,
+[data-theme="dark"] body .wpr-section-heading__subtitle,
+[data-theme="dark"] body .wprt-how-it-works__text,
+[data-theme="dark"] body .wprt-faq-answer,
+[data-theme="dark"] body .description {
+	color: var(--wprt-night-muted);
+}
+
+/* Main card/surface family. */
+[data-theme="dark"] body :is(
+	.wpr-card,
+	.rc-card,
+	.wpr-panel,
+	.wprt-faq-item,
+	.wprt-testimonial-card,
+	.wprt-how-it-works__step,
+	.wpr-winner-card,
+	.wpr-testimonial,
+	.wpr-hiw-step,
+	.wpr-stat-card,
+	.wpr-featured-card,
+	.wpr-trust-item,
+	.raffle-image-card,
+	.raffle-stat-box,
+	.raffle-entry-section,
+	.raffle-entry-panel,
+	.raffle-purchase-box,
+	.raffle-ticket-selector,
+	.raffle-instant-wins,
+	.raffle-prize-description,
+	.raffle-rules,
+	.raffle-faq,
+	.wprt-empty-state,
+	.woocommerce-cart-form,
+	.cart_totals,
+	.woocommerce-checkout-review-order,
+	.woocommerce-billing-fields,
+	.woocommerce-shipping-fields,
+	.woocommerce-MyAccount-navigation,
+	.woocommerce-MyAccount-content
+) {
+	background: var(--wprt-night-surface) !important;
+	border-color: var(--wprt-night-border) !important;
+	color: var(--wprt-night-text) !important;
+	box-shadow: var(--wprt-night-shadow);
+}
+
+[data-theme="dark"] body .woocommerce ul.products li.product {
+	background: var(--wprt-night-surface) !important;
+	border-color: var(--wprt-night-border) !important;
+	color: var(--wprt-night-text) !important;
+}
+
+[data-theme="dark"] body :is(
+	.rc-card__title,
+	.rc-card__title a,
+	.wpr-card__title,
+	.wpr-card__title a,
+	.wprt-faq-question,
+	.wprt-how-it-works__title,
+	.woocommerce ul.products li.product .woocommerce-loop-product__title
+) {
+	color: var(--wprt-night-text) !important;
+}
+
+[data-theme="dark"] body :is(
+	.rc-card__countdown,
+	.rc-card__progress,
+	.raffle-progress-bar-wrap,
+	.wprt-filter-tabs__btn
+) {
+	background: var(--wprt-night-surface-2) !important;
+	border-color: var(--wprt-night-border) !important;
+	color: var(--wprt-night-text) !important;
+}
+
+[data-theme="dark"] body .wprt-filter-tabs__btn.is-active {
+	background: var(--wprt-night-accent) !important;
+	border-color: var(--wprt-night-accent) !important;
+	color: #0b0c0e !important;
+}
+
+/* Forms / WooCommerce */
+[data-theme="dark"] body input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]),
+[data-theme="dark"] body select,
+[data-theme="dark"] body textarea,
+[data-theme="dark"] body .select2-container--default .select2-selection--single,
+[data-theme="dark"] body .select2-dropdown {
+	background: var(--wprt-night-surface-2) !important;
+	border-color: var(--wprt-night-border) !important;
+	color: var(--wprt-night-text) !important;
+}
+
+[data-theme="dark"] body input::placeholder,
+[data-theme="dark"] body textarea::placeholder {
+	color: var(--wprt-night-muted) !important;
+	opacity: .82;
+}
+
+[data-theme="dark"] body table,
+[data-theme="dark"] body .shop_table,
+[data-theme="dark"] body .woocommerce table.shop_table {
+	color: var(--wprt-night-text);
+	border-color: var(--wprt-night-border) !important;
+}
+[data-theme="dark"] body table th,
+[data-theme="dark"] body table td,
+[data-theme="dark"] body .woocommerce table.shop_table th,
+[data-theme="dark"] body .woocommerce table.shop_table td {
+	border-color: var(--wprt-night-border) !important;
+}
+
+/* Notices */
+[data-theme="dark"] body :is(.woocommerce-info,.woocommerce-message,.woocommerce-error) {
+	background: var(--wprt-night-surface-2) !important;
+	color: var(--wprt-night-text) !important;
+	border-color: var(--wprt-night-accent) !important;
+}
+
+/* Native 1.4 pages should use night tokens regardless of the daytime preset
+   tokens established in components.css. */
+[data-theme="dark"] body {
+	--wprt-page-bg: var(--wprt-night-bg) !important;
+	--wprt-page-surface: var(--wprt-night-surface) !important;
+	--wprt-page-surface-2: var(--wprt-night-surface-2) !important;
+	--wprt-page-text: var(--wprt-night-text) !important;
+	--wprt-page-muted: var(--wprt-night-muted) !important;
+	--wprt-page-border: var(--wprt-night-border) !important;
+	--wprt-page-accent: var(--wprt-night-accent) !important;
+	--wprt-page-shadow: var(--wprt-night-shadow) !important;
+}
+
+/* Social proof, consent and overlays. */
+[data-theme="dark"] body .wprt-toast,
+[data-theme="dark"] body .wprt-cookie-consent,
+[data-theme="dark"] body .wprt-age-gate__modal {
+	background: var(--wprt-night-surface) !important;
+	border-color: var(--wprt-night-border) !important;
+	color: var(--wprt-night-text) !important;
+}
+[data-theme="dark"] body .wprt-toast__body,
+[data-theme="dark"] body .wprt-age-gate__title,
+[data-theme="dark"] body .wprt-age-gate__text {
+	color: var(--wprt-night-text) !important;
+}
+[data-theme="dark"] body .wprt-toast__time {
+	color: var(--wprt-night-muted) !important;
+}
+
+/* Footer / header retain preset identity but become visually integrated. */
+[data-theme="dark"] body .wpr-footer {
+	background: color-mix(in srgb, var(--wprt-night-bg) 86%, #000) !important;
+	border-color: var(--wprt-night-border) !important;
+}
+[data-theme="dark"] body .wpr-header {
+	border-color: var(--wprt-night-border) !important;
+}
+
+/* Smooth but respectful mode transition. */
+@media (prefers-reduced-motion: no-preference) {
+	html[data-theme] body,
+	html[data-theme] body .site,
+	html[data-theme] body .site-main,
+	html[data-theme] body .section,
+	html[data-theme] body .wpr-card,
+	html[data-theme] body .rc-card,
+	html[data-theme] body .wpr-panel,
+	html[data-theme] body .wprt-faq-item,
+	html[data-theme] body .wprt-how-it-works__step,
+	html[data-theme] body input,
+	html[data-theme] body select,
+	html[data-theme] body textarea {
+		transition:
+			background-color .24s ease,
+			border-color .24s ease,
+			color .24s ease,
+			box-shadow .24s ease;
+	}
+}
+
+/* Compact header treatment for smaller devices. */
+@media (max-width: 767.98px) {
+	.wprt-mode-toggle {
+		width: 46px;
+		height: 42px;
+	}
+	.wprt-mode-toggle__track {
+		width: 42px;
+		height: 28px;
+	}
+	.wprt-mode-toggle__icon {
+		width: 18px;
+		height: 22px;
+		font-size: 9px;
+	}
+	.wprt-mode-toggle__thumb {
+		width: 20px;
+		height: 20px;
+	}
+	[data-theme="dark"] .wprt-mode-toggle__thumb {
+		transform: translateX(14px);
+	}
+}
+
+/* Forced-colours keeps native platform affordances usable. */
+@media (forced-colors: active) {
+	.wprt-mode-toggle__track,
+	.wprt-mode-toggle__thumb {
+		border: 1px solid ButtonText;
+	}
+}

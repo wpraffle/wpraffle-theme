@@ -1,0 +1,567 @@
+/**
+ * WPRaffle Theme v1.3.2 — Golf preset refresh
+ *
+ * Premium golf-competition styling inspired by modern UK golf competition
+ * sites. Everything is scoped to .wpr-preset-golf so the other presets are
+ * not changed.
+ */
+
+.wpr-preset-golf {
+	--wpr-golf-ink: #10271c;
+	--wpr-golf-deep: #153b2b;
+	--wpr-golf-green: #1f6a45;
+	--wpr-golf-fairway: #3f8b61;
+	--wpr-golf-lime: #d8f35a;
+	--wpr-golf-lime-hover: #c4e43b;
+	--wpr-golf-cream: #f5f4eb;
+	--wpr-golf-paper: #fffef9;
+	--wpr-golf-line: #d9dfd4;
+	--wpr-golf-muted: #6b786f;
+	--wpr-golf-shadow: 0 18px 45px rgba(16, 39, 28, 0.12);
+	--wpr-golf-shadow-hover: 0 24px 60px rgba(16, 39, 28, 0.18);
+	background: var(--wpr-golf-cream);
+	color: var(--wpr-golf-ink);
+}
+
+.wpr-preset-golf h1,
+.wpr-preset-golf h2,
+.wpr-preset-golf h3,
+.wpr-preset-golf h4,
+.wpr-preset-golf h5,
+.wpr-preset-golf h6 {
+	color: var(--wpr-golf-ink);
+	letter-spacing: -0.025em;
+}
+
+/* Header / navigation */
+.wpr-preset-golf .wpr-header {
+	background: var(--wpr-golf-ink);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+	box-shadow: 0 8px 28px rgba(16, 39, 28, 0.18);
+}
+
+.wpr-preset-golf .wpr-header__inner { min-height: 78px; }
+
+.wpr-preset-golf .wpr-header .custom-logo-link,
+.wpr-preset-golf .wpr-header .site-title,
+.wpr-preset-golf .wpr-header .site-title a,
+.wpr-preset-golf .wpr-nav a,
+.wpr-preset-golf .wpr-header__actions a,
+.wpr-preset-golf .wpr-header__actions button,
+.wpr-preset-golf .wpr-menu-toggle { color: #fff; }
+
+.wpr-preset-golf .wpr-primary-menu > li > a {
+	font-weight: 750;
+	letter-spacing: 0.025em;
+	text-transform: uppercase;
+	font-size: 0.82rem;
+	position: relative;
+}
+
+.wpr-preset-golf .wpr-primary-menu > li > a::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -8px;
+	width: 0;
+	height: 3px;
+	border-radius: 99px;
+	background: var(--wpr-golf-lime);
+	transform: translateX(-50%);
+	transition: width .2s ease;
+}
+
+.wpr-preset-golf .wpr-primary-menu > li:hover > a::after,
+.wpr-preset-golf .wpr-primary-menu > .current-menu-item > a::after,
+.wpr-preset-golf .wpr-primary-menu > .current-menu-ancestor > a::after {
+	width: 26px;
+}
+
+.wpr-preset-golf .wpr-primary-menu .sub-menu {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 14px;
+	box-shadow: var(--wpr-golf-shadow);
+	overflow: hidden;
+}
+
+.wpr-preset-golf .wpr-primary-menu .sub-menu a {
+	color: var(--wpr-golf-ink);
+	text-transform: none;
+}
+
+.wpr-preset-golf .wpr-primary-menu .sub-menu a:hover {
+	background: rgba(216, 243, 90, .28);
+}
+
+/* Buttons / inputs */
+.wpr-preset-golf .button,
+.wpr-preset-golf button:not(.wpr-menu-toggle),
+.wpr-preset-golf input[type="submit"],
+.wpr-preset-golf .wp-element-button,
+.wpr-preset-golf .wpr-btn,
+.wpr-preset-golf .rc-card__cta,
+.wpr-preset-golf .woocommerce a.button,
+.wpr-preset-golf .woocommerce button.button,
+.wpr-preset-golf .woocommerce input.button {
+	border-radius: 10px;
+	font-weight: 800;
+	letter-spacing: .035em;
+	text-transform: uppercase;
+}
+
+.wpr-preset-golf .wpr-btn-primary,
+.wpr-preset-golf .rc-card__cta,
+.wpr-preset-golf .woocommerce a.button.alt,
+.wpr-preset-golf .woocommerce button.button.alt,
+.wpr-preset-golf .woocommerce #respond input#submit.alt {
+	background: var(--wpr-golf-lime) !important;
+	border-color: var(--wpr-golf-lime) !important;
+	color: var(--wpr-golf-ink) !important;
+	box-shadow: none;
+}
+
+.wpr-preset-golf .wpr-btn-primary:hover,
+.wpr-preset-golf .rc-card__cta:hover,
+.wpr-preset-golf .rc-card__cta:focus,
+.wpr-preset-golf .woocommerce a.button.alt:hover,
+.wpr-preset-golf .woocommerce button.button.alt:hover {
+	background: var(--wpr-golf-lime-hover) !important;
+	border-color: var(--wpr-golf-lime-hover) !important;
+	color: var(--wpr-golf-ink) !important;
+	transform: translateY(-2px);
+}
+
+.wpr-preset-golf input:not([type="checkbox"]):not([type="radio"]),
+.wpr-preset-golf select,
+.wpr-preset-golf textarea,
+.wpr-preset-golf .select2-container--default .select2-selection--single {
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 10px;
+	background: #fff;
+}
+
+/* Hero / golf-ball detail */
+.wpr-preset-golf .wpr-hero {
+	background-color: var(--wpr-golf-deep);
+	color: #fff;
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+}
+
+.wpr-preset-golf .wpr-hero::after {
+	content: "";
+	position: absolute;
+	right: -90px;
+	top: -90px;
+	width: 360px;
+	height: 360px;
+	border-radius: 50%;
+	background:
+		radial-gradient(circle at 5px 5px, rgba(16,39,28,.13) 2px, transparent 2.5px) 0 0/18px 18px,
+		#fff;
+	opacity: .10;
+	z-index: -1;
+}
+
+.wpr-preset-golf .wpr-hero h1,
+.wpr-preset-golf .wpr-hero h2,
+.wpr-preset-golf .wpr-hero h3 { color: #fff; }
+
+.wpr-preset-golf .wpr-section-title,
+.wpr-preset-golf .section-title {
+	position: relative;
+	padding-left: 28px;
+}
+
+.wpr-preset-golf .wpr-section-title::before,
+.wpr-preset-golf .section-title::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: .18em;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	background:
+		radial-gradient(circle at 4px 4px, rgba(16,39,28,.16) 1px, transparent 1.4px) 0 0/6px 6px,
+		#fff;
+	border: 1px solid rgba(16,39,28,.18);
+	box-shadow: 0 2px 5px rgba(16,39,28,.12);
+}
+
+/* Competition archive */
+@media (min-width: 1280px) {
+	.wpr-preset-golf .raffle-list-grid,
+	.wpr-preset-golf .woocommerce ul.products {
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+	}
+}
+
+.wpr-preset-golf .raffle-list-grid { gap: 20px !important; }
+
+.wpr-preset-golf .rc-card {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 16px;
+	box-shadow: 0 8px 24px rgba(16,39,28,.08);
+	position: relative;
+	overflow: hidden;
+}
+
+.wpr-preset-golf .rc-card::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 4px;
+	background: linear-gradient(90deg, var(--wpr-golf-green), var(--wpr-golf-lime));
+	z-index: 4;
+}
+
+.wpr-preset-golf .rc-card:hover,
+.wpr-preset-golf .rc-card:focus-within {
+	transform: translateY(-6px);
+	box-shadow: var(--wpr-golf-shadow-hover);
+	border-color: #bfcbbd;
+}
+
+.wpr-preset-golf .rc-card__image {
+	padding-top: 72%;
+	background: #edf1e8;
+	overflow: hidden;
+}
+
+.wpr-preset-golf .rc-card__image img { transition: transform .35s ease; }
+.wpr-preset-golf .rc-card:hover .rc-card__image img { transform: scale(1.035); }
+
+.wpr-preset-golf .rc-card__title {
+	font-size: 1rem;
+	font-weight: 850;
+	line-height: 1.22;
+	min-height: 3.35rem;
+	padding: 1rem 1rem .45rem;
+	text-transform: uppercase;
+	letter-spacing: -.012em;
+}
+
+.wpr-preset-golf .rc-card__title-alt {
+	color: var(--wpr-golf-green);
+	font-weight: 800;
+}
+
+.wpr-preset-golf .rc-card__title-iw,
+.wpr-preset-golf .rc-card__iw-badge {
+	color: var(--wpr-golf-ink);
+	background: var(--wpr-golf-lime) !important;
+	font-weight: 900;
+	letter-spacing: .06em;
+}
+
+.wpr-preset-golf .rc-card__status {
+	border-radius: 8px;
+	font-weight: 900;
+	box-shadow: 0 4px 14px rgba(16,39,28,.18);
+}
+
+.wpr-preset-golf .rc-card__draw-bar {
+	background: var(--wpr-golf-deep);
+	color: #fff;
+	font-size: .69rem;
+	letter-spacing: .07em;
+	padding: .55rem .85rem;
+	text-transform: uppercase;
+}
+
+.wpr-preset-golf .rc-card__countdown {
+	background: #f0f2e9;
+	border-bottom-color: var(--wpr-golf-line);
+	padding: .7rem .9rem;
+}
+
+.wpr-preset-golf .rc-card__cd-num { color: var(--wpr-golf-ink); }
+.wpr-preset-golf .rc-card__cd-label { color: var(--wpr-golf-muted); }
+
+.wpr-preset-golf .rc-card__cash-bar {
+	background: rgba(216,243,90,.22);
+	border-bottom-color: var(--wpr-golf-line);
+	color: var(--wpr-golf-ink);
+	font-weight: 800;
+}
+
+.wpr-preset-golf .rc-card__price {
+	justify-content: space-between;
+	align-items: center;
+	padding: .8rem 1rem .4rem;
+}
+
+.wpr-preset-golf .rc-card__price-amount {
+	color: var(--wpr-golf-green);
+	font-size: 1.55rem;
+	font-weight: 900;
+}
+
+.wpr-preset-golf .rc-card__price-label {
+	color: var(--wpr-golf-muted);
+	font-size: .65rem;
+}
+
+/* Scorecard-style sold/ticket panel */
+.wpr-preset-golf .rc-card__progress {
+	margin: .2rem 1rem .8rem;
+	padding: .65rem .75rem .75rem;
+	background: #f0f2e9;
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 10px;
+}
+
+.wpr-preset-golf .rc-card__progress-stats {
+	color: var(--wpr-golf-ink);
+	font-size: .72rem;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: .025em;
+}
+
+.wpr-preset-golf .rc-card__progress-bar,
+.wpr-preset-golf .raffle-progress-bar-wrap {
+	height: 10px;
+	background: #dfe5dc;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.wpr-preset-golf .rc-card__progress-fill,
+.wpr-preset-golf .raffle-progress-bar-inner {
+	background:
+		repeating-linear-gradient(135deg, rgba(255,255,255,.12) 0 7px, transparent 7px 14px),
+		linear-gradient(90deg, var(--wpr-golf-green), var(--wpr-golf-fairway)) !important;
+	border-radius: 4px;
+}
+
+.wpr-preset-golf .rc-card__charity {
+	color: var(--wpr-golf-muted);
+	font-weight: 650;
+}
+
+.wpr-preset-golf .rc-card__cta {
+	margin: 0 1rem 1rem;
+	padding: .78rem 1rem;
+	border-radius: 9px;
+	box-shadow: 0 6px 0 #a8c72f;
+}
+
+.wpr-preset-golf .rc-card__cta:hover,
+.wpr-preset-golf .rc-card__cta:focus {
+	box-shadow: 0 3px 0 #9dbb2b;
+}
+
+/* WooCommerce loop */
+.wpr-preset-golf .woocommerce ul.products li.product {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(16,39,28,.08);
+	transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.wpr-preset-golf .woocommerce ul.products li.product:hover {
+	transform: translateY(-5px);
+	box-shadow: var(--wpr-golf-shadow-hover);
+}
+
+.wpr-preset-golf .woocommerce ul.products li.product .woocommerce-loop-product__title {
+	color: var(--wpr-golf-ink);
+	font-weight: 850;
+	text-transform: uppercase;
+}
+
+.wpr-preset-golf .woocommerce ul.products li.product .price {
+	color: var(--wpr-golf-green);
+	font-weight: 900;
+}
+
+/* Single competition */
+.wpr-preset-golf .raffle-single-page-wrapper {
+	background:
+		radial-gradient(circle at 8px 8px, rgba(16,39,28,.025) 1.4px, transparent 1.6px) 0 0/24px 24px,
+		var(--wpr-golf-cream) !important;
+	padding: 3rem 0 !important;
+}
+
+.wpr-preset-golf .raffle-main-grid { gap: 2.5rem !important; }
+
+.wpr-preset-golf .raffle-image-card {
+	border-radius: 18px;
+	border: 1px solid var(--wpr-golf-line);
+	box-shadow: var(--wpr-golf-shadow);
+	background: #fff;
+}
+
+.wpr-preset-golf .raffle-title-main {
+	font-size: clamp(1.8rem, 3vw, 3rem);
+	line-height: 1.05;
+	text-transform: uppercase;
+	letter-spacing: -.035em;
+	color: var(--wpr-golf-ink);
+}
+
+.wpr-preset-golf .raffle-price-value {
+	color: var(--wpr-golf-green);
+	font-weight: 950;
+}
+
+.wpr-preset-golf .raffle-stats-header {
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0,1fr));
+	gap: 10px !important;
+}
+
+.wpr-preset-golf .raffle-stat-box {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 10px;
+	box-shadow: none;
+	position: relative;
+	overflow: hidden;
+}
+
+.wpr-preset-golf .raffle-stat-box::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	background: var(--wpr-golf-lime);
+}
+
+.wpr-preset-golf .raffle-entry-tabs {
+	background: #e9eee6;
+	padding: 5px;
+	border-radius: 12px;
+	gap: 5px;
+}
+
+.wpr-preset-golf .raffle-tab-btn {
+	border-radius: 8px !important;
+	background: transparent;
+	border-color: transparent !important;
+	color: var(--wpr-golf-ink) !important;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+.wpr-preset-golf .raffle-tab-btn.active {
+	background: var(--wpr-golf-ink) !important;
+	border-color: var(--wpr-golf-ink) !important;
+	color: #fff !important;
+	box-shadow: 0 4px 12px rgba(16,39,28,.16);
+}
+
+.wpr-preset-golf .raffle-entry-section,
+.wpr-preset-golf .raffle-entry-panel,
+.wpr-preset-golf .raffle-purchase-box,
+.wpr-preset-golf .raffle-ticket-selector,
+.wpr-preset-golf .raffle-instant-wins,
+.wpr-preset-golf .raffle-prize-description,
+.wpr-preset-golf .raffle-rules,
+.wpr-preset-golf .raffle-faq {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 14px;
+}
+
+.wpr-preset-golf .raffle-ticket-selector button,
+.wpr-preset-golf .raffle-quantity button,
+.wpr-preset-golf .quantity .plus,
+.wpr-preset-golf .quantity .minus {
+	background: var(--wpr-golf-ink);
+	color: #fff;
+	border-radius: 8px;
+}
+
+/* Homepage supporting cards */
+.wpr-preset-golf .wpr-winner-card,
+.wpr-preset-golf .wpr-testimonial,
+.wpr-preset-golf .wpr-hiw-step,
+.wpr-preset-golf .wpr-stat-card,
+.wpr-preset-golf .wpr-featured-card,
+.wpr-preset-golf .wpr-trust-item {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 14px;
+	box-shadow: 0 8px 24px rgba(16,39,28,.07);
+}
+
+.wpr-preset-golf .wpr-hiw-step {
+	position: relative;
+	overflow: hidden;
+}
+
+.wpr-preset-golf .wpr-hiw-step::after {
+	content: "";
+	position: absolute;
+	right: -28px;
+	bottom: -28px;
+	width: 86px;
+	height: 86px;
+	border-radius: 50%;
+	background:
+		radial-gradient(circle at 4px 4px, rgba(16,39,28,.12) 1.2px, transparent 1.5px) 0 0/10px 10px,
+		#fff;
+	opacity: .35;
+	pointer-events: none;
+}
+
+/* Cart / checkout / account */
+.wpr-preset-golf.woocommerce-cart,
+.wpr-preset-golf.woocommerce-checkout,
+.wpr-preset-golf.woocommerce-account {
+	background: var(--wpr-golf-cream);
+}
+
+.wpr-preset-golf .woocommerce-cart-form,
+.wpr-preset-golf .cart_totals,
+.wpr-preset-golf .woocommerce-checkout-review-order,
+.wpr-preset-golf .woocommerce-billing-fields,
+.wpr-preset-golf .woocommerce-shipping-fields,
+.wpr-preset-golf .woocommerce-MyAccount-navigation,
+.wpr-preset-golf .woocommerce-MyAccount-content {
+	background: var(--wpr-golf-paper);
+	border: 1px solid var(--wpr-golf-line);
+	border-radius: 14px;
+}
+
+.wpr-preset-golf .woocommerce-info,
+.wpr-preset-golf .woocommerce-message {
+	border-top-color: var(--wpr-golf-green);
+	background: #eef4ea;
+	color: var(--wpr-golf-ink);
+}
+
+@media (max-width: 767.98px) {
+	.wpr-preset-golf .wpr-header__inner { min-height: 64px; }
+	.wpr-preset-golf .raffle-list-grid { gap: 14px !important; }
+	.wpr-preset-golf .rc-card { border-radius: 13px; }
+	.wpr-preset-golf .rc-card__title { min-height: 0; font-size: .95rem; }
+	.wpr-preset-golf .raffle-main-grid { gap: 1.5rem !important; }
+	.wpr-preset-golf .raffle-stats-header { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 420px) {
+	.wpr-preset-golf .raffle-stats-header { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wpr-preset-golf .rc-card,
+	.wpr-preset-golf .rc-card__image img,
+	.wpr-preset-golf .wpr-btn,
+	.wpr-preset-golf .button {
+		transition: none !important;
+		transform: none !important;
+	}
+}

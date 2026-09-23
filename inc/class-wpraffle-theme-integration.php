@@ -38,6 +38,9 @@ final class WPRaffle_Theme_Integration {
 	 * Hook into the plugin when it is present.
 	 */
 	private function __construct() {
+		// Tell the plugin which theme-owned templates render WPRaffle UI. The
+		// plugin remains the single owner of asset registration and localisation.
+		add_filter( 'wpraffle_frontend_context', array( $this, 'frontend_context' ), 10, 2 );
 		// The Theme Options Style tab now owns the full --wpr-* / --wpr-*
 		// palette. Suppress the plugin's own inline styling so it never competes.
 		add_filter( 'pre_option_wpraffle_styling_settings', array( $this, 'disable_plugin_styling' ), 10, 1 );
@@ -73,33 +76,48 @@ final class WPRaffle_Theme_Integration {
 	}
 
 	/**
-	 * Force-enqueue the plugin's raffle-public assets on the homepage and any
-	 * page that uses the theme's raffle template parts. Without this, cards
-	 * rendered via do_shortcode() on the front page are unstyled because the
-	 * plugin only enqueues its CSS when has_shortcode() finds the shortcode in
-	 * the page's own post_content.
+	 * Extend the plugin's frontend-context decision for native theme templates.
+	 *
+	 * @param bool         $needs Current plugin decision.
+	 * @param WP_Post|null $post  Current queried post.
+	 * @return bool
+	 */
+	public function frontend_context( $needs, $post = null ) {
+		if ( $needs || is_front_page() ) {
+			return true;
+		}
+
+		if ( ! is_page() ) {
+			return false;
+		}
+
+		$template = get_page_template_slug( $post instanceof WP_Post ? $post->ID : get_queried_object_id() );
+		$templates = array(
+			'page-competitions.php',
+			'page-winners.php',
+			'page-charities.php',
+			'page-draw-results.php',
+			'page-instant-wins.php',
+		);
+
+		return in_array( $template, $templates, true );
+	}
+
+	/**
+	 * Backwards-compatible safety net for WPRaffle versions before the context
+	 * filter/API existed.
 	 */
 	public function force_plugin_assets() {
-		if ( ! wpraffle_theme_has_plugin() ) {
+		if ( ! $this->frontend_context( false ) || ! class_exists( 'Raffle_Public' ) ) {
 			return;
 		}
-		if ( ! defined( 'RAFFLE_SYSTEM_URL' ) || ! defined( 'RAFFLE_SYSTEM_VERSION' ) ) {
+		if ( is_callable( array( 'Raffle_Public', 'enqueue_public_assets' ) ) ) {
+			Raffle_Public::enqueue_public_assets();
 			return;
 		}
 
-		// Front page renders [raffle_list] + [raffle_charities] via template parts.
-		$needs = is_front_page();
-
-		// Also cover any page/template that calls these via do_shortcode — the
-		// Charities template part is used by page-charities.php too.
-		if ( ! $needs && is_page() ) {
-			$template = get_page_template_slug( get_queried_object_id() );
-			if ( 'page-charities.php' === $template || 'page-winners.php' === $template ) {
-				$needs = true;
-			}
-		}
-
-		if ( $needs ) {
+		// Compatibility with plugin releases that pre-date the public API.
+		if ( defined( 'RAFFLE_SYSTEM_URL' ) && defined( 'RAFFLE_SYSTEM_VERSION' ) ) {
 			wp_enqueue_style( 'wpraffle-icons', RAFFLE_SYSTEM_URL . 'assets/css/icons.css', array(), RAFFLE_SYSTEM_VERSION );
 			wp_enqueue_style( 'raffle-public', RAFFLE_SYSTEM_URL . 'assets/css/public.css', array( 'wpraffle-icons' ), RAFFLE_SYSTEM_VERSION );
 			wp_enqueue_script( 'raffle-public', RAFFLE_SYSTEM_URL . 'assets/js/public.js', array( 'jquery' ), RAFFLE_SYSTEM_VERSION, true );

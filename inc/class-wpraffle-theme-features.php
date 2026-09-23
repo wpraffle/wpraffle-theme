@@ -271,8 +271,22 @@ final class WPRaffle_Theme_Features {
 		}
 		check_admin_referer( 'wprt_import' );
 
-		if ( empty( $_FILES['wprt_import_file']['tmp_name'] ) ) {
+		if (
+			empty( $_FILES['wprt_import_file']['tmp_name'] )
+			|| ! is_uploaded_file( $_FILES['wprt_import_file']['tmp_name'] )
+			|| ! isset( $_FILES['wprt_import_file']['error'] )
+			|| UPLOAD_ERR_OK !== (int) $_FILES['wprt_import_file']['error']
+		) {
 			wp_safe_redirect( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&import=error' ) );
+			exit;
+		}
+		if ( ! empty( $_FILES['wprt_import_file']['size'] ) && (int) $_FILES['wprt_import_file']['size'] > 1048576 ) {
+			wp_safe_redirect( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&import=size' ) );
+			exit;
+		}
+		$filename = isset( $_FILES['wprt_import_file']['name'] ) ? sanitize_file_name( wp_unslash( $_FILES['wprt_import_file']['name'] ) ) : '';
+		if ( 'json' !== strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) ) ) {
+			wp_safe_redirect( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&import=type' ) );
 			exit;
 		}
 
@@ -284,7 +298,8 @@ final class WPRaffle_Theme_Features {
 			exit;
 		}
 
-		update_option( 'wpraffle_theme_settings', $data );
+		$data = WPRaffle_Theme_Settings::sanitize_imported_settings( $data );
+		update_option( WPRaffle_Theme_Settings::OPTION, $data );
 		wp_safe_redirect( admin_url( 'themes.php?page=wpraffle-theme-settings&tab=advanced&import=success' ) );
 		exit;
 	}

@@ -85,7 +85,7 @@ final class WPRaffle_Theme_Elementor {
 	 * editor canvas.
 	 */
 	public function enqueue_elementor_styles() {
-		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.3.1';
+		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.4.0';
 		wp_enqueue_style(
 			'wpraffle-theme-elementor',
 			WPRAFFLE_THEME_URI . '/assets/css/elementor.css',
@@ -111,12 +111,19 @@ final class WPRaffle_Theme_Elementor {
 			) );
 		}
 
-		$tags = array(
-			'WPRaffle_Theme_Tag_Raffle_Id',
-			'WPRaffle_Theme_Tag_Ticket_Price',
-			'WPRaffle_Theme_Tag_Draw_Date',
-			'WPRaffle_Theme_Tag_Charity_Total',
-		);
+		// WPRaffle 1.4+ owns raffle-specific dynamic data. Keep only the
+		// theme/global charity tag when that stable integration API is present;
+		// retain the legacy theme tags as a fallback when the plugin is absent.
+		if ( function_exists( 'wpraffle_get_integration_manifest' ) ) {
+			$tags = array( 'WPRaffle_Theme_Tag_Charity_Total' );
+		} else {
+			$tags = array(
+				'WPRaffle_Theme_Tag_Raffle_Id',
+				'WPRaffle_Theme_Tag_Ticket_Price',
+				'WPRaffle_Theme_Tag_Draw_Date',
+				'WPRaffle_Theme_Tag_Charity_Total',
+			);
+		}
 		foreach ( $tags as $class ) {
 			if ( class_exists( $class ) ) {
 				$dynamic_tags->register( new $class() );
