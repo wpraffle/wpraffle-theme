@@ -22,10 +22,10 @@ if ( ! $next ) {
 
 $iso = gmdate( 'Y-m-d\TH:i:s\Z', strtotime( $next ) );
 ?>
-<section id="countdown" class="section section--dark" style="padding:2.5rem 0;">
+<section id="countdown" class="section section--dark wprt-dark-section--compact">
 	<div class="container text-center">
-		<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Next Draw', 'wpraffle-theme' ); ?></span>
-		<h2 style="color:#fff;margin-bottom:1rem;"><?php esc_html_e( 'Closing Soon', 'wpraffle-theme' ); ?></h2>
+		<span class="eyebrow wprt-dark-eyebrow"><?php esc_html_e( 'Next Draw', 'wpraffle-theme' ); ?></span>
+		<h2 class="wprt-dark-title"><?php esc_html_e( 'Closing Soon', 'wpraffle-theme' ); ?></h2>
 		<div class="wprt-countdown-banner" data-draw-date="<?php echo esc_attr( $iso ); ?>">
 			<div class="wprt-cd-unit"><span class="wprt-cd-num wprt-cd-days">0</span><span class="wprt-cd-label"><?php esc_html_e( 'Days', 'wpraffle-theme' ); ?></span></div>
 			<div class="wprt-cd-unit"><span class="wprt-cd-num wprt-cd-hours">0</span><span class="wprt-cd-label"><?php esc_html_e( 'Hrs', 'wpraffle-theme' ); ?></span></div>

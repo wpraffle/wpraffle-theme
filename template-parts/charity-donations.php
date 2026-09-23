@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		);
 		?>
 		<div class="wpr-charity">
-			<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Giving Back', 'wpraffle-theme' ); ?></span>
+			<span class="eyebrow wprt-dark-eyebrow"><?php esc_html_e( 'Giving Back', 'wpraffle-theme' ); ?></span>
 			<div class="wpr-charity__total"><?php echo esc_html( wpraffle_theme_has_plugin() ? WPRaffle_Theme_Integration::get_total_raised() : '£0' ); ?></div>
 			<div class="wpr-charity__label"><?php esc_html_e( 'Raised for Charity', 'wpraffle-theme' ); ?></div>
 		</div>

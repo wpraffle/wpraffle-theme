@@ -13,9 +13,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Theme version (bumped on each release).
  */
-define( 'WPRAFFLE_THEME_VERSION', '1.3.1' );
+define( 'WPRAFFLE_THEME_VERSION', '1.4.0' );
 define( 'WPRAFFLE_THEME_DIR', get_template_directory() );
 define( 'WPRAFFLE_THEME_URI', get_template_directory_uri() );
+
+/**
+ * Return a content-aware version for a local theme asset.
+ *
+ * The public theme version intentionally remains stable during a release, but
+ * a CSS/JS hotfix must not reuse a stale browser/CDN URL. A short content hash
+ * changes only when that asset changes and is cached for the current request.
+ *
+ * @param string $relative_path Theme-relative asset path.
+ * @return string
+ */
+function wpraffle_theme_asset_version( $relative_path ) {
+	static $versions = array();
+	$relative_path   = '/' . ltrim( $relative_path, '/' );
+	if ( isset( $versions[ $relative_path ] ) ) {
+		return $versions[ $relative_path ];
+	}
+	$path = WPRAFFLE_THEME_DIR . $relative_path;
+	$hash = is_readable( $path ) ? md5_file( $path ) : false;
+	$versions[ $relative_path ] = $hash
+		? WPRAFFLE_THEME_VERSION . '.' . substr( $hash, 0, 10 )
+		: WPRAFFLE_THEME_VERSION;
+	return $versions[ $relative_path ];
+}
 
 /**
  * Migrate settings from the old "diamond" option key to the new one.
@@ -94,8 +118,10 @@ $wpraffle_theme_classes = array(
 	'/inc/class-wpraffle-theme-woocommerce.php',
 	'/inc/class-wpraffle-theme-integration.php',
 	'/inc/class-wpraffle-theme-settings.php',
+	'/inc/class-wpraffle-theme-control-center.php',
 	'/inc/class-wpraffle-theme-features.php',
 	'/inc/class-wpraffle-theme-elementor.php',
+	'/inc/class-wpraffle-theme-elementor-importer.php',
 	'/inc/class-wpraffle-theme-tgm.php',
 	'/inc/class-wpraffle-theme-updater.php',
 );
@@ -124,8 +150,10 @@ WPRaffle_Theme_Setup::instance();
 WPRaffle_Theme_WooCommerce::instance();
 WPRaffle_Theme_Integration::instance();
 WPRaffle_Theme_Settings::instance();
+WPRaffle_Theme_Control_Center::instance();
 WPRaffle_Theme_Features::instance();
 WPRaffle_Theme_Elementor::instance();
+WPRaffle_Theme_Elementor_Importer::instance();
 WPRaffle_Theme_TGM::instance();
 new WPRaffle_Theme_Updater();
 
@@ -189,3 +217,71 @@ function wpraffle_theme_has_elementor_pro() {
 		defined( 'ELEMENTOR_PRO_VERSION' ) || did_action( 'elementor_pro/init' )
 	);
 }
+
+/**
+ * WPRaffle Theme 1.3.2–1.3.5 preset refresh layers.
+ *
+ * Each visual refresh is loaded only for its matching preset. The shared
+ * v1.3.5 fixes load for all presets and correct the header action icons and
+ * viewport-height mobile navigation.
+ */
+add_action( 'wp_enqueue_scripts', function() {
+	$s      = WPRaffle_Theme_Settings::instance()->get_settings();
+	$preset = isset( $s['preset'] ) ? $s['preset'] : 'default';
+
+	$base_dependency = array( 'wpraffle-theme-integration' );
+
+	wp_enqueue_style(
+		'wpraffle-theme-v135-fixes',
+		WPRAFFLE_THEME_URI . '/assets/css/v1.3.5-fixes.css',
+		$base_dependency,
+		wpraffle_theme_asset_version( '/assets/css/v1.3.5-fixes.css' )
+	);
+
+	$styles = array(
+		'golf'    => array( 'wpraffle-theme-v132-golf', 'v1.3.2-golf.css' ),
+		'car'     => array( 'wpraffle-theme-v133-car', 'v1.3.3-car.css' ),
+		'retro'   => array( 'wpraffle-theme-v134-retro', 'v1.3.4-retro.css' ),
+		'diamond' => array( 'wpraffle-theme-v135-diamond', 'v1.3.5-diamond.css' ),
+		'elite'   => array( 'wpraffle-theme-v135-elite', 'v1.3.5-elite.css' ),
+	);
+
+	if ( isset( $styles[ $preset ] ) ) {
+		wp_enqueue_style(
+			$styles[ $preset ][0],
+			WPRAFFLE_THEME_URI . '/assets/css/' . $styles[ $preset ][1],
+			array( 'wpraffle-theme-v135-fixes' ),
+			wpraffle_theme_asset_version( '/assets/css/' . $styles[ $preset ][1] )
+		);
+	}
+}, 205 );
+
+
+
+/**
+ * v1.4.0: preset-aware Day / Night design system.
+ *
+ * Loaded after all preset refresh layers so mode tokens can consistently
+ * restyle native templates, plugin components and WooCommerce surfaces.
+ */
+add_action( 'wp_enqueue_scripts', function() {
+	wp_enqueue_style(
+		'wpraffle-theme-v140-modes',
+		WPRAFFLE_THEME_URI . '/assets/css/v1.4.0-modes.css',
+		array( 'wpraffle-theme-v135-fixes' ),
+		wpraffle_theme_asset_version( '/assets/css/v1.4.0-modes.css' )
+	);
+}, 230 );
+
+
+/**
+ * v1.4.0: native page templates inherit the selected preset.
+ */
+add_action( 'wp_enqueue_scripts', function() {
+	wp_enqueue_style(
+		'wpraffle-theme-v140-native-presets',
+		WPRAFFLE_THEME_URI . '/assets/css/v1.4.0-native-presets.css',
+		array( 'wpraffle-theme-v135-fixes' ),
+		wpraffle_theme_asset_version( '/assets/css/v1.4.0-native-presets.css' )
+	);
+}, 225 );

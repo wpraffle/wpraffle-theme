@@ -53,7 +53,7 @@ $stats = array(
 	),
 );
 ?>
-<section id="stats-counter" class="section section--dark" style="padding:3rem 0;">
+<section id="stats-counter" class="section section--dark wprt-dark-section--standard">
 	<div class="container">
 		<div class="wprt-stats-counter wprt-reveal-stagger">
 			<?php foreach ( $stats as $stat ) : ?>

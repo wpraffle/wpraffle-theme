@@ -1,44 +1,17 @@
 <?php
 /**
- * Template Name: Full Width
- * A full-width page template (no sidebar, edge-to-edge content).
- *
+ * Template Name: WPRaffle — Full Width
+ * Template Post Type: page
  * @package WPRaffle_Theme
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 get_header();
 ?>
-<main id="main" class="site-main">
-	<?php
-	while ( have_posts() ) :
-		the_post();
-		?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class( 'wpr-page wpr-page--full' ); ?>>
-			<?php if ( has_post_thumbnail() ) : ?>
-				<div class="wpr-page-featured"><?php the_post_thumbnail( 'wpr-hero' ); ?></div>
-			<?php endif; ?>
-			<div class="section">
-				<div class="container-fluid px-4">
-					<header class="wpr-page-header mb-4">
-						<h1 class="wpr-page-title"><?php the_title(); ?></h1>
-						<div class="wpr-rule"></div>
-					</header>
-					<div class="wpr-page-content">
-						<?php
-						the_content();
-						wp_link_pages();
-						?>
-					</div>
-				</div>
-			</div>
-		</article>
-		<?php
-	endwhile;
-	?>
+<main id="primary" class="site-main wprt-page-template wprt-page-full-width">
+	<?php while ( have_posts() ) : the_post(); ?>
+	<section class="wprt-page-hero"><div class="container"><span class="wprt-page-kicker"><?php esc_html_e( 'Discover more', 'wpraffle-theme' ); ?></span><h1><?php the_title(); ?></h1><?php if ( has_excerpt() ) : ?><p><?php echo esc_html( get_the_excerpt() ); ?></p><?php endif; ?></div></section>
+	<?php if ( has_post_thumbnail() ) : ?><div class="wpr-page-featured"><?php the_post_thumbnail( 'wpr-hero' ); ?></div><?php endif; ?>
+	<section class="wprt-page-content"><div class="container-fluid px-4"><?php the_content(); wp_link_pages(); ?></div></section>
+	<?php endwhile; ?>
 </main>
-<?php
-get_footer();
+<?php get_footer(); ?>

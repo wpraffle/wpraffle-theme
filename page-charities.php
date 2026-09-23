@@ -1,54 +1,24 @@
 <?php
 /**
- * Template Name: Charities
- *
- * Displays the charities the site supports, with the total raised banner and
- * the plugin's [raffle_charities] shortcode grid.
- *
- * Assign this template to a page under Page → Attributes → Template, or rely
- * on the auto-created "Charities" page (theme activation creates it).
- *
+ * Template Name: WPRaffle — Charities
+ * Template Post Type: page
  * @package WPRaffle_Theme
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 get_header();
 ?>
-<main id="main" class="site-main">
-
-	<header class="wpr-shop-hero section--dark" style="padding:3.5rem 0;">
-		<div class="container">
-			<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Giving Back', 'wpraffle-theme' ); ?></span>
-			<h1 class="mb-2" style="color:#fff;font-size:clamp(1.8rem,4vw,2.75rem);margin:0;">
-				<?php the_title(); ?>
-			</h1>
-			<p class="mb-0" style="color:rgba(255,255,255,.85);">
-				<?php esc_html_e( 'Every ticket purchased helps support great causes.', 'wpraffle-theme' ); ?>
-			</p>
-		</div>
-	</header>
-
-	<div class="section">
-		<div class="container">
-
-			<?php if ( wpraffle_theme_has_plugin() ) : ?>
-				<div class="wpr-charity mb-5">
-					<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Total Raised', 'wpraffle-theme' ); ?></span>
-					<div class="wpr-charity__total"><?php echo esc_html( WPRaffle_Theme_Integration::get_total_raised() ); ?></div>
-					<div class="wpr-charity__label"><?php esc_html_e( 'Raised for Charity', 'wpraffle-theme' ); ?></div>
-				</div>
-
-				<?php echo do_shortcode( '[raffle_charities columns="3"]' ); ?>
-			<?php else : ?>
-				<p class="text-center"><?php esc_html_e( 'Activate the WPRaffles plugin to display your charities.', 'wpraffle-theme' ); ?></p>
-			<?php endif; ?>
-
-		</div>
-	</div>
-
+<main id="primary" class="site-main wprt-page-template wprt-page-charities">
+	<?php while ( have_posts() ) : the_post(); ?>
+	<section class="wprt-page-hero"><div class="container"><span class="wprt-page-kicker"><?php esc_html_e( 'Giving back', 'wpraffle-theme' ); ?></span><h1><?php the_title(); ?></h1><p><?php echo esc_html( has_excerpt() ? get_the_excerpt() : __( 'Every ticket purchased helps support great causes.', 'wpraffle-theme' ) ); ?></p></div></section>
+	<section class="wprt-page-content"><div class="container">
+		<?php if ( trim( get_the_content() ) ) : ?><div class="wprt-reading-width wprt-page-intro"><?php the_content(); ?></div><?php endif; ?>
+		<?php if ( wpraffle_theme_has_plugin() ) : ?>
+			<div class="wpr-charity mb-5"><span class="wprt-page-kicker"><?php esc_html_e( 'Total raised', 'wpraffle-theme' ); ?></span><div class="wpr-charity__total"><?php echo esc_html( WPRaffle_Theme_Integration::get_total_raised() ); ?></div><div class="wpr-charity__label"><?php esc_html_e( 'Raised for charity', 'wpraffle-theme' ); ?></div></div>
+			<?php echo do_shortcode( '[raffle_charities columns="3"]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		<?php else : ?>
+			<div class="wprt-empty-state"><span class="dashicons dashicons-heart"></span><h2><?php esc_html_e( 'Charities will appear here.', 'wpraffle-theme' ); ?></h2><p><?php esc_html_e( 'Activate WPRaffle to display supported charities.', 'wpraffle-theme' ); ?></p></div>
+		<?php endif; ?>
+	</div></section>
+	<?php endwhile; ?>
 </main>
-<?php
-get_footer();
+<?php get_footer(); ?>

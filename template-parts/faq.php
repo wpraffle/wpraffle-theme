@@ -11,13 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $s    = WPRaffle_Theme_Settings::instance()->get_settings();
 $faqs = isset( $s['faqs'] ) && is_array( $s['faqs'] ) ? $s['faqs'] : array();
+$faqs = array_values( array_filter( $faqs, static function ( $faq ) {
+	return ! empty( $faq['question'] ) || ! empty( $faq['answer'] );
+} ) );
 
 if ( empty( $faqs ) ) {
 	return;
 }
 ?>
 <section id="faq" class="section">
-	<div class="container" style="max-width:800px;">
+	<div class="container wprt-faq-container">
 		<?php
 		wpraffle_theme_section_heading(
 			get_theme_mod( 'wpr_faq_title', __( 'Frequently Asked Questions', 'wpraffle-theme' ) ),
@@ -33,12 +36,12 @@ if ( empty( $faqs ) ) {
 					continue;
 				}
 				?>
-				<div class="wprt-faq-item">
-					<button class="wprt-faq-question" type="button" aria-expanded="<?php echo 0 === $i ? 'true' : 'false'; ?>">
+				<div class="wprt-faq-item<?php echo 0 === $i ? ' is-open' : ''; ?>">
+					<button class="wprt-faq-question" type="button" aria-expanded="<?php echo 0 === $i ? 'true' : 'false'; ?>" aria-controls="wprt-faq-answer-<?php echo (int) $i; ?>">
 						<?php echo esc_html( $question ); ?>
 						<i class="fa-solid fa-chevron-down wprt-faq-icon"></i>
 					</button>
-					<div class="wprt-faq-answer"<?php echo 0 === $i ? ' style="display:block;"' : ''; ?>>
+					<div class="wprt-faq-answer" id="wprt-faq-answer-<?php echo (int) $i; ?>">
 						<?php echo wp_kses_post( wpautop( $answer ) ); ?>
 					</div>
 				</div>

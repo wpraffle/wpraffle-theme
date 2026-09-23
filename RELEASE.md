@@ -1,138 +1,68 @@
-# WPRaffle Theme v1.3.0 Release Notes
+# WPRaffle Theme 1.4.0
 
-**Release date:** 5 August 2026
-**Version:** 1.3.0
-**Previous version:** 1.2.1
+Release date: 23 September 2026  
+Previous release: 1.3.5
 
-> A cleanup + Elementor release that pairs with **WPRaffle Plugin v1.3.1**.
-> Retires the legacy `diamond` prefix across ~1,100 references, hard-codes the
-> update repository, removes redundant code, fixes two latent bugs, and ships a
-> substantial Elementor expansion: dynamic tags for plugin data, 7 new homepage
-> section blocks, 4 new Theme Builder templates, and a dedicated Elementor
-> stylesheet.
+WPRaffle Theme 1.4.0 is a production-hardening and visual-consistency release
+designed for WPRaffle Plugin 1.4.0. It resolves missing or inconsistent styling
+on PHP-rendered competition pages and completes the shared layout system across
+native templates and WooCommerce account screens.
 
----
+## Highlights
 
-## Headlines
-
-- **Legacy `diamond` prefix retired.** Every technical identifier that still
-  used the old "Diamond" brand has been renamed to the `wpr` / `wpraffle-theme`
-  prefix — CSS variables (`--diamond-*` → `--wpr-*`), classes, theme-mod keys,
-  the admin page slug, the `diamondData` JS object, image-size handles, and 37
-  `@package Diamond` docblocks. **The user-facing "Diamond" colour preset is
-  intentionally preserved.** A one-time DB migration + a read fallback ensure
-  no saved value is ever lost.
-- **Elementor dynamic tags** for plugin data — any native Elementor widget can
-  now bind to the live raffle id, ticket price, draw date, or the global charity
-  total, instead of hardcoding values.
-- **Elementor library expanded** — 7 new homepage section blocks (covering
-  every section the PHP homepage renders) + 4 new Theme Builder templates
-  (Cart, Checkout, 404, Search).
-- **Update repository hard-coded** to `wpraffle/wpraffle-theme` — no longer
-  editable from the UI.
-- **Two latent bugs fixed:** testimonial headings that disappeared after the
-  rename, and the single-raffle Elementor template that rendered nothing.
-
----
+- Uses the plugin's supported frontend-context and asset-enqueue contract.
+- Restores complete menu, header, preset and competition-card styling on native
+  competition templates.
+- Gives Raffles pages containing `[raffle_list]` or the raffle-list block the
+  same full-width grid structure as the Competitions template.
+- Unifies selectable and default page templates on one hero, container,
+  content and empty-state contract.
+- Refines WooCommerce My Account navigation, WPRaffle tabs, content panels,
+  forms, addresses, notices and transaction tables.
+- Adds safe tablet/mobile reflow for account navigation and wide tables.
+- Uses a solid account glyph matching the cart action.
+- Adds content-derived asset versions to prevent stale CSS and JavaScript after
+  deployment without changing the public 1.4.0 version.
+- Updates documentation and release metadata for the native
+  `wpraffle.dev/docs/` documentation site.
 
 ## Fixed
 
-- **Testimonial headings disappeared** after the diamond→wpr rename: the
-  template still read `diamond_testimonials_title/subtitle` (empty after
-  migration). Now uses the `wpraffle_theme_mod()` fallback helper against the
-  renamed `wpr_*` keys.
-- **Single-raffle Elementor template rendered nothing.** The
-  `[raffle id="{{current_product_id}}"]` placeholder was invalid Elementor
-  syntax. Now uses `[raffle]`, which auto-resolves to the current product's
-  raffle (paired with a plugin-side fix in v1.3.1).
+- Theme integration styles could disappear when their plugin stylesheet
+  dependency had not yet been registered.
+- Competition pages rendered through PHP could be missed by shortcode-only
+  asset detection.
+- Raffles pages using the default page template were constrained to an article
+  width instead of the competition grid.
+- My Account panels, notices and nested navigation had inconsistent spacing and
+  mobile wrapping.
+- Cached 1.4.0 assets could survive subsequent styling corrections.
 
----
+## Compatibility
 
-## Security / Hardening
-
-- **Update repository hard-coded** (`WPRaffle_Theme_Updater::REPO`). The
-  editable "GitHub repository" field on Appearance → Theme Options → Advanced
-  is replaced with a fixed label + link to
-  https://github.com/wpraffle/wpraffle-theme, and the settings save handler
-  ignores any posted `github_repo`.
-
----
-
-## Added — Elementor
-
-- **Dynamic tags** (group `🎁 WPRaffle Theme`):
-  - **Raffle ID** (current product)
-  - **Ticket Price** (current raffle)
-  - **Draw Date** (current raffle)
-  - **Charity Total Raised** (global, summed across active charities)
-- **`[wpraffle_charity_total]` shortcode** — outputs the always-current
-  charity total; used in the Elementor templates in place of the previously
-  hardcoded `£2,800,000`.
-- **7 homepage section blocks** for the Elementor library, covering every
-  section the PHP homepage renders: `how-it-works`, `featured-spotlight`,
-  `stats-counter`, `countdown`, `live-draw`, `testimonials`, `faq`.
-- **4 Theme Builder templates:** Cart, Checkout, 404, Search results.
-- **Dedicated `assets/css/elementor.css`** enqueued only when Elementor is
-  active — centralises canvas max-width, responsive column-stacking, and
-  section padding for the `wpr-*` classes.
-
----
-
-## Changed — `diamond` → `wpr` prefix rename
-
-The legacy prefix is retired everywhere except the intentional colour-preset
-name. (~1,100 references across ~60 files.)
-
-- **CSS custom properties:** `--diamond-*` → `--wpr-*` (~55 names, ~367 uses).
-- **CSS classes / selectors:** `.diamond-*` → `.wpr-*` (~95 selectors).
-- **Theme-mod keys:** `diamond_*` → `wpr_*` (~20 keys), with a one-time
-  `theme_mods` migration (flag-gated) + a `wpraffle_theme_mod()` read fallback.
-- **Admin page slug:** `diamond-settings` → `wpraffle-theme-settings`.
-- **Nonces / form identifiers:** `diamond_nonce`, `diamond_save_settings`,
-  `diamond_preset`, `diamond_action`, `diamond_tab` → `wpr_*`.
-- **Form namespace:** `$_POST['diamond']` → `$_POST['wpr_settings']`.
-- **JS localised object:** `diamondData` → `wprThemeData`.
-- **Image-size handles:** `diamond-card`, `-card-wide`, `-hero`, `-winner` →
-  `wpr-*`.
-- **TGM slug id:** `'diamond'` → `'wpraffle-theme'`.
-- **Docblocks:** `@package Diamond` → `@package WPRaffle_Theme` (37 files).
-- **Elementor template titles:** "Diamond Home" → "WPRaffle Theme Home", etc.
-
-> ⚠️ **Child themes / custom CSS** referencing `.diamond-*` classes or
-> `--diamond-*` variables must be updated to `.wpr-*` / `--wpr-*`.
-
----
-
-## Changed — Redundancy cleanup
-
-- Removed empty deprecated `create_plugin_pages()` and the no-op
-  `enqueue_google_fonts()` + its hook.
-- Removed dead first-pass font-URL computation in `load_dynamic_fonts()`.
-- Removed the unused `DEFAULT_REPO` constant.
-- Deleted a byte-identical duplicate CSS block in `assets/css/wpraffle.css`.
-- Deleted the orphan `template-parts/share-buttons.php` (never loaded).
-- Refreshed `elementor/README.md` (renamed "Diamond", removed a dead file
-  reference, documented the new sections/templates/tags).
-
----
+- WordPress 6.5 or later; tested through 7.1.
+- PHP 8.1 or later.
+- WooCommerce 8.0 or later; tested through 11.0.
+- WPRaffle Plugin 1.4.0 recommended.
+- Elementor is optional; Theme Builder imports require Elementor Pro or the
+  bundled GPL-compatible PRO Elements package.
 
 ## Upgrade notes
 
-- **No breaking changes for end users.** The diamond→wpr rename is internal;
-  saved Theme Options values are migrated automatically and protected by a
-  read fallback.
-- **Child themes / custom CSS:** update any `.diamond-*` / `--diamond-*`
-  references to `.wpr-*` / `--wpr-*`.
-- The update repo is now fixed; any previously-stored custom repo is ignored.
-- Dynamic tags + the new Theme Builder templates require PRO Elements (bundled)
-  or Elementor Pro.
+1. Back up the site and database.
+2. Install or update WPRaffle Plugin 1.4.0.
+3. Update the theme and purge page, object, CDN and browser caches.
+4. Review saved menu locations, page assignments and the active style preset.
+5. Verify the homepage, competition grid, single competition, Winners,
+   Charities, cart, checkout and every My Account endpoint on staging.
 
----
+Custom CSS or child themes still using historical `.diamond-*` selectors or
+`--diamond-*` variables must migrate to the current `.wpr-*` and `--wpr-*`
+names.
 
-## What's next
+## Release asset
 
-- Custom Elementor widgets for the homepage sections (replacing the
-  shortcode-in-a-widget pattern with purpose-built controls).
-- A "Single Raffle" Theme Builder condition so a full single-raffle template
-  can be assigned visually.
-- Live-draw embed section block.
+Upload `wpraffle-theme-1.4.0.zip` to the GitHub release for tag `v1.4.0`. The
+archive must extract to the single top-level directory `wpraffle-theme/`.
+
+Full historical changes are recorded in [CHANGELOG.md](CHANGELOG.md).

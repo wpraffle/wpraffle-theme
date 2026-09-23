@@ -15,6 +15,34 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<?php
+	$wprt_mode_settings = WPRaffle_Theme_Settings::instance()->get_settings();
+	$wprt_mode_setting  = isset( $wprt_mode_settings['dark_mode'] ) ? $wprt_mode_settings['dark_mode'] : 'off';
+	?>
+	<?php if ( 'off' !== $wprt_mode_setting ) : ?>
+		<script id="wprt-mode-bootstrap">
+		(function () {
+			try {
+				var configured = <?php echo wp_json_encode( $wprt_mode_setting ); ?>;
+				var stored = localStorage.getItem('wprt-theme');
+				var mode;
+
+				if (stored === 'dark' || stored === 'light') {
+					mode = stored;
+				} else if (configured === 'auto' && window.matchMedia) {
+					mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+				} else {
+					mode = 'light';
+				}
+
+				document.documentElement.setAttribute('data-theme', mode);
+				document.documentElement.style.colorScheme = mode;
+			} catch (e) {
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+		}());
+		</script>
+	<?php endif; ?>
 	<?php wp_head(); ?>
 </head>
 

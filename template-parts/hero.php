@@ -63,19 +63,81 @@ $tp_show = in_array( $s['trustpilot_position'], array( 'hero', 'both' ), true ) 
 	<?php endif; ?>
 	<div class="container">
 		<div class="wpr-hero__inner">
-			<span class="eyebrow" style="color:#fff;opacity:.85;"><?php echo esc_html( get_theme_mod( 'wpr_hero_eyebrow', __( 'Luxury Prize Competitions', 'wpraffle-theme' ) ) ); ?></span>
+			<span class="eyebrow wprt-dark-eyebrow"><?php echo esc_html( get_theme_mod( 'wpr_hero_eyebrow', __( 'Luxury Prize Competitions', 'wpraffle-theme' ) ) ); ?></span>
 			<h1 class="wpr-hero__title">
 				<?php
 				echo wp_kses_post( get_theme_mod( 'wpr_hero_title', __( 'Win incredible prizes <span class="accent">every week</span>', 'wpraffle-theme' ) ) );
 				?>
 			</h1>
 			<p class="wpr-hero__lead"><?php echo esc_html( get_theme_mod( 'wpr_hero_lead', __( 'Low fixed odds, instant payouts and 100% of ticket sales donated to charity. Enter your favourite competition today.', 'wpraffle-theme' ) ) ); ?></p>
-			<div class="wpr-hero__actions">
-				<?php if ( class_exists( 'WooCommerce' ) ) : ?>
-					<a class="btn btn-accent btn-lg" href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>"><?php esc_html_e( 'Enter Competitions', 'wpraffle-theme' ); ?> <i class="fa-solid fa-arrow-right ms-1"></i></a>
-				<?php endif; ?>
-				<a class="btn btn-outline-light btn-lg" href="#winners"><?php esc_html_e( 'See Recent Winners', 'wpraffle-theme' ); ?></a>
-			</div>
+			<?php
+			$resolve_hero_url = static function ( $type, $page_id, $custom_url ) {
+				switch ( $type ) {
+					case 'shop':
+						if ( class_exists( 'WooCommerce' ) ) {
+							$shop_id = wc_get_page_id( 'shop' );
+							if ( $shop_id > 0 ) {
+								return get_permalink( $shop_id );
+							}
+						}
+						return home_url( '/competitions/' );
+
+					case 'winners-section':
+						if ( wpraffle_theme_section_should_show( 'winners' ) ) {
+							return '#winners';
+						}
+						$winners = get_page_by_path( 'winners' );
+						return $winners ? get_permalink( $winners ) : home_url( '/winners/' );
+
+					case 'winners-page':
+						$winners = get_page_by_path( 'winners' );
+						return $winners ? get_permalink( $winners ) : home_url( '/winners/' );
+
+					case 'page':
+						return $page_id ? get_permalink( $page_id ) : home_url( '/' );
+
+					case 'custom':
+						return $custom_url ? $custom_url : home_url( '/' );
+				}
+
+				return home_url( '/' );
+			};
+
+			$primary_enabled = ! isset( $s['hero_primary_enabled'] ) || 'on' === $s['hero_primary_enabled'];
+			$primary_text    = ! empty( $s['hero_primary_text'] ) ? $s['hero_primary_text'] : __( 'Enter Competitions', 'wpraffle-theme' );
+			$primary_url     = $resolve_hero_url(
+				isset( $s['hero_primary_link_type'] ) ? $s['hero_primary_link_type'] : 'shop',
+				isset( $s['hero_primary_page_id'] ) ? absint( $s['hero_primary_page_id'] ) : 0,
+				isset( $s['hero_primary_url'] ) ? $s['hero_primary_url'] : ''
+			);
+
+			$secondary_enabled = ! isset( $s['hero_secondary_enabled'] ) || 'on' === $s['hero_secondary_enabled'];
+			$secondary_text    = ! empty( $s['hero_secondary_text'] ) ? $s['hero_secondary_text'] : __( 'See Recent Winners', 'wpraffle-theme' );
+			$secondary_url     = $resolve_hero_url(
+				isset( $s['hero_secondary_link_type'] ) ? $s['hero_secondary_link_type'] : 'winners-section',
+				isset( $s['hero_secondary_page_id'] ) ? absint( $s['hero_secondary_page_id'] ) : 0,
+				isset( $s['hero_secondary_url'] ) ? $s['hero_secondary_url'] : ''
+			);
+			?>
+			<?php if ( $primary_enabled || $secondary_enabled ) : ?>
+				<div class="wpr-hero__actions">
+					<?php if ( $primary_enabled ) : ?>
+						<a class="btn btn-accent btn-lg"
+						   href="<?php echo esc_url( $primary_url ); ?>"
+						   <?php echo ! empty( $s['hero_primary_new_tab'] ) && 'on' === $s['hero_primary_new_tab'] ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+							<?php echo esc_html( $primary_text ); ?> <i class="fa-solid fa-arrow-right ms-1" aria-hidden="true"></i>
+						</a>
+					<?php endif; ?>
+
+					<?php if ( $secondary_enabled ) : ?>
+						<a class="btn btn-outline-light btn-lg"
+						   href="<?php echo esc_url( $secondary_url ); ?>"
+						   <?php echo ! empty( $s['hero_secondary_new_tab'] ) && 'on' === $s['hero_secondary_new_tab'] ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+							<?php echo esc_html( $secondary_text ); ?>
+						</a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if ( $tp_show ) : ?>
 				<div class="wprt-trustpilot-slot wprt-trustpilot-slot--hero">

@@ -3,6 +3,86 @@
 All notable changes to WPRaffle Theme are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+
+## [1.4.0] — 2026-09-23
+
+### Release hardening
+- Added a plugin-owned frontend context and asset API, extended by the theme for native templates.
+- Fixed missing WPRaffle card, preset, header and navigation styling on the Competitions template.
+- Covered competitions, winners, charities, draw results, instant wins, WooCommerce shop/product taxonomies, raffle products, account endpoints and shortcode content.
+- Made the theme integration stylesheet resilient when the plugin stylesheet handle is unavailable.
+- Removed an accidental temporary JavaScript file and refreshed release metadata.
+- Unified every native/default page template on one preset-aware hero, content, spacing and empty-state system.
+- Standardised all selectable template labels to the `WPRaffle — Page Name` convention while retaining existing filenames and page assignments.
+- Fixed mobile homepage/header horizontal overflow by reducing phone actions to the essential account and cart controls.
+- Removed fictional public winner placeholders; the homepage Winners section now appears only with featured winner data.
+- Fixed Trustpilot-only testimonial visibility, dead Winners-section hero links and duplicate FAQ click handlers.
+- Made shortcode/block-driven Raffles pages use the same full-width competition
+  section and grid contract as the native Competitions template.
+- Added a dedicated wide My Account content container plus polished navigation,
+  nested WPRaffle tabs, forms, addresses, notices, tables and mobile layouts.
+- Changed the header account action to a solid icon matching the cart control.
+- Added content-aware local asset versions so browser/CDN caches cannot retain
+  stale 1.4.0 CSS or JavaScript after a release-hardening update.
+
+### Premium product completion
+- Added plugin-backed operational health/readiness checks for raffle tables, competition content and WooCommerce core pages.
+- Added downloadable support/system reports from Theme Options.
+- Added a one-click child-theme ZIP generator for update-safe customisations.
+- Added native About and Instant Wins page templates and included them in recommended-page setup.
+- Expanded Theme Options search with common setting aliases such as mobile menu, competition cards, child theme and diagnostics.
+- Added a direct recommended-plugin management shortcut to the Control Centre.
+
+- Coordinated WPRaffle plugin 1.4.0 integration with a stable capability/context API.
+- Added one-click idempotent Elementor template/library importing from Theme Options.
+- Consolidated raffle-specific Elementor dynamic data ownership into the plugin.
+- Theme dashboard now reports the active WPRaffle integration version and widget capability count.
+### Initial 1.4.0 development — 2026-08-17
+
+### Added
+
+- New **WPRaffle Control Centre** as the default Theme Options landing page with site-readiness checks, quick actions and current-style preview.
+- Guided **Site Setup** workflow with safe one-click creation of recommended pages and primary navigation. Existing pages are detected and never overwritten.
+- **Starter Sites** screen for Default, Golf, Car, Retro, Diamond and Elite, applying each real preset plus recommended layout/card defaults without importing fake competition data.
+- **Template Library** surfacing all native WordPress page templates and bundled Elementor Theme Builder/section templates.
+- New native templates for How It Works, FAQ, Draw Results, Contact and Legal/Policy pages.
+- **Tools** area with JSON settings export/import for staging, backup and cloning.
+- **System Status** screen for WordPress, PHP, WooCommerce, WPRaffle, Elementor, HTTPS, memory and permalink health.
+- First-activation welcome notice linking directly to the Control Centre.
+- Theme Options navigation search for quickly locating settings.
+
+### Changed
+
+- Theme Options navigation reorganised into Control Centre, Design, Pages, Content, Marketing and Developer groups.
+- Renamed the user-facing `Enhancements (v1.2)` tab to **Features**.
+- Theme version bumped to **1.4.0**.
+
+### Responsive Admin
+- Optimised admin/settings screens for desktop, tablet and mobile.
+- Added touch-friendly controls, responsive grids, scrollable admin navigation, stacked mobile forms and safe table overflow.
+
+### Unified Admin Experience
+- Plugin Settings now uses the same WPRaffle-branded Control Centre design language as Theme Options.
+- Desktop uses a persistent sidebar; tablet/mobile uses a hamburger dropdown that displays the current section name.
+- Removed horizontal settings tabs on smaller screens and standardised cards, forms, navigation and touch targets across plugin and theme.
+
+### Hero CTA controls
+- Added configurable primary and secondary homepage hero buttons, including text, destination, custom page/URL, visibility and new-tab options.
+
+## [1.3.5] — 2026-08-17
+
+### Changed
+- Added refreshed **Diamond** styling with a premium black/gold competition presentation.
+- Added refreshed **Elite** styling with an obsidian/platinum/champagne high-end presentation.
+- Includes the **Golf** refresh from 1.3.2, **Car** refresh from 1.3.3 and **Retro** refresh from 1.3.4.
+- Added shared header fixes for Search and Notifications icon colours.
+- Added full-viewport mobile navigation with `100dvh`, safe-area padding and independent scrolling.
+
+### Compatibility
+- Default remains the fresh-install default style.
+- Existing Diamond, Golf, Retro, Car and Elite preset selections remain available.
+- Visual refresh styles are isolated to their matching preset body classes.
+
 ## [1.3.1] — 2026-08-11
 
 ### Added
@@ -189,3 +269,22 @@ Elite) is intentionally preserved** — only the internal prefix changed.
   3 footer widget areas.
 - Settings migration: copies the old `diamond_style_settings` option to
   `wpraffle_theme_settings` on first load.
+
+### Day / Night design system
+- Rebuilt the frontend day/night mode with preset-specific palettes for Default, Golf, Car, Retro, Diamond and Elite.
+- Replaced the generic moon icon with a branded accessible day/night switch.
+- Applied mode colours before first paint to prevent light/dark flashing.
+- Extended night mode across WPRaffle cards, native pages, WooCommerce, forms, FAQs, How It Works, notices and supporting UI.
+
+### Release-candidate hardening
+- Fixed Homepage Hero CTA settings persistence, including selected page IDs, custom URLs, enabled states and new-tab options.
+- Renamed legacy Diamond-era settings/preset nonce fields to WPRaffle-scoped names.
+- Added a late-loaded preset integration layer for all native 1.4.0 page templates so Default, Golf, Car, Retro, Diamond and Elite are visually inherited consistently.
+- Hardened settings JSON imports with capability/nonce protection, a 1 MB size limit, JSON extension checks, known-key filtering and field-level sanitisation.
+- Sanitised imported theme mods by expected type.
+
+### Native-template consistency fixes
+- Removed literal escaped whitespace accidentally rendered before the viewport meta tag and in the admin dashboard.
+- Added an explicit native-template body marker so header, logo, navigation, scrolled header and mobile drawer always inherit the active preset.
+- Normalised the native Competitions page to the same `.rc-card` responsive grid contract used by raffle/shop loops.
+- Added a full rendered-template scan for line-leading escaped control characters.

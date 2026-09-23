@@ -1,47 +1,23 @@
 <?php
 /**
- * Template Name: Winners
- *
- * Displays the winners wall. Renders the plugin's [raffle_ended_list]
- * shortcode (which shows completed raffles + winners across Live Draw /
- * Auto-Draw / Instant Wins tabs) inside a Paragon-style page header.
- *
- * Assign this template to a page under Page → Attributes → Template, or rely
- * on the auto-created "Winners" page (theme activation creates it).
- *
+ * Template Name: WPRaffle — Winners
+ * Template Post Type: page
  * @package WPRaffle_Theme
  */
-
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
+if ( ! defined( 'ABSPATH' ) ) { exit; }
 get_header();
 ?>
-<main id="main" class="site-main">
-
-	<header class="wpr-shop-hero section--dark" style="padding:3.5rem 0;">
-		<div class="container">
-			<span class="eyebrow" style="color:#fff;opacity:.85;"><?php esc_html_e( 'Real Winners', 'wpraffle-theme' ); ?></span>
-			<h1 class="mb-2" style="color:#fff;font-size:clamp(1.8rem,4vw,2.75rem);margin:0;">
-				<?php the_title(); ?>
-			</h1>
-			<p class="mb-0" style="color:rgba(255,255,255,.85);">
-				<?php esc_html_e( 'Real prizes, real people, paid out instantly.', 'wpraffle-theme' ); ?>
-			</p>
-		</div>
-	</header>
-
-	<div class="section">
-		<div class="container">
-			<?php if ( wpraffle_theme_has_plugin() ) : ?>
-				<?php echo do_shortcode( '[raffle_ended_list]' ); ?>
-			<?php else : ?>
-				<p class="text-center"><?php esc_html_e( 'Activate the WPRaffles plugin to display the winners wall.', 'wpraffle-theme' ); ?></p>
-			<?php endif; ?>
-		</div>
-	</div>
-
+<main id="primary" class="site-main wprt-page-template wprt-page-winners">
+	<?php while ( have_posts() ) : the_post(); ?>
+	<section class="wprt-page-hero"><div class="container"><span class="wprt-page-kicker"><?php esc_html_e( 'Real winners', 'wpraffle-theme' ); ?></span><h1><?php the_title(); ?></h1><p><?php echo esc_html( has_excerpt() ? get_the_excerpt() : __( 'Real prizes, real people, paid out instantly.', 'wpraffle-theme' ) ); ?></p></div></section>
+	<section class="wprt-page-content"><div class="container">
+		<?php if ( trim( get_the_content() ) ) : ?><div class="wprt-reading-width wprt-page-intro"><?php the_content(); ?></div><?php endif; ?>
+		<?php if ( wpraffle_theme_has_plugin() && shortcode_exists( 'raffle_ended_list' ) ) : ?>
+			<div class="wprt-results-grid"><?php echo do_shortcode( '[raffle_ended_list]' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+		<?php else : ?>
+			<div class="wprt-empty-state"><span class="dashicons dashicons-awards"></span><h2><?php esc_html_e( 'Winners will appear here.', 'wpraffle-theme' ); ?></h2><p><?php esc_html_e( 'Activate WPRaffle and complete a competition to populate the winners wall.', 'wpraffle-theme' ); ?></p></div>
+		<?php endif; ?>
+	</div></section>
+	<?php endwhile; ?>
 </main>
-<?php
-get_footer();
+<?php get_footer(); ?>
