@@ -167,3 +167,34 @@
 		}
 	} );
 } )( jQuery );
+
+(function () {
+    'use strict';
+    document.addEventListener('click', function (event) {
+        var move = event.target.closest('[data-wprt-move]');
+        if (move) {
+            var row = move.closest('li'); var list = row.parentNode;
+            if (move.dataset.wprtMove === 'up' && row.previousElementSibling) { list.insertBefore(row, row.previousElementSibling); }
+            if (move.dataset.wprtMove === 'down' && row.nextElementSibling) { list.insertBefore(row.nextElementSibling, row); }
+            move.focus();
+        }
+        var button = event.target.closest('[data-wprt-preview]');
+        if (!button) { return; }
+        var panel = button.closest('.wprt-preview-panel');
+        var status = panel.querySelector('.wprt-preview-status');
+        var body = new FormData(button.closest('form'));
+        body.delete('wprt_settings_action'); body.delete('wprt_settings_nonce'); body.delete('wprt_settings_tab');
+        body.set('action', 'wprt_preview'); body.set('nonce', button.dataset.nonce);
+        button.disabled = true; status.textContent = 'Loading preview…';
+        fetch(window.ajaxurl, {method:'POST', credentials:'same-origin', body:body})
+            .then(function (response) { if (!response.ok) { throw new Error('Preview request failed'); } return response.json(); })
+            .then(function (result) {
+                if (!result.success) { throw new Error('Preview request failed'); }
+                var url = new URL(result.data.url, window.location.href);
+                if (url.origin !== window.location.origin) { throw new Error('Preview must use the same site'); }
+                var frame = panel.querySelector('iframe'); frame.src = url.href; frame.hidden = false;
+                status.textContent = 'Private preview refreshed. Changes are not published.';
+            }).catch(function () { status.textContent = 'Could not load preview. Refresh the settings page and try again.'; })
+            .finally(function () { button.disabled = false; });
+    });
+})();

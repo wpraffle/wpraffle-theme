@@ -41,7 +41,7 @@
               "id": "dmdtop1a2",
               "elType": "widget",
               "widgetType": "heading",
-              "settings": { "title": "Instant payouts — pay yourself out 24/7 direct to your bank", "header_size": "div", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_font_weight": "500" },
+              "settings": { "title": "Review prize details and entry rules before you enter", "header_size": "div", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_font_weight": "500" },
               "elements": []
             }
           ]

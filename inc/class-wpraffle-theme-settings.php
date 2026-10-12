@@ -190,6 +190,7 @@ final class WPRaffle_Theme_Settings {
 			'draw_mechanism'       => '', // e.g. "Computer-randomised draw, independently verified."
 			'terms_url'            => '',
 			// Product card.
+			'card_fields'        => array( 'image','title','price','draw','progress','cta' ),
 			'card_ratio'         => '4-3', // 4-3 | 16-9 | square.
 			'card_title_pos'     => 'below', // below | overlay.
 			'card_progress'      => 'thick', // thick | thin | hidden.
@@ -398,7 +399,7 @@ final class WPRaffle_Theme_Settings {
 	 */
 	public function get_settings() {
 		if ( null !== $this->settings ) {
-			return $this->settings;
+			return apply_filters( 'wpraffle_theme_settings', $this->settings );
 		}
 		$saved   = get_option( self::OPTION, array() );
 		$saved   = is_array( $saved ) ? $saved : array();
@@ -408,7 +409,7 @@ final class WPRaffle_Theme_Settings {
 			: self::get_defaults();
 		$merged  = wp_parse_args( $saved, $defaults );
 		$this->settings = $merged;
-		return $merged;
+		return apply_filters( 'wpraffle_theme_settings', $merged );
 	}
 
 	/**
@@ -695,7 +696,7 @@ final class WPRaffle_Theme_Settings {
 			}
 		}
 
-		if ( ! isset( $_POST['wprt_settings_action'] ) || 'save_settings' !== sanitize_key( wp_unslash( $_POST['wprt_settings_action'] ) ) ) {
+		if ( wp_doing_ajax() || ! isset( $_POST['wprt_settings_action'] ) || 'save_settings' !== sanitize_key( wp_unslash( $_POST['wprt_settings_action'] ) ) ) {
 			return;
 		}
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -726,6 +727,8 @@ final class WPRaffle_Theme_Settings {
 			$saved = $this->save_simple_keys( $saved, array( 'footer_cta_title', 'footer_cta_text', 'footer_cta_btn', 'footer_cta_url' ) );
 		} elseif ( 'product-cards' === $tab ) {
 			$saved = $this->save_simple_keys( $saved, array( 'card_ratio', 'card_title_pos', 'card_progress', 'card_hover' ) );
+            $posted = isset( $_POST['wpr_settings'] ) ? wp_unslash( $_POST['wpr_settings'] ) : array();
+            $saved['card_fields'] = WPRaffle_Theme_Preview::card_fields( isset( $posted['card_fields'] ) ? $posted['card_fields'] : null );
 		} elseif ( 'promo' === $tab ) {
 			$saved = $this->save_simple_keys( $saved, array( 'promo_bar', 'promo_text', 'promo_url', 'promo_bg', 'promo_start', 'promo_end' ) );
 		} elseif ( 'social-proof' === $tab ) {
@@ -1027,7 +1030,9 @@ final class WPRaffle_Theme_Settings {
 				$clean[ $key ] = esc_url_raw( $value );
 			} elseif ( in_array( $key, $kses, true ) ) {
 				$clean[ $key ] = wp_kses_post( $value );
-			} elseif ( is_array( $default ) ) {
+			} elseif ( 'card_fields' === $key ) {
+                $clean[ $key ] = WPRaffle_Theme_Preview::card_fields( $value );
+            } elseif ( is_array( $default ) ) {
 				// Unknown nested arrays are never accepted from imports.
 				continue;
 			} else {

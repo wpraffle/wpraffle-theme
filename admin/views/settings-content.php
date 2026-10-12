@@ -72,11 +72,11 @@ $textarea = array(); // reserved for future rich fields.
 	<h3><?php esc_html_e( 'Hero Stats', 'wpraffle-theme' ); ?></h3>
 	<table class="form-table" role="presentation"><tbody>
 		<tr><th scope="row"><label for="wpr_stat_winners"><?php esc_html_e( 'Winners count', 'wpraffle-theme' ); ?></label></th>
-			<td><input type="text" class="regular-text" name="wpr_settings[wpr_stat_winners]" id="wpr_stat_winners" value="<?php echo esc_attr( $f( 'wpr_stat_winners', '12,400+' ) ); ?>"></td></tr>
+			<td><input type="text" class="regular-text" name="wpr_settings[wpr_stat_winners]" id="wpr_stat_winners" value="<?php echo esc_attr( $f( 'wpr_stat_winners', '' ) ); ?>"></td></tr>
 		<tr><th scope="row"><label for="wpr_stat_raised"><?php esc_html_e( 'Raised for charity', 'wpraffle-theme' ); ?></label></th>
-			<td><input type="text" class="regular-text" name="wpr_settings[wpr_stat_raised]" id="wpr_stat_raised" value="<?php echo esc_attr( $f( 'wpr_stat_raised', '£2.8m' ) ); ?>"></td></tr>
+			<td><input type="text" class="regular-text" name="wpr_settings[wpr_stat_raised]" id="wpr_stat_raised" value="<?php echo esc_attr( $f( 'wpr_stat_raised', '' ) ); ?>"></td></tr>
 		<tr><th scope="row"><label for="wpr_stat_rating"><?php esc_html_e( 'Rating', 'wpraffle-theme' ); ?></label></th>
-			<td><input type="text" class="regular-text" name="wpr_settings[wpr_stat_rating]" id="wpr_stat_rating" value="<?php echo esc_attr( $f( 'wpr_stat_rating', '4.9★' ) ); ?>"></td></tr>
+			<td><input type="text" class="regular-text" name="wpr_settings[wpr_stat_rating]" id="wpr_stat_rating" value="<?php echo esc_attr( $f( 'wpr_stat_rating', '' ) ); ?>"></td></tr>
 	</tbody></table>
 
 	<h3><?php esc_html_e( 'Top Bar', 'wpraffle-theme' ); ?></h3>

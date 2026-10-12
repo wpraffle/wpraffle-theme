@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Extends the plugin's tag pattern but lives in the theme so it works on
  * templates that don't include a raffle widget (header/footer/homepage).
  */
-abstract class WPRaffle_Theme_Tag_Base extends \Elementor\Base_Data_Tag {
+abstract class WPRaffle_Theme_Tag_Base extends \Elementor\Core\DynamicTags\Data_Tag {
 
 	/**
 	 * Tag group (matches the plugin's group when present, else standalone).
@@ -91,7 +91,7 @@ class WPRaffle_Theme_Tag_Ticket_Price extends WPRaffle_Theme_Tag_Base {
 		if ( ! $raffle ) {
 			return '';
 		}
-		return function_exists( 'wpr_price' ) ? wpr_price( $raffle->id ) : $raffle->ticket_price;
+		return function_exists( 'wpr_price' ) ? wpr_price( $raffle->ticket_price ) : $raffle->ticket_price;
 	}
 }
 

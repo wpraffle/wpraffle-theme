@@ -416,6 +416,7 @@
 		 * a modal populated via AJAX. Closes on backdrop / Esc / close button.
 		 * ------------------------------------------------------------- */
 		initQuickView();
+        document.addEventListener( 'wprt:competitions-updated', initQuickView );
 
 		function initQuickView() {
 			if ( ! ( d.isRaffle ) ) { return; }
@@ -439,57 +440,85 @@
 				trigger.setAttribute( 'aria-label', ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.quickView ) || 'Quick view' );
 				trigger.innerHTML = '<i class="fa-solid fa-eye" aria-hidden="true"></i><span>' + ( ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.quickView ) || 'Quick view' ) + '</span>';
 				trigger.addEventListener( 'click', function ( e ) {
-					e.preventDefault();
+					e.preventDefault(); e.stopPropagation();
 					openModal( raffleId );
 				} );
-				card.appendChild( trigger );
+				(card.querySelector( '.rc-card__image' ) || card).appendChild( trigger );
 			} );
 
 			function openModal( raffleId ) {
+                if (modal._wprtController) { modal._wprtController.abort(); }
+                modal._wprtController = new AbortController();
+                var sequence = modal._wprtSequence = (modal._wprtSequence || 0) + 1;
+                modal._wprtRaffle = raffleId;
+				if (modal.hidden) { modal._wprtReturnFocus = document.activeElement; modal._wprtOverflow = document.body.style.overflow; }
 				modal.hidden = false;
+                modal.querySelector( '.wprt-quickview-modal__close' ).focus();
 				document.body.style.overflow = 'hidden';
-				content.innerHTML = '<p style="text-align:center;color:var(--wpr-text-muted,#9ca3af);">' + ( ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.loading ) || 'Loading…' ) + '</p>';
+				content.innerHTML = '<div class="wprt-quickview-state"><h2 id="wprt-quickview-title">' + escapeHtml((window.wpraffleTheme.i18n || {}).loading || 'Loading competition…') + '</h2></div>';
+                content.setAttribute( 'aria-busy', 'true' );
 				fetch( ajaxUrl, {
 					method: 'POST',
+                    signal: modal._wprtController.signal,
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 					body: 'action=wprt_quickview&nonce=' + encodeURIComponent( nonce ) + '&raffle_id=' + encodeURIComponent( raffleId )
 				} )
-				.then( function ( r ) { return r.json(); } )
+				.then( function ( r ) { if (!r.ok) { throw new Error('Request failed'); } return r.json(); } )
 				.then( function ( res ) {
-					if ( ! res || ! res.success ) {
-						content.innerHTML = '<p>' + ( ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.loadError ) || 'Could not load this competition.' ) + '</p>';
-						return;
-					}
+                    if (modal.hidden || sequence !== modal._wprtSequence) { return; }
+					if ( ! res || ! res.success ) { throw new Error('Request failed'); }
+					content.setAttribute( 'aria-busy', 'false' );
 					var data = res.data;
-					var media = data.image ? 'background-image:url(\'' + data.image + '\')' : '';
+					var imageUrl = safeUrl( data.image );
 					content.innerHTML =
 						'<div class="wprt-quickview">' +
-							'<div class="wprt-quickview__media" style="' + media + '"></div>' +
+							'<div class="wprt-quickview__media"></div>' +
 							'<div class="wprt-quickview__body">' +
 								'<h2 class="wprt-quickview__title" id="wprt-quickview-title">' + escapeHtml( data.title ) + '</h2>' +
 								( data.price ? '<div class="wprt-featured-spotlight__price">' + data.price + '</div>' : '' ) +
 								( data.draw_label ? '<div class="wprt-featured-spotlight__countdown">' + escapeHtml( data.draw_label ) + '</div>' : '' ) +
 								'<div class="rc-card__progress"><div class="rc-card__progress-stats"><span>' + data.sold + ' sold</span><span>' + data.remain + ' left</span></div><div class="rc-card__progress-bar"><div class="rc-card__progress-fill" style="width:' + data.pct + '%;"></div></div></div>' +
-								'<a class="btn btn-accent btn-lg" href="' + data.enter_url + '">' + ( ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.enterNow ) || 'Enter Now' ) + '</a>' +
+								'<a class="btn btn-accent btn-lg" href="' + escapeHtml( safeUrl( data.enter_url ) ) + '">' + ( ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.enterNow ) || 'Enter Now' ) + '</a>' +
 							'</div>' +
 						'</div>';
+					if ( imageUrl ) { content.querySelector( '.wprt-quickview__media' ).style.backgroundImage = 'url(' + JSON.stringify( imageUrl ) + ')'; }
 				} )
-				.catch( function () {
-					content.innerHTML = '<p>' + ( ( window.wpraffleTheme && window.wpraffleTheme.i18n && window.wpraffleTheme.i18n.loadError ) || 'Could not load this competition.' ) + '</p>';
-				} );
+                .catch(function (error) {
+                    if (error.name === 'AbortError' || modal.hidden || sequence !== modal._wprtSequence) { return; }
+                    content.setAttribute('aria-busy','false');
+                    content.innerHTML = '<div class="wprt-quickview-state"><h2 id="wprt-quickview-title">' + escapeHtml((window.wpraffleTheme.i18n || {}).loadError || 'Could not load this competition.') + '</h2></div>';
+                    var retry = document.createElement('button'); retry.type = 'button'; retry.className = 'button'; retry.textContent = (window.wpraffleTheme.i18n || {}).retry || 'Retry'; retry.addEventListener('click',function () { openModal(raffleId); }); content.firstChild.appendChild(retry);
+                });
 			}
 
 			function closeModal() {
+                modal._wprtSequence = (modal._wprtSequence || 0) + 1; if (modal._wprtController) { modal._wprtController.abort(); }
 				modal.hidden = true;
-				document.body.style.overflow = '';
+				document.body.style.overflow = modal._wprtOverflow || '';
+                if ( modal._wprtReturnFocus && modal._wprtReturnFocus.isConnected ) { modal._wprtReturnFocus.focus(); } else { var fallback = document.querySelector('.wprt-discovery-form button[type=submit]'); if (fallback) { fallback.focus(); } }
 			}
+            if ( modal.dataset.wprtFocusReady ) { return; }
+            modal.dataset.wprtFocusReady = '1';
 			modal.addEventListener( 'click', function ( e ) {
 				if ( e.target.closest( '[data-wprt-quickview-close]' ) ) { closeModal(); }
 			} );
 			document.addEventListener( 'keydown', function ( e ) {
 				if ( e.key === 'Escape' && ! modal.hidden ) { closeModal(); }
+                if ( e.key === 'Tab' && ! modal.hidden ) {
+                    var controls = Array.from( modal.querySelectorAll( 'button:not([disabled]),a[href],input:not([disabled]),[tabindex="0"]' ) ).filter( function( element ) { return element.getClientRects().length > 0; } );
+                    var first = controls[0]; var last = controls[controls.length - 1];
+                    if ( controls.length && e.shiftKey && ( document.activeElement === first || ! modal.contains( document.activeElement ) ) ) { e.preventDefault(); last.focus(); }
+                    else if ( controls.length && ! e.shiftKey && ( document.activeElement === last || ! modal.contains( document.activeElement ) ) ) { e.preventDefault(); first.focus(); }
+                }
 			} );
 		}
+
+        function safeUrl( value ) {
+            try {
+                var url = new URL( value, window.location.href );
+                return /^(https?:)$/.test( url.protocol ) ? url.href : '';
+            } catch ( error ) { return ''; }
+        }
 
 		function escapeHtml( s ) {
 			return String( s ).replace( /[&<>"']/g, function ( c ) {

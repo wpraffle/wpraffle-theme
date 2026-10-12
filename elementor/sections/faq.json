@@ -24,7 +24,7 @@
               { "tab_title": "How do I enter a competition?", "tab_content": "Pick a live competition, answer the skill question, and choose how many tickets you'd like. Every competition also has a free postal entry route." },
               { "tab_title": "How are winners chosen?", "tab_content": "All draws are conducted live and independently verified. You can watch each draw in real time on the Live Draw section." },
               { "tab_title": "When do I get paid if I win?", "tab_content": "Instantly. Winners are paid out the same day the draw closes — no waiting periods and no admin fees." },
-              { "tab_title": "Where does the money go?", "tab_content": "100% of ticket sales are donated to charity. You can see the running total and the causes we support on the Charities page." }
+              { "tab_title": "Where does the money go?", "tab_content": "Charity support varies by competition. Check its details and the Charities page for the stated allocation." }
             ],
             "border_border": "solid",
             "border_width": { "unit": "px", "size": 1 },

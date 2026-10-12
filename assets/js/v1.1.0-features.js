@@ -13,6 +13,12 @@
 	/* -----------------------------------------------------------------
 	 * Dark mode toggle
 	 * ----------------------------------------------------------------- */
+	function escapeHtml( value ) {
+        return String( value ).replace( /[&<>"']/g, function ( c ) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ c ];
+        } );
+    }
+
 	function initDarkMode() {
 		var configured = ( typeof wprThemeData !== 'undefined' && wprThemeData.darkMode ) ? wprThemeData.darkMode : 'off';
 		if ( 'off' === configured ) {
@@ -119,9 +125,12 @@
 			return;
 		}
 		document.body.classList.add( 'has-mobile-cta' );
-		var lastY = 0;
+		var lastY = window.scrollY;
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 		window.addEventListener( 'scroll', function () {
 			var y = window.scrollY;
+            if (reduced.matches) { bar.style.transform = 'none'; bar.style.transition = 'none'; lastY = y; return; }
+            if (Math.abs(y - lastY) < 16) { return; }
 			if ( y > lastY && y > 200 ) {
 				bar.style.transform = 'translateY(100%)';
 			} else {
@@ -129,7 +138,8 @@
 			}
 			lastY = y;
 		}, { passive: true } );
-		bar.style.transition = 'transform 0.3s ease';
+		bar.style.transition = reduced.matches ? 'none' : 'transform 0.2s ease';
+        reduced.addEventListener('change',function () { bar.style.transition = reduced.matches ? 'none' : 'transform 0.2s ease'; if (reduced.matches) { bar.style.transform = 'none'; } });
 	}
 
 	/* -----------------------------------------------------------------
@@ -169,9 +179,9 @@
 					toast.innerHTML =
 						'<div class="wprt-toast__icon"><i class="fa-solid fa-ticket"></i></div>' +
 						'<div class="wprt-toast__body">' +
-						'<strong>' + d.name + '</strong> ' +
-						'entered the ' + d.prize + ' draw' +
-						'<span class="wprt-toast__time">' + d.time + ' ago</span>' +
+						'<strong>' + escapeHtml( d.name ) + '</strong> ' +
+						'entered the ' + escapeHtml( d.prize ) + ' draw' +
+						'<span class="wprt-toast__time">' + escapeHtml( d.time ) + ' ago</span>' +
 						'</div>';
 					container.appendChild( toast );
 					setTimeout( function () {

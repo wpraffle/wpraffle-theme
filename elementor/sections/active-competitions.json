@@ -13,7 +13,7 @@
       },
       "elements": [
         { "id": "dmdsec-active-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "Active Competitions", "header_size": "h2", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 36 }, "align": "center" }, "elements": [] },
-        { "id": "dmdsec-active-sub", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D\">Enter now — limited tickets, guaranteed draws.</p>" }, "elements": [] },
+        { "id": "dmdsec-active-sub", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"text-align:center;color:#6C757D\">Explore prizes and review entry details.</p>" }, "elements": [] },
         { "id": "dmdsec-active-sc", "elType": "widget", "widgetType": "shortcode", "settings": { "shortcode": "[raffle_list status=\"active\" columns=\"3\" per_page=\"9\"]" }, "elements": [] },
         { "id": "dmdsec-active-btn", "elType": "widget", "widgetType": "button", "settings": { "text": "View all competitions", "link": { "url": "/shop" }, "selected_icon": { "value": "fas fa-arrow-right", "library": "fa-solid" }, "icon_align": "right", "background_color": "#E4678A", "text_color": "#FFFFFF", "align": "center", "border_radius": { "unit": "px", "size": 999 } }, "elements": [] }
       ]

@@ -85,7 +85,7 @@ final class WPRaffle_Theme_Elementor {
 	 * editor canvas.
 	 */
 	public function enqueue_elementor_styles() {
-		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.4.0';
+		$ver = defined( 'WPRAFFLE_THEME_VERSION' ) ? WPRAFFLE_THEME_VERSION : '1.3.1';
 		wp_enqueue_style(
 			'wpraffle-theme-elementor',
 			WPRAFFLE_THEME_URI . '/assets/css/elementor.css',
@@ -102,6 +102,12 @@ final class WPRaffle_Theme_Elementor {
 	 * @param \Elementor\Core\DynamicTags\Manager $dynamic_tags
 	 */
 	public function register_dynamic_tags( $dynamic_tags ) {
+        // Optional integration: do not include subclasses until the API exists.
+        if ( ! class_exists( '\Elementor\Core\DynamicTags\Data_Tag' ) ||
+             ! class_exists( '\Elementor\Modules\DynamicTags\Module' ) ) {
+            return;
+        }
+
 		require_once WPRAFFLE_THEME_DIR . '/inc/class-wpraffle-theme-elementor-tags.php';
 
 		$groups = \Elementor\Plugin::$instance->dynamic_tags->get_config( 'groups' );

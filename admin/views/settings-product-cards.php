@@ -41,3 +41,10 @@ $s = WPRaffle_Theme_Settings::instance()->get_settings();
 			</select></td></tr>
 	</tbody></table>
 </div>
+
+<?php WPRaffle_Theme_Preview::panel(); ?>
+
+<section class="wpr-panel"><h3><?php esc_html_e( 'Card field order', 'wpraffle-theme' ); ?></h3><p><?php esc_html_e( 'Choose optional fields and arrange them with the up/down buttons. Titles, images, prices and the entry link remain available. Entry links stay last. This builder applies to WPRaffle competition cards; WooCommerce fallback cards retain their existing layout.', 'wpraffle-theme' ); ?></p><ol class="wprt-card-builder">
+<?php $enabled_fields = isset( $s['card_fields'] ) ? WPRaffle_Theme_Preview::card_fields( $s['card_fields'] ) : WPRaffle_Theme_Preview::card_fields( null ); $fields = array_merge( array_diff( $enabled_fields, array( 'cta' ) ), array_diff( WPRaffle_Theme_Preview::card_fields( null ), $enabled_fields ), array( 'cta' ) ); foreach ( $fields as $field ) : ?>
+<li><?php $required = in_array( $field, array( 'image','title','price','cta' ), true ); if ( $required ) : ?><input type="hidden" name="wpr_settings[card_fields][]" value="<?php echo esc_attr( $field ); ?>"><?php endif; ?><label><input type="checkbox" <?php if ( ! $required ) : ?>name="wpr_settings[card_fields][]"<?php endif; ?> value="<?php echo esc_attr( $field ); ?>" <?php checked( in_array( $field, $enabled_fields, true ) ); disabled( $required ); ?>> <?php echo esc_html( ucfirst( $field ) ); ?></label> <button type="button" class="button" data-wprt-move="up" aria-label="<?php echo esc_attr( sprintf( __( 'Move %s up', 'wpraffle-theme' ), $field ) ); ?>">↑</button> <button type="button" class="button" data-wprt-move="down" aria-label="<?php echo esc_attr( sprintf( __( 'Move %s down', 'wpraffle-theme' ), $field ) ); ?>">↓</button></li>
+<?php endforeach; ?></ol></section>

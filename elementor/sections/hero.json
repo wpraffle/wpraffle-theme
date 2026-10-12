@@ -24,7 +24,7 @@
           "elements": [
             { "id": "dmdsec-hero-eb", "elType": "widget", "widgetType": "heading", "settings": { "title": "LUXURY PRIZE COMPETITIONS", "header_size": "div", "title_color": "rgba(255,255,255,0.85)", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 13 }, "typography_text_transform": "uppercase", "typography_letter_spacing": { "unit": "px", "size": 2 } }, "elements": [] },
             { "id": "dmdsec-hero-h", "elType": "widget", "widgetType": "heading", "settings": { "title": "Win incredible prizes <span style=\"color:#E4678A\">every week</span>", "header_size": "h1", "title_color": "#FFFFFF", "typography_typography": "custom", "typography_font_family": "Montserrat", "typography_font_size": { "unit": "px", "size": 60 }, "typography_font_weight": "800" }, "elements": [] },
-            { "id": "dmdsec-hero-lead", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:rgba(255,255,255,0.9);font-size:18px\">Low fixed odds, instant payouts and 100% of ticket sales donated to charity.</p>" }, "elements": [] },
+            { "id": "dmdsec-hero-lead", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:rgba(255,255,255,0.9);font-size:18px\">Browse current competitions and review their entry details.</p>" }, "elements": [] },
             {
               "id": "dmdsec-hero-btns",
               "elType": "container",

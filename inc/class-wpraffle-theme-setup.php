@@ -125,17 +125,17 @@ final class WPRaffle_Theme_Setup {
 		}
 
 		// Theme base styles.
-		wp_enqueue_style( 'wpraffle-theme-base', WPRAFFLE_THEME_URI . '/assets/css/base.css', array( 'bootstrap' ), wpraffle_theme_asset_version( '/assets/css/base.css' ) );
-		wp_enqueue_style( 'wpraffle-theme-components', WPRAFFLE_THEME_URI . '/assets/css/components.css', array( 'wpraffle-theme-base' ), wpraffle_theme_asset_version( '/assets/css/components.css' ) );
-		wp_enqueue_style( 'wpraffle-theme-woocommerce', WPRAFFLE_THEME_URI . '/assets/css/woocommerce.css', array( 'wpraffle-theme-components' ), wpraffle_theme_asset_version( '/assets/css/woocommerce.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-base', WPRAFFLE_THEME_URI . '/assets/css/base.css', array( 'bootstrap' ), $ver );
+		wp_enqueue_style( 'wpraffle-theme-components', WPRAFFLE_THEME_URI . '/assets/css/components.css', array( 'wpraffle-theme-base' ), $ver );
+		wp_enqueue_style( 'wpraffle-theme-woocommerce', WPRAFFLE_THEME_URI . '/assets/css/woocommerce.css', array( 'wpraffle-theme-components' ), $ver );
 		// v1.1.0 features (typography, header layouts, sections, blog).
-		wp_enqueue_style( 'wpraffle-theme-v110', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0.css', array( 'wpraffle-theme-components' ), wpraffle_theme_asset_version( '/assets/css/v1.1.0.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-v110', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0.css', array( 'wpraffle-theme-components' ), $ver );
 		// v1.1.0 15 features (dark mode, promo, mobile CTA, social proof, age gate, footer, product cards, mega menu).
-		wp_enqueue_style( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0-features.css', array( 'wpraffle-theme-v110' ), wpraffle_theme_asset_version( '/assets/css/v1.1.0-features.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/css/v1.1.0-features.css', array( 'wpraffle-theme-v110' ), $ver );
 		// v1.2.0 enhancements (scroll reveal, counters, back-to-top, new sections, etc.).
-		wp_enqueue_style( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/css/v1.2.0.css', array( 'wpraffle-theme-features' ), wpraffle_theme_asset_version( '/assets/css/v1.2.0.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/css/v1.2.0.css', array( 'wpraffle-theme-features' ), $ver );
 		// v1.3.1 main-site visual language, scoped to the new Default preset.
-		wp_enqueue_style( 'wpraffle-theme-v131', WPRAFFLE_THEME_URI . '/assets/css/v1.3.1-default.css', array( 'wpraffle-theme-v120' ), wpraffle_theme_asset_version( '/assets/css/v1.3.1-default.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-v131', WPRAFFLE_THEME_URI . '/assets/css/v1.3.1-default.css', array( 'wpraffle-theme-v120' ), $ver );
 
 		// WPRaffle overrides load after plugin CSS when its registered public API
 		// is available, but must never disappear because of an unresolved handle.
@@ -143,10 +143,10 @@ final class WPRaffle_Theme_Setup {
 		if ( wp_style_is( 'raffle-public', 'registered' ) ) {
 			$integration_deps[] = 'raffle-public';
 		}
-		wp_enqueue_style( 'wpraffle-theme-integration', WPRAFFLE_THEME_URI . '/assets/css/wpraffle.css', $integration_deps, wpraffle_theme_asset_version( '/assets/css/wpraffle.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-integration', WPRAFFLE_THEME_URI . '/assets/css/wpraffle.css', $integration_deps, $ver );
 
 		// The parent style.css (kept light for backwards-compat discovery).
-		wp_enqueue_style( 'wpraffle-theme-style', get_stylesheet_uri(), array( 'wpraffle-theme-base' ), wpraffle_theme_asset_version( '/style.css' ) );
+		wp_enqueue_style( 'wpraffle-theme-style', get_stylesheet_uri(), array( 'wpraffle-theme-base' ), $ver );
 	}
 
 	/**
@@ -168,10 +168,10 @@ final class WPRaffle_Theme_Setup {
 		if ( 'on' === $s['load_swiper'] ) {
 			$deps[] = 'swiper';
 		}
-		wp_enqueue_script( 'wpraffle-theme-script', WPRAFFLE_THEME_URI . '/assets/js/wpraffle-theme.js', $deps, wpraffle_theme_asset_version( '/assets/js/wpraffle-theme.js' ), true );
-		wp_enqueue_script( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/js/v1.1.0-features.js', array( 'wpraffle-theme-script' ), wpraffle_theme_asset_version( '/assets/js/v1.1.0-features.js' ), true );
+		wp_enqueue_script( 'wpraffle-theme-script', WPRAFFLE_THEME_URI . '/assets/js/wpraffle-theme.js', $deps, $ver, true );
+		wp_enqueue_script( 'wpraffle-theme-features', WPRAFFLE_THEME_URI . '/assets/js/v1.1.0-features.js', array( 'wpraffle-theme-script' ), $ver, true );
 		// v1.2.0 enhancements — depends on the features script so it can extend its helpers.
-		wp_enqueue_script( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/js/v1.2.0.js', array( 'wpraffle-theme-features' ), wpraffle_theme_asset_version( '/assets/js/v1.2.0.js' ), true );
+		wp_enqueue_script( 'wpraffle-theme-v120', WPRAFFLE_THEME_URI . '/assets/js/v1.2.0.js', array( 'wpraffle-theme-features' ), $ver, true );
 
 		wp_localize_script( 'wpraffle-theme-script', 'wprThemeData', array(
 			'ajaxUrl'         => admin_url( 'admin-ajax.php' ),

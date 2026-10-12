@@ -89,7 +89,7 @@ final class WPRaffle_Theme_Features {
 			$css .= '#login{position:relative;z-index:1;}';
 		}
 		if ( $s['login_logo'] ) {
-			$css .= '#login h1 a{background-image:url(' . esc_url( $s['login_logo'] . ') !important;background-size:contain !important;width:200px !important;height:80px !important;' ) . ';}';
+			$css .= '#login h1 a{background-image:url("' . esc_url( $s['login_logo'] ) . '") !important;background-size:contain !important;width:200px !important;height:80px !important;}';
 		}
 		$css .= '.wp-core-ui .button-primary{background:' . $s['accent'] . ';border-color:' . $s['accent'] . ';}';
 		$css .= '.wp-core-ui .button-primary:hover{background:' . WPRaffle_Theme_Settings::darken( $s['accent'], 12 ) . ';border-color:' . WPRaffle_Theme_Settings::darken( $s['accent'], 12 ) . ';}';
@@ -344,17 +344,16 @@ final class WPRaffle_Theme_Features {
 	public function ajax_filter_raffles() {
 		check_ajax_referer( 'wpr_nonce', 'nonce' );
 
-		$category = isset( $_POST['category'] ) ? sanitize_text_field( wp_unslash( $_POST['category'] ) ) : '';
-
-		if ( ! wpraffle_theme_has_plugin() ) {
-			wp_send_json( '' );
-		}
-
-		// The plugin (v1.3.1+) supports a `category` attribute on [raffle_list].
-		// If the plugin predates v1.3.1 the attribute is silently ignored and the
-		// full list is returned — acceptable graceful degradation.
-		$out = do_shortcode( '[raffle_list status="active" columns="3" per_page="9" category="' . esc_attr( $category ) . '"]' );
-		wp_send_json( $out );
+        if ( ! wpraffle_theme_has_plugin() || ! class_exists( 'Raffle_Discovery' ) ) { wp_send_json_error( array( 'message' => 'Competition filters unavailable.' ), 503 ); }
+        $args = array();
+        foreach ( array( 'category','min_price','max_price','closing','availability','sort','status','page','per_page' ) as $key ) { if ( isset( $_POST[ $key ] ) && is_scalar( $_POST[ $key ] ) ) { $args[ $key ] = sanitize_text_field( wp_unslash( $_POST[ $key ] ) ); } }
+        if ( isset( $args['status'] ) && 'draft' === $args['status'] ) { $args['status'] = 'upcoming'; }
+        $args = Raffle_Discovery::normalize( $args );
+        $total = Raffle_Discovery::query( $args, true );
+        $args['page'] = min( $args['page'], max( 1, (int) ceil( $total / $args['per_page'] ) ) );
+        $shortcode = '[raffle_list';
+        foreach ( $args as $key => $value ) { if ( is_scalar( $value ) ) { $shortcode .= ' ' . $key . '="' . esc_attr( (string) $value ) . '"'; } }
+        wp_send_json_success( array( 'html' => do_shortcode( $shortcode . ']' ), 'total' => $total, 'page' => $args['page'], 'pages' => (int) ceil( $total / $args['per_page'] ) ) );
 	}
 
 	/**
@@ -375,12 +374,15 @@ final class WPRaffle_Theme_Features {
 		}
 
 		global $wpdb;
-		$r = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}raffles WHERE id = %d LIMIT 1", $raffle_id ) );
+		$r = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}raffles WHERE id = %d AND status IN ('active', 'finished') LIMIT 1", $raffle_id ) );
 		if ( ! $r ) {
 			wp_send_json_error();
 		}
 
-		$product   = $r->wc_product_id ? wc_get_product( $r->wc_product_id ) : null;
+		$product   = $r->wc_product_id && function_exists( 'wc_get_product' ) ? wc_get_product( $r->wc_product_id ) : null;
+		if ( $r->wc_product_id && ( ! $product || 'publish' !== $product->get_status() || post_password_required( $r->wc_product_id ) ) ) {
+			wp_send_json_error();
+		}
 		$enter_url = $product ? $product->get_permalink() : wpraffle_theme_competitions_url();
 		$image_id  = $product ? $product->get_image_id() : 0;
 		$image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'wpr-card-wide' ) : '';
@@ -433,7 +435,7 @@ final class WPRaffle_Theme_Features {
 
 		// Quick-view modal — only on pages that show competition grids/cards.
 		$show_quickview = wpraffle_theme_has_plugin() && (
-			is_front_page() ||
+			is_front_page() || is_page_template( 'page-competitions.php' ) ||
 			( function_exists( 'is_shop' ) && is_shop() ) ||
 			( function_exists( 'is_product_category' ) && is_product_category() )
 		);
@@ -447,7 +449,9 @@ final class WPRaffle_Theme_Features {
 			'quickView'  => __( 'Quick view', 'wpraffle-theme' ),
 			'enterNow'   => __( 'Enter Now', 'wpraffle-theme' ),
 			'loading'    => __( 'Loading…', 'wpraffle-theme' ),
-			'loadError'  => __( 'Could not load this competition.', 'wpraffle-theme' ),
+			'retry' => __( 'Retry', 'wpraffle-theme' ),
+            'loading' => __( 'Loading competition…', 'wpraffle-theme' ),
+            'loadError'  => __( 'Could not load this competition.', 'wpraffle-theme' ),
 		) ) . ' };</script>';
 	}
 

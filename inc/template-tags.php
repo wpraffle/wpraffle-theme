@@ -302,7 +302,7 @@ if ( ! function_exists( 'wpraffle_theme_account_link' ) ) {
 		$label = is_user_logged_in() ? __( 'My Account', 'wpraffle-theme' ) : __( 'Login', 'wpraffle-theme' );
 		?>
 		<a class="wpr-icon-btn wpr-account" href="<?php echo esc_url( $url ); ?>" aria-label="<?php echo esc_attr( $label ); ?>" title="<?php echo esc_attr( $label ); ?>">
-			<i class="fa-solid fa-user"></i>
+			<i class="fa-regular fa-user"></i>
 		</a>
 		<?php
 	}

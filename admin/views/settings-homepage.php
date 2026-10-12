@@ -251,3 +251,5 @@ asort( $ordered_keys );
 	</div>
 </div>
 
+
+<?php WPRaffle_Theme_Preview::panel(); ?>

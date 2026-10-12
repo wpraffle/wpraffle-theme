@@ -20,7 +20,7 @@ $plugins = array(
 			'wpraffle/wpraffle.php', // legacy/future compatibility.
 		),
 		'required'   => false,
-		'install'    => 'https://wpraffle.dev/',
+		'install'    => 'https://wpraffles.dev/',
 	),
 	'elementor' => array(
 		'name'       => 'Elementor',

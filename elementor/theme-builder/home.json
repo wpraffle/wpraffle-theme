@@ -44,7 +44,7 @@
               "id": "dmdhome-hero-lead",
               "elType": "widget",
               "widgetType": "text-editor",
-              "settings": { "editor": "<p style=\"color:rgba(255,255,255,0.9);font-size:18px\">Low fixed odds, instant payouts and 100% of ticket sales donated to charity. Enter your favourite competition today.</p>" },
+              "settings": { "editor": "<p style=\"color:rgba(255,255,255,0.9);font-size:18px\">Browse current competitions and review the prize, entry price and closing date.</p>" },
               "elements": []
             },
             {
@@ -153,7 +153,7 @@
           "id": "dmdhome-active-sub",
           "elType": "widget",
           "widgetType": "text-editor",
-          "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;margin-top:8px\">Enter now — limited tickets, guaranteed draws.</p>" },
+          "settings": { "editor": "<p style=\"text-align:center;color:#6C757D;margin-top:8px\">Explore prizes and review entry details.</p>" },
           "elements": []
         },
         {

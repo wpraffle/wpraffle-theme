@@ -43,7 +43,7 @@
               "id": "dmdarc-sub",
               "elType": "widget",
               "widgetType": "text-editor",
-              "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85)\">Limited tickets, guaranteed draws, instant payouts.</p>" },
+              "settings": { "editor": "<p style=\"text-align:center;color:rgba(255,255,255,0.85)\">Explore prizes, entry prices and draw dates.</p>" },
               "elements": []
             }
           ]

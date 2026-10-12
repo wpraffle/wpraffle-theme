@@ -38,7 +38,7 @@
               "settings": { "background_background": "classic", "background_color": "#FFFFFF", "border_border": "solid", "border_width": { "unit": "px", "size": 1 }, "border_color": "#DEE2E6", "border_radius": { "unit": "px", "size": 16 }, "padding": { "unit": "px", "size": 32 } },
               "elements": [
                 { "id": "dmdsec-ts-2t", "elType": "widget", "widgetType": "heading", "settings": { "title": "★★★★★", "header_size": "div", "title_color": "#E4678A", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 16 }, "align": "left" }, "elements": [] },
-                { "id": "dmdsec-ts-2d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:#6C757D;font-size:14px\">\"Low odds and 100% to charity — best competition site I've used by far.\"</p>" }, "elements": [] },
+                { "id": "dmdsec-ts-2d", "elType": "widget", "widgetType": "text-editor", "settings": { "editor": "<p style=\"color:#6C757D;font-size:14px\">\"Sample review: replace with a verified customer testimonial before publishing.\"</p>" }, "elements": [] },
                 { "id": "dmdsec-ts-2n", "elType": "widget", "widgetType": "heading", "settings": { "title": "Sophie, London", "header_size": "h4", "title_color": "#2C2C2C", "typography_typography": "custom", "typography_font_size": { "unit": "px", "size": 14 }, "typography_font_weight": "600" }, "elements": [] }
               ]
             },
