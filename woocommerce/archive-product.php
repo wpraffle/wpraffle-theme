@@ -20,7 +20,7 @@ get_header( 'shop' );
 				<?php woocommerce_page_title(); ?>
 			</h1>
 		<?php endif; ?>
-		<p class="mb-0" style="color:rgba(255,255,255,.85);"><?php esc_html_e( 'Limited tickets, guaranteed draws, instant payouts.', 'wpraffle-theme' ); ?></p>
+		<p class="mb-0" style="color:rgba(255,255,255,.85);"><?php esc_html_e( 'Explore prizes, entry prices and draw dates.', 'wpraffle-theme' ); ?></p>
 	</div>
 </header>
 

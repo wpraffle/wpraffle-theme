@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 		wpraffle_theme_section_heading(
 			get_theme_mod( 'wpr_charity_title', __( 'Supporting Great Causes', 'wpraffle-theme' ) ),
-			get_theme_mod( 'wpr_charity_subtitle', __( '100% of ticket sales donated to charity.', 'wpraffle-theme' ) ),
+			get_theme_mod( 'wpr_charity_subtitle', __( 'See the causes supported by participating competitions.', 'wpraffle-theme' ) ),
 			wpraffle_theme_charities_url(),
 			__( 'View all charities', 'wpraffle-theme' )
 		);

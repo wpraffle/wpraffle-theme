@@ -49,7 +49,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="wpr-skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'wpraffle-theme' ); ?></a>
+<a class="wpr-skip-link screen-reader-text" href="<?php echo is_page() && ! is_front_page() ? '#primary' : '#main'; ?>"><?php esc_html_e( 'Skip to content', 'wpraffle-theme' ); ?></a>
 
 <div class="site">
 	<?php

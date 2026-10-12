@@ -32,26 +32,21 @@ $stats = array(
 	),
 	array(
 		'prefix'   => '',
-		'target'   => (float) preg_replace( '/[^\d.]/', '', (string) get_theme_mod( 'wpr_stat_winners', '12400' ) ) ?: 0,
+		'target'   => (float) preg_replace( '/[^\d.]/', '', (string) get_theme_mod( 'wpr_stat_winners', '' ) ) ?: 0,
 		'decimals' => 0,
-		'suffix'   => '+',
-		'label'    => __( 'Happy Winners', 'wpraffle-theme' ),
+		'suffix'   => '',
+		'label'    => __( 'Winners', 'wpraffle-theme' ),
 	),
 	array(
 		'prefix'   => '',
-		'target'   => 100,
-		'decimals' => 0,
-		'suffix'   => '%',
-		'label'    => __( 'Guaranteed Draws', 'wpraffle-theme' ),
-	),
-	array(
-		'prefix'   => '',
-		'target'   => 4.9,
+		'target'   => (float) preg_replace( '/[^\d.]/', '', (string) get_theme_mod( 'wpr_stat_rating', '' ) ),
 		'decimals' => 1,
 		'suffix'   => '★',
 		'label'    => __( 'Average Rating', 'wpraffle-theme' ),
 	),
 );
+$stats = array_values( array_filter( $stats, static function( $stat ) { return $stat['target'] > 0; } ) );
+if ( ! $stats ) { return; }
 ?>
 <section id="stats-counter" class="section section--dark wprt-dark-section--standard">
 	<div class="container">

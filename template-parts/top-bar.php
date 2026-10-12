@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<div class="wpr-topbar__msg">
 				<i class="fa-solid fa-bolt"></i>
-				<span><?php echo esc_html( get_theme_mod( 'wpr_topbar_text', __( 'Instant payouts — pay yourself out 24/7 direct to your bank', 'wpraffle-theme' ) ) ); ?></span>
+				<span><?php echo esc_html( get_theme_mod( 'wpr_topbar_text', __( 'Review prize details and entry rules before you enter', 'wpraffle-theme' ) ) ); ?></span>
 			</div>
 
 			<?php if ( has_nav_menu( 'top_bar' ) ) : ?>

@@ -1,104 +1,101 @@
 # WPRaffle Theme
 
-WPRaffle Theme is the official open-source WordPress theme for the WPRaffle
-plugin. It provides a polished competition storefront, native page templates,
-WooCommerce styling and optional Elementor Theme Builder templates.
+Version 1.4.6
 
-[Documentation](https://wpraffle.dev/docs/getting-started/wpraffle-theme/) ·
-[Releases](https://github.com/wpraffle/wpraffle-theme/releases) ·
-[Changelog](CHANGELOG.md) ·
-[WPRaffle plugin](https://github.com/wpraffle/wpraffle)
-
-## Version 1.4.0
-
-Theme 1.4.0 is the paired release for WPRaffle Plugin 1.4.0. It unifies native
-templates, plugin components and WooCommerce screens under one dependable
-asset and layout contract.
-
-### Release highlights
-
-- Correct header, navigation, preset and competition-card styling across native
-  competition templates.
-- Consistent layouts for Competitions, Raffles, Winners, Charities, Instant
-  Wins, Draw Results and standard pages.
-- Content-aware Raffles pages automatically use the full competition grid.
-- Refined WooCommerce My Account navigation, panels, notices, forms and tables.
-- Responsive account and ticket views without horizontal collisions.
-- Solid account icon aligned with the cart and other header actions.
-- Content-aware asset versions that invalidate stale browser/CDN files.
-- Preset-aware day/night styling across native templates.
-- Control Centre readiness checks, guided setup, starter imports, system
-  reports and child-theme generation.
-
-See [RELEASE.md](RELEASE.md) for upgrade and acceptance notes.
-
-## Included experience
-
-- Purpose-built homepage with configurable competition sections.
-- Native competition, winner, charity, result and instant-win templates.
-- WooCommerce shop, product, cart, checkout and My Account presentation.
-- Six style presets: Default, Diamond, Golf, Car, Retro and Elite.
-- Responsive header, mobile navigation and four-column footer.
-- Custom logo, colours, typography and section controls.
-- Elementor dynamic tags, Theme Builder templates and homepage section blocks.
-- Gutenberg and wide-block support.
-- GitHub-based theme update checking.
-
-The theme remains usable without Elementor. PRO Elements or Elementor Pro is
-only required for importing and editing Theme Builder templates.
+The companion WordPress theme for WPRaffle includes competition pages, WooCommerce layouts, customer account styling and configurable homepage sections.
 
 ## Requirements
 
-| Component | Minimum | Tested through |
-|---|---:|---:|
-| WordPress | 6.5 | 7.1 |
-| PHP | 8.1 | — |
-| WooCommerce | 8.0 | 11.0 |
-| WPRaffle plugin | 1.4.0 recommended | 1.4.0 |
+- WordPress 6.5 or later
+- PHP 8.1 or later
+- WooCommerce 8.0 or later
+- WPRaffle 1.4.6
+
+Elementor is optional for native pages. Elementor templates require the relevant builder features.
+
+## Features
+
+- Default, Diamond, Golf, Car, Retro and Elite visual presets
+- Native homepage, competition, winner and informational templates
+- WooCommerce cart, checkout and customer account styling
+- Homepage section selection and ordering
+- Competition filters, sorting and pagination
+- Configurable competition cards and quick view
+- Private preview of supported unsaved settings
+- Mobile entry controls and sticky entry bars
+- Optional Elementor templates, widgets and dynamic tags
+- Settings import and export
+
+## What's new in 1.4.6
+
+- Advanced filters sit inside an expandable panel, with counts and removable selections.
+- Filter results support browser Back and Forward navigation.
+- Empty results and failed requests provide clear recovery actions.
+- Competition cards use a simpler default layout with clearer dates and price labels.
+- Primary buttons have readable text across all six presets.
+- Quick view supports request cancellation, retry and improved focus return.
+- Mobile controls respond more consistently to scrolling and reduced-motion preferences.
+- Starter content uses neutral copy and configurable statistics.
 
 ## Installation
 
-1. Install and activate `wpraffle-1.4.0.zip` first.
-2. Download `wpraffle-theme-1.4.0.zip` from the theme GitHub release.
-3. In WordPress, open **Appearance → Themes → Add New → Upload Theme**.
-4. Upload the ZIP, install it and activate WPRaffle Theme.
-5. Open **Appearance → Theme Options** and complete the guided setup.
-6. Assign menus, logo and required WPRaffle pages.
-7. Purge page, object, CDN and browser caches after upgrading.
+1. Back up your files, database and theme settings.
+2. Install and activate WooCommerce and WPRaffle 1.4.6.
+3. Upload `wpraffle-theme-1.4.6.zip` through Appearance → Themes → Add New → Upload Theme.
+4. Activate the theme and open Theme Options or the Control Centre.
+5. Configure your preset, menus, homepage sections, site identity and images.
+6. Clear caches and check the competition, cart, checkout and account pages.
 
-Test upgrades and preset changes on staging before applying them to a live
-competition website.
+Existing settings and saved card layouts are preserved. Version 1.4.6 adds no theme database tables. Use a child theme for custom PHP and template changes.
 
-## Native templates
+## Homepage and content
 
-The theme includes native templates for:
+Use the homepage controls to enable, disable and order sections. Replace starter images, contact details, links and legal text before publishing. Add your own verified statistics and customer reviews where required.
 
-- Homepage and standard content pages.
-- Active competitions and shortcode/block-driven raffle listings.
-- Winners and past competitions.
-- Charities and fundraising totals.
-- Instant wins and draw results.
-- WooCommerce archives, products, cart, checkout and My Account.
-- Blog, archive, search and 404 views.
+Native templates support the homepage, competition listing, results, How It Works, FAQ, Contact and Legal pages. Elementor templates and widgets can be used alongside these layouts.
 
-Selectable page templates use consistent `WPRaffle — Page Name` labels while
-their existing filenames remain stable for saved WordPress assignments.
+## Competition discovery
 
-## Elementor
+The competition listing provides status and sorting controls, with category, price, closing-window and availability options in the advanced filter panel. Selected filters can be removed individually or cleared together.
 
-The `elementor/` directory contains optional Theme Builder templates and
-section blocks. Import guidance is in
-[`elementor/README.md`](elementor/README.md). The bundled PRO Elements package
-is GPL-licensed and optional; native templates do not depend on it.
+Successful changes update the page URL. Back and Forward restore the corresponding listing. If a request fails, the current results remain visible and a retry action is available. Filtering and pagination also work without JavaScript.
 
-## Support and contributing
+## Product cards
 
-- Read the [theme documentation](https://wpraffle.dev/docs/getting-started/wpraffle-theme/).
-- Search or open a [GitHub issue](https://github.com/wpraffle/wpraffle-theme/issues).
-- Include WordPress, WooCommerce, PHP, plugin and theme versions with reports.
-- Mention the active preset and whether Elementor is enabled for visual issues.
+Theme Options → Product Cards controls the image ratio, title placement, progress display and supported card fields. Use the checkboxes to select optional fields and the Up/Down buttons to arrange them.
 
-## Licences
+Images, titles, prices and the entry link remain available. The entry link stays last. Optional fields include draw date, countdown, cash alternative, progress and charity information.
 
-WPRaffle Theme is licensed under GPL-2.0-or-later. Bundled PRO Elements is
-GPL-3.0, and TGMPA is GPL-2.0.
+New installations use image, title, price, draw date, progress and entry link. Saved layouts retain their existing order and can be changed in Product Cards.
+
+## Live preview
+
+In Homepage or Product Cards, select Refresh live preview to view supported unsaved changes. Previews are available only to the signed-in administrator and expire after 15 minutes.
+
+Use Save settings to publish changes. Refreshing the preview does not save settings.
+
+## Customer accounts
+
+My Account → My Raffles provides the plugin's Overview, Tickets and Notifications views. The theme styles the account summary, next draw and entry history. Wallet information appears when a supported integration is available.
+
+## Keyboard and display preferences
+
+Quick view supports Tab and Shift+Tab navigation, Escape to close and focus return. Filter results announce loading and result changes. Supported animations respond to reduced-motion preferences, with additional styling for contrast and transparency preferences.
+
+Check your chosen preset with your images, translated text, checkout extensions and custom content.
+
+## Customization
+
+Use a child theme for template overrides. Export theme settings before changing presets or importing a configuration. Custom templates may override the default card and filter layouts.
+
+Fonts, newsletters, social feeds and other external integrations require their own provider settings. Configure these services through the appropriate theme or plugin controls.
+
+## Updating
+
+Install the plugin update before the theme update. Test competition browsing, entry, checkout, refunds and account pages on staging, including any custom templates and third-party extensions. Clear page and application caches after updating.
+
+## License
+
+GPL-2.0-or-later. Preserve bundled third-party license notices.
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and [RELEASE.md](RELEASE.md) for release notes.

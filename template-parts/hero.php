@@ -43,9 +43,9 @@ $hero_stat_attrs = function ( $raw ) {
 	return $out;
 };
 
-$stat_winners = get_theme_mod( 'wpr_stat_winners', '12,400+' );
-$stat_raised  = get_theme_mod( 'wpr_stat_raised', '£2.8m' );
-$stat_rating  = get_theme_mod( 'wpr_stat_rating', '4.9★' );
+$stat_winners = get_theme_mod( 'wpr_stat_winners', '' );
+$stat_raised  = get_theme_mod( 'wpr_stat_raised', '' );
+$stat_rating  = get_theme_mod( 'wpr_stat_rating', '' );
 
 $tp_id   = ! empty( $s['trustpilot_business_id'] ) ? $s['trustpilot_business_id'] : '';
 $tp_show = in_array( $s['trustpilot_position'], array( 'hero', 'both' ), true ) && $tp_id;
@@ -69,7 +69,7 @@ $tp_show = in_array( $s['trustpilot_position'], array( 'hero', 'both' ), true ) 
 				echo wp_kses_post( get_theme_mod( 'wpr_hero_title', __( 'Win incredible prizes <span class="accent">every week</span>', 'wpraffle-theme' ) ) );
 				?>
 			</h1>
-			<p class="wpr-hero__lead"><?php echo esc_html( get_theme_mod( 'wpr_hero_lead', __( 'Low fixed odds, instant payouts and 100% of ticket sales donated to charity. Enter your favourite competition today.', 'wpraffle-theme' ) ) ); ?></p>
+			<p class="wpr-hero__lead"><?php echo esc_html( get_theme_mod( 'wpr_hero_lead', __( 'Browse current competitions and review the prize, entry price and closing date.', 'wpraffle-theme' ) ) ); ?></p>
 			<?php
 			$resolve_hero_url = static function ( $type, $page_id, $custom_url ) {
 				switch ( $type ) {
@@ -148,7 +148,7 @@ $tp_show = in_array( $s['trustpilot_position'], array( 'hero', 'both' ), true ) 
 				</div>
 			<?php endif; ?>
 
-			<div class="wpr-hero__stats">
+			<?php if ( $stat_winners || $stat_raised || $stat_rating ) : ?><div class="wpr-hero__stats">
 				<?php
 				$stats = array(
 					array( 'value' => $stat_winners, 'label' => __( 'Winners', 'wpraffle-theme' ) ),
@@ -156,6 +156,7 @@ $tp_show = in_array( $s['trustpilot_position'], array( 'hero', 'both' ), true ) 
 					array( 'value' => $stat_rating,  'label' => __( 'Trustpilot', 'wpraffle-theme' ) ),
 				);
 				foreach ( $stats as $stat ) :
+                    if ( '' === trim( (string) $stat['value'] ) ) { continue; }
 					$a = $hero_stat_attrs( $stat['value'] );
 					$has_target = '' !== $a['target'];
 					?>
@@ -172,7 +173,7 @@ $tp_show = in_array( $s['trustpilot_position'], array( 'hero', 'both' ), true ) 
 						<div class="label"><?php echo esc_html( $stat['label'] ); ?></div>
 					</div>
 				<?php endforeach; ?>
-			</div>
+			</div><?php endif; ?>
 		</div>
 	</div>
 </section>

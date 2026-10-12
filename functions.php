@@ -13,33 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Theme version (bumped on each release).
  */
-define( 'WPRAFFLE_THEME_VERSION', '1.4.0' );
+define( 'WPRAFFLE_THEME_VERSION', '1.4.6' );
 define( 'WPRAFFLE_THEME_DIR', get_template_directory() );
 define( 'WPRAFFLE_THEME_URI', get_template_directory_uri() );
-
-/**
- * Return a content-aware version for a local theme asset.
- *
- * The public theme version intentionally remains stable during a release, but
- * a CSS/JS hotfix must not reuse a stale browser/CDN URL. A short content hash
- * changes only when that asset changes and is cached for the current request.
- *
- * @param string $relative_path Theme-relative asset path.
- * @return string
- */
-function wpraffle_theme_asset_version( $relative_path ) {
-	static $versions = array();
-	$relative_path   = '/' . ltrim( $relative_path, '/' );
-	if ( isset( $versions[ $relative_path ] ) ) {
-		return $versions[ $relative_path ];
-	}
-	$path = WPRAFFLE_THEME_DIR . $relative_path;
-	$hash = is_readable( $path ) ? md5_file( $path ) : false;
-	$versions[ $relative_path ] = $hash
-		? WPRAFFLE_THEME_VERSION . '.' . substr( $hash, 0, 10 )
-		: WPRAFFLE_THEME_VERSION;
-	return $versions[ $relative_path ];
-}
 
 /**
  * Migrate settings from the old "diamond" option key to the new one.
@@ -235,7 +211,7 @@ add_action( 'wp_enqueue_scripts', function() {
 		'wpraffle-theme-v135-fixes',
 		WPRAFFLE_THEME_URI . '/assets/css/v1.3.5-fixes.css',
 		$base_dependency,
-		wpraffle_theme_asset_version( '/assets/css/v1.3.5-fixes.css' )
+		WPRAFFLE_THEME_VERSION
 	);
 
 	$styles = array(
@@ -251,7 +227,7 @@ add_action( 'wp_enqueue_scripts', function() {
 			$styles[ $preset ][0],
 			WPRAFFLE_THEME_URI . '/assets/css/' . $styles[ $preset ][1],
 			array( 'wpraffle-theme-v135-fixes' ),
-			wpraffle_theme_asset_version( '/assets/css/' . $styles[ $preset ][1] )
+			WPRAFFLE_THEME_VERSION
 		);
 	}
 }, 205 );
@@ -269,7 +245,7 @@ add_action( 'wp_enqueue_scripts', function() {
 		'wpraffle-theme-v140-modes',
 		WPRAFFLE_THEME_URI . '/assets/css/v1.4.0-modes.css',
 		array( 'wpraffle-theme-v135-fixes' ),
-		wpraffle_theme_asset_version( '/assets/css/v1.4.0-modes.css' )
+		WPRAFFLE_THEME_VERSION
 	);
 }, 230 );
 
@@ -282,6 +258,28 @@ add_action( 'wp_enqueue_scripts', function() {
 		'wpraffle-theme-v140-native-presets',
 		WPRAFFLE_THEME_URI . '/assets/css/v1.4.0-native-presets.css',
 		array( 'wpraffle-theme-v135-fixes' ),
-		wpraffle_theme_asset_version( '/assets/css/v1.4.0-native-presets.css' )
+		WPRAFFLE_THEME_VERSION
 	);
 }, 225 );
+
+require_once WPRAFFLE_THEME_DIR . '/inc/class-wpraffle-theme-preview.php';
+add_filter( 'wpraffle_card_fields', static function( $fields ) { $s = WPRaffle_Theme_Settings::instance()->get_settings(); return isset( $s['card_fields'] ) ? WPRaffle_Theme_Preview::card_fields( $s['card_fields'] ) : $fields; } );
+
+add_action( 'wp_enqueue_scripts', static function() {
+    wp_enqueue_script( 'wprt-discovery', WPRAFFLE_THEME_URI . '/assets/js/discovery.js', array(), WPRAFFLE_THEME_VERSION, true );
+    wp_enqueue_style( 'wprt-145', WPRAFFLE_THEME_URI . '/assets/css/v1.4.5.css', array(), WPRAFFLE_THEME_VERSION );
+} );
+
+add_action( 'wp_enqueue_scripts', static function() { wp_enqueue_style( 'wprt-146', WPRAFFLE_THEME_URI . '/assets/css/v1.4.6.css', array( 'wprt-145' ), WPRAFFLE_THEME_VERSION ); }, 1000 );
+
+// 1.4.6: readable action foreground for configured solid brand colours, even without JS.
+add_action( 'wp_head', static function() {
+    $settings = WPRaffle_Theme_Settings::instance()->get_settings();
+    $hex = sanitize_hex_color( $settings['accent'] );
+    if ( ! $hex ) { return; }
+    $hex = ltrim( $hex, '#' ); if ( 3 === strlen( $hex ) ) { $hex = $hex[0].$hex[0].$hex[1].$hex[1].$hex[2].$hex[2]; }
+    $linear = static function( $value ) { $v = hexdec( $value ) / 255; return $v <= .04045 ? $v / 12.92 : pow( ( $v + .055 ) / 1.055, 2.4 ); };
+    $luminance = .2126 * $linear( substr( $hex, 0, 2 ) ) + .7152 * $linear( substr( $hex, 2, 2 ) ) + .0722 * $linear( substr( $hex, 4, 2 ) );
+    $foreground = ( $luminance + .05 ) / .05 >= 1.05 / ( $luminance + .05 ) ? '#000' : '#fff';
+    echo '<style id="wprt-action-contrast">body{--wprt-action-bg:#' . $hex . ';--wprt-action-text:' . $foreground . ';--wprt-action-text-hover:' . $foreground . '}</style>';
+}, 100 );

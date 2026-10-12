@@ -24,7 +24,7 @@ get_header();
 	<?php if ( $is_raffle_listing ) : ?>
 	<section id="active" class="section wprt-reveal">
 		<div class="container">
-			<?php wpraffle_theme_section_heading( __( 'Active Competitions', 'wpraffle-theme' ), __( 'Enter now — limited tickets, guaranteed draws.', 'wpraffle-theme' ) ); ?>
+			<?php wpraffle_theme_section_heading( __( 'Active Competitions', 'wpraffle-theme' ), __( 'Explore prizes and review entry details.', 'wpraffle-theme' ) ); ?>
 			<div class="wpr-active-grid"><div class="wprt-active-list"><?php the_content(); wp_link_pages(); ?></div></div>
 		</div>
 	</section>

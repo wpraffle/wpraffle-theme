@@ -31,7 +31,7 @@ if ( ! wpraffle_theme_has_plugin() ) {
 			<i class="fa-solid fa-xmark" aria-hidden="true"></i>
 		</button>
 		<div class="wprt-quickview-modal__content">
-			<p style="text-align:center;color:var(--wpr-text-muted,#9ca3af);"><?php esc_html_e( 'Loading…', 'wpraffle-theme' ); ?></p>
+			<h2 id="wprt-quickview-title"><?php esc_html_e( 'Loading…', 'wpraffle-theme' ); ?></h2>
 		</div>
 	</div>
 </div>
